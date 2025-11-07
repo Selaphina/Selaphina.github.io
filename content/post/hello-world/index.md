@@ -55,11 +55,11 @@ Unity 提前定义5个渲染队列
 
 透明度测试的双面渲染：
 
-![image-20251025125910175](.assets/image-20251025125910175.png)
+![image-20251025125910175](image-20251025125910175.png)
 
 代码见：Chapter8-AlphaTest.shader
 
-![image-20251025130050435](.assets/image-20251025130050435.png)
+![image-20251025130050435](image-20251025130050435.png)
 
 在透明度测试的基础上加上Cull Off即可。
 
@@ -67,7 +67,7 @@ Unity 提前定义5个渲染队列
 
 ### 2. 透明度混合的双面渲染
 
-![image-20251025130804715](.assets/image-20251025130804715.png)
+![image-20251025130804715](image-20251025130804715.png)
 
 代码：Chapter8-AlphaBlendBothSided.shader
 
