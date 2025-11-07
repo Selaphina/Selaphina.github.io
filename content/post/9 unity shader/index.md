@@ -1,7 +1,6 @@
 ---
 title: 9 复杂光照
 description: Unity Shader 入门精要 第九章
-slug: hello-world
 date: 2022-03-09 00:00:00+0000
 image: cover.jpg
 categories:
