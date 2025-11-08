@@ -1,7 +1,7 @@
 ---
-title: 9 复杂光照
-description: Unity Shader 入门精要 第九章
-date: 2022-03-09 00:00:00+0000
+title: 12 屏幕后处理
+description: Unity Shader 入门精要 第十二章
+date: 2022-03-25 22:10:30+0000
 image: cover1.jpg
 categories:
     - 技术笔记
@@ -10,441 +10,939 @@ tags:
 weight: 1       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
-# 9 复杂光照
+# 12 屏幕后处理
 
-## 9.1 渲染路径
+屏幕后处理，顾名思义，通常是指在渲染完整个场景得到屏幕图像后，再对这个图像进行一系列操作，实现各种屏幕特效。例如：景深（Depth of Field），运动模糊（Motion Blur）等。
 
-Unity主要有两种渲染路径：
+因此，想要实现屏幕后处理的基础在于得到渲染后的屏幕图像，即抓取屏幕，而Unity为我们提供了这样一个方便的接口--0nRenderImage函数。它的函数声明如下:
 
-1.前向渲染路径（Forward Rendering Path）
+```c#
+MonoBehaviour.OnRenderImage(RenderTexture src, RenderTexture dest)
+```
 
-2.延迟渲染路径（Deferred Rendering Path）
-
-3.(已弃用)顶点照明渲染路径（Vertex Lit Rendering Path）
-
-大多数情况下，一个项目只用一种渲染路径，所以在全局的Edit—Project Setting—Player—Other Settings—Rendering Path中选择。如果有需要使用多个渲染路径，可用多个摄像机的设置中选择渲染路径：
-
-比如摄像机A渲染的物体使用前向渲染路径，摄像机B渲染的物体使用延迟渲染路径。
-
-![image-20251025150716223](image-20251025150716223.png)
-
-这样就可以覆盖掉Project Setting的设置。
-
-完成摄像机的设置之后，我们就可以在每个Pass中使用标签来指定该Pass的渲染路径。
+在 OnRenderlmage 函数中，我们通常是利用Graphics.Blit函数来完成对渲染纹理的: 
 
 ```
-Pass{
-	Tags { "LightMode" = "ForwardBase" }
+public static void Blit(Texture src,RenderTexture dest);
+public static void Blit(Texture src,RenderTexture dest,Material mat,int pass = -1);
+public static void Blit( Texture src,Material mat,int pass=-1);
+```
+
+* 参数src：
+
+  源纹理，在屏幕后处理技术中，unity通常会将当前屏幕渲染纹理（或者上一步处理后的渲染纹理）存储在src源纹理中。
+
+* 参数dest：
+
+  目标渲染纹理，如果它的值为null，会直接将结果显示在屏幕上。不为null则通过函数的一系列操作后，unity再将dest渲染到屏幕上。
+
+* 参数mat
+
+  我们使用的材质，这个材质使用的unity shader会进行各种屏幕后处理操作。而src纹理将会被传递给shader中名为MainTex的代码.
+
+* 参数pass
+
+  默认值为-1，表示将会依次调用shader内的所有pass，否则只会调用索引值的pass。
+
+> 在默认情况下，OnRenderImage函数会在所有的不透明和透明的Pass执行完毕后被调用，以便对场景中所有游戏对象都产生影响。但有时，我们希望在不透明的Pass(即渲染队列小于等于2500的Pass，内置的 Background、Geometry和 AlphaTest 渲染队列均在此范围内)执行完毕后立即调用 OnRenderlmage 函数,从而不对透明物体产生任何影响。此时,我们可以在 OnRenderlmage函数前添加ImageEfectOpaque 属性来实现这样的目的。13.4节展示了这样一个例子，在13.4节
+
+## 12.1 基础unity屏幕后处理脚本系统
+
+因此，要在 Unity 中实现屏幕后处理效果，过程通常如下:
+
+1）首先需要在**摄像机**中添加一个用于屏幕后处理的脚本。在这个脚本中，我们会实现OnRenderlmage函数来获取当前屏幕的渲染纹理。
+
+2）然后，调用 Graphics.Blit 函数使用特定的 Unity Shader 来对当前图像进行处理，再把返回的渲染纹理显示到屏幕上。
+
+3）对于一些复杂的屏幕特效，我们可能需要多次调用Graphics.Blit 函数来对上一步的输出结果进行下一步处理。
+
+> 但是，在进行屏幕后处理之前，我们需要检查一系列条件是否满足，例如当前平台是否支持渲染纹理和屏幕特效，是否支持当前使用的UnityShader 等。为此，我们创建了一个用于屏幕后处理效果的基类，在实现各种屏幕特效时，我们只需要继承自该基类，再实现派生类中不同的操作即可。读者可在本书资源的 <u>Assets/Scripts/Chapter12/PostEffectsBase.cs</u> 中找到该脚本。
+
+`PostEffecrsBase.cs`
+
+(1)首先，所有屏幕后处理效果都需要绑定在某个摄像机上，并且我们希望在编辑器状态下也可以执行该脚本来查看效果:
+
+```
+[ExecuteInEditMode]
+[RequireComponent (typeof(Camera))]
+public class PostEffectsBase : MonoBehaviour {
+```
+
+(2)为了提前检查各种资源和条件是否满足，我们在Start函数中调用CheckResources 函数:
+
+```
+	// Called when start
+	protected void CheckResources() {
+		bool isSupported = CheckSupport();
+		
+		if (isSupported == false) {
+			NotSupported();
+		}
+	}
+
+	// Called in CheckResources to check support on this platform
+	protected bool CheckSupport() {
+		if (SystemInfo.supportsImageEffects == false || SystemInfo.supportsRenderTextures == false) {
+			Debug.LogWarning("This platform does not support image effects or render textures.");
+			return false;
+		}
+		
+		return true;
+	}
+
+	// Called when the platform doesn't support this effect
+	protected void NotSupported() {
+		enabled = false;
+	}
+	
+	protected void Start() {
+		CheckResources();
+	}
+```
+
+
+(3)由于每个屏幕后处理效果通常都需要指定一个shader 来创建一个用于处理渲染纹理的材质，因此基类中也提供了这样的方法:
+
+```
+protected Material CheckShaderAndCreateMaterial(Shader shader, Material material) {
+		if (shader == null) {
+			return null;
+		}
+		
+		if (shader.isSupported && material && material.shader == shader)
+			return material;
+		
+		if (!shader.isSupported) {
+			return null;
+		}
+		else {
+			material = new Material(shader);
+			material.hideFlags = HideFlags.DontSave;
+			if (material)
+				return material;
+			else 
+				return null;
+		}
+	}
+```
+
+**CheckShaderAndCreateMaterial**函数接受两个参数，第一个参数指定了该特效需要使用的Shader，第二个参数则是用于后期处理的材质。该函数首先检査Shader 的可用性，检查通过后就返回一个使用了该 Shader的材质，否则返回null。
+
+
+
+## 12.2 调整屏幕的亮度/饱和度和对比度
+
+1）新建场景，包括相机，平行光。去掉天空盒子。
+
+2）把本书资源中的 Assets/Textures/Chapter12/Sakura0,jpg拖曳到场景中，并调整其的位置使它可以填充整个场景。
+3）新建一个脚本。在本书资源中，该脚本名为BrightnessSaturationAndContrast.cs。把该脚本拖曳到摄像机上。
+4）新建一个Unity Shader。在本书资源中,该 Shader 名为Chapter12-BrightnessSaturationAndContrast.shader。
+
+### BrightnessSaturationAndContrast.cs脚本
+
+首先来编写 BrightnessSaturationAndContrast.cs脚本。打开该脚本，并进行如下修改：
+
+1. 首先继承12.1的基类
+
+```
+public class BrightnessSaturationAndContrast : PostEffectsBase {
+```
+
+2. 声明该效果需要的shader，并依据此创建相应的材质：
+
+```c#
+public Shader briSatConShader;
+	private Material briSatConMaterial;
+	public Material material {  
+		get {
+			briSatConMaterial = CheckShaderAndCreateMaterial(briSatConShader, briSatConMaterial);
+			return briSatConMaterial;
+		}  
+	}
+```
+
+在上述代码中，briSatConShader是我们指定的Shader，对应了后面将会实现的Chapter12-BrightnessSaturationAndContrast。briSatConMaterial是创建的材质，我们提供了名为 material 的材质来访问它，material的get函数调用了基类的CheckShaderAndCreateMaterial 函数来得到对应的材质。
+
+3. 我们还在脚本中提供了调整亮度、饱和度和对比度的参数:
+
+```
+	[Range(0.0f, 3.0f)]
+	public float brightness = 1.0f;
+
+	[Range(0.0f, 3.0f)]
+	public float saturation = 1.0f;
+
+	[Range(0.0f, 3.0f)]
+	public float contrast = 1.0f;
+```
+
+4. 最后定义OnRenderImage来真正的后处理：
+
+```
+void OnRenderImage(RenderTexture src, RenderTexture dest) {
+		if (material != null) {
+			material.SetFloat("_Brightness", brightness);
+			material.SetFloat("_Saturation", saturation);
+			material.SetFloat("_Contrast", contrast);
+
+			Graphics.Blit(src, dest, material);
+		} else {
+			Graphics.Blit(src, dest);
+		}
+	}
+```
+
+每当 OnRenderlmage函数被调用时，它会检查材质是否可用。如果可用，就把参数传递给材质，再调用 Graphics.Blit进行处理；否则，直接把原图像显示到屏幕上，不做任何处理。
+
+### BrightnessSaturationAndContrast.shader
+
+下面，我们来实现 Shader 的部分。打开Chapter12-BrightnessSaturationAndContrast，进行如下修改。
+
+1)声明
+
+```
+Properties {
+	_MainTex ("Base (RGB)", 2D) = "white" {}
+	_Brightness ("Brightness", Float) = 1
+	_Saturation("Saturation", Float) = 1
+	_Contrast("Contrast", Float) = 1
 }
 ```
 
-**表9.1 LightMode 标签支持的渲染路径设置选项**
+在 12.1节中，我们提到 Graphics.Blit(src,dest,material)将把第一个参数传递给 Shader 中名为MainTex的属性。因此，我们必须声明一个名为MainTex的纹理属性。除此之外，我们还声明了用于调整亮度、饱和度和对比度的属性。这些值将会由脚本传递而得。事实上，我们可以省略Properties中的属性声明，Properties中声明的属性仅仅是为了显示在材质面板中，但对于屏幕特效来说，它们使用的材质都是临时创建的，我们也不需要在材质面板上调整参数，而是直接从脚本传递给 Unity Shader。
 
-| 标签名                            | 描述                                                         |
-| --------------------------------- | ------------------------------------------------------------ |
-| **Always**                        | 不管使用哪种渲染路径，该 Pass 总是会被渲染，但不会计算任何光照。 |
-| **ForwardBase**                   | 用于前向渲染。该 Pass 会计算环境光、最重要的平行光、逐顶点 / SH 光源和 Lightmaps。 |
-| **ForwardAdd**                    | 用于前向渲染。该 Pass 会计算额外的逐像素光源，每个 Pass 对应一个光源。 |
-| **Deferred**                      | 用于延迟渲染。该 Pass 会渲染 G 缓冲 (G-buffer)。             |
-| **ShadowCaster**                  | 把物体的深度信息渲染到阴影映射纹理 (shadowmap) 或一张深度纹理。 |
-| **PrepassBase**                   | 用于遗留的延迟渲染。该 Pass 会渲染法线和高光反射的指数部分。 |
-| **PrepassFinal**                  | 用于遗留的延迟渲染。该 Pass 通过合并纹理、光照和自发光来渲染得到最后的颜色。 |
-| **Vertex/VertexLMRGBM和VertexLM** | 用于遗留的顶点照明渲染                                       |
-
-
-
-## 9.2 前向渲染路径（Forwad Rendering Path）
-
-前向渲染路径时传统的渲染方式，也是最常用的渲染路径。
-
-**过程**
-
-每进行一次完整的前向渲染，我们需要渲染该图像的渲染图元，并计算两个缓冲区的信息：
+2）定义用于屏幕后处理的pass
 
 ```
-1.深度缓冲区：利用深度缓冲来决定一个片元是否可见，如果可见就更新颜色缓冲区的颜色值
-
-2.颜色缓冲区：如上。
+SubShader {
+	Pass {  
+		ZTest Always Cull Off ZWrite Off
 ```
 
-> 其中，对每个逐像素光源都要进行一次上述完整渲染流程，如果N个物体，M个光源，则渲染整个场景需要N*M个Pass。因此渲染引擎通常会限制**逐像素光照**的数目。
-
-**处理光照方式**
-
-在Unity中前向渲染路径有3种处理光照的方式：
-
-1.逐像素处理
-
-2.逐顶点处理
-
-3.球谐函数（SH，Spherical Harmonics）
-
-
-
-**一个光源如何决定使用哪种处理光照的方式？**
-
-> 决定一个光源使用哪种处理模式取决于它的光源类型和渲染模式。
->
-> **光源类型**：平行光，点光源，等等。
->
-> **渲染模式：**是指该光源是否**<u>重要（Important）</u>**。如果把一个光照的模式设置为Important，意味着告诉Unity：嘿老兄，这个光源很重要，我需要你认真对待，把它当成一个逐像素光源来处理。
-
-
-
-**Unity的判断规则：**
-
-* 场景中最亮的平行光总是按逐像素处理。
-* 渲染模式被设置成**Not Important**的光源，会按逐顶点处理或SH处理。
-* 渲染模式被设置成**Important**的光源，会按逐像素处理。
-* 如果根据以上规则得到的逐像素光源数量小于Quality Setting里的逐像素光源数量（Pixel Light Count），会有更多的光源以逐像素的方式进行渲染。
-
-通常，对前向渲染来说，一个Unity Shader通常会定义一个**Base Pass**（Base pass也可以定义多次，例如需要双面渲染的情况。）和一个**Additional Pass**。
-
-一个Base Pass仅会执行一次（定义多个Base Pass除外），一个Additional Pass根据逐像素光源的数目多次调用（当然，是能影响到本物体的逐像素光源）。
-
-
-
-## 9.3 延迟渲染路径（**Deferred** Pass）
-
-延迟渲染是一种更古老的方法，但为了解决前向渲染的性能瓶颈问题，近几年又流行起来。
-
-> 前向渲染的性能瓶颈：计算复杂度随物体和光源数量的乘积增长，实时光源增多时性能下降显著。
-
-**原理**
-
-其核心思想可以概括为“**先存储，后计算**”，即将几何信息与光照计算分离。除了前向渲染中的颜色缓冲区和深度缓冲区，延迟渲染利用了额外的一个缓冲区：**G-buffer**（G，Geometry，几何缓冲区）
-
-**G-Buffer 通常包含的数据**：
-
-**位置 (Position)**: 像素在世界空间中的坐标
-
-**法线 (Normal)**: 物体表面的朝向，用于计算光照角度
-
-**漫反射颜色 (Albedo)**: 物体表面的基础颜色，不包含光照信息
-
-**高光属性 (Specular)**: 如高光颜色和光滑度，控制材质反光能力
-
-
-
-一般来说，延迟渲染使用的Pass数量就是两个。
-
-**第一个Pass：几何通道 (Geometry Pass)**
-
-> 这个阶段不进行光照计算，收集场景中所有不透明物体表面的原始几何和材质信息，并将其存储到一系列称为**G-Buffer（几何缓冲区）** 的纹理中。
-
-**第二个Pass：光照通道 (Lighting Pass)**
-
-> 在这个阶段，利用G-buffer里的各个片元信息，如法线，视角方向，漫反射系数等等，进行真正的光照计算。
-
-由于 G-Buffer 只存储了最终可见的像素信息，那些被遮挡的（不可见）片段不会进入此阶段，从而**避免了大量无效的光照计算**
-
-
-
-**主要局限**：
-
-- **半透明物体渲染困难**。
-- **显存带宽占用高**：G-Buffer 包含多张高精度纹理，读写这些数据会消耗大量显存带宽，可能成为性能瓶颈。
-- **不支持真正的抗锯齿功能**。
-
-
-
-## 9.2 光源类型
-
-### 平行光 (Directional Light)
-
-平行光被模拟为来自**无穷远处**的光源，其发出的所有光线都是**相互平行**的，类似于太阳光照射到地球的效果。由于光源被视为无限远，所以光线**没有衰减**，场景中所有物体接收到光照的方向和强度都是均匀一致的
-
-
-
-在图形学和照明设计中，平行光的主要属性是其**方向**，而非位置。它非常适合用于模拟日光等全局照明，能够为场景提供基础而均匀的照明效果
-
-
-
-### 点光源 (Point Light)
-
-点光源是从空间中的**一个特定点**向**所有方向**均匀发光的光源，类似于一个白炽灯泡。点光源有明确的位置属性，其光照强度会随着传播距离的增加而**衰减**，通常遵循平方反比定律之类的规律
-
-点光源是理想化的物理概念，现实中并不存在严格意义上的点光源，但像LED灯珠这样的发光体可以近似看作点光源
-
-在照明应用中，多个点光源可以组合成阵列，用于建筑轮廓勾勒、大屏幕显示等，实现丰富的动态效果
-
-
-
-### 聚光灯 (Spot Light)
-
-聚光灯从一个点出发，向**特定方向**发射出一个**锥形**的光束，类似于舞台追光灯或手电筒。它同时具有**位置**和**明确的照射方向**两个核心属性。
-
-其光照特性包括锥形光束的**照射角度**（光束张角）和**边缘衰减**（光束边缘的光线如何逐渐变弱）
-
-聚光灯能够产生强烈的中心亮斑和清晰的阴影，非常适合于突出场景中的特定物体或区域，营造戏剧性的视觉效果。在摄影、舞台照明和建筑亮化中应用广泛。
-
-
-
-## 9.3 光照衰减
-
-如果是平行光的话，衰减值为1.0。如果是其他光源类型，计算会更复杂，包括开根号/除法等等。应对这种计算量相对较大的操作，Unity选择了用一张纹理作为查找表**（Lookup Table, LUT）**.
-
-LUT计算衰减的局限：
-
-1.**灵活性和直观性上的牺牲**。一旦衰减数据被预计算并存储为纹理，你就很难在Shader中动态地改用其他数学公式来实时调整衰减曲线。调试也变得相对不便。
-
-**2.需要预处理得到采样纹理。衰减的精度依赖于预计算纹理的分辨率**，低分辨率纹理可能导致精度不足或带状瑕疵；而预处理纹理本身也会占用一定的存储和内存资源
-
-
-
-
-
-## 9.4 Unity的阴影
-
-**阴影的原因**：
-
-> 当一个光源发射的一条光线遇到一个不透明的物体，这条光线就不可以继续照亮其他物体（这里不考虑反射），因此，这个物体就会向它旁边的物体投射阴影。**阴影区域的产生是因为光线无法到达这些区域。**
-
-**阴影映射纹理（shadowmap）**
-
-在前向渲染路径中，如果场景中最重要的平行光开启了**阴影**，那么unity为该光源计算它的阴影映射纹理**（shadowmap）**。这张阴影映射纹理本质上也是一张深度图，记录了该光源位置出发—能看到的场景中距离它最近的**表面位置（深度信息）**。
-
-
-
-**如何计算shadowmap呢？**
-
-Unity用一个额外的Pass来专门更新光源的阴影映射纹理。LightMode设置为：**ShadowCaster**的**pass**。
-
-**过程**：
-
-**1.** Unity首先将摄像头放到光源的位置上，判定距离它最近的表面，调用该pass，据此来输出深度信息到阴影纹理映射中。
-
-**2.** 因此开启光源的阴影效果后，底层渲染引擎会首先在当前渲染物体的shader中寻找LightMode为ShadowCaster的Pass，如果没有 会在Fallback指定的UnityShader中继续找
-
-**3.** 如果没有找到，该物体就无法向其他物体投射阴影。但它依然可以接收来自其他物体的阴影。
-
-**4.**  当找到了一个**物体**确实使用shadowCaster的Pass后，unity就会用该Pass来更新**光源**的阴影映射纹理。
-
-
-
-**总结**
-
-* 一个物体接收来自其他物体的阴影：就必须在Shader中对阴影映射纹理进行采样，并将采样结果和光照计算结果相乘来得到最终的阴影效果。
-* 一个物体向其他物体投射阴影：必须把该物体加入光源的阴影映射纹理的计算中，从而让其他物体在对阴影映射纹理采样时可以得到该物体的相关信息。 
-
-
-
-在Unity中：1.首先要开启光源的阴影效果。2.其次要开启物体的投射阴影和接收阴影。
-
-![image-20251025210439179](image-20251025210439179.png)
-
-注意，在默认情况下阴影映射纹理会剔除掉物体的背面，但是对于内置的平面只有一个面，所以，需要设置成tow sides的阴影模式，平面才能正确地向其他物体投射阴影。
-
-![image-20251025210939289](image-20251025210939289.png)
-
-打开帧调试器：windows——analysis——frame debug
-
-![image-20251025213737783](image-20251025213737783.png)
-
-可以看出，绘制该场景一共花19个渲染事件，每一步骤的绘制过程可查看：
-
-![image-20251025215611385](image-20251025215611385.png)
-
-没有在shader中写有关ShadowCaster的Pass，也可以投射阴影，这是因为，回调函数
+3）为了在代码中访问各个属性，我们需要在CG代码块中声明对应的变量:
 
 ```
-FallBack “Specular”
-FallBack “Diffuse”
+sampler2D _MainTex;  
+half _Brightness;
+half _Saturation;
+half _Contrast;
 ```
 
-等这些回调内部又会回调：`Fallback "VertexLit"`顶点光照路径，它可以提供给阴影的计算。
-
-### 单独阴影
-
-1.在base pass中内置头文件
-
-```
-Pass {
-	// Pass for ambient light & first pixel light (directional light)
-	Tags { "LightMode"="ForwardBase" }
-	// 
-	CGPROGRAM
-	
-	// Apparently need to add this declaration 
-	// 声明包含阴影纹理映射的头文件
-	#include "AutoLight.cginc"
-```
-
-2.在结构体v2f中声明一个阴影纹理坐标
+4）定义顶点着色器：屏幕特效使用的顶点着色器代码通常都比较简单，我们只需要进行必需的顶点变换，更重要的是，我们需要把正确的纹理坐标传递给片元着色器，以便对屏幕图像进行正确的采样:
 
 ```
 struct v2f {
 	float4 pos : SV_POSITION;
-	float3 worldNormal : TEXCOORD0;
-	float3 worldPos : TEXCOORD1;
-	// 内置宏，作用是声明一个阴影纹理坐标
-	SHADOW_COORDS(2)
+	half2 uv: TEXCOORD0;
 };
+  
+v2f vert(appdata_img v) {
+	v2f o;
+	
+	o.pos = UnityObjectToClipPos(v.vertex);
+	
+	o.uv = v.texcoord;
+			 
+	return o;
+}
 ```
 
-3.顶点着色器中计算
+**appdata_img结构体：**使用了Unity内置的appdata_img结构体作为顶点着色器的输入,读者可以在 UnityCGcginc 中找到该结构体的声明,它只包含了图像处理时必需的顶点坐标和纹理
+坐标等变量
 
-```
-			v2f vert(a2v v) {
-				//……
-				
-				// 计算阴影纹理坐标
-				TRANSFER_SHADOW(o);
-				return o;
-			}
-```
-
-4.片元着色器中采样
+5）接着，我们实现了用于调整亮度、饱和度和对比度的片元着色器:
 
 ```
 fixed4 frag(v2f i) : SV_Target {
-	//……
+	fixed4 renderTex = tex2D(_MainTex, i.uv);  
+	  
+	// Apply brightness
+	fixed3 finalColor = renderTex.rgb * _Brightness;
 	
-	//用一张阴影纹理采样阴影映射纹理
-	fixed shadow = SHADOW_ATTENUATION(i);
-	//将阴影映射结果漫反射+高光的结果相乘。
-	return fixed4(ambient + (diffuse + specular) * shadow, 1.0);
-}
-```
-
-### 统一管理衰减和阴影
-
-1.包含进头文件
-
-```
-// Need these files to get built-in macros
-#include "Lighting.cginc"
-#include "AutoLight.cginc"
-```
-
-2.声明阴影纹理坐标
-
-```
-v2f vert(a2v v) {
-	//……
- 	// Pass shadow coordinates to pixel shader
- 	TRANSFER_SHADOW(o);
- 	
- 	return o;
-}
-```
-
-3.内置宏TRANSFER_SHADOW
-
-```
-			v2f vert(a2v v) {
-				//……
-				
-				// 计算阴影纹理坐标
-				TRANSFER_SHADOW(o);
-				return o;
-			}
-```
-
-4.与上一部分阴影计算不同，在内置宏UNITY_LIGHT_ATTENUATION	来计算阴影+光照衰减
-
-```
-fixed4 frag(v2f i) : SV_Target {
-	// UNITY_LIGHT_ATTENUATION not only compute attenuation, but also shadow infos
-	UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
+	// Apply saturation
+	fixed luminance = 0.2125 * renderTex.r + 0.7154 * renderTex.g + 0.0721 * renderTex.b;
+	fixed3 luminanceColor = fixed3(luminance, luminance, luminance);
+	finalColor = lerp(luminanceColor, finalColor, _Saturation);
 	
-	return fixed4(ambient + (diffuse + specular) * atten, 1.0);
+	// Apply contrast
+	fixed3 avgColor = fixed3(0.5, 0.5, 0.5);
+	finalColor = lerp(avgColor, finalColor, _Contrast);
+	
+	return fixed4(finalColor, renderTex.a);  
+}  
+```
+
+我们得到对原屏幕图像**(存储在MainTex中)**的采样结果renderTex。然后，利用_Brightness属性来调整亮度。
+
+亮度的调整非常简单,我们只需要把原颜色乘以亮度系数 Brightness即可。
+
+然后，我们计算该像素对应的亮度值(luminance)，这是通过对每个颜色分量乘以一个特定的系数再相加得到的。
+
+我们使用该亮度值创建了一个饱和度为0的颜色值，并使用Saturation属性在其和上一步得到的颜色之间进行插值，从而得到希望的饱和度颜色。对比度的处理类似，我们首先创建一个对比度为0的颜色值(各分量均为0.5)，再使用Contrast属性在其和上一步得到的颜色之间进行插值，从而得到最终的处理结果
+
+6)回调
+
+```
+Fallback Off
+```
+
+## 12.3 边缘检测
+
+边缘检测的原理是利用一些边缘检测算子对图像进行卷积(convolution)操作。
+
+![image-20251102172424999](image-20251102172424999.png)
+
+**什么是卷积？**
+
+在图像处理中，卷积操作指的就是使用一个卷积核(kernel)对一张图像中的每个像素进行一系列操作。卷积核通常是一个四方形网格结构(例如2x2、3x3的方形区域)，该区域内每个方格都有一个权重值。当对图像中的某个像素进行卷积时,我们会把卷积核的中心放置于该像素上，如图12.4所示，翻转核之后再依次计算核中每个元素和其覆盖的图像像素值的乘积并求和，得到的结果就是该位置的新像素值。
+
+![image-20251102164347694](image-20251102164347694.png)
+
+这样的计算过程虽然简单，但可以实现很多常见的图像处理效果，例如图像模糊、边缘检测等。
+
+
+
+**几种不同的边缘检测算子**
+
+![image-20251102164652028](image-20251102164652028.png)
+
+3种常见的边缘检测算子如图12.5所示，它们都包含了两个方向的卷积核，分别用于检测水平方向和竖直方向上的边缘信息。在进行边缘检测时，我们需要对每个像素分别进行一次卷积计算，得到两个方向上的梯度值G和G，而整体的梯度可按下面的公式计算而得:![image-20251102164711757](image-20251102164711757.png)
+
+由于上述计算包含了开根号操作，出于性能的考虑，我们有时会使用绝对值操作来代替开根号操作:
+
+![image-20251102164732492](image-20251102164732492.png)
+
+**实现过程**
+
+###  EdgeDetection.cs 脚本
+
+1）新建场景，包括相机，平行光。去掉天空盒子。
+
+2）把本书资源中的 Assets/Textures/Chapter12/Sakura0,jpg拖曳到场景中，并调整其的位置使它可以填充整个场景。
+3）新建一个脚本。在本书资源中，该脚本名为EdgeDetection.cs。把该脚本拖曳到摄像机上。
+4）新建一个Unity Shader。在本书资源中,该 Shader 名为Chapter12-EdgeDetection.shader。
+
+首先来编写 EdgeDetection.cs 脚本。打开该脚本，并进行如下修改：
+
+1. 首先继承12.1的基类
+
+```
+public class BrightnessSaturationAndContrast : PostEffectsBase {
+```
+
+2. 声明该效果需要的shader，并据此创建相应的材质
+
+```
+public Shader edgeDetectShader;
+	private Material edgeDetectMaterial = null;
+	public Material material {  
+		get {
+			edgeDetectMaterial = CheckShaderAndCreateMaterial(edgeDetectShader, edgeDetectMaterial);
+			return edgeDetectMaterial;
+		}  
+	}
+
+```
+
+在上述代码中，edgeDetectShader是我们指定的Shader，对应了后面将会实现的Chapter12-EdgeDetection。
+
+3. 在脚本中提供用于调整边缘线强度、描边颜色以及背景颜色的参数:
+
+```
+[Range(0.0f, 1.0f)]
+public float edgesOnly = 0.0f;
+
+public Color edgeColor = Color.black;
+
+public Color backgroundColor = Color.white;
+```
+
+当edgesOnly值为0时，边缘将会叠加在原渲染图像上;当edgesOnly值为1时，则会只显示边缘，不显示原渲染图像。其中，背景颜色由backgroundColor指定，边缘颜色由edgeColor 指定。
+
+4. 最后，我们定义OnRenderlmage函数来进行真正的特效处理:
+
+```
+void OnRenderImage (RenderTexture src, RenderTexture dest) {
+		if (material != null) {
+			material.SetFloat("_EdgeOnly", edgesOnly);
+			material.SetColor("_EdgeColor", edgeColor);
+			material.SetColor("_BackgroundColor", backgroundColor);
+
+			Graphics.Blit(src, dest, material);
+		} else {
+			Graphics.Blit(src, dest);
+		}
+	}
+```
+
+每当 OnRenderlmage 函数被调用时，它会检查材质是否可用。如果可用，就把参数传递给材质，再调用 Graphics.Blit进行处理;否则，直接把原图像显示到屏幕上，不做任何处理。
+
+### Chapter12-EdgeDetection
+
+下面，我们来实现Shader 的部分。打开Chapter12-EdgeDetection，进行如下修改。
+
+1)	定义
+
+```
+Properties {
+	_MainTex ("Base (RGB)", 2D) = "white" {}
+	_EdgeOnly ("Edge Only", Float) = 1.0
+	_EdgeColor ("Edge Color", Color) = (0, 0, 0, 1)
+	_BackgroundColor ("Background Color", Color) = (1, 1, 1, 1)
 }
 ```
 
-注意这里没有在代码中声明atten，因为内置宏UNITY_LIGHT_ATTENUATION会帮我们声明这个变量。最后我们将（漫反射+高光）*（atten），atten就是`阴影\*光照衰减`的结果。
-
-### 透明物体的阴影
-
-正常：
-
-![image-20251025222108299](image-20251025222108299.png)
-
-而VertexLit内置的阴影投射无法计算出正确透明物体的阴影。包括透明度测试和透明度混合。
-
-![image-20251025222221202](image-20251025222221202.png)
-
-这是不对的。
-
-#### 透明度测试
-
-要怎么针对透明物体写阴影投射呢？
-
-1.声明头文件
+2） 设置屏幕后处理的 Pass
 
 ```
-#include "Lighting.cginc"
-#include "AutoLight.cginc"
+SubShader {
+	Pass {  
+		ZTest Always Cull Off ZWrite Off
 ```
 
-2.在v2f中使用，注意我们在前面的三个纹理坐标声明中，已经占用了3个插值寄存器（TEXCOORD0/TEXCOORD1/TEXCOORD2）。
+3）为了代码中访问各个属性，需要在CG代码块中声明变量：
 
 ```
-			struct v2f {
-				float4 pos : SV_POSITION;
-				float3 worldNormal : TEXCOORD0;
-				float3 worldPos : TEXCOORD1;
-				float2 uv : TEXCOORD2;
-				SHADOW_COORDS(3)
-			};
+sampler2D _MainTex;  
+uniform half4 _MainTex_TexelSize;
+fixed _EdgeOnly;
+fixed4 _EdgeColor;
+fixed4 _BackgroundColor;
 ```
 
-所以在SHADOW_COORDS(3)传入的是3.意味着占用的是第四个插值寄存器TEXCOORD3。
+在上面的代码中，我们还声明了一个新的变量MainTexTexelSize。xxxTexelSize是 Unity为我们提供的访问 xxx 纹理对应的每个纹素的大小。例如，一张 512x512大小的纹理，该值大约为0.001953(即112)。由于卷积需要对相邻区域内的纹理进行采样，因此我们需要利用MainTex TexelSize 来计算各个相邻区域的纹理坐标。
 
-3.顶点着色器中计算阴影映射纹理并传给片元着色器
+4）在顶点着色器的代码中，我们计算了边缘检测时需要的纹理坐标:
 
 ```
-v2f vert(a2v v) {
-	//……
- 	// Pass shadow coordinates to pixel shader
- 	TRANSFER_SHADOW(o);
- 	
- 	return o;
+struct v2f {
+	float4 pos : SV_POSITION;
+	half2 uv[9] : TEXCOORD0;
+};
+  
+v2f vert(appdata_img v) {
+	v2f o;
+	o.pos = UnityObjectToClipPos(v.vertex);
+	
+	half2 uv = v.texcoord;
+	
+	o.uv[0] = uv + _MainTex_TexelSize.xy * half2(-1, -1);
+	o.uv[1] = uv + _MainTex_TexelSize.xy * half2(0, -1);
+	o.uv[2] = uv + _MainTex_TexelSize.xy * half2(1, -1);
+	o.uv[3] = uv + _MainTex_TexelSize.xy * half2(-1, 0);
+	o.uv[4] = uv + _MainTex_TexelSize.xy * half2(0, 0);
+	o.uv[5] = uv + _MainTex_TexelSize.xy * half2(1, 0);
+	o.uv[6] = uv + _MainTex_TexelSize.xy * half2(-1, 1);
+	o.uv[7] = uv + _MainTex_TexelSize.xy * half2(0, 1);
+	o.uv[8] = uv + _MainTex_TexelSize.xy * half2(1, 1);
+			 
+	return o;
 }
 ```
 
-4.片元着色器中，使用内置宏UNITY_LIGHT_ATTENUATION计算阴影和光照衰减
+我们在v2f结构体中定义了一个维数为9的纹理数组，对应了使用Sobel算子采样时需要的9个邻域纹理坐标。通过把计算采样纹理坐标的代码从片元着色器中转移到顶点着色器中，可以减少运算，提高性能。由于从顶点着色器到片元着色器的插值是线性的，因此这样的转移并不会影响纹理坐标的计算结果。
+
+5）片元着色器是我们的重点
 
 ```
-			fixed4 frag(v2f i) : SV_Target {
-				//计算光照衰减和阴影
-				UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
-			 	
-				return fixed4(ambient + diffuse * atten, 1.0);
+fixed4 fragSobel(v2f i) : SV_Target {
+	half edge = Sobel(i);
+	
+	fixed4 withEdgeColor = lerp(_EdgeColor, tex2D(_MainTex, i.uv[4]), edge);
+	fixed4 onlyEdgeColor = lerp(_EdgeColor, _BackgroundColor, edge);
+	return lerp(withEdgeColor, onlyEdgeColor, _EdgeOnly);
+	}
+```
+
+我们首先调用Sobel函数计算当前像素的梯度值edge，并利用该值分别计算了**背景为原图和纯色下的颜色值,**然后利用 EdgeOnly 在两者之间插值得到最终的像素值。Sobel 函数将利用 Sobel算子对原图进行边缘检测，它的定义如下:
+
+```
+fixed luminance(fixed4 color) {
+	return  0.2125 * color.r + 0.7154 * color.g + 0.0721 * color.b; 
+}
+
+half Sobel(v2f i) {
+	const half Gx[9] = {-1,  0,  1,
+							-2,  0,  2,
+							-1,  0,  1};
+	const half Gy[9] = {-1, -2, -1,
+							0,  0,  0,
+							1,  2,  1};		
+	
+	half texColor;
+	half edgeX = 0;
+	half edgeY = 0;
+	for (int it = 0; it < 9; it++) {
+		texColor = luminance(tex2D(_MainTex, i.uv[it]));
+		edgeX += texColor * Gx[it];
+		edgeY += texColor * Gy[it];
+	}
+	
+	half edge = 1 - abs(edgeX) - abs(edgeY);
+	
+	return edge;
+}
+```
+
+我们首先定义了水平方向和竖直方向使用的卷积核G和G。接着，我们依次对9个像素行采样，计算它们的亮度值，再与卷积核G和G,中对应的权重相乘后，叠加到各自的梯度值上最后，我们从1中减去水平方向和竖直方向的梯度值的绝对值，得到edge。edge值越小，表明位置越可能是一个边缘点。至此，边缘检测过程结束。
+(6)当然，我们也关闭了该Shader的Fallback:
+
+```
+Fallback Off
+```
+
+## 12.4 高斯模糊
+
+高斯模糊同样利用了卷积计算，它使用的卷积核名为高斯核。高斯核是一个正方形大小的滤波核，其中每个元素的计算都是基于下面的高斯方程:
+
+![image-20251102172445426](image-20251102172445426.png)
+
+高斯方程很好地模拟了邻域每个像素对当前处理像素的影响程度--距离越近，影响越大。
+
+> 高斯核的维数越高,模糊程度越大。使用一个NxN 的高斯核对图像进行卷积滤波,就需要NxNxWxH(W 和H分别是图像的宽和高)次纹理采样。当N的大小不断增加时，采样次数会变得非常巨大。幸运的是，我们可以把这个二维高斯函数拆分成两个一维函数。也就是说，我们可以使用两个一维的高斯核(图12.8中的右图)先后对图像进行滤波，它们得到的结果和直接使用二维高斯核是一样的，但采样次数只需要 2xNxWxH。我们可以进一步观察到，两个一维高斯核中包含了很多重复的权重。对于一个大小为5的一维高斯核，我们实际只需要记录3个权重值即可。
+>
+> ![image-20251102172731413](image-20251102172731413.png)
+
+**实验过程**
+
+1）新建场景，包括相机，平行光。去掉天空盒子。
+
+2）把本书资源中的 Assets/Textures/Chapter12/Sakura0,jpg拖曳到场景中，并调整其的位置使它可以填充整个场景。
+3）新建一个脚本。在本书资源中，该脚本名为GaussianBlur.cs。把该脚本拖曳到摄像机上。
+4）新建一个Unity Shader。在本书资源中,该 Shader 名为Chapter12-GaussianBlur.shader。
+
+### GaussianBlur.cs脚本
+
+首先来编写 BrightnessSaturationAndContrast.cs脚本。打开该脚本，并进行如下修改：
+
+1. 首先继承12.1的基类
+
+```
+public class BrightnessSaturationAndContrast : PostEffectsBase {
+```
+
+2. 声明需要用到的shader并创建相应材质
+
+```
+public Shader gaussianBlurShader;
+	private Material gaussianBlurMaterial = null;
+
+	public Material material {  
+		get {
+			gaussianBlurMaterial = CheckShaderAndCreateMaterial(gaussianBlurShader, gaussianBlurMaterial);
+			return gaussianBlurMaterial;
+		}  
+	}
+```
+
+3. 在脚本中，我们还提供了调整高斯模糊的迭代次数 ，模糊范围和缩放系数的参数：
+
+```
+// Blur iterations - larger number means more blur.
+	[Range(0, 4)]
+	public int iterations = 3;
+	
+	// Blur spread for each iteration - larger value means more blur
+	[Range(0.2f, 3.0f)]
+	public float blurSpread = 0.6f;
+	
+	[Range(1, 8)]
+	public int downSample = 2;
+	
+```
+
+blurSpread 和 downSample 都是出于性能的考虑。在高斯核维数不变的情况下，BlurSize 越大，模糊程度越高，但采样数却不会受到影响。但过大的BlurSize值会造成虚影，这可能并不是我们希望的。而 downSample 越大，需要处理的像素数越少，同时也能进一步提高模糊程度，但过大的 downSample 可能会使图像像素化。
+
+4. 最后，我们需要定义关键的 OnRenderlmage函数。我们首先来看第一个版本，也就是最简单的 OnRenderImage 的实现:
+
+```
+void OnRenderImage (RenderTexture src, RenderTexture dest) {
+		if (material != null) {
+			int rtW = src.width/downSample;
+			int rtH = src.height/downSample;
+
+			RenderTexture buffer0 = RenderTexture.GetTemporary(rtW, rtH, 0);
+			buffer0.filterMode = FilterMode.Bilinear;
+
+			Graphics.Blit(src, buffer0);
+
+			for (int i = 0; i < iterations; i++) {
+				material.SetFloat("_BlurSize", 1.0f + i * blurSpread);
+
+				RenderTexture buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
+
+				// Render the vertical pass
+				Graphics.Blit(buffer0, buffer1, material, 0);
+
+				RenderTexture.ReleaseTemporary(buffer0);
+				buffer0 = buffer1;
+				buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
+
+				// Render the horizontal pass
+				Graphics.Blit(buffer0, buffer1, material, 1);
+
+				RenderTexture.ReleaseTemporary(buffer0);
+				buffer0 = buffer1;
 			}
+
+			Graphics.Blit(buffer0, dest);
+			RenderTexture.ReleaseTemporary(buffer0);
+		} else {
+			Graphics.Blit(src, dest);
+		}
+	}
 ```
 
-5.注意修改回调函数
+与上两节的实现不同,我们这里利用 RenderTexture.GetTemporary 函数分配了一块与屏幕图像大小相同的缓冲区。这是因为，高斯模糊需要调用两个Pass，我们需要使用一块中间缓存来存储第一个 Pass 执行完毕后得到的模糊结果。如代码所示，我们首先调用 Graphics.Blit(src,buffer,material,0)，使用 Shader 中的第一个Pass(即使用竖直方向的一维高斯核进行滤波)对 src 进行处理，并将结果存储在了buffer中。然后,再调用 Graphics.Blit(bufer,dest,material,1),使用 Shader中的第二个 Pass(即使用水平方向的一维高斯核进行滤波)对 buffer 进行处理，返回最终的屏幕图像。最后，我们还需要调用RenderTexture.ReleaseTemporary 来释放之前分配的缓存。
+
+5. 在理解了上述代码后，我们可以实现第二个版本的 OnRenderlmage 函数。在这个版本中，我们将利用缩放对图像进行降采样，从而减少需要处理的像素个数，提高性能。
 
 ```
-	// FallBack "VertexLit"
-	FallBack "Transparent/Cutout/VertexLit"
+	void OnRenderImage (RenderTexture src, RenderTexture dest) {
+		if (material != null) {
+			int rtW = src.width/downSample;
+			int rtH = src.height/downSample;
+			RenderTexture buffer = RenderTexture.GetTemporary(rtW, rtH, 0);
+			buffer.filterMode = FilterMode.Bilinear;
+
+			// Render the vertical pass
+			Graphics.Blit(src, buffer, material, 0);
+			// Render the horizontal pass
+			Graphics.Blit(buffer, dest, material, 1);
+
+			RenderTexture.ReleaseTemporary(buffer);
+		} else {
+			Graphics.Blit(src, dest);
+		}
+	}
 ```
 
-#### 而透明度混合
+与第一个版本代码不同的是，我们在声明缓冲区的大小时，使用了小于原屏幕分辨率的尺寸,并将该临时渲染纹理的滤波模式设置为双线性。这样，在调用第一个Pass时，我们需要处理的像素个数就是原来的几分之一。对图像进行降采样不仅可以减少需要处理的像素个数，提高性能,而且适当的降采样往往还可以得到更好的模糊效果。尽管 downSample 值越大，性能越好，但过大的 downSample 可能会造成图像像素化。
 
-Unity的Transparent回调中，关于半透明的物体的阴影效果为：不会投射阴影。这是Unity因为深度写入和透明度混合之间复杂的问题决定的，个人编写者自然可以通过dirty work来手动为透明度混合的物体写阴影效果，但unity提供的解法就两种：
-
-1.
+6. 最后一个版本的代码还考虑了高斯模糊的迭代次数:
 
 ```
-	FallBack "VertexLit"
-	或
-	FallBack "Diffuse"等
+	// / 1st edition: just apply blur
+	void OnRenderImage(RenderTexture src, RenderTexture dest) {
+		if (material != null) {
+			int rtW = src.width;
+			int rtH = src.height;
+			RenderTexture buffer = RenderTexture.GetTemporary(rtW, rtH, 0);
+
+			// Render the vertical pass
+			Graphics.Blit(src, buffer, material, 0);
+			// Render the horizontal pass
+			Graphics.Blit(buffer, dest, material, 1);
+
+			RenderTexture.ReleaseTemporary(buffer);
+		} else {
+			Graphics.Blit(src, dest);
+		}
+	} 
 ```
 
-![image-20251025223549083](image-20251025223549083.png)
+> 上面的代码显示了如何利用两个临时缓存在迭代之间进行交替的过程。在迭代开始前，我们首先定义了第一个缓存 bufer0，并把src 中的图像缩放后存储到 bufer0中。在迭代过程中，我们又定义了第二个缓存 bufer1。在执行第一个Pass时，输入是 buffer0，输出是buffer1，完毕后首先把 bufer0 释放，再把结果值 bufer1存储到 buffer0中，重新分配 bufer1，然后再调用第二个Pass，重复上述过程。迭代完成后，bufer0将存储最终的图像，我们再利用Graphics.Blit(bufer0.dest)把结果显示到屏幕上，并释放缓存。
 
-像普通不透明物体一样投射阴影。
-
-
-
-2.
+### Chapter12- GaussianBlur.shader
 
 ```
-FallBack "Transparent/VertexLit"
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Unity Shaders Book/Chapter 12/Gaussian Blur" {
+	Properties {
+		_MainTex ("Base (RGB)", 2D) = "white" {}
+		_BlurSize ("Blur Size", Float) = 1.0
+	}
+	SubShader {
+		CGINCLUDE
+		
+		#include "UnityCG.cginc"
+		
+		sampler2D _MainTex;  
+		half4 _MainTex_TexelSize;
+		float _BlurSize;
+		  
+		struct v2f {
+			float4 pos : SV_POSITION;
+			half2 uv[5]: TEXCOORD0;
+		};
+		  
+		v2f vertBlurVertical(appdata_img v) {
+			v2f o;
+			o.pos = UnityObjectToClipPos(v.vertex);
+			
+			half2 uv = v.texcoord;
+			
+			o.uv[0] = uv;
+			o.uv[1] = uv + float2(0.0, _MainTex_TexelSize.y * 1.0) * _BlurSize;
+			o.uv[2] = uv - float2(0.0, _MainTex_TexelSize.y * 1.0) * _BlurSize;
+			o.uv[3] = uv + float2(0.0, _MainTex_TexelSize.y * 2.0) * _BlurSize;
+			o.uv[4] = uv - float2(0.0, _MainTex_TexelSize.y * 2.0) * _BlurSize;
+					 
+			return o;
+		}
+		
+		v2f vertBlurHorizontal(appdata_img v) {
+			v2f o;
+			o.pos = UnityObjectToClipPos(v.vertex);
+			
+			half2 uv = v.texcoord;
+			
+			o.uv[0] = uv;
+			o.uv[1] = uv + float2(_MainTex_TexelSize.x * 1.0, 0.0) * _BlurSize;
+			o.uv[2] = uv - float2(_MainTex_TexelSize.x * 1.0, 0.0) * _BlurSize;
+			o.uv[3] = uv + float2(_MainTex_TexelSize.x * 2.0, 0.0) * _BlurSize;
+			o.uv[4] = uv - float2(_MainTex_TexelSize.x * 2.0, 0.0) * _BlurSize;
+					 
+			return o;
+		}
+		
+		fixed4 fragBlur(v2f i) : SV_Target {
+			float weight[3] = {0.4026, 0.2442, 0.0545};
+			
+			fixed3 sum = tex2D(_MainTex, i.uv[0]).rgb * weight[0];
+			
+			for (int it = 1; it < 3; it++) {
+				sum += tex2D(_MainTex, i.uv[it*2-1]).rgb * weight[it];
+				sum += tex2D(_MainTex, i.uv[it*2]).rgb * weight[it];
+			}
+			
+			return fixed4(sum, 1.0);
+		}
+		    
+		ENDCG
+		
+		ZTest Always Cull Off ZWrite Off
+		
+		Pass {
+			NAME "GAUSSIAN_BLUR_VERTICAL"
+			
+			CGPROGRAM
+			  
+			#pragma vertex vertBlurVertical  
+			#pragma fragment fragBlur
+			  
+			ENDCG  
+		}
+		
+		Pass {  
+			NAME "GAUSSIAN_BLUR_HORIZONTAL"
+			
+			CGPROGRAM  
+			
+			#pragma vertex vertBlurHorizontal  
+			#pragma fragment fragBlur
+			
+			ENDCG
+		}
+	} 
+	FallBack "Diffuse"
+}
+
 ```
 
-![image-20251025223458843](image-20251025223458843.png)
+## 12.5 Bloom效果
 
-不投射阴影。
+Bloom 特效是游戏中常见的一种屏幕效果。这种特效可以模拟真实摄像机的一种图像效果,它让画面中较亮的区域“扩散”到周围的区域中，造成一种朦胧的效果。
+
+Bloom 的实现原理非常简单:我们首先根据一个值提取出图像中的较亮区域，把它们存储在一张渲染纹理中，再利用高斯模糊对这张渲染纹理进行模糊处理，模拟光线扩散的效果，最后再将其和原图像进行混合，得到最终的效果。
+
+ [Chapter12-Bloom.shader](F:\UNITY\（冯乐乐）Unity_Shaders_Book\Assets\Shaders\Chapter12\Chapter12-Bloom.shader) 
+
+```
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Unity Shaders Book/Chapter 12/Bloom" {
+	Properties {
+		_MainTex ("Base (RGB)", 2D) = "white" {}
+		_Bloom ("Bloom (RGB)", 2D) = "black" {}
+		_LuminanceThreshold ("Luminance Threshold", Float) = 0.5
+		_BlurSize ("Blur Size", Float) = 1.0
+	}
+	SubShader {
+		CGINCLUDE
+		
+		#include "UnityCG.cginc"
+		
+		sampler2D _MainTex;
+		half4 _MainTex_TexelSize;
+		sampler2D _Bloom;
+		float _LuminanceThreshold;
+		float _BlurSize;
+		
+		struct v2f {
+			float4 pos : SV_POSITION; 
+			half2 uv : TEXCOORD0;
+		};	
+		
+		v2f vertExtractBright(appdata_img v) {
+			v2f o;
+			
+			o.pos = UnityObjectToClipPos(v.vertex);
+			
+			o.uv = v.texcoord;
+					 
+			return o;
+		}
+		
+		fixed luminance(fixed4 color) {
+			return  0.2125 * color.r + 0.7154 * color.g + 0.0721 * color.b; 
+		}
+		
+		fixed4 fragExtractBright(v2f i) : SV_Target {
+			fixed4 c = tex2D(_MainTex, i.uv);
+			fixed val = clamp(luminance(c) - _LuminanceThreshold, 0.0, 1.0);
+			
+			return c * val;
+		}
+		
+		struct v2fBloom {
+			float4 pos : SV_POSITION; 
+			half4 uv : TEXCOORD0;
+		};
+		
+		v2fBloom vertBloom(appdata_img v) {
+			v2fBloom o;
+			
+			o.pos = UnityObjectToClipPos (v.vertex);
+			o.uv.xy = v.texcoord;		
+			o.uv.zw = v.texcoord;
+			
+			#if UNITY_UV_STARTS_AT_TOP			
+			if (_MainTex_TexelSize.y < 0.0)
+				o.uv.w = 1.0 - o.uv.w;
+			#endif
+				        	
+			return o; 
+		}
+		
+		fixed4 fragBloom(v2fBloom i) : SV_Target {
+			return tex2D(_MainTex, i.uv.xy) + tex2D(_Bloom, i.uv.zw);
+		} 
+		
+		ENDCG
+		
+		ZTest Always Cull Off ZWrite Off
+		
+		Pass {  
+			CGPROGRAM  
+			#pragma vertex vertExtractBright  
+			#pragma fragment fragExtractBright  
+			
+			ENDCG  
+		}
+		
+		UsePass "Unity Shaders Book/Chapter 12/Gaussian Blur/GAUSSIAN_BLUR_VERTICAL"
+		
+		UsePass "Unity Shaders Book/Chapter 12/Gaussian Blur/GAUSSIAN_BLUR_HORIZONTAL"
+		
+		Pass {  
+			CGPROGRAM  
+			#pragma vertex vertBloom  
+			#pragma fragment fragBloom  
+			
+			ENDCG  
+		}
+	}
+	FallBack Off
+}
+
+```
+
+ [Bloom.cs](F:\UNITY\（冯乐乐）Unity_Shaders_Book\Assets\Scripts\Chapter12\Bloom.cs) 
+
+## 12.6 运动模糊
+
+运动模糊是真实世界中的摄像机的一种效果。如果在摄像机曝光时，拍摄场景发生了变化，就会产生模糊的画面。
+
+运动模糊的实现有多种方法。一种实现方法是利用一块累积缓存(accumulationbuffer) 来混合多张连续的图像。当物体快速移动产生多张图像后,我们取它们之间的平均值作为最后的运动模糊图像。然而，这种暴力的方法对性能的消耗很大，因为想要获取多张帧图像往往意味着我们需要在同一帧里渲染多次场景。另一种应用广泛的方法是创建和使用速度缓存(velocitybufer)，这个缓存中存储了各个像素当前的运动速度，然后利用该值来决定模糊的方向和大小。
+
+在本节中，我们将使用类似上述第一种方法的实现来模拟运动模糊的效果。我们不需要在一帧中把场景渲染多次，但需要保存之前的渲染结果，不断把当前的渲染图像叠加到之前的渲染图像中，从而产生一种运动轨迹的视觉效果。这种方法与原始的利用累计缓存的方法相比性能更好但模糊效果可能会略有影响。
+
+为此，我们需要进行如下准备工作。
+
+(1)新建一个场景。在本书资源中，该场景名为Scene126。在Unity5.2中，默认情况下场景将包含一个摄像机和一个平行光，并且使用了内置的天空盒子。在Window→Lighting→Skybox中去掉场景中的天空盒子。
+
+(2)我们需要搭建一个测试运动模糊的场景。在本书资源的实现中，我们构建了一个包含3面墙的房间，并放置了4个立方体，它们均使用了我们在9.5节中创建的标准材质。同时，我们把本书资源中的 Translating.cs脚本拖曳给摄像机，让其在场景中不断运动。
+
+(3)新建一个脚本。在本书资源中，该脚本名为MotionBlur.cs。把该脚本拖曳到摄像机上。
+
+(4)新建一个 Unity Shader。在本书资源中，该 Shader名为 Chapter12-MotionBlur。
+
+```
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Unity Shaders Book/Chapter 12/Motion Blur" {
+	Properties {
+		_MainTex ("Base (RGB)", 2D) = "white" {}
+		_BlurAmount ("Blur Amount", Float) = 1.0
+	}
+	SubShader {
+		CGINCLUDE
+		
+		#include "UnityCG.cginc"
+		
+		sampler2D _MainTex;
+		fixed _BlurAmount;
+		
+		struct v2f {
+			float4 pos : SV_POSITION;
+			half2 uv : TEXCOORD0;
+		};
+		
+		v2f vert(appdata_img v) {
+			v2f o;
+			
+			o.pos = UnityObjectToClipPos(v.vertex);
+			
+			o.uv = v.texcoord;
+					 
+			return o;
+		}
+		
+		fixed4 fragRGB (v2f i) : SV_Target {
+			return fixed4(tex2D(_MainTex, i.uv).rgb, _BlurAmount);
+		}
+		
+		half4 fragA (v2f i) : SV_Target {
+			return tex2D(_MainTex, i.uv);
+		}
+		
+		ENDCG
+		
+		ZTest Always Cull Off ZWrite Off
+		
+		Pass {
+			Blend SrcAlpha OneMinusSrcAlpha
+			ColorMask RGB
+			
+			CGPROGRAM
+			
+			#pragma vertex vert  
+			#pragma fragment fragRGB  
+			
+			ENDCG
+		}
+		
+		Pass {   
+			Blend One Zero
+			ColorMask A
+			   	
+			CGPROGRAM  
+			
+			#pragma vertex vert  
+			#pragma fragment fragA
+			  
+			ENDCG
+		}
+	}
+ 	FallBack Off
+}
+
+```
+
+ [MotionBlur.cs](F:\UNITY\（冯乐乐）Unity_Shaders_Book\Assets\Scripts\Chapter12\MotionBlur.cs) 
+
+注意：Translating.cs脚本拖曳给摄像机，让其在场景中不断运动。
+
+ [Translating.cs](F:\UNITY\（冯乐乐）Unity_Shaders_Book\Assets\Scripts\Helpers\Translating.cs) 
