@@ -7,7 +7,7 @@ categories:
     - 技术笔记
 tags:
     - Unity Shader
-weight: 100       # You can add weight to some posts to override the default sorting (date descending)
+weight: 2044       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
 # 12 屏幕后处理
