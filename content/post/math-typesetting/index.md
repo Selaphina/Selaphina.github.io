@@ -20,7 +20,7 @@ $\varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887…$
 ## Block math
 
 $$
-    \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } 
+\varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
 $$
 
 ```markdown
@@ -30,7 +30,7 @@ $$
 ```
 
 $$
-    f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
+f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
 $$
 
 ```markdown

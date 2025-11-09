@@ -2,7 +2,7 @@
 title: 8 透明效果
 description: Unity Shader 入门精要 第八章
 slug: hello-world
-date: 2022-03-06 00:00:00+0000
+date: 2024-03-06 00:00:00+0000
 image: cover1.jpg
 categories:
     - 技术笔记

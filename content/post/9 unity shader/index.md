@@ -1,7 +1,7 @@
 ---
 title: 9 复杂光照
 description: Unity Shader 入门精要 第九章
-date: 2022-03-09 10:20:12+0000
+date: 2024-03-09 10:20:12+0000
 image: cover1.jpg
 categories:
     - 技术笔记

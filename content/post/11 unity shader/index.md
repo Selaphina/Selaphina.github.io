@@ -1,7 +1,7 @@
 ---
 title: 11 动态纹理
 description: Unity Shader 入门精要 第十一章
-date: 2022-03-18 19:10:20+0000
+date: 2024-03-18 19:10:20+0000
 image: cover1.jpg
 categories:
     - 技术笔记
