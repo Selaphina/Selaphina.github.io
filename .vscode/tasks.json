@@ -6,7 +6,7 @@
         {
             "label": "Serve Drafts",
             "type": "shell",
-            "command": "hugo server",
+            "command": "hugo server -D",
             "group": {
                 "kind": "test",
                 "isDefault": true
