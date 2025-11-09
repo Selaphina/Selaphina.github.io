@@ -2,6 +2,7 @@
 title: About me
 description: 关于作者
 image: cover.jpg
+date: 2025-09-25 22:10:30+0000
 weight: 1
 aliases: ["/about/"]
 categories:
