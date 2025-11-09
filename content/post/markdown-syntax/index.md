@@ -3,6 +3,7 @@ title: Markdown Syntax Guide
 date: 2023-09-07
 description: Sample article showcasing basic Markdown syntax and formatting for HTML elements.
 draft: true
+private: true
 tags: 
     - markdown
     - css
