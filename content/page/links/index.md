@@ -25,7 +25,7 @@ comments: false
 
 2026.09-2029.07：厦门大学	电影学院	    计算机科学与技术
 
-## Project
+
 
 ## Project
 
