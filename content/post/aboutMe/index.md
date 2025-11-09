@@ -23,19 +23,19 @@ categories:
 
 ### **2024.08-2024.11: 基于unity开发的2D 横版平台冒险剧情向游戏**  
 
-[简介视频](https://drive.google.com/file/d/1FjW7MCq9ixUjPJ4uHrPh2Scrby3zhsuM/view?usp=drive_link)
+![《Lobe Corporation》](图片4.png)
 
-![图片4](图片4.png)
+[简介视频](https://drive.google.com/file/d/1FjW7MCq9ixUjPJ4uHrPh2Scrby3zhsuM/view?usp=drive_link)
 
 ###  2025.06-2025.07：**RPAIchat-虚拟角色AI双语对话系统**
 
-![image-20251109130958679](image-20251109130958679.png)
+![RPAIchat](image-20251109130958679.png)
 
 [项目地址](https://github.com/Selaphina/RPAIchat-DeepSeek-R1-for-Dynamic-Role-Playing-with-in-Unity)
 
 **2025.05-2025.06：基于UE5的可交互风格化洞穴水体场景**
 
-![image-20251109131200707](image-20251109131200707.png)
+![普通卡渲小骑士](image-20251109131200707.png)
 
 [演示视频](https://drive.google.com/file/d/1lIqijUMOLgBpfexKJI0soJJlarThKua0/view?usp=drive_link)
 
