@@ -4,6 +4,7 @@ description: 关于作者
 date: 2023-08-26 00:00:00+0000
 image: cover.jpg
 weight: 1
+aliases: ["/about/"]
 categories:
     - 置顶
 ---
