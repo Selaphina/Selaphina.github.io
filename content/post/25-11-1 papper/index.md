@@ -81,8 +81,6 @@ p = Σ wᵢvᵢ  (∀像素p ∈ 图像I)
 
 ### 2. 4D几何调色板定义
 
-<img src="../../../../../博客笔记/image-20251109111056939.png" alt="如图示，切片非斜多面体得7顶点多边形，而切片斜多面体得4顶点多边形。顶点越少，越易于可视化和控制。" style="zoom:50%;" />
-
 - 将视频像素投影至**RGBT空间**（RGB颜色+时间维度）
 - 时变调色板通过4D多胞形的时间切片隐式定义
 - 引入**帧间度规则**与**拓扑规则**确保顶点对应关系清晰
@@ -97,7 +95,6 @@ p = Σ wᵢvᵢ  (∀像素p ∈ 图像I)
 
 #### （2）顶点移除
 
-![img](https://hunyuan-plugin-private-1258344706.cos.ap-nanjing.myqcloud.com/pdf_youtu/img/eb2a7f19500a440f8a2031d79b6daea7-image.png?q-sign-algorithm=sha1&q-ak=AKID372nLgqocp7HZjfQzNcyGOMTN3Xp6FEA&q-sign-time=1762657042%3B2078017042&q-key-time=1762657042%3B2078017042&q-header-list=host&q-url-param-list=&q-signature=17e35f7ed1863fd51677f2e193cd5be321b52f81)
 
 - 用"幽灵顶点"替代冗余顶点
 - 保留分裂/合并顶点及边界顶点以保护拓扑结构
