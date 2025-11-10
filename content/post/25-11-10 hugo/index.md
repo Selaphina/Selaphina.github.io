@@ -6,7 +6,7 @@ image: cover.jpg
 categories:
     - 工具指南
 tags:
-	- Hugo
+	    - Hugo
 weight: 2046       # You can add weight to some posts to override the default sorting (date descending)
 
 ---
