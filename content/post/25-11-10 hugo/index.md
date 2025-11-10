@@ -6,9 +6,7 @@ image: cover.jpg
 categories:
     - 工具指南
 tags:
-    - Note
 	- Hugo
-	- 建站
 weight: 2046       # You can add weight to some posts to override the default sorting (date descending)
 
 ---
