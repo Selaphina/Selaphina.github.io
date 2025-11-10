@@ -4,14 +4,14 @@ description: 通过Hugo构建的静态博客，以stack主题为例。
 date: 2025-11-09 10:12:30+0000
 image: cover.jpg
 categories:
-    - 论文研读
+    - 工具指南
 tags:
     - Note
+	- Hugo
+	- 建站
 weight: 2046       # You can add weight to some posts to override the default sorting (date descending)
 
 ---
-
-
 
 作为Hugo建站新手，使用作者提供的 **Stack starter template**，并用 **GitHub Actions** 自动构建并部署到 GitHub Pages，最为方便。
 
