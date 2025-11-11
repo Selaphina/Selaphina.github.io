@@ -17,3 +17,6 @@ weight: 3100       # You can add weight to some posts to override the default so
 ![](钢琴湖精灵（字）2!.png)
 
 ![](image100239.png)
+
+> 2023年，宣推的条漫组创立之初时，我的第一个作品。现在看来青涩而有趣。不过当时绘制这条漫画的高漫板子已经被我出售了，购置了更昂贵的wacom板子，却至今没有像样的作品。两年后的今天，宣推越来越好，我却停在了某处。
+
