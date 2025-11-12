@@ -2,7 +2,7 @@
 title: 10 高级纹理
 description: Unity Shader 入门精要 第十章
 date: 2024-03-12 12:02:00+0000
-image: cover1.jpg
+image: cover1.png
 categories:
     - 技术笔记
 tags:

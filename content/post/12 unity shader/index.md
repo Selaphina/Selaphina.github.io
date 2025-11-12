@@ -2,7 +2,7 @@
 title: 12 屏幕后处理
 description: Unity Shader 入门精要 第十二章
 date: 2024-03-25 22:10:30+0000
-image: cover1.jpg
+image: cover1.png
 categories:
     - 技术笔记
 tags:
