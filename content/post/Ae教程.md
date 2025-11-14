@@ -8,7 +8,7 @@
 
 C:\Program Files\Adobe\Adobe After Effects CC 2018\Support Files
 
-![image-20251114115747966](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20251114115747966.png)
+![image-20251114115747966](image-20251114115747966.png)
 
 　（Ps：在弹出的窗口中手动找到软件安装目录里面的 amtlib.dll 文件）
 
@@ -30,7 +30,7 @@ C:\Program Files\Adobe\Adobe After Effects CC 2018\Support Files
 
 7.U显示所有有变化的关键帧
 
-![image-20251114140113272](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20251114140113272.png)
+![image-20251114140113272](image-20251114140113272.png)
 
 ## 工具/快捷键
 
@@ -46,6 +46,10 @@ C:\Program Files\Adobe\Adobe After Effects CC 2018\Support Files
 
 5.ctrl+shift+C预合成
 
+6.消隐
+
+![image-20251114182654593](image-20251114182654593.png)
+
 ## 要点：
 
 1.非线性动画
@@ -56,9 +60,15 @@ C:\Program Files\Adobe\Adobe After Effects CC 2018\Support Files
 
 4.alpha遮罩
 
+5.表达式：抖动表达式。时间表达式
+
+![image-20251114182502974](image-20251114182502974.png)
+
+6.
+
 ## 前后缀的规范：
 
-1. 尺寸
+1. 尺寸：
 2. 有学校的元素，一眼记住是CUC STU
 3. 时长7-10s是ok的，视觉上尽量快
 
