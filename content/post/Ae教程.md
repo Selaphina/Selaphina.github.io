@@ -1,19 +1,3 @@
-## **AMTEmu使用方法**
-
-　1.、断开网络链接，以试用模式安装 Adobe 各类软件程序
-
-　2、运行Amtemu，选择对应的软件版本，
-
-　3、点击Install运行安装（自动替换amtlib.dll，并生成painter.ini配置文件）
-
-C:\Program Files\Adobe\Adobe After Effects CC 2018\Support Files
-
-![image-20251114115747966](image-20251114115747966.png)
-
-　（Ps：在弹出的窗口中手动找到软件安装目录里面的 amtlib.dll 文件）
-
-　4、完成安装。
-
 ## 基本介绍：
 
 1.什么是合成（ctrl+K 合成设置-主要是做长度控制）
@@ -64,7 +48,11 @@ C:\Program Files\Adobe\Adobe After Effects CC 2018\Support Files
 
 ![image-20251114182502974](image-20251114182502974.png)
 
-6.
+6.运动模糊
+
+7.导出
+
+
 
 ## 前后缀的规范：
 
