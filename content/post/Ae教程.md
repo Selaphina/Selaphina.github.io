@@ -28,9 +28,13 @@ C:\Program Files\Adobe\Adobe After Effects CC 2018\Support Files
 
 6.位移，缩放，旋转，不透明度
 
+7.U显示所有有变化的关键帧
+
 ![image-20251114140113272](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20251114140113272.png)
 
 ## 工具/快捷键
+
+0.窗口设置
 
 1.按住alt键轻敲工具栏图标即可切换常用功能
 
@@ -40,15 +44,23 @@ C:\Program Files\Adobe\Adobe After Effects CC 2018\Support Files
 
 4.顶部菜单栏——动画——关键帧辅助——时间反向关键帧
 
-5.
+5.ctrl+shift+C预合成
 
+## 要点：
 
+1.非线性动画
+
+2.效果预设--湍流置换为例，hellow summer，不要奶茶的案例了
+
+3.蒙版（简单易懂的文字出入）
+
+4.alpha遮罩
 
 ## 前后缀的规范：
 
 1. 尺寸
 2. 有学校的元素，一眼记住是CUC STU
-3. 时长7-10s是ok的，尽量快
+3. 时长7-10s是ok的，视觉上尽量快
 
 
 
