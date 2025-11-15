@@ -32,10 +32,6 @@ AE 全称 **Adobe After Effects**，它是一个 **视频特效与动态图形�
 
 {{< bilibili "BV1ZA411g7Sb" >}}
 
-
-
-
-
 ## 为什么要用Ae？
 
 ~~招新宣传片~~
