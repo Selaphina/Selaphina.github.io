@@ -311,6 +311,44 @@ wiggle(1, 12)
 
 注意，ae内只能导出avi文件，比较大，该尺寸10s视频大概到1-2G以上。
 
+### 转换格式：
+
+下载ffmpeg：
+
+> FFmpeg 是一个用于处理视频、音频等多媒体文件的开源工具包。它支持几乎所有的多媒体格式转换、剪辑和编辑，是开发者和多媒体工作者必备的工具。
+
+打开 [Dpwnload FFmpeg](https://ffmpeg.org/download.html) 官网，选择安装包Windows builds from gyan.dev
+
+![](image-20251116024309772.png)
+
+
+下滑找到release bulids部分，选择ffmpeg-7.0.2-essentials_build.zip
+
+ [ffmpeg-8.0-essentials_build.7z](..\..\..\..\..\迅雷下载\ffmpeg-8.0-essentials_build.7z) 
+打开文件夹，复制bin文件的路径，并添加进系统的环境变量中。
+
+![](image-20251116024426927.png)
+
+```
+D:\迅雷下载\ffmpeg-8.0-essentials_build\bin
+```
+
+![](image-20251116024448089.png)
+
+![](image-20251116024504012.png)
+
+![](image-20251116024529818.png)
+
+打开avi所在文件的根目录，将avi视频压缩后再转换格式。
+
+```
+ffmpeg -i input.avi -vf "fps=15,scale=640:-1:flags=lanczos" -loop 0 output.gif
+```
+
+原文链接：https://blog.csdn.net/Natsuago/article/details/143231558
+
+
+
 ## 前后缀的规范：
 
 ![45th前缀-21数媒网络叶谨娴](640.gif)
@@ -346,6 +384,22 @@ wiggle(1, 12)
 * 往期回顾3张都是透明底。
 * 设计的元素不要压在图片上，否则换图会很麻烦。
 * 制作过程中，记得检查深色模式和浅色模式是不是都可以显示，用两种方式都比较显眼的灰色。
+
+## 作业（选做）
+
+1.上手试试做个前缀吧！7-10s。
+
+2.把自己手上现有的一张/多张头图改成动态版，时长不限。
+
+**一般流程：**
+
+1.定主题颜色（2-3种）
+
+2.找参考，小红书/b站……拆解分析一个ae动态视频/动态效果/动态海报的各个环节用到了哪些技巧。对应找教程。
+
+3.写个简单的分镜草稿，1-3个画面即可，过审一下。
+
+4.ps/ai/ae开搞！
 
 ## 附录
 
