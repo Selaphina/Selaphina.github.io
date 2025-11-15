@@ -4,8 +4,7 @@ description: 新手向Ae使用指南，如果已经是熟练的ae使用者可以
 date: 2025-11-14 10:12:30+0000
 image: cover.jpg
 categories:
-    - 工具指南
-	- 置顶
+    - 教程
 weight: 2       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
