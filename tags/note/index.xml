@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Note on Selaphina</title><link>https://Selaphina.github.io/tags/note/</link><description>Recent content in Note on Selaphina</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 11 Nov 2025 10:12:30 +0000</lastBuildDate><atom:link href="https://Selaphina.github.io/tags/note/index.xml" rel="self" type="application/rss+xml"/><item><title>毕业设计 | 水墨风格化场景渲染（其一）</title><link>https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/</link><pubDate>Tue, 11 Nov 2025 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/</guid><description>&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/cover1.png" alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其一）" /&gt;&lt;h2 id="1插件unrealtounity"&gt;1.插件：UnrealToUnity
+&lt;/h2&gt;&lt;p&gt;在日常创作中，经常碰到一些好的UE美术资源，可以使用这个插件把它转换到Unity当中。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://pan.baidu.com/s/1P5AMJ177SIdE4-fjiRFEXg?pwd=6666" target="_blank" rel="noopener"
+&gt;百度网盘链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-c29b95f89891b425695cec5e69071dbd_1440w.jpg"
+width="179"
+height="130"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-c29b95f89891b425695cec5e69071dbd_1440w_hu_927da9e9d7402a24.jpg 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-c29b95f89891b425695cec5e69071dbd_1440w_hu_f863cfb54ac0eff0.jpg 1024w"
+loading="lazy"
+alt="img"
+class="gallery-image"
+data-flex-grow="137"
+data-flex-basis="330px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Unity：2019以上的版本&lt;/p&gt;
+&lt;p&gt;UE：版本根据自己的安装插件对应的版本自行选择，我选择的是5.3.2&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;解压对应版本的UE插件：&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150443177.png"
+width="819"
+height="744"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150443177_hu_6bcad59267b4922c.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150443177_hu_8abf1b88f6ad638b.png 1024w"
+loading="lazy"
+alt="压缩包内部结构"
+class="gallery-image"
+data-flex-grow="110"
+data-flex-basis="264px"
+&gt;&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;&lt;strong&gt;新建一个UE工程。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150049173.png"
+width="963"
+height="621"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150049173_hu_e946f434a0c9d43f.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150049173_hu_69e76da4002afd3f.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="155"
+data-flex-basis="372px"
+&gt;&lt;/p&gt;
+&lt;p&gt;找到工程目录，新建一个Plugins文件夹，如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150636303.png"
+width="441"
+height="494"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150636303_hu_ff62370e4432ec55.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150636303_hu_73d12de49c1f9ca9.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="89"
+data-flex-basis="214px"
+&gt;&lt;/p&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;&lt;strong&gt;把解压后的插件文件夹整个复制到Plugins文件夹下。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150754424.png"
+width="999"
+height="396"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150754424_hu_43d0e4941934258.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150754424_hu_ff578cce62f49cf2.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="252"
+data-flex-basis="605px"
+&gt;&lt;/p&gt;
+&lt;ol start="4"&gt;
+&lt;li&gt;&lt;strong&gt;重启UE，插件会在菜单栏上显示，可直接点击使用。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150908079.png"
+width="1806"
+height="867"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150908079_hu_87a4e7681268be69.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150908079_hu_a363508f164496ec.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="208"
+data-flex-basis="499px"
+&gt;&lt;/p&gt;
+&lt;p&gt;把需要转成unity资产的ue美术素材uasset拖到世界中，即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150924765.png"
+width="678"
+height="362"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150924765_hu_de3245674f6e1af8.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150924765_hu_83374b5f7b30a122.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="187"
+data-flex-basis="449px"
+&gt;&lt;/p&gt;
+&lt;p&gt;默认设置即可导出。可以选择取消勾选shader等，因为会与unity本体的shader有冲突。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111151019722.png"
+width="759"
+height="885"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111151019722_hu_de24daf9576b9140.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111151019722_hu_ea27b31e35fcef09.png 1024w"
+loading="lazy"
+alt="image-20251111151019722"
+class="gallery-image"
+data-flex-grow="85"
+data-flex-basis="205px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;事实上，导入unity后大概率会进入报错的安全模式，按照console窗口的报错一步步注释掉UE转生过来的代码即可，很快就能清理完毕。另外，还是强调，尽量把ue带来的shader删除干净，在unity里重新写一遍shader。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="2简单水墨渲染的初步实现"&gt;2.简单水墨渲染的初步实现
+&lt;/h2&gt;&lt;h3 id="21-轮廓线的渲染"&gt;2.1 轮廓线的渲染
+&lt;/h3&gt;&lt;p&gt;《unity shader入门精要 14章》已经详细介绍轮廓线的渲染方法。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;过程式集合轮廓线渲染方法：&lt;/strong&gt;
+1）单独一个pass将模型沿法线扩张一点，渲染成轮廓线的颜色，&lt;/p&gt;
+&lt;p&gt;2）然后再用一个pass正常内部渲染着色，遮住前面的部分。留下显示出来的部分就是轮廓线了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;span class="lnt"&gt;44
+&lt;/span&gt;&lt;span class="lnt"&gt;45
+&lt;/span&gt;&lt;span class="lnt"&gt;46
+&lt;/span&gt;&lt;span class="lnt"&gt;47
+&lt;/span&gt;&lt;span class="lnt"&gt;48
+&lt;/span&gt;&lt;span class="lnt"&gt;49
+&lt;/span&gt;&lt;span class="lnt"&gt;50
+&lt;/span&gt;&lt;span class="lnt"&gt;51
+&lt;/span&gt;&lt;span class="lnt"&gt;52
+&lt;/span&gt;&lt;span class="lnt"&gt;53
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Properties
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; [Header(OutLine)]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // Stroke Color 描边颜色
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; _StrokeColor (&amp;#34;Stroke Color&amp;#34;, Color) = (0,0,0,1)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // Noise Map 噪声图
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; _OutlineNoise (&amp;#34;Outline Noise Map&amp;#34;, 2D) = &amp;#34;white&amp;#34; {}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // First Outline Width
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; _Outline (&amp;#34;Outline Width&amp;#34;, Range(0, 1)) = 0.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // Second Outline Width
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; _OutsideNoiseWidth (&amp;#34;Outside Noise Width&amp;#34;, Range(1, 2)) = 1.3
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; _MaxOutlineZOffset (&amp;#34;Max Outline Z Offset&amp;#34;, Range(0,1)) = 0.5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; SubShader
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Tags { &amp;#34;RenderType&amp;#34;=&amp;#34;Opaque&amp;#34; &amp;#34;Queue&amp;#34;=&amp;#34;Geometry&amp;#34;}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // the first outline pass
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Pass
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // 主要在vertex shader内进行计算 省略部分基本参数设置
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; v2f vert (a2v v)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // fetch Perlin noise map here to map the vertex
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // add some bias by the normal direction
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float4 burn = tex2Dlod(_OutlineNoise, v.vertex);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; v2f o = (v2f)0;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float3 scaledir = mul((float3x3)UNITY_MATRIX_MV, normalize(v.normal.xyz));
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; scaledir += 0.5;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; scaledir.z = 0.01;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; scaledir = normalize(scaledir);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // camera space
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float4 position_cs = mul(UNITY_MATRIX_MV, v.vertex);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; position_cs /= position_cs.w;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float3 viewDir = normalize(position_cs.xyz);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float3 offset_pos_cs = position_cs.xyz + viewDir * _MaxOutlineZOffset;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // y = cos（fov/2）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float linewidth = -position_cs.z / (unity_CameraProjection[1].y);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; linewidth = sqrt(linewidth);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; position_cs.xy = offset_pos_cs.xy + scaledir.xy * linewidth * burn.x * _Outline ;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; position_cs.z = offset_pos_cs.z;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; o.pos = mul(UNITY_MATRIX_P, position_cs);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; return o;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // fragment shader只是输出了一个颜色 不赘述
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;水墨画风格渲染，做了一个最简单的noise干扰，在这里使用noise纹理图片（_OutlineNoise）进行采样，这样又个好处就是随机出来的&lt;strong&gt;轮廓不会随着视角的改变而改变。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/noise.jpg"
+width="512"
+height="512"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/noise_hu_8146bc218cacc7b4.jpg 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/noise_hu_877286e9feb68bb1.jpg 1024w"
+loading="lazy"
+alt="noise"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+&gt;&lt;/p&gt;
+&lt;p&gt;其中，&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;// y = cos（fov/2）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float linewidth = -position_cs.z / (unity_CameraProjection[1].y);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;增加了一个linewidth的操作，因为unity_CameraProjection[1].y = cos（fov/2）。&lt;/p&gt;
+&lt;p&gt;**目的：**保证轮廓线随着FOV的变换也是成一定比例，近大远小，而不是远近一样粗细。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221055648.png"
+width="1529"
+height="1157"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221055648_hu_c311b012eff2cd2a.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221055648_hu_c0b68fd4632830f9.png 1024w"
+loading="lazy"
+alt="image-20251110221055648"
+class="gallery-image"
+data-flex-grow="132"
+data-flex-basis="317px"
+&gt;&lt;/p&gt;
+&lt;p&gt;最后一个小trick是，再增加了一个pass进行完全相同的操作，只是宽度再稍微增加一点，然后在fragment shader里根据noise再进行一下剔除。这也是在属性里面，之前没有用到的_OutsideNoiseWidth，来控制第二个pass的轮廓线的宽度，理论上它要大于1，比第一个pass稍微宽一些。简要的代码如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;// 在vertex shader内 只需要稍微改变一点
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;position_cs.xy = offset_pos_cs.xy + scaledir.xy * linewidth * burn.y * _Outline * _OutsideNoiseWidth ;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;// 在fragment shader内 也稍微根据noise突变做了下剔除
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;fixed4 frag(v2f i) : SV_Target
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; //clip randome outline here
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; fixed4 c = _StrokeColor;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; fixed3 burn = tex2D(_OutlineNoise, i.uv).rgb;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; if (burn.x &amp;gt; 0.5)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; discard;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; return c;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111165604073.png"
+width="963"
+height="1005"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111165604073_hu_5dd6d5c1711fb05b.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111165604073_hu_a38b1631e7c7a54e.png 1024w"
+loading="lazy"
+alt="这个噪声控制的是笔触的毛边效果"
+class="gallery-image"
+data-flex-grow="95"
+data-flex-basis="229px"
+&gt;&lt;/p&gt;
+&lt;p&gt;这样可以形成毛笔笔触边缘毛边的效果：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111162848528.png"
+width="416"
+height="207"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111162848528_hu_af0f0f5f05d5e7d2.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111162848528_hu_bd5b33fe4b8c0a3.png 1024w"
+loading="lazy"
+alt="前后对比"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="482px"
+&gt;&lt;/p&gt;
+&lt;h3 id="22-内部着色"&gt;2.2 内部着色
+&lt;/h3&gt;&lt;p&gt;而内部着色的基本思想和unity卡通渲染的一致，使用最基本的光照方程，再映射到一张ramp图上进行采样，最后形成的就是阶梯状的颜色过渡。在这里基础物体用的ramp图如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-02a14c743e478ce75fd317787f12b6c3_r.jpg"
+width="512"
+height="64"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-02a14c743e478ce75fd317787f12b6c3_r_hu_2f2ad02bf580e4d9.jpg 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-02a14c743e478ce75fd317787f12b6c3_r_hu_5a07b6929fa8ccc0.jpg 1024w"
+loading="lazy"
+alt="Ramp"
+class="gallery-image"
+data-flex-grow="800"
+data-flex-basis="1920px"
+&gt;&lt;/p&gt;
+&lt;p&gt;天空盒用的ramp图进行了反转，否则黑天和灰色墨迹很丑：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/Ramp_Texture6flip.png"
+width="512"
+height="64"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/Ramp_Texture6flip_hu_6223ea9de613bb5e.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/Ramp_Texture6flip_hu_2866de26d034ea93.png 1024w"
+loading="lazy"
+alt="这里用sai快速画的，有点不对，以后优化的时候改一下。"
+class="gallery-image"
+data-flex-grow="800"
+data-flex-basis="1920px"
+&gt;&lt;/p&gt;
+&lt;p&gt;将纹理笔触作为一个noise贴图，扰动uv的值之后再进行一次高斯模糊。在这里是用了一张笔触纹理和一个noise贴图混合的一起扰动uv。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/ssstroke4b-1762850698712.png"
+width="910"
+height="283"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/ssstroke4b-1762850698712_hu_91d9d4c62ba9a1c3.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/ssstroke4b-1762850698712_hu_9902d8c51f4ada37.png 1024w"
+loading="lazy"
+alt="笔触纹理"
+class="gallery-image"
+data-flex-grow="321"
+data-flex-basis="771px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;内部着色步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;先计算半郎伯特漫反射系数;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用笔触纹理+noise纹理稍微扰动一下。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在采样ramp纹理的时候进行高斯模糊。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;span class="lnt"&gt;44
+&lt;/span&gt;&lt;span class="lnt"&gt;45
+&lt;/span&gt;&lt;span class="lnt"&gt;46
+&lt;/span&gt;&lt;span class="lnt"&gt;47
+&lt;/span&gt;&lt;span class="lnt"&gt;48
+&lt;/span&gt;&lt;span class="lnt"&gt;49
+&lt;/span&gt;&lt;span class="lnt"&gt;50
+&lt;/span&gt;&lt;span class="lnt"&gt;51
+&lt;/span&gt;&lt;span class="lnt"&gt;52
+&lt;/span&gt;&lt;span class="lnt"&gt;53
+&lt;/span&gt;&lt;span class="lnt"&gt;54
+&lt;/span&gt;&lt;span class="lnt"&gt;55
+&lt;/span&gt;&lt;span class="lnt"&gt;56
+&lt;/span&gt;&lt;span class="lnt"&gt;57
+&lt;/span&gt;&lt;span class="lnt"&gt;58
+&lt;/span&gt;&lt;span class="lnt"&gt;59
+&lt;/span&gt;&lt;span class="lnt"&gt;60
+&lt;/span&gt;&lt;span class="lnt"&gt;61
+&lt;/span&gt;&lt;span class="lnt"&gt;62
+&lt;/span&gt;&lt;span class="lnt"&gt;63
+&lt;/span&gt;&lt;span class="lnt"&gt;64
+&lt;/span&gt;&lt;span class="lnt"&gt;65
+&lt;/span&gt;&lt;span class="lnt"&gt;66
+&lt;/span&gt;&lt;span class="lnt"&gt;67
+&lt;/span&gt;&lt;span class="lnt"&gt;68
+&lt;/span&gt;&lt;span class="lnt"&gt;69
+&lt;/span&gt;&lt;span class="lnt"&gt;70
+&lt;/span&gt;&lt;span class="lnt"&gt;71
+&lt;/span&gt;&lt;span class="lnt"&gt;72
+&lt;/span&gt;&lt;span class="lnt"&gt;73
+&lt;/span&gt;&lt;span class="lnt"&gt;74
+&lt;/span&gt;&lt;span class="lnt"&gt;75
+&lt;/span&gt;&lt;span class="lnt"&gt;76
+&lt;/span&gt;&lt;span class="lnt"&gt;77
+&lt;/span&gt;&lt;span class="lnt"&gt;78
+&lt;/span&gt;&lt;span class="lnt"&gt;79
+&lt;/span&gt;&lt;span class="lnt"&gt;80
+&lt;/span&gt;&lt;span class="lnt"&gt;81
+&lt;/span&gt;&lt;span class="lnt"&gt;82
+&lt;/span&gt;&lt;span class="lnt"&gt;83
+&lt;/span&gt;&lt;span class="lnt"&gt;84
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Shader&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;ChinesePainting/MountainShader&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Properties&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt; [Header(OutLine)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;//...省略上述已介绍过的&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt; [Header(Interior)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;_Ramp&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Ramp Texture&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;white&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// Stroke Map&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;_StrokeTex&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Stroke Tex&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;white&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;_InteriorNoise&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Interior Noise Map&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;white&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// Interior Noise Level&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;_InteriorNoiseLevel&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Interior Noise Level&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.15&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// Guassian Blur&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;radius&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Guassian Blur Radius&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;60&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;resolution&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Resolution&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;float&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;800&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;hstep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;HorizontalStep&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;vstep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;VerticalStep&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;SubShader&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Tags&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;RenderType&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Opaque&amp;#34;&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;Queue&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Geometry&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// the first outline pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 省略&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// the second outline pass for random part, a little bit wider than last one&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 省略&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// the interior pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 之前的vertex shader部分没有特殊操作 省略&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;float4&lt;/span&gt; &lt;span class="n"&gt;frag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v2f&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;SV_Target&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;fixed3&lt;/span&gt; &lt;span class="n"&gt;worldNormal&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;worldNormal&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;fixed3&lt;/span&gt; &lt;span class="n"&gt;worldLightDir&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;UnityWorldSpaceLightDir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;worldPos&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// Noise&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// For the bias of the coordiante&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;float4&lt;/span&gt; &lt;span class="n"&gt;burn&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_InteriorNoise&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uv&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;//a little bit disturbance&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;fixed&lt;/span&gt; &lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;worldNormal&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;worldLightDir&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;float2&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_StrokeTex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uv&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;xy&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;float2&lt;/span&gt; &lt;span class="n"&gt;cuv&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;diff&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="n"&gt;burn&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xy&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_InteriorNoiseLevel&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// This iniminate the bias of the uv movement&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cuv&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;0.95&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;cuv&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.95&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;cuv&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cuv&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;0.95&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;cuv&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.95&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;cuv&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;cuv&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;clamp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cuv&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// Guassian Blur&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;float4&lt;/span&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;float4&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;float2&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cuv&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// blur radius in pixels&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;blur&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;radius&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;resolution&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_Ramp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="m"&gt;4.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;hstep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="m"&gt;4.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;vstep&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.0162162162&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_Ramp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="m"&gt;3.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;hstep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="m"&gt;3.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;vstep&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.0540540541&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_Ramp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="m"&gt;2.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;hstep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="m"&gt;2.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;vstep&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.1216216216&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_Ramp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;hstep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;vstep&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.1945945946&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_Ramp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.2270270270&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_Ramp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;hstep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;vstep&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.1945945946&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_Ramp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;2.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;hstep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;2.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;vstep&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.1216216216&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_Ramp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;3.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;hstep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;3.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;vstep&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.0540540541&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tex2D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_Ramp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;4.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;hstep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="m"&gt;4.0&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;blur&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;vstep&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="m"&gt;0.0162162162&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;float4&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rgb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;ENDCG&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;FallBack&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;Diffuse&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;目前是这样的效果：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110220857186.png"
+width="1031"
+height="1145"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110220857186_hu_466b8214b67c51cf.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110220857186_hu_528af5dd10e8581d.png 1024w"
+loading="lazy"
+alt="正视图"
+class="gallery-image"
+data-flex-grow="90"
+data-flex-basis="216px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221308701.png"
+width="1511"
+height="1305"
+srcset="https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221308701_hu_b62566514aae4b27.png 480w, https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221308701_hu_c56ed3a199dac04e.png 1024w"
+loading="lazy"
+alt="半侧面"
+class="gallery-image"
+data-flex-grow="115"
+data-flex-basis="277px"
+&gt;&lt;/p&gt;</description></item><item><title>SIGGRAPH 2021 | Video Recoloring via Spatial-Temporal Geometric Palettes</title><link>https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/</link><pubDate>Sat, 08 Nov 2025 11:10:30 +0000</pubDate><guid>https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/</guid><description>&lt;img src="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/cover.jpg" alt="Featured image of post SIGGRAPH 2021 | Video Recoloring via Spatial-Temporal Geometric Palettes" /&gt;&lt;h1 id="video-recoloring-via-spatial-temporal-geometric-palettes-论文研读总结"&gt;Video Recoloring via Spatial-Temporal Geometric Palettes 论文研读总结
+&lt;/h1&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109105918617.png"
+width="951"
+height="599"
+srcset="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109105918617_hu_376733e73ee92a79.png 480w, https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109105918617_hu_f0db243d65e63b55.png 1024w"
+loading="lazy"
+alt="image-20251109105918617"
+class="gallery-image"
+data-flex-grow="158"
+data-flex-basis="381px"
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;文献来源&lt;/strong&gt;：SIGGRAPH 2021（清华大学）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;论文标题&lt;/strong&gt;：Video Recoloring via Spatial-Temporal Geometric Palettes&lt;/li&gt;
+&lt;li&gt;**中文翻译：**通过时空几何调色板进行视频重新着色&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="摘要"&gt;摘要
+&lt;/h2&gt;&lt;p&gt;传统基于调色板的图像重着色方法使用静态调色板，无法有效处理视频中随时间变化的颜色。本文提出一种创新的&lt;strong&gt;时空几何调色板方法&lt;/strong&gt;，通过构建4D倾斜多胞形（颜色+时间维度）隐式定义时变调色板，实现自然、无伪影的视频重着色。&lt;/p&gt;
+&lt;h2 id="核心贡献"&gt;&lt;strong&gt;核心贡献&lt;/strong&gt;：
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;扩展调色板框架至视频场景&lt;/li&gt;
+&lt;li&gt;引入4D几何调色板概念&lt;/li&gt;
+&lt;li&gt;自然处理颜色合并/分裂的拓扑变化&lt;/li&gt;
+&lt;li&gt;提供直观的编辑界面支持关键帧动画&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="工作流程"&gt;工作流程
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109110020547.png"
+width="1765"
+height="743"
+srcset="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109110020547_hu_a751a90151458c2e.png 480w, https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109110020547_hu_33f3c6fc08281224.png 1024w"
+loading="lazy"
+alt="image-20251109110020547"
+class="gallery-image"
+data-flex-grow="237"
+data-flex-basis="570px"
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;初始化&lt;/strong&gt;：逐帧生成RGB凸包，粘合相邻帧形成初始4D倾斜多胞形&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;块合并&lt;/strong&gt;：按拓扑一致性分块并合并，减少冗余&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;顶点移除&lt;/strong&gt;：迭代移除冗余顶点至损失阈值（η₂=3）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;顶点优化&lt;/strong&gt;：微调顶点位置，优化重构精度与时间平滑性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="关键技术细节"&gt;关键技术细节
+&lt;/h2&gt;&lt;h3 id="1-数学模型基础"&gt;1. 数学模型基础
+&lt;/h3&gt;&lt;h4 id="加性混合权重公式"&gt;&lt;strong&gt;加性混合权重公式&lt;/strong&gt;：
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;p = Σ wᵢvᵢ (∀像素p ∈ 图像I)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;像素颜色可表示为调色板颜色的加权组合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="损失函数"&gt;&lt;strong&gt;损失函数&lt;/strong&gt;：
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;重建误差&lt;/strong&gt;：像素到调色板凸包的平均距离&lt;code&gt;R(V,I) = (1/|I|) Σ ||p - proj(p)||&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;紧凑性损失&lt;/strong&gt;：调色板颜色与邻近颜色的差异&lt;code&gt;C(V,I) = (1/|V|) Σ ||v - vₙ||&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;总损失&lt;/strong&gt;：&lt;code&gt;L(V,I) = λR(V,I) + C(V,I)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="生成一个好的调色板需要满足的数学目标和约束"&gt;&lt;strong&gt;生成一个“好”的调色板需要满足的数学目标和约束：&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;三个理想属性：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;顶点数量少：便于用户编辑。&lt;/li&gt;
+&lt;li&gt;重建精度高：即重建误差R(V,I)（公式2）要小，表示用调色板重建的图像与原图差异小。&lt;/li&gt;
+&lt;li&gt;调色板紧凑：即紧凑性损失C(V,I)（公式3）要小，表示调色板中的每个颜色都与图像中的真实像素颜色非常接近，这样调色板更具代表性，用户控制更直接。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109112409910.png"
+width="744"
+height="485"
+srcset="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109112409910_hu_296c8902a65336c6.png 480w, https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109112409910_hu_2447019cae769742.png 1024w"
+loading="lazy"
+alt="image-20251109112409910"
+class="gallery-image"
+data-flex-grow="153"
+data-flex-basis="368px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;四个约束条件：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;帧间度规则1：每个顶点的帧间度必须≥1。不允许为零。&lt;/li&gt;
+&lt;li&gt;帧间度规则2：对于每条帧间边，其两个顶点中最多只能有一个的帧间度≥2。&lt;/li&gt;
+&lt;li&gt;拓扑规则1：若一个顶点有多个帧间边，则它连接到的目标顶点之间必须已经存在一条帧内边。&lt;/li&gt;
+&lt;li&gt;拓扑规则2：对于一条帧内边，其两个端点分别连接到的目标顶点必须是同一个顶点，或者它们之间也必须存在一条帧内边。我们在满足上述条件的前提下，寻找一组能最小化色彩差异的帧间边集合E。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-4d几何调色板定义"&gt;2. 4D几何调色板定义
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;将视频像素投影至&lt;strong&gt;RGBT空间&lt;/strong&gt;（RGB颜色+时间维度）&lt;/li&gt;
+&lt;li&gt;时变调色板通过4D多胞形的时间切片隐式定义&lt;/li&gt;
+&lt;li&gt;引入&lt;strong&gt;帧间度规则&lt;/strong&gt;与&lt;strong&gt;拓扑规则&lt;/strong&gt;确保顶点对应关系清晰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-核心算法步骤"&gt;3. 核心算法步骤
+&lt;/h3&gt;&lt;h4 id="1块合并"&gt;（1）块合并
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;将视频分段为拓扑一致的&amp;quot;块&amp;quot;&lt;/li&gt;
+&lt;li&gt;合并相邻块至损失增长超过η₁=3.5倍时停止&lt;/li&gt;
+&lt;li&gt;平衡拓扑复杂度与控制便利性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="2顶点移除"&gt;（2）顶点移除
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;用&amp;quot;幽灵顶点&amp;quot;替代冗余顶点&lt;/li&gt;
+&lt;li&gt;保留分裂/合并顶点及边界顶点以保护拓扑结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="3顶点优化"&gt;（3）顶点优化
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;引入平滑项惩罚颜色突变：&lt;code&gt;K(P) = (1/|E|) Σ |(uRGB - vRGB)/(ut - vt)|&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;总损失函数：&lt;code&gt;Lᵥ' = Lᵥ + γK(P)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;通过非线性优化微调顶点位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="实验与分析"&gt;实验与分析
+&lt;/h2&gt;&lt;h3 id="1-参数调优"&gt;1. 参数调优
+&lt;/h3&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111316339.png"
+width="1799"
+height="453"
+srcset="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111316339_hu_dfff3ae359da3058.png 480w, https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111316339_hu_8281f1938ee20443.png 1024w"
+loading="lazy"
+alt="image-20251109111316339"
+class="gallery-image"
+data-flex-grow="397"
+data-flex-basis="953px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111327635.png"
+width="1817"
+height="429"
+srcset="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111327635_hu_9e602dc1f1a889bc.png 480w, https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111327635_hu_4f2fd88185ac486.png 1024w"
+loading="lazy"
+alt="image-20251109111327635"
+class="gallery-image"
+data-flex-grow="423"
+data-flex-basis="1016px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111424211.png"
+width="1014"
+height="374"
+srcset="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111424211_hu_47fb11f5b815a22.png 480w, https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111424211_hu_6a6f8618d9203454.png 1024w"
+loading="lazy"
+alt="image-20251109111424211"
+class="gallery-image"
+data-flex-grow="271"
+data-flex-basis="650px"
+&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: left"&gt;参数&lt;/th&gt;
+&lt;th style="text-align: left"&gt;最优值&lt;/th&gt;
+&lt;th style="text-align: left"&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;α&lt;/td&gt;
+&lt;td style="text-align: left"&gt;10&lt;/td&gt;
+&lt;td style="text-align: left"&gt;控制块合并的拓扑复杂度&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;η₁&lt;/td&gt;
+&lt;td style="text-align: left"&gt;3.5&lt;/td&gt;
+&lt;td style="text-align: left"&gt;块合并的损失阈值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;β&lt;/td&gt;
+&lt;td style="text-align: left"&gt;1.0&lt;/td&gt;
+&lt;td style="text-align: left"&gt;影响顶点数量平衡&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;η₂&lt;/td&gt;
+&lt;td style="text-align: left"&gt;3.0&lt;/td&gt;
+&lt;td style="text-align: left"&gt;顶点移除的损失阈值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="2-对比实验"&gt;2. 对比实验
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: left"&gt;对比方法&lt;/th&gt;
+&lt;th style="text-align: left"&gt;缺陷&lt;/th&gt;
+&lt;th style="text-align: left"&gt;本方法优势&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;RGB凸包法&lt;/td&gt;
+&lt;td style="text-align: left"&gt;静态调色板无法处理时变颜色&lt;/td&gt;
+&lt;td style="text-align: left"&gt;动态调色板适应颜色变化&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;聚类法&lt;/td&gt;
+&lt;td style="text-align: left"&gt;缺乏时间维度精确控制&lt;/td&gt;
+&lt;td style="text-align: left"&gt;提供时间连贯的顶点对应&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;RGBT凸包法&lt;/td&gt;
+&lt;td style="text-align: left"&gt;调色板过于复杂难解释&lt;/td&gt;
+&lt;td style="text-align: left"&gt;紧凑且易于解释的几何结构&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;量化结果&lt;/strong&gt;：本方法紧凑性损失（0.036）显著优于对比方法（0.0649/0.2635）&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="用户界面与反馈"&gt;用户界面与反馈
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111630948.png"
+width="884"
+height="860"
+srcset="https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111630948_hu_af20a994574cf109.png 480w, https://Selaphina.github.io/p/siggraph-2021-video-recoloring-via-spatial-temporal-geometric-palettes/image-20251109111630948_hu_86cfe6d41453356b.png 1024w"
+loading="lazy"
+alt="image-20251109111630948"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;界面特性&lt;/strong&gt;：时间轴视图+颜色选择器，支持关键帧编辑&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户研究&lt;/strong&gt;（16人含专业调色师）：100%对UI满意87.5%认为调色板准确反映颜色分布93.5%认为结果符合预期&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;本方法通过&lt;strong&gt;4D时空几何调色板&lt;/strong&gt;解决了视频重着色的核心挑战：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;动态性&lt;/strong&gt;：适应颜色随时间变化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;紧凑性&lt;/strong&gt;：顶点数少且代表性强&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;直观性&lt;/strong&gt;：提供拓扑一致的编辑接口&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自然度&lt;/strong&gt;：平滑处理颜色合并/分裂的拓扑变化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;应用前景&lt;/strong&gt;：影视调色、视频滤镜、动态视觉效果制作等领域具有重要应用价值。&lt;/p&gt;</description></item></channel></rss>

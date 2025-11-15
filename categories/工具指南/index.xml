@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具指南 on Selaphina</title><link>https://Selaphina.github.io/categories/%E5%B7%A5%E5%85%B7%E6%8C%87%E5%8D%97/</link><description>Recent content in 工具指南 on Selaphina</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 14 Nov 2025 10:12:30 +0000</lastBuildDate><atom:link href="https://Selaphina.github.io/categories/%E5%B7%A5%E5%85%B7%E6%8C%87%E5%8D%97/index.xml" rel="self" type="application/rss+xml"/><item><title>Git新手使用规范</title><link>https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/</link><pubDate>Wed, 12 Nov 2025 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/</guid><description>&lt;img src="https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/cover.png" alt="Featured image of post Git新手使用规范" /&gt;&lt;p&gt;因为Git是分布式的，你的本地仓库和远程仓库（如GitHub, GitLab）可能不同步。直接&lt;code&gt;git push&lt;/code&gt;可能会因为远程有比你本地更新的提交而被拒绝，或者更糟的是，造成复杂的冲突。&lt;/p&gt;
+&lt;h2 id="简化流程项目允许直接推送到主分支"&gt;简化流程（项目允许直接推送到主分支）
+&lt;/h2&gt;&lt;p&gt;对于非常小的团队或个人项目，有时会直接在主分支上工作。即便如此，**“先拉取，再推送”**的原则依然不变。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 1. 拉取远程最新代码，自动合并
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin master
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 2. （解决可能的冲突，如果有）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 3. 进行你的开发工作，添加、提交
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;你的提交信息&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 4. 再次拉取，确保在推送前是最新的（期间可能有人提交了代码）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin master
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 5. 解决可能出现的冲突（第二次拉取时）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 6. 推送
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="规范的日常协作流程推荐工作流"&gt;规范的日常协作流程（推荐工作流）
+&lt;/h2&gt;&lt;p&gt;这个流程结合了分支策略，是最安全、最高效的方法。&lt;/p&gt;
+&lt;h3 id="第零步准备工作一次性"&gt;第零步：准备工作（一次性）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;克隆仓库&lt;/strong&gt;：如果是第一次参与项目，先将远程仓库克隆到本地。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone &amp;lt;远程仓库地址&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cd &amp;lt;项目文件夹名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;设置上游分支（可选）&lt;/strong&gt;：克隆后，你的本地&lt;code&gt;main&lt;/code&gt;（或&lt;code&gt;master&lt;/code&gt;）分支通常已经自动跟踪了远程的&lt;code&gt;origin/main&lt;/code&gt;分支。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第一步开始新功能或修复前基于最新代码创建分支"&gt;第一步：开始新功能或修复前——基于最新代码创建分支
+&lt;/h3&gt;&lt;p&gt;这是关键的最佳实践！不要在本地的主分支上直接修改。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;切换到主分支&lt;/strong&gt;：确保你从一个干净的起点开始。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;拉取远程最新变更&lt;/strong&gt;：这保证了你的主分支是最新的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin master
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 或者简单写 git pull （如果当前分支已跟踪远程分支）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;创建并切换到一个新分支&lt;/strong&gt;：分支名要有描述性，例如&lt;code&gt;feat/user-login&lt;/code&gt;或&lt;code&gt;fix/header-alignment&lt;/code&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout -b feat/remote-one
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第二步日常开发工作"&gt;第二步：日常开发工作
+&lt;/h3&gt;&lt;p&gt;在你的特性分支上进行开发。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;进行修改&lt;/strong&gt;：添加、删除、修改代码文件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;暂存更改&lt;/strong&gt;：将需要提交的文件加入暂存区。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add &amp;lt;文件名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 或添加所有更改
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;提交更改&lt;/strong&gt;：在本地提交，写清晰的提交信息。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;描述你完成了什么工作&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;重复&lt;/strong&gt;：不断重复&lt;code&gt;add&lt;/code&gt;和&lt;code&gt;commit&lt;/code&gt;，直到功能完成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第三步准备推送整合最新代码"&gt;第三步：准备推送——整合最新代码
+&lt;/h3&gt;&lt;p&gt;在将你的分支推送到远程之前，很可能主分支已经有了新的提交。你需要将这些新变化整合到你的特性分支中，以确保你的代码是基于最新代码的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;切换到主分支并拉取最新代码&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout master
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;切回你特性分支&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout feat/remote-one
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;将主分支的更新合并到你的分支&lt;/strong&gt;（有两种主流方式）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;方式A：合并Merge）&lt;/strong&gt;（更简单，推荐新手）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git merge master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这会在你的特性分支上创建一个“合并提交”，记录整合点。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;方式B：变基（Rebase）&lt;/strong&gt;（历史更整洁，但需谨慎）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git rebase master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这会将你的所有提交“重新播放”在最新的主分支之上，使历史呈线性。&lt;strong&gt;注意：不要在公共分支上使用rebase&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;解决冲突（如果有）&lt;/strong&gt;：如果合并或变基过程中发生代码冲突，Git会提示你。你需要手动打开冲突文件，解决冲突（选择保留谁的代码，或进行修改）。解决后，使用&lt;code&gt;git add&lt;/code&gt;标记冲突已解决。如果使用&lt;code&gt;merge&lt;/code&gt;，然后执行&lt;code&gt;git commit&lt;/code&gt;（合并提交）。如果使用&lt;code&gt;rebase&lt;/code&gt;，执行&lt;code&gt;git rebase --continue&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第四步推送到远程并发起合并请求pull-request"&gt;第四步：推送到远程并发起合并请求（Pull Request）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;推送特性分支到远程&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin feat/your-feature-name
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# -u 参数设置上游分支，之后可以直接用 git push
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在GitHub/GitLab等平台上创建Pull Request（PR）&lt;/strong&gt;：前往你的仓库页面，通常会有提示让你创建PR。选择你的特性分支作为源分支，选择&lt;code&gt;main&lt;/code&gt;作为目标分支。在PR描述中清晰说明你的修改内容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;代码审查&lt;/strong&gt;：团队成员在PR中进行讨论和代码审查。你可能需要根据反馈继续在本地分支上提交修改，然后再次&lt;code&gt;push&lt;/code&gt;，PR会自动更新。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;合并PR&lt;/strong&gt;：审查通过后，由有权限的人（可能就是你）将PR合并到主分支。通常平台会提供“Squash and Merge”（压缩合并）等选项，保持历史整洁。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第五步清理"&gt;第五步：清理
+&lt;/h3&gt;&lt;p&gt;合并成功后，你可以删除本地和远程的特性分支，保持整洁。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;删除远程分支&lt;/strong&gt;（在PR页面或通过命令）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin --delete feat/your-feature-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;切换回主分支&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;拉取最新的合并结果&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;删除本地分支&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -d feat/your-feature-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="git-在新设备上配置新的ssh密钥"&gt;git 在新设备上配置新的SSH密钥
+&lt;/h2&gt;&lt;h3 id="1-检查现有的-ssh-密钥"&gt;1. &lt;strong&gt;检查现有的 SSH 密钥&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;打开 Git Bash 并运行以下命令，查看是否已存在 SSH 密钥：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ls -al ~/.ssh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果看到 &lt;code&gt;id_ed25519&lt;/code&gt;和 &lt;code&gt;id_ed25519.pub&lt;/code&gt;（或 &lt;code&gt;id_rsa&lt;/code&gt;和 &lt;code&gt;id_rsa.pub&lt;/code&gt;）等文件，说明你已有密钥。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="2-生成新的-ssh-密钥如果没有"&gt;2. &lt;strong&gt;生成新的 SSH 密钥（如果没有）&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;运行以下命令（替换为你的 GitHub 注册邮箱）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-keygen -t ed25519 -C &amp;#34;1806527871@qq.com&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;按 Enter 接受默认保存路径，并设置一个安全的密码（可选）。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="3-将-ssh-密钥添加到-ssh-agent"&gt;3. &lt;strong&gt;将 SSH 密钥添加到 ssh-agent&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;启动 ssh-agent 并添加密钥：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;eval &amp;#34;$(ssh-agent -s)&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-add ~/.ssh/id_ed25519
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id="4-将公钥复制到-github"&gt;4. &lt;strong&gt;将公钥复制到 GitHub&lt;/strong&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;显示公钥内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cat ~/.ssh/id_ed25519.pub
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复制输出的全部内容（以 &lt;code&gt;ssh-ed25519&lt;/code&gt;开头）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;登录 GitHub → Settings → SSH and GPG keys → New SSH key → 粘贴并保存。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="C:%5cUsers%5cAdministrator%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251114103822658.png"
+loading="lazy"
+alt="image-20251114103822658"
+&gt;&lt;/p&gt;</description></item><item><title>Hugo：个人博客建站指南</title><link>https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/</link><pubDate>Sun, 09 Nov 2025 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/</guid><description>&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/hugo.png" alt="Featured image of post Hugo：个人博客建站指南" /&gt;&lt;p&gt;作为Hugo建站新手，使用作者提供的 &lt;strong&gt;Stack starter template&lt;/strong&gt;，并用 &lt;strong&gt;GitHub Actions&lt;/strong&gt; 自动构建并部署到 GitHub Pages，最为方便。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;建站之初参考了很多博主的指南博客，都是手工方式在本地安装Hugo，把stack主题拉取到本地再部署到github上。然而实际操作过程中总有和博主相悖的情况发生，遂找G老师从头复盘一遍。最后一遍过。&lt;/p&gt;
+&lt;p&gt;Todo：补充自备案域名的建站方式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="一先决条件"&gt;一、先决条件
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;一个 GitHub 账号（有仓库权限）。&lt;/li&gt;
+&lt;li&gt;安装 Git（本地开发时需要）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;小提示：如果只是用 starter 模板并通过 GitHub Actions 构建部署，&lt;strong&gt;本地安装 Hugo 可以暂时跳过&lt;/strong&gt; — 但建议安装以便本地预览与调试。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;3.从Hugo资源页&lt;a class="link" href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener"
+&gt;Releases · gohugoio/hugo&lt;/a&gt;下载amd版本（查看自己的电脑为**&lt;code&gt;基于 x64 的处理器&lt;/code&gt;** -&amp;gt; &lt;strong&gt;下载 &lt;code&gt;amd64&lt;/code&gt;版本。&lt;/strong&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154753124.png"
+width="1338"
+height="231"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154753124_hu_ed5d394095ddf49e.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154753124_hu_d65e8fe7398c7fc3.png 1024w"
+loading="lazy"
+alt="image-20251107154753124"
+class="gallery-image"
+data-flex-grow="579"
+data-flex-basis="1390px"
+&gt;&lt;/p&gt;
+&lt;p&gt;由于部分主题需要 Hugo 的 Extended 版本才可以正常使用，因此建议&lt;strong&gt;一步到位直接安装 Extended 版本&lt;/strong&gt;的 Hugo，在将压缩包解压后一定不要忘记的是将 &lt;code&gt;hugo.exe&lt;/code&gt; 所在的文件夹添加至用户的**&lt;a class="link" href="https://zhida.zhihu.com/search?content_id=165841755&amp;amp;content_type=Article&amp;amp;match_order=1&amp;amp;q=%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f&amp;amp;zhida_source=entity" target="_blank" rel="noopener"
+&gt;环境变量&lt;/a&gt;**。&lt;/p&gt;
+&lt;p&gt;若是以上步骤都正常完成，那么可以在输入 &lt;code&gt;hugo version&lt;/code&gt; 命令后得到正常的版本号显示。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154836195.png"
+width="1434"
+height="255"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154836195_hu_940da0f3a839974b.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154836195_hu_a174a10688815683.png 1024w"
+loading="lazy"
+alt="image-20251107154836195"
+class="gallery-image"
+data-flex-grow="562"
+data-flex-basis="1349px"
+&gt;&lt;/p&gt;
+&lt;p&gt;4.初始化&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo new site XXX
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;5.快速预览&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;浏览 http://localhost:1313 查看效果。注意：-D的意思是同时预览草稿。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo server -D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在浏览器中访问http://localhost:1313/ ，如果正常就会显示出页面。&lt;/p&gt;
+&lt;h2 id="二用-hugo-theme-stack-starter适合新手"&gt;二、用 Hugo-Theme-Stack Starter（适合新手）
+&lt;/h2&gt;&lt;p&gt;Stack 作者维护了一个 starter 模板并自带 GitHub Actions 来部署，直接用模板能省很多配置工作。示例仓库与 workflow 可参考作者的 starter。&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter" target="_blank" rel="noopener"
+&gt;Hugo-Theme-Stack&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="步骤"&gt;&lt;strong&gt;步骤：&lt;/strong&gt;
+&lt;/h3&gt;&lt;h4 id="1在-github-上用模板创建仓库"&gt;1.&lt;strong&gt;在 GitHub 上用模板创建仓库&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;打开 &lt;code&gt;CaiJimmy/hugo-theme-stack-starter&lt;/code&gt; 仓库（或访问主题主页找到 starter 链接），点击 &lt;strong&gt;Use this template → Create a new repository from template&lt;/strong&gt;。选择仓库名：
+&lt;ul&gt;
+&lt;li&gt;如果你想把博客作为个人主页（username.github.io），仓库名应为 &lt;code&gt;your-github-username.github.io&lt;/code&gt;（这样 GitHub Pages 会直接在根域名托管）。&lt;/li&gt;
+&lt;li&gt;如果想作为项目页（例如 &lt;code&gt;your-username/myblog&lt;/code&gt;），可以用任意仓库名（但发布 URL 会是 &lt;code&gt;https://username.github.io/repo&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;（参考：starter 仓库自带 Actions 和样例配置。）&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter?utm_source=chatgpt.com" target="_blank" rel="noopener"
+&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="2-把仓库-clone-到本地可选但推荐"&gt;2. &lt;strong&gt;把仓库 clone 到本地（可选但推荐）&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/your-username/your-repo.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cd your-repo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="3-修改站点配置最重要的两项"&gt;3. &lt;strong&gt;修改站点配置（最重要的两项）&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;打开仓库中的 &lt;code&gt;config.toml&lt;/code&gt;（或 &lt;code&gt;config/_default/config.toml&lt;/code&gt;，starter 可能把配置拆分），修改：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;baseURL&lt;/code&gt;：部署到 GitHub Pages 时必须设置为你站点的真实 URL，例如：
+&lt;ul&gt;
+&lt;li&gt;个人主页（username.github.io）: &lt;code&gt;https://your-username.github.io/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;比如我：&lt;a class="link" href="https://selaphina.github.io/" target="_blank" rel="noopener"
+&gt;Selaphina&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;项目页：&lt;code&gt;https://your-username.github.io/repo-name/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;title&lt;/code&gt;、&lt;code&gt;author&lt;/code&gt; 等按需修改。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Starter 通常已经把 theme 配好为 Hugo module（不用把主题源码放到 &lt;code&gt;themes/&lt;/code&gt;），直接修改 baseURL 即可。参考 Stack 文档或 starter README。&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack?utm_source=chatgpt.com" target="_blank" rel="noopener"
+&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="4启动本地预览"&gt;4.&lt;strong&gt;启动本地预览&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo server -D
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 浏览 http://localhost:1313 查看效果
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="5确认-github-actions-workflow自动部署"&gt;5.&lt;strong&gt;确认 GitHub Actions workflow（自动部署）&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;starter 仓库中自带 &lt;code&gt;.github/workflows/deploy.yml&lt;/code&gt;（或类似文件），该 workflow 会在你 push 到主分支后构建 Hugo 并把 &lt;code&gt;public/&lt;/code&gt; 内容发布到 GitHub Pages（通常是 &lt;code&gt;gh-pages&lt;/code&gt; 分支或通过 &lt;code&gt;pages&lt;/code&gt; 路径）。你可以打开该文件预览构建步骤并根据需要修改 Hugo 版本或 build 参数。示例和历史记录见作者 repo。&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter/actions/workflows/deploy.yml?utm_source=chatgpt.com" target="_blank" rel="noopener"
+&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107220605272.png"
+width="1151"
+height="894"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107220605272_hu_b74269ec6a3956e5.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107220605272_hu_7b881539cbceb15e.png 1024w"
+loading="lazy"
+alt="image-20251107220605272"
+class="gallery-image"
+data-flex-grow="128"
+data-flex-basis="308px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181141764.png"
+width="1172"
+height="504"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181141764_hu_4a66bab74f3e87df.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181141764_hu_9e285a87213457c1.png 1024w"
+loading="lazy"
+alt="image-20251109181141764"
+class="gallery-image"
+data-flex-grow="232"
+data-flex-basis="558px"
+&gt;&lt;/p&gt;
+&lt;h4 id="6推送修改并等待自动部署"&gt;6.&lt;strong&gt;推送修改并等待自动部署&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;Customize site config&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;推送后，GitHub Actions 会触发构建并将结果发布到 GitHub Pages。你可以在仓库的 &lt;strong&gt;Actions&lt;/strong&gt; 标签页查看构建日志与历史。成功后，访问你设置的 &lt;code&gt;baseURL&lt;/code&gt; 即可看到站点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;比如：https://selaphina.github.io/&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;7.新建博客帖子：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;根目录\content\post&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181312523.png"
+width="564"
+height="531"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181312523_hu_1794e4df8ca48c98.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181312523_hu_d9575ed6552335fa.png 1024w"
+loading="lazy"
+alt="image-20251109181312523"
+class="gallery-image"
+data-flex-grow="106"
+data-flex-basis="254px"
+&gt;&lt;/p&gt;
+&lt;h2 id="附录"&gt;附录
+&lt;/h2&gt;&lt;h3 id="create-a-new-repository-on-the-command-line"&gt;create a new repository on the command line
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git remote add origin git@github.com:Selaphina/Selaphina.github.io.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;first commit&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="push-an-existing-repository-from-the-command-line"&gt;push an existing repository from the command line
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git remote add origin git@github.com:huoshaoweiba/Sera.github.io-.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -M main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="怎么删除帖子"&gt;怎么删除帖子？
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;本想设置草稿帖子，即在网络上访问时不显示的帖子。但是无论设置draft: true还是private：true都失败了，草稿照常显示，非常不美观。对构建config.yml等进行修改也无效果。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;删除不需要的帖子。单纯从content中删除之后，本地hugo server正常删除，而公网上的帖子仍然存在。经检查，应在&lt;code&gt;\..\【站点根目录】\public\p&lt;/code&gt;目录下的对应帖子也删除才可以。&lt;/p&gt;
+&lt;p&gt;不知是否是构建工作流没有顾及到位。总之目前只能用此方法删除。&lt;/p&gt;
+&lt;h3 id="怎么设置草稿"&gt;怎么设置草稿？
+&lt;/h3&gt;&lt;p&gt;上述所示，没有常规标记draft : true的草稿方式。&lt;/p&gt;
+&lt;p&gt;但是！由于工作流中规定的【不允许上传未来日期/过时的帖子】。因此，如果想要上传一个公网上不可见（相当于私密的）帖子，可以把日期改为未来的日期。比如&lt;code&gt;2100年6月6日&lt;/code&gt;，这样的话起码75年内都不会有人能在公网上访问你的私密帖子了。&lt;/p&gt;</description></item><item><title>压缩包密码破解 Ziperello</title><link>https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/</link><pubDate>Fri, 14 Nov 2025 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/</guid><description>&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/CUC%E5%85%91%E6%8D%A2%E7%82%B92.png" alt="Featured image of post 压缩包密码破解 Ziperello" /&gt;&lt;p&gt;使用 Ziperello &lt;a class="link" href="https://qweree.cn/index.php/416/" target="_blank" rel="noopener"
+&gt;https://qweree.cn/index.php/416/&lt;/a&gt; 对加了密码的压缩包进行密码破解，教程如下：&lt;/p&gt;
+&lt;p&gt;第一步，双击运行 Ziperello双击我打开程序.exe，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115145845360.png"
+width="327"
+height="243"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115145845360_hu_9402b4eac8bc5423.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115145845360_hu_75d27a84fe6245cf.png 1024w"
+loading="lazy"
+alt="image-20251115145845360"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="322px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第二步，打开一个加了密的 ZIP 压缩包，再选择一个里面的文件，再点击下一步，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150020123.png"
+width="1173"
+height="587"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150020123_hu_b881933ff4ac4e45.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150020123_hu_44c4c990d57a0ad8.png 1024w"
+loading="lazy"
+alt="image-20251115150020123"
+class="gallery-image"
+data-flex-grow="199"
+data-flex-basis="479px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第三步，这里可以选择「暴力破解」方式，继续下一步，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150032549.png"
+width="1173"
+height="591"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150032549_hu_fb13404b332c5384.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150032549_hu_6896e318155a798c.png 1024w"
+loading="lazy"
+alt="image-20251115150032549"
+class="gallery-image"
+data-flex-grow="198"
+data-flex-basis="476px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第四步，如果对压缩包来源没有一点头绪，建议可以选数字、小写字母、大写字母这三种方式组合，毕竟这三种是大家常用的组合，继续下一步，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150116337.png"
+width="1173"
+height="597"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150116337_hu_61b099a76f09fc78.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150116337_hu_846e5900741d6807.png 1024w"
+loading="lazy"
+alt="image-20251115150116337"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="471px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第五步，如下图界面我们直接点击开始，程序会自动组合各种密码进行暴力尝试，当然，密码越长、越复杂破解时间也会更长！&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150135862.png"
+width="1170"
+height="606"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150135862_hu_f2a0b0eee6ab1ac1.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150135862_hu_8bad9b7cfa09d565.png 1024w"
+loading="lazy"
+alt="image-20251115150135862"
+class="gallery-image"
+data-flex-grow="193"
+data-flex-basis="463px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第六步，只需静静等待，直到弹框提示正确密码，大功告成，如图：&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;原文链接：https://blog.csdn.net/qq_29856169/article/details/139879447&lt;/p&gt;</description></item></channel></rss>
