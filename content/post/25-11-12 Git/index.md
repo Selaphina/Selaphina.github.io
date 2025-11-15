@@ -2,7 +2,7 @@
 title: Git新手使用规范
 description: 新手向分布式仓库使用规范指南。
 date: 2025-11-12 10:12:30+0000
-image: cover.jpg
+image: cover.png
 categories:
     - 工具指南
 tags:

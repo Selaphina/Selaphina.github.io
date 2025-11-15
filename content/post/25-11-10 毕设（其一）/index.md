@@ -2,7 +2,7 @@
 title: 毕业设计 | 水墨风格化场景渲染（其一）
 description: 毕业设计的开发日志，用于实时记录学到的trick。
 date: 2025-11-11 10:12:30+0000
-image: cover.jpg
+image: cover1.png
 categories:
     - 技术笔记
 tags:

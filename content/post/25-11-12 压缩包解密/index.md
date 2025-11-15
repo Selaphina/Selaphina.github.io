@@ -2,7 +2,7 @@
 title: 压缩包密码破解 Ziperello 
 description: 压缩包文件密码破解软件Ziperello 下载及使用教程
 date: 2025-11-14 10:12:30+0000
-image: cover.jpg
+image: CUC兑换点2.png
 categories:
     - 工具指南
 weight: 2049       # You can add weight to some posts to override the default sorting (date descending)

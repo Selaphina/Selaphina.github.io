@@ -2,7 +2,7 @@
 title: Hugo：个人博客建站指南
 description: 通过Hugo构建的静态博客，以stack主题为例。
 date: 2025-11-09 10:12:30+0000
-image: cover.jpg
+image: hugo.png
 categories:
     - 工具指南
 tags:

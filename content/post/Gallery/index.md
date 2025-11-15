@@ -2,7 +2,7 @@
 title: 阿佩莱斯走廊
 description: 古希腊，一位名叫阿佩莱斯的画家喜欢把自己画的画挂在走廊上，等待偷听路人经过时的评价。
 date: 2025-03-25 22:10:30+0000
-image: OPEN THE DOORa.png
+image: cover.png
 categories:
     - 原创画集
 tags:
