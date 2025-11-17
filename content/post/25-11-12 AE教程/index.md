@@ -1,5 +1,5 @@
 ---
-title: 猴子也能学会的！ | Ae入门级教程（48th宣推）
+title: 猴子也能学会的！ | Ae入门级教程（48th宣传）
 description: 新手向Ae使用指南，如果已经是熟练的ae使用者可以不用看啦！
 date: 2025-11-14 10:12:30+0000
 image: cover.png
@@ -389,7 +389,7 @@ ffmpeg -i input.avi -vf "fps=15,scale=640:-1:flags=lanczos" -loop 0 output.gif
 
 1.上手试试做个前缀吧！7-10s。
 
-2.把自己手上现有的一张/多张头图改成动态版，时长不限。
+2.把自己手上现有的一张/多张图改成动态版，时长不限。
 
 **一般流程：**
 

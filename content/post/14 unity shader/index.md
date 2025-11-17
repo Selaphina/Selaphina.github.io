@@ -113,5 +113,37 @@ spec=lerp(0,1,smoothstep(-w，w，spec-threshold));
 
 http://blog.csdn.net/candycat1992/article/details/47284289
 
+### ToonShading.shader
 
+1）声明
 
+```
+Properties{
+// ===固有色===
+	_Color ("Color Tint",Color) = (1,1,1,1)
+	_MainTex ("Main Tex",2D) = "white" {}
+	_Ramp ("Ramp Texture",2D) = "white" {}
+// ===描边===
+	_Outline ("Outline",Range(0,1)) = 0.1
+	_OutlineColor ("Outline Color",Color) = (0,0,0,1)
+// ===高光===
+	_SpecularColor ("SpecularColor",Color) = (1,1,1,1)
+	_SpecularScale ("Specular Scale",Range(0,0.1)) = 0.01
+}
+```
+
+其中，Ramp是用于控制漫反射色调的渐变纹理，Outline用于控制轮线宽度，OutlineColor对应了轮廓线颜色，Specular是高光反射颜色，SpecularScale 用于控制计算高光反射时使用的阈值。
+
+2）定义渲染轮廓线需要的pass，这个pass只渲染北面的三角面片
+
+```
+ SubShader {
+		Tags { "RenderType"="Opaque" "Queue"="Geometry"}
+		
+		Pass {
+			NAME "OUTLINE"
+			
+			Cull Front
+```
+
+`Cull Front`使用cull名利
