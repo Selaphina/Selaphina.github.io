@@ -146,4 +146,4 @@ Properties{
 			Cull Front
 ```
 
-`Cull Front`使用cull名利
+`Cull Front`使用cull指令把正面的三角面片剔除，只渲染背面。值得注意的是，描边在非真实感渲染中是非常常见的
