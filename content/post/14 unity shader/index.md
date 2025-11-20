@@ -171,11 +171,80 @@ Properties{
 		}
 ```
 
+在顶点着色器中我们首先把顶点和法线变换到视角空间下，这是为了让描边可以在观察空间达到最好的效果。随后，我们设置法线的z分量，对其归一化后再将顶点沿其方向扩张，得到扩张后的顶点坐标。对法线的处理是为了尽可能避免背面扩张后的顶点挡住正面的面片。最后，我们把顶点从视角空间变换到裁剪空间。
 
-
-4）
+4）定义光照模型所需要的Pass，以渲染模型的正面。
 
 ```
+Pass {
+			Tags { "LightMode"="ForwardBase" }
+			
+			Cull Back
+		
+			CGPROGRAM
+		
+			#pragma vertex vert
+			#pragma fragment frag
+			
+			#pragma multi_compile_fwdbase
+		
+```
 
+在上面的代码中，我们将LightMode设置为ForwardBase，指令，这些都是为了让Shader中的光照变量可以被正确赋值。并且使用#pragma语句设置了编译。
+
+
+
+5）顶点着色器
+
+```
+			v2f vert (a2v v) {
+				v2f o;
+				
+				o.pos = mul( UNITY_MATRIX_MVP, v.vertex);
+				o.uv = TRANSFORM_TEX (v.texcoord, _MainTex);
+				o.worldNormal  = UnityObjectToWorldNormal(v.normal);
+				o.worldPos = mul(_Object2World, v.vertex).xyz;
+				
+				TRANSFER_SHADOW(o);
+				
+				return o;
+			}
+```
+
+在上面的代码中，我们计算了世界空间下的法线方向和顶点位置，并使用Unity提供的内置宏SHADOWCOORDS和TRANSFERSHADOW来计算阴影所需的各个变量。这些宏的实现原理可以参见 9.4节。
+
+6）片元着色器中包含了计算光照模型的关键代码：
+
+```
+float4 frag(v2f i) : SV_Target { 
+				fixed3 worldNormal = normalize(i.worldNormal);
+				fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));
+				fixed3 worldViewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
+				fixed3 worldHalfDir = normalize(worldLightDir + worldViewDir);
+				
+				fixed4 c = tex2D (_MainTex, i.uv);
+				fixed3 albedo = c.rgb * _Color.rgb;
+				
+				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
+				
+				UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
+				
+				fixed diff =  dot(worldNormal, worldLightDir);
+				diff = (diff * 0.5 + 0.5) * atten;
+				
+				fixed3 diffuse = _LightColor0.rgb * albedo * tex2D(_Ramp, float2(diff, diff)).rgb;
+				
+				fixed spec = dot(worldNormal, worldHalfDir);
+				fixed w = fwidth(spec) * 2.0;
+				fixed3 specular = _Specular.rgb * lerp(0, 1, smoothstep(-w, w, spec + _SpecularScale - 1)) * step(0.0001, _SpecularScale);
+				
+				return fixed4(ambient + diffuse + specular, 1.0);
+			}
+```
+
+7）最后为shader设置了合适的fallback
+
+```
+	FallBack "Diffuse"
 ```
 
