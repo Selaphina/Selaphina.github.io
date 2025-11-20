@@ -146,4 +146,36 @@ Properties{
 			Cull Front
 ```
 
-`Cull Front`使用cull指令把正面的三角面片剔除，只渲染背面。值得注意的是，描边在非真实感渲染中是非常常见的
+`Cull Front`使用cull指令把正面的三角面片剔除，只渲染背面。值得注意的是，描边在非真实感渲染中是非常常见的，为该Pass定义名称可以让我们在后面的使用中不需要再重复编写此Pass，而只需要调用它的名字即可。
+
+3）顶点和片元着色器
+
+```
+			v2f vert (a2v v) {
+				v2f o;
+				
+				float4 pos = mul(UNITY_MATRIX_MV, v.vertex); 
+				float3 normal = mul((float3x3)UNITY_MATRIX_IT_MV, v.normal);  
+				normal.z = -0.5;
+				pos = pos + float4(normalize(normal), 0) * _Outline;
+				o.pos = mul(UNITY_MATRIX_P, pos);
+				
+				return o;
+			}
+			
+			float4 frag(v2f i) : SV_Target { 
+				return float4(_OutlineColor.rgb, 1);               
+			}
+			
+			ENDCG
+		}
+```
+
+
+
+4）
+
+```
+
+```
+
