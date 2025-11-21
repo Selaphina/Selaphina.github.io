@@ -248,3 +248,160 @@ float4 frag(v2f i) : SV_Target {
 	FallBack "Diffuse"
 ```
 
+类似于cocos 的引擎内，其实已经内置了toon shader，可以快速实现这种二分明确/有描边的卡通渲染。
+
+> 贴图设置问题，如果出现亮部有黑点，是贴图设置问题。
+>
+> ![image-20251122021420066](image-20251122021420066.png)
+
+![image-20251122021409951](image-20251122021409951.png)
+
+微软研究院的Praun等人在2001年的SIGGRAPH 上发表了一篇非常著名的论文。在这篇文章中，他们使用了提前生成的素描纹理来实现实时的素描风格渲染,这些纹理组成了一个色调艺术映射(TonalArt Map,TAM),如图 14.4所示。在图14.4中，从左到右纹理中的笔触逐渐增多，用于模拟不同光照下的漫反射效果，从上到下则对应了每张纹理的多级渐远纹理(mipmaps)。这些多级渐远纹理的生成并不是简单的对上层纹理进行降采样，而是需要保持笔触之间的间隔，以便更真实地模拟素描效果。
+
+![image-20251122021513144](image-20251122021513144.png)
+
+**1.**本文简化了论文的操作方式，不需要用mipmap，使用6张纹理即可
+
+```
+	Properties {
+		_Color ("Color Tint", Color) = (1, 1, 1, 1)
+		_TileFactor ("Tile Factor", Float) = 1
+		_Outline ("Outline", Range(0, 1)) = 0.1
+		_Hatch0 ("Hatch 0", 2D) = "white" {}
+		_Hatch1 ("Hatch 1", 2D) = "white" {}
+		_Hatch2 ("Hatch 2", 2D) = "white" {}
+		_Hatch3 ("Hatch 3", 2D) = "white" {}
+		_Hatch4 ("Hatch 4", 2D) = "white" {}
+		_Hatch5 ("Hatch 5", 2D) = "white" {}
+	}
+```
+
+其中， Color 是用于控制模型颜色的属性。 TileFactor 是纹理的平铺系数， TileFactor 越大,模型上的素描线条越密,在实现图14.5的过程中,我们把 TileFactor设置为8。Hatch0至 Hatch5对应了渲染时使用的6张素描纹理，它们的线条密度依次增大。
+
+**2.**由于素描风格往往也需要在物体周围渲染轮廓线，因此我们直接使用14.1节中渲染轮廓
+
+```
+SubShader {
+		Tags { "RenderType"="Opaque" "Queue"="Geometry"}
+		
+		UsePass "Unity Shaders Book/Chapter 14/Toon Shading/OUTLINE"
+		
+```
+
+我们使用 UsePass 命令调用了 14.1节中实现的轮廓线渲染的 Pass,Unity Shaders Book/Chapter14/Toon Shading 对应了14.1 节中 Chapter14-ToonShading 文件里 Shader 的名字，而 Unity 内部会把 Pass的名称全部转成大写格式，所以我们需要在 UsePass 中使用大写格式的 Pass 名称。
+
+
+
+3. 下面，我们需要定义光照模型所在的Pass。为了能够正确获取各个光照变量，我们设置了Pass的标签和相关的编译指令
+
+```
+	Pass {
+			Tags { "LightMode"="ForwardBase" }
+			
+			CGPROGRAM
+			
+			#pragma vertex vert
+			#pragma fragment frag 
+			
+			#pragma multi_compile_fwdbase
+```
+
+
+(4)由于我们需要在顶点着色器中计算6张纹理的混合权重，我们首先需要在 v2f结构体中添加相应的变量:
+
+```
+			struct v2f {
+				float4 pos : SV_POSITION;
+				float2 uv : TEXCOORD0;
+				fixed3 hatchWeights0 : TEXCOORD1;
+				fixed3 hatchWeights1 : TEXCOORD2;
+				float3 worldPos : TEXCOORD3;
+				SHADOW_COORDS(4)
+			};
+```
+
+由于一共声明了6张纹理，这意味着需要6个混合权重，我们把它们存储在两个fixed3 类型的变量(hatchWeights0 和 hatchWeights1)中。为了添加阴影效果，我们还声明了 worldPos 变量,并使用 SHADOWCOORDS宏声明了阴影纹理的采样坐标。
+
+5)然后，我们定义了关键的顶点着色器:
+
+```
+v2f vert(a2v v) {
+				v2f o;
+				
+				o.pos = UnityObjectToClipPos(v.vertex);
+				
+				o.uv = v.texcoord.xy * _TileFactor;
+				
+				fixed3 worldLightDir = normalize(WorldSpaceLightDir(v.vertex));
+				fixed3 worldNormal = UnityObjectToWorldNormal(v.normal);
+				fixed diff = max(0, dot(worldLightDir, worldNormal));
+				
+				o.hatchWeights0 = fixed3(0, 0, 0);
+				o.hatchWeights1 = fixed3(0, 0, 0);
+				
+				float hatchFactor = diff * 7.0;
+				
+				if (hatchFactor > 6.0) {
+					// Pure white, do nothing
+				} else if (hatchFactor > 5.0) {
+					o.hatchWeights0.x = hatchFactor - 5.0;
+				} else if (hatchFactor > 4.0) {
+					o.hatchWeights0.x = hatchFactor - 4.0;
+					o.hatchWeights0.y = 1.0 - o.hatchWeights0.x;
+				} else if (hatchFactor > 3.0) {
+					o.hatchWeights0.y = hatchFactor - 3.0;
+					o.hatchWeights0.z = 1.0 - o.hatchWeights0.y;
+				} else if (hatchFactor > 2.0) {
+					o.hatchWeights0.z = hatchFactor - 2.0;
+					o.hatchWeights1.x = 1.0 - o.hatchWeights0.z;
+				} else if (hatchFactor > 1.0) {
+					o.hatchWeights1.x = hatchFactor - 1.0;
+					o.hatchWeights1.y = 1.0 - o.hatchWeights1.x;
+				} else {
+					o.hatchWeights1.y = hatchFactor;
+					o.hatchWeights1.z = 1.0 - o.hatchWeights1.y;
+				}
+				
+				o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+				
+				TRANSFER_SHADOW(o);
+				
+				return o; 
+			}
+```
+
+我们首先对顶点进行了基本的坐标变换。然后，使用TileFactor 得到了纹理采样坐标。在计算6张纹理的混合权重之前，我们首先需要计算逐顶点光照。因此，我们使用世界空间下的光照方向和法线方向得到漫反射系数 diff。
+
+之后,我们把权重值初始化为0,并把 diff缩放到[0,7]范围，得到 hatchFactor。
+
+我们把[0,7]的区间均匀划分为7个子区间，通过判断 hatchFactor 所处的子区间来计算对应的纹理混合权重。
+
+最后，我们计算了顶点的世界坐标，并使用TRANSFERSHADOW宏来计算阴影纹理的采样坐标。
+
+6.片元着色器
+
+```
+fixed4 frag(v2f i) : SV_Target {			
+				fixed4 hatchTex0 = tex2D(_Hatch0, i.uv) * i.hatchWeights0.x;
+				fixed4 hatchTex1 = tex2D(_Hatch1, i.uv) * i.hatchWeights0.y;
+				fixed4 hatchTex2 = tex2D(_Hatch2, i.uv) * i.hatchWeights0.z;
+				fixed4 hatchTex3 = tex2D(_Hatch3, i.uv) * i.hatchWeights1.x;
+				fixed4 hatchTex4 = tex2D(_Hatch4, i.uv) * i.hatchWeights1.y;
+				fixed4 hatchTex5 = tex2D(_Hatch5, i.uv) * i.hatchWeights1.z;
+				fixed4 whiteColor = fixed4(1, 1, 1, 1) * (1 - i.hatchWeights0.x - i.hatchWeights0.y - i.hatchWeights0.z - 
+							i.hatchWeights1.x - i.hatchWeights1.y - i.hatchWeights1.z);
+				
+				fixed4 hatchColor = hatchTex0 + hatchTex1 + hatchTex2 + hatchTex3 + hatchTex4 + hatchTex5 + whiteColor;
+				
+				UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
+								
+				return fixed4(hatchColor.rgb * _Color.rgb * atten, 1.0);
+			}
+```
+
+7.合适的fallback
+
+```
+Fallback “Diffuse”
+```
+
