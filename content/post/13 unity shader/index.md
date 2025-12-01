@@ -85,7 +85,7 @@ float d=SAMPLE DEPTH TEXTURE PROJ( CameraDepthTexture,UNITY PROJ COORD(i.scrPos)
 些宏的定义，读者可以在 Unity内置的HSLSupport.cginc 文件中找到。当通过纹理采样得到深度值后，这些深度值往往是非线性的，这种非线性来自于透视投影使用的裁剪矩阵。然而，在我们的计算过程中通常是需要线性的深度值，也就是说，我们需要把投影后的深度值变换到线性空间下，例如视角空间下的深度值。那么，我们应该如何进行这个转换呢?实际上，我们只需要倒推顶点变换的过程即可。下面我们以透视投影为例，推导如何由深度纹理中的深度信息计算得到视角空间下的深度值。
 由4.6.7节可知，当我们使用透视投影的裁剪矩阵P"对视角空间下的一个顶点进行变换后，裁剪空间下顶点的z和w分量为:
 $$
-z_{\text{clip}} = -z_{\text{visw}} \frac{ \text{Far} + \text{Near} }{ \text{Far} - \text{Near} } - \frac{2 \cdot \text{Near} \cdot \text{Far} }{ \text{Far} - \text{Near} } 
+z_{\text{clip}} = -z_{\text{visw}} \frac{ \text{Far} + \text{Near} }{ \text{Far} - \text{Near} } - \frac{2 \cdot \text{Near} \cdot \text{Far} }{ \text{Far} - \text{Near} }
 $$
 
 $$
@@ -100,3 +100,300 @@ z_{\text{ndc}} = \frac{z_{\text{clip}}}{w_{\text{clip}}} = \frac{ \text{Far} + \
 $$
 在 13.1.1节中我们知道，深度纹理中的深度值是通过下面的公式由NDC计算而得的:
 
+$$
+d = 0.5 \cdot z_{ndc} + 0.5
+$$
+由上面的这些式子，我们可以推导出用d表示而得的z的表达式:
+$$
+z'_{\text{visw}} = \frac{ 1 }{ \frac{ \text{Far} - \text{Near}}{\text{Near} \cdot \text{Far} } d - \frac{1}{\text{Near}}}
+$$
+由于在 Unity 使用的视角空间中，摄像机正向对应的z值均为负值，因此为了得到深度值的正数表示，我们需要对上面的结果取反，最后得到的结果如下:
+$$
+z_{01} = \frac{ 1 }{ \frac{ \text{Near} - \text{Far}}{\text{Near}} d + \frac{Far}{\text{Near}}}
+$$
+幸运的是，Unity 提供了两个辅助函数来为我们进行上述的计算过程一LinearEyeDepth和Linear01Depth。
+
+LinearEyeDepth负责把深度纹理的采样结果转换到视角空间下的深度值，也就是我们上面得到的Z'visw。
+
+而Linear01Depth 则会返回一个范围在[0,1]的线性深度值，也就是我们上面得到的 Z01。这两个函数内部使用了内置的 ZBuferParams 变量来得到远近裁剪平面的距离。如果我们需要获取深度+法线纹理，可以直接使用tex2D数对CameraDepthNormalsTexture进行采样，得到里面存储的深度和法线信息。Unity 提供了辅助函数来为我们对这个采样结果进行解码，从而得到深度值和法线方向。这个函数是DecodeDepthNormal，它在UnityCG.cginc 里被定义：
+
+```
+inline void DecodeDepthNormal( float4 enc,out float depth, out float3 normal)
+{
+    depth =DecodeFloatRG(enc.zw);
+    normal=DecodeViewNormalStereo(enc);
+}
+```
+
+DecodeDepthNormal的第一个参数是对深度+法线纹理的采样结果，这个采样结果是 Unity 对深度和法线信息编码后的结果,它的xy分量存储的是视角空间下的法线信息,而深度信息被编码进了 zw 分量。通过调用 DecodeDepthNormal 函数对采样结果解码后，我们就可以得到解码后的深度值和法线。这个深度值是范围在[0.11的线性深度值(这与单独的深度纹理中存储的深度值不同)，而得到的法线则是视角空间下的法线方向。同样，我们也可以通过调用DecodeFloatRG 和DecodeViewNormalStereo 来解码深度+法线纹理中的深度和法线信息。
+
+至此，我们已经学会了如何在 Unity 里获取及使用深度和法线纹理。下面，我们会学习如何使用它们实现各种屏幕特效。
+
+### 3）查看深度和法线纹理
+
+很多时候，我们希望可以查看生成的深度和法线纹理，以便对Shader 进行调试。Unity5提供了一个方便的方法来查看摄像机生成的深度和法线纹理，这个方法就是利用帧调试器(FrameDebugger)。图13.3 显示了使用帧调试器査看到的深度纹理和深度+法线纹理。
+
+![image-20251202005807184](image-20251202005807184.png)
+
+使用帧调试器查看到的深度纹理是非线性空间的深度值,而深度+法线纹理都是由Unity 编码后的结果。有时，显示出线性空间下的深度信息或解码后的法线方向会更加有用。此时，我们可以自行在片元着色器中输出转换或解码后的深度和法线值，如图13.4所示。输出代码非常简单，我们可以使用类似下面的代码来输出线性深度值:
+
+```
+float depth = SAMPLE DEPTH TEXTURE( CameraDepthTexture,i.uv);
+float linearDepth = Linear01Depth(depth);
+return fixed4(linearDepth,linearDepth,linearDepth，1.0);
+```
+
+或是输出法线方向:
+
+```
+fixed3 normal = DecodeViewNormalStereo(tex2D(_CameraDepthNormalsTexture, i.uv).xy);
+return fixed4(normal*0.5+0.5, 1.0);
+```
+
+在查看深度纹理时，读者得到的画面有可能几乎是全黑或全白的。这时候读者可以把摄像机的远裁剪平面的距离(Unity默认为1000)调小，使视锥体的范围刚好覆盖场景的所在区域。这是因为，由于投影变换时需要覆盖从近裁剪平面到远裁剪平面的所有深度区域，当远裁剪平面的距离过大时，会导致离摄像机较近的距离被映射到非常小的深度值，如果场景是一个封闭的区域(如图13.4所示)，那么这就会导致画面看起来几乎是全黑的。相反，如果场景是一个开放区域，且物体离摄像机的距离较远，就会导致画面几乎是全白的。
+
+![image-20251202010103493](image-20251202010103493.png)
+
+## 2.再谈运动模糊
+
+在12.6节中，我们学习了如何通过混合多张屏幕图像来模拟运动模糊的效果。但是，另一种应用更加广泛的技术则是使用速度映射图。速度映射图中存储了每个像素的速度，然后使用这个速度来决定模糊的方向和大小。速度缓冲的生成有多种方法，一种方法是把场景中所有物体的速度渲染到一张纹理中。但这种方法的缺点在于需要修改场景中所有物体的 Shader 代码，使其添加计算速度的代码并输出到一个渲染纹理中。
+
+《GPU Gems3》在第27章(http://http.developer,nvidia.com/GPUGems3/gpugems3 ch27.html)中介绍了一种生成**速度映射图**的方法。这种方法利用深度纹理在片元着色器中为每个像素计算其在世界空间下的位置，这是通过使用当前的视角*投影矩阵的逆矩阵对NDC下的顶点坐标进行变换得到的。当得到世界空间中的顶点坐标后，我们使用前一帧的视角*投影矩阵对其进行变换，得到该位置在前一帧中的 NDC坐标。然后，我们计算前一帧和当前帧的位置差，生成该像素的速度。这种方法的优点是可以在一个屏幕后处理步骤中完成整个效果的模拟，但缺点是需要在片元着色器中进行两次矩阵乘法的操作，对性能有所影响。为了使用深度纹理模拟运动模糊，我们需要进行如下准备工作。
+
+为了使用深度纹理模拟运动模糊，我们需要进行如下准备工作。(1)新建一个场景。在本书资源中，该场景名为Scene132。在 Unity5.2中，默认情况下场景将包含一个摄像机和一个平行光,并且使用了内置的天空盒子。在Window→ Lighting→Skybox中去掉场景中的天空盒子。
+(2)我们需要搭建一个测试运动模糊的场景。在本书资源的实现中，我们构建了一个包含3面墙的房间，并放置了4个立方体，它们都使用了我们在95节中创建的标准材质。同时，我们把本书资源中的 Translating.cs脚本拖曳给摄像机，让其在场景中不断运动。(3)新建一个脚本。在本书资源中，该脚本名为MotionBlurWithDepthTexture.cs。把该脚本拖曳到摄像机上。
+(4)新建一个Unity Shader。在本书资源中，该Shader 名为Chapter13-MotionBlurWithDepthTexture。
+
+### MotionBlurWithDepthTexture.cs
+
+我们首先来编写 MotionBlurWithDepthTexture.cs脚本。打开该脚本，并进行如下修改。
+
+(1)首先，继承12.1节中创建的基类
+
+```
+public class MotionBlurWithDepthTexture :PostEffectsBase {
+```
+
+(2)声明该效果需要的Shader，并据此创建相应的材质:
+
+```
+public Shader motionBlurShader;
+private Material motionBlurMaterial = null;
+```
+
+```
+	public Material material {  
+		get {
+			motionBlurMaterial = CheckShaderAndCreateMaterial(motionBlurShader, motionBlurMaterial);
+			return motionBlurMaterial;
+		}  
+	}
+```
+
+3)定义运动模糊时模糊图像使用的大小:
+
+```
+[Range(0.0f, 1.0f)]
+	public float blurSize = 0.5f;
+```
+
+
+(4)由于本节需要得到摄像机的视角和投影矩阵，我们需要定义一个Camera 类型的变量,以获取该脚本所在的摄像机组件:
+
+```
+	private Camera myCamera;
+	public Camera camera {
+		get {
+			if (myCamera == null) {
+				myCamera = GetComponent<Camera>();
+			}
+			return myCamera;
+		}
+	}
+```
+
+(5)我们还需要定义一个变量来保存上一帧摄像机的视角*投影矩阵:
+
+```
+private Matrix4x4 previousViewProjectionMatrix;
+```
+
+(6)由于本例需要获取摄像机的深度纹理，我们在脚本的 OnEnable 函数中设置摄像机的状态:
+
+```
+void onEnable(){
+camera.depthTextureMode= DepthTextureMode .Depth;
+}
+```
+
+(7)最后，我们实现了OnRenderlmage 函数:
+
+```c++
+void OnRenderImage (RenderTexture src, RenderTexture dest) {
+		if (material != null) {
+			material.SetFloat("_BlurSize", blurSize);
+
+			material.SetMatrix("_PreviousViewProjectionMatrix", previousViewProjectionMatrix);
+			Matrix4x4 currentViewProjectionMatrix = camera.projectionMatrix * camera.worldToCameraMatrix;
+			Matrix4x4 currentViewProjectionInverseMatrix = currentViewProjectionMatrix.inverse;
+			material.SetMatrix("_CurrentViewProjectionInverseMatrix", currentViewProjectionInverseMatrix);
+			previousViewProjectionMatrix = currentViewProjectionMatrix;
+
+			Graphics.Blit (src, dest, material);
+		} else {
+			Graphics.Blit(src, dest);
+		}
+	}
+```
+
+上面的 OnRenderImage 函数很简单，我们首先需要计算和传递运动模糊使用的各个属性。才例需要使用两个变换矩阵——`前一帧的视角\*投影矩阵`以及`当前帧的视角\*投影矩阵`的逆矩阵。因此，我们通过调用 camera.worldToCameraMatrix和 camera.projectionMatrix来分别得到当前摄像机的视角矩阵和投影矩阵。对它们相乘后取逆，得到`当前帧的视角*投影矩阵的逆矩阵`，并传递给材质。然后，我们把取逆前的结果存储在 previousViewProjectionMatrix 变量中，以便在下一帧时传递给材质的 PreviousViewProjectionMatrix属性。
+
+### Chapter13-MotionBlurWithDepthTexture
+
+下面，我们来实现 Shader 的部分。打开 Chapter13-MotionBlurWithDepthTexture，进行如下修改。
+
+(1)我们首先需要声明本例使用的各个属性:
+
+```
+Properties{
+	_MainTex("Base(RGB)"2D)="white"{}
+	_BlurSize ("Blur Size"Float)=1.0
+}
+
+```
+
+MainTex 对应了输入的渲染纹理，BlurSize 是模糊图像时使用的参数。我们注意到，虽然在脚本里设置了材质的 PreviousViewProjectionMatrix和CurrentViewProjectionInverseMatrix属性，但并没有在Properties块中声明它们。这是因为Unity 没有提供矩阵类型的属性，但我们仍然可以在CG代码块中定义这些矩阵，并从脚本中设置它们。
+
+
+(2)在本节中,我们使用 CGINCLUDE来组织代码。我们在 SubShader块中利用CGINCLUDE和 ENDCG 语义来定义一系列代码:
+
+```
+SubShader
+{
+	CGINCLUDE
+	……
+	ENDCG
+	……
+    }
+```
+
+(3)声明代码中需要使用的各个变量:
+
+```
+sampler2DMainTex;
+half4 MainTex TexelSize;
+sampler2DCameraDepthTexture;
+float4x4 CurrentViewProjectionInverseMatrix;
+float4x4PreviousViewProjectionMatrix;
+half Blursize;
+```
+
+在上面的代码中，除了定义在 Properties 声明的 MainTex和 BlurSize 属性，我们还声明了其他三个变量。CameraDepthTexture 是Unity 传递给我们的深度纹理，而 CurrentViewProjectionInverseMatrix和PreviousViewProiectionMatrix是由脚本传递而来的矩阵。除此之外，我们还声明了MainTex TexelSize 变量，它对应了主纹理的纹素大小，我们需要使用该变量来对深度纹理的采样坐标进行平台差异化处理(详见5.6.1节)。
+
+(4)顶点着色器的代码和之前使用多次的代码基本一致，只是增加了专门用于对深度纹理采样的纹理坐标变量:
+
+```
+struct v2f {
+	float4 pos : SV_POSITION;
+	half2 uv : TEXCOORD0;
+	half2 uv_depth : TEXCOORD1;
+};
+
+v2f vert(appdata_img v) {
+	v2f o;
+	o.pos = UnityObjectToClipPos(v.vertex);
+	
+	o.uv = v.texcoord;
+	o.uv_depth = v.texcoord;
+	
+	#if UNITY_UV_STARTS_AT_TOP
+	if (_MainTex_TexelSize.y < 0)
+		o.uv_depth.y = 1 - o.uv_depth.y;
+	#endif
+			 
+	return o;
+}
+```
+
+由于在本例中，我们需要同时处理多张渲染纹理，因此在DirectX这样的平台上，我们需要处理平台差异导致的图像翻转问题。在上面的代码中，我们对深度纹理的采样坐标进行了平台差异化处理，以便在类似 Directx的平台上，在开启了抗锯齿的情况下仍然可以得到正确的结果,
+
+(5)片元着色器是算法的重点所在:
+
+```
+		fixed4 frag(v2f i) : SV_Target {
+			// Get the depth buffer value at this pixel.
+			float d = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth);
+			// H is the viewport position at this pixel in the range -1 to 1.
+			float4 H = float4(i.uv.x * 2 - 1, i.uv.y * 2 - 1, d * 2 - 1, 1);
+			// Transform by the view-projection inverse.
+			float4 D = mul(_CurrentViewProjectionInverseMatrix, H);
+			// Divide by w to get the world position. 
+			float4 worldPos = D / D.w;
+			
+			// Current viewport position 
+			float4 currentPos = H;
+			// Use the world position, and transform by the previous view-projection matrix.  
+			float4 previousPos = mul(_PreviousViewProjectionMatrix, worldPos);
+			// Convert to nonhomogeneous points [-1,1] by dividing by w.
+			previousPos /= previousPos.w;
+			
+			// Use this frame's position and last frame's to compute the pixel velocity.
+			float2 velocity = (currentPos.xy - previousPos.xy)/2.0f;
+			
+			float2 uv = i.uv;
+			float4 c = tex2D(_MainTex, uv);
+			uv += velocity * _BlurSize;
+			for (int it = 1; it < 3; it++, uv += velocity * _BlurSize) {
+				float4 currentColor = tex2D(_MainTex, uv);
+				c += currentColor;
+			}
+			c /= 3;
+			
+			return fixed4(c.rgb, 1.0);
+		}
+```
+
+我们首先需要利用深度纹理和当前帧的视角*投影矩阵的逆矩阵来求得该像素在世界空间下的坐标。过程开始于对深度纹理的采样，我们便用内置的SAMPLE DEPTH TEXTURE宏和纹理坐标对深度纹理进行采样，得到了深度值 d。由 13.1.2节可知,d是由 NDC下的坐标映射而来的。我们想要构建像素的 NDC 坐标 ，就需要把这个深度值重新映射回 NDC。这个映射很简单，只需要使用原映射的反函数即可，即d*2-1。同样，NDC的x分量可以由像素的纹理坐标映射而来(NDC下的xyz分量范围均为[-1,1])。当得到NDC下的坐标H后，我们就可以使用`当前帧的视角*投影矩阵的逆矩阵`对其进行变换，并把结果值除以它的w分量来得到世界空间下的坐标表示 worldPos.
+
+一旦得到了世界空间下的坐标，我们就可以使用`前一帧的视角*投影矩阵`对它进行变换，得到前一帧在 NDC下的坐标 previousPos。然后，我们计算前一帧和当前帧在屏幕空间下的位置差,得到该像素的速度 velocity。
+当得到该像素的速度后，我们就可以使用该速度值对它的邻域像素进行采样，相加后取平均值得到一个模糊的效果。采样时我们还使用了_BlurSize 来控制采样距离。
+
+(6)然后，我们定义了运动模糊所需的 Pass:
+
+```
+Pass {      
+	ZTest Always Cull Off ZWrite Off
+	    	
+	CGPROGRAM  
+	
+	#pragma vertex vert  
+	#pragma fragment frag  
+	  
+	ENDCG  
+}
+```
+
+(7)最后，我们关闭了shader的Fallback:
+
+```
+Fallback Off
+```
+
+完成后返回编辑器，并把 Chapter13-MotionBlurWithDepthTexture 拖曳到摄像机的 MotionBlurWithDepthTexture.cs脚本中的 motionBlurShader 参数中。当然，我们可以在 MotionBlurWithDepthTexture.cs的脚本面板中将 motionBlurShader 参数的默认值设置为 Chapter13-MotionBlurWithDepthTexture，这样就不需要以后使用时每次都手动拖曳了。
+
+本节实现的运动模糊适用于场景静止、摄像机快速运动的情况，这是因为我们在计算时只考虑了摄像机的运动。因此，如果读者把本节中的代码应用到一个物体快速运动而摄像机静止的场景，会发现不会产生任何运动模糊效果。如果我们想要对快速移动的物体产生运动模糊的效果，就需要生成更加精确的速度映射图。读者可以在 Unity 自带的ImageEfect包中找到更多的运动模糊的实现方法。
+本节选择在片元着色器中使用逆矩阵来重建每个像素在世界空间下的位置。但是，这种做法往往会影响性能，在13.3节中，我们会介绍一种更快速的由深度纹理重建世界坐标的方法。
+
+## 3.全局雾效
+
+雾效(Fog)是游戏里经常使用的一种效果。Unity内置的雾效可以产生基于距离的线性或指数雾效。然而，要想在自己编写的顶点/片元着色器中实现这些雾效，我们需要在Shader 中添加#pragma multi compile fog指令，同时还需要使用相关的内置宏，例如 UNITY FOG COORDS、UNITY TRANSFERFOG和UNITY APPLY FOG等。这种方法的缺点在于，我们不仅需要为场景中所有物体添加相关的渲染代码，而且能够实现的效果也非常有限。当我们需要对雾效进行些个性化操作时，例如使用基于高度的雾效等，仅仅使用Unity内置的雾效就变得不再可行。
+
+在本节中，我们将会学习一种基于屏幕后处理的全局雾效的实现。使用这种方法，我们不需要更改场景内渲染的物体所使用的Shader代码，而仅仅依靠一次屏幕后处理的步骤即可这种方法的自由性很高，我们可以方便地模拟各种雾效，例如均匀的雾效、基于距离的线性指数雾效、基于高度的雾效等。在学习完本节后，我们可以得到类似图13.5中的效果。
+
+![image-20251202012321171](image-20251202012321171.png)
+
+基于屏幕后处理的全局雾效的关键是，根据深度纹理来重建每个像素在世界空间下的位置。尽管在 13.2节中，我们在模拟运动模糊时已经实现了这个要求，即构建出当前像素的NDC坐标，再通过当前摄像机的视角*投影矩阵的逆矩阵来得到世界空间下的像素坐标，但是，这样的实现需要在片元着色器中进行矩阵乘法的操作，而这通常会影响游戏性能。
+
+在本节中，我们将会学习一个快速从深度纹理中重建世界坐标的方法。这种方法首先对图像空间下的视锥体射线(从摄像机出发，指向图像上的某点的射线)进行插值，这条射线存储了该像素在世界空间下到摄像机的方向信息。然后，我们把该射线和线性化后的视角空间下的深度值相乘，再加上摄像机的世界位置，就可以得到该像素在世界空间下的位置。
+
+当我们得到世界坐标后，就可以轻松地使用各个公式来模拟全局雾效了。
