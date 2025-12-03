@@ -14,6 +14,7 @@ weight: 2040       # You can add weight to some posts to override the default so
 
 结构
 
+```
 test
 
 ​	-3
@@ -21,6 +22,9 @@ test
 ​		-q1
 
 ​		-q2
+```
+
+
 
 ## 3 中心光辉径向渐变
 
@@ -122,3 +126,9 @@ Start Color
 ![image-20251202165821735](image-20251202165821735.png)
 
 ![quan16](quan16.png)
+
+> PS：内置的particle shader有自带的广告牌效果，根据摄像机视角自动旋转角度。涉及旋转有关的特效，最好先用纯色的贴图进行代替，观测好适合的初始角度再进行后续调整。
+
+![image-20251202181722815](image-20251202181722815.png)
+
+![image-20251202181737355](image-20251202181737355.png)
