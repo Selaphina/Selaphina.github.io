@@ -230,3 +230,11 @@ python main.py --test all_CT --out_path "/media/out"
 python main.py --test all_EVAL
 ```
 
+# 目前
+
+```
+# 重新安装 detectron2
+pip install git+https://github.com/facebookresearch/detectron2.git
+```
+
+还是卡在 detectron2。无进度。
