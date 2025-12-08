@@ -1,22 +1,14 @@
 ---
 title: 毕业设计 | 水墨风格化场景渲染（其二）
-description: 毕业设计的开发日志，用于实时记录进度和一些小巧思。
+description: 毕业设计的开发日志，用于实时记录学到的trick。
 date: 2025-12-7 10:12:30+0000
 image: cover1.png
 categories:
     - 技术笔记
 tags:
     - Note
-weight: 2030       # You can add weight to some posts to override the default sorting (date descending)
+weight: 2010       # You can add weight to some posts to override the default sorting (date descending)
 ---
-
-
-
-
-
-
-
-
 
 
 
