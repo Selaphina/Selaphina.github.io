@@ -1,11 +1,35 @@
 ---
-title: python虚拟环境
+title: 材质美术-基础概念梳理笔记
 description: 在服务器上如何安装python虚拟环境
 date: 2025-12-11 10:32:30+0000
 image: CUC兑换点2.png
 categories:
-    - 工具指南
-weight: 2020       # You can add weight to some posts to override the default sorting (date descending)
+    - 技术笔记
+weight: 2019       # You can add weight to some posts to override the default sorting (date descending)
 
 ---
 
+## 1 关于Tex Mapping
+
+### albedo和diffuse的区别与联系
+
+Albedo：反照率
+
+diffuse：漫反射
+
+它们都用于定义物体表面的基础颜色。下面是它们的核心区别。
+
+| 特性维度       | Albedo (反照率) 贴图                                   | Diffuse (漫反射) 贴图                        |
+| :------------- | :----------------------------------------------------- | :------------------------------------------- |
+| **核心定义**   | 表面本身**不包含任何光照信息**的纯颜色/反射率          | 表面在**包含简单光影信息**（如阴影）下的颜色 |
+| **所属工作流** | 基于物理的渲染（PBR）工作流                            | 传统/非基于物理的渲染（Non-PBR）工作流       |
+| **信息纯度**   | **纯材质信息**，只表示物体固有的颜色和反射特性         | **混合信息**，融合了物体固有色和基础光照阴影 |
+| **金属表现**   | 金属区域通常为**深色甚至纯黑**，因为纯金属几乎无漫反射 | 不严格区分金属与非金属的漫反射表现           |
+| **视觉对比**   | 色调通常**更平缓，对比度较低**                         | 因包含光影，通常**对比度更明显**             |
+| **常见引擎**   | Unity (称 Albedo), Unreal Engine (称 Base Color)       | 旧版引擎或传统Lambert着色器                  |
+
+总而言之，它们的区别实际上标志着渲染技术的进步：
+
+> 传统的/非真实感渲染：
+>
+> 通过将光影信息 “烘培” 

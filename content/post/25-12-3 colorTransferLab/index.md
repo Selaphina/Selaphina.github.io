@@ -1,7 +1,7 @@
 ---
 title: colorTransferLab艰难配环境中
 description: 
-date: 2025-12-3 10:12:30+0000
+date: 2025-12-03 10:12:30+0000
 image: CUC兑换点2.png
 categories:
     - 工具指南
