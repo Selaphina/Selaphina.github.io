@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blender on Selaphina</title><link>https://Selaphina.github.io/tags/blender/</link><description>Recent content in Blender on Selaphina</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 22 Nov 2025 10:20:12 +0000</lastBuildDate><atom:link href="https://Selaphina.github.io/tags/blender/index.xml" rel="self" type="application/rss+xml"/><item><title>Blender-导出fbx动画</title><link>https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/</link><pubDate>Sat, 22 Nov 2025 10:20:12 +0000</pubDate><guid>https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/</guid><description>&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/cover1.png" alt="Featured image of post Blender-导出fbx动画" /&gt;&lt;h2 id="1-blender导出带贴图模型"&gt;1. Blender导出带贴图模型
+&lt;/h2&gt;&lt;p&gt;{{BV1384y1j7wt}}&lt;/p&gt;
+&lt;p&gt;1.文件—— 外部数据 ——打包资源——（第二项）将文件写至当前目录&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213913006.png"
+width="589"
+height="335"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213913006_hu_c0d6dc0824b0df17.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213913006_hu_fa4c9e44c588edd1.png 1024w"
+loading="lazy"
+alt="image-20251123213913006"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="421px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2.着色器编辑器：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213936700.png"
+width="1010"
+height="366"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213936700_hu_9e2d895dd5cade6e.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213936700_hu_4be320baff120bab.png 1024w"
+loading="lazy"
+alt="image-20251123213936700"
+class="gallery-image"
+data-flex-grow="275"
+data-flex-basis="662px"
+&gt;&lt;/p&gt;
+&lt;p&gt;所有shader节点的贴图文件处，都需要：解包项——将文件写至当前目录（覆盖现有文件）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214055334.png"
+width="390"
+height="204"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214055334_hu_ecfc758f18e87cdf.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214055334_hu_2e91e8b8c960d62b.png 1024w"
+loading="lazy"
+alt="image-20251123214055334"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="458px"
+&gt;&lt;/p&gt;
+&lt;p&gt;操作之后，确保图标变化：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214149107.png"
+width="392"
+height="381"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214149107_hu_7a178a03ad250aff.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214149107_hu_c1b79ee306c7d14f.png 1024w"
+loading="lazy"
+alt="image-20251123214149107"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+&gt;&lt;/p&gt;
+&lt;p&gt;3.导出——fbx&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214226752.png"
+width="639"
+height="804"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214226752_hu_b472bf64c9e36019.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214226752_hu_40d1cf863ccd9822.png 1024w"
+loading="lazy"
+alt="image-20251123214226752"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="190px"
+&gt;&lt;/p&gt;
+&lt;p&gt;两处修改：&lt;/p&gt;
+&lt;p&gt;路径模式——复制&lt;/p&gt;
+&lt;p&gt;右侧小图标——激活&lt;/p&gt;
+&lt;p&gt;1.&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214312173.png"
+width="356"
+height="125"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214312173_hu_5b7302e5c3f74e20.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214312173_hu_353d8b958524642c.png 1024w"
+loading="lazy"
+alt="image-20251123214312173"
+class="gallery-image"
+data-flex-grow="284"
+data-flex-basis="683px"
+&gt;&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="形态键动画导出"&gt;形态键动画导出
+&lt;/h2&gt;&lt;p&gt;1.分为两个动画：&lt;/p&gt;
+&lt;p&gt;动作动画&lt;/p&gt;
+&lt;p&gt;形态键动画&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123221119471.png"
+width="2068"
+height="489"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123221119471_hu_92d0e2ef319e6ea.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123221119471_hu_9858e00de7cea1ff.png 1024w"
+loading="lazy"
+alt="image-20251123221119471"
+class="gallery-image"
+data-flex-grow="422"
+data-flex-basis="1014px"
+&gt;&lt;/p&gt;
+&lt;p&gt;要求：&lt;/p&gt;
+&lt;p&gt;动作动画长度一定要&amp;gt;=形态键动画&lt;/p&gt;
+&lt;p&gt;导出：&lt;/p&gt;
+&lt;p&gt;1.&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223229361.png"
+width="320"
+height="231"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223229361_hu_6644c3877eb3d971.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223229361_hu_10a2f9b89beeda87.png 1024w"
+loading="lazy"
+alt="image-20251123223229361"
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="332px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2.&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223258583.png"
+width="295"
+height="260"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223258583_hu_6484b1ee64666746.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223258583_hu_1e93ac3d1759ab55.png 1024w"
+loading="lazy"
+alt="image-20251123223258583"
+class="gallery-image"
+data-flex-grow="113"
+data-flex-basis="272px"
+&gt;&lt;/p&gt;</description></item><item><title>Blender-导出fbx动画</title><link>https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/</link><pubDate>Sat, 22 Nov 2025 10:20:12 +0000</pubDate><guid>https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/</guid><description>&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/cover1.png" alt="Featured image of post Blender-导出fbx动画" /&gt;&lt;h2 id="1-blender导出带贴图模型"&gt;1. Blender导出带贴图模型
+&lt;/h2&gt;&lt;p&gt;{{BV1384y1j7wt}}&lt;/p&gt;
+&lt;p&gt;1.文件—— 外部数据 ——打包资源——（第二项）将文件写至当前目录&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213913006.png"
+width="589"
+height="335"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213913006_hu_c0d6dc0824b0df17.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213913006_hu_fa4c9e44c588edd1.png 1024w"
+loading="lazy"
+alt="image-20251123213913006"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="421px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2.着色器编辑器：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213936700.png"
+width="1010"
+height="366"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213936700_hu_9e2d895dd5cade6e.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123213936700_hu_4be320baff120bab.png 1024w"
+loading="lazy"
+alt="image-20251123213936700"
+class="gallery-image"
+data-flex-grow="275"
+data-flex-basis="662px"
+&gt;&lt;/p&gt;
+&lt;p&gt;所有shader节点的贴图文件处，都需要：解包项——将文件写至当前目录（覆盖现有文件）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214055334.png"
+width="390"
+height="204"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214055334_hu_ecfc758f18e87cdf.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214055334_hu_2e91e8b8c960d62b.png 1024w"
+loading="lazy"
+alt="image-20251123214055334"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="458px"
+&gt;&lt;/p&gt;
+&lt;p&gt;操作之后，确保图标变化：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214149107.png"
+width="392"
+height="381"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214149107_hu_7a178a03ad250aff.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214149107_hu_c1b79ee306c7d14f.png 1024w"
+loading="lazy"
+alt="image-20251123214149107"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+&gt;&lt;/p&gt;
+&lt;p&gt;3.导出——fbx&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214226752.png"
+width="639"
+height="804"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214226752_hu_b472bf64c9e36019.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214226752_hu_40d1cf863ccd9822.png 1024w"
+loading="lazy"
+alt="image-20251123214226752"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="190px"
+&gt;&lt;/p&gt;
+&lt;p&gt;两处修改：&lt;/p&gt;
+&lt;p&gt;路径模式——复制&lt;/p&gt;
+&lt;p&gt;右侧小图标——激活&lt;/p&gt;
+&lt;p&gt;1.&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214312173.png"
+width="356"
+height="125"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214312173_hu_5b7302e5c3f74e20.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123214312173_hu_353d8b958524642c.png 1024w"
+loading="lazy"
+alt="image-20251123214312173"
+class="gallery-image"
+data-flex-grow="284"
+data-flex-basis="683px"
+&gt;&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="形态键动画导出"&gt;形态键动画导出
+&lt;/h2&gt;&lt;p&gt;1.分为两个动画：&lt;/p&gt;
+&lt;p&gt;动作动画&lt;/p&gt;
+&lt;p&gt;形态键动画&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123221119471.png"
+width="2068"
+height="489"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123221119471_hu_92d0e2ef319e6ea.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123221119471_hu_9858e00de7cea1ff.png 1024w"
+loading="lazy"
+alt="image-20251123221119471"
+class="gallery-image"
+data-flex-grow="422"
+data-flex-basis="1014px"
+&gt;&lt;/p&gt;
+&lt;p&gt;要求：&lt;/p&gt;
+&lt;p&gt;动作动画长度一定要&amp;gt;=形态键动画&lt;/p&gt;
+&lt;p&gt;导出：&lt;/p&gt;
+&lt;p&gt;1.&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223229361.png"
+width="320"
+height="231"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223229361_hu_6644c3877eb3d971.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223229361_hu_10a2f9b89beeda87.png 1024w"
+loading="lazy"
+alt="image-20251123223229361"
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="332px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2.&lt;img src="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223258583.png"
+width="295"
+height="260"
+srcset="https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223258583_hu_6484b1ee64666746.png 480w, https://Selaphina.github.io/p/blender-%E5%AF%BC%E5%87%BAfbx%E5%8A%A8%E7%94%BB/image-20251123223258583_hu_1e93ac3d1759ab55.png 1024w"
+loading="lazy"
+alt="image-20251123223258583"
+class="gallery-image"
+data-flex-grow="113"
+data-flex-basis="272px"
+&gt;&lt;/p&gt;</description></item></channel></rss>
