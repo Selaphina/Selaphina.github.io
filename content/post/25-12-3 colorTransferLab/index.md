@@ -66,11 +66,17 @@ conda config --show envs_dirs
 
 ```
 # 1. 尝试直接创建环境（最简单的方案）
-conda create -n colortransfer python=3.8
+conda create -n colorTS python=3.12
 
 # 2. 如果成功，激活并安装包
-conda activate colortransfer
-conda install -c conda-forge octave ffmpeg
+conda activate colorTS
+
+# 3.pip安装colortransfer
+pip install colortransferlib
+
+# 4.
+
+conda install -c conda-forge octave ffmpeg 
 ```
 
 检查一下：
@@ -238,3 +244,35 @@ pip install git+https://github.com/facebookresearch/detectron2.git
 ```
 
 还是卡在 detectron2。无进度。
+
+网络问题实在安装不上，直接下载zip了
+
+![image-20251212160923938](image-20251212160923938.png)
+
+把zip拖进文件夹：
+
+![嗯这会儿已经被移走了……](image-20251212161023486.png)
+
+```
+# 回到根文件夹
+cd ~
+```
+
+移动文件夹（这个命令甚至是meshy ai的面试题）
+
+```
+mv detectron2-main.zip /workspace/wsy/
+```
+
+解压
+
+```
+unzip detectron2-main.zip
+```
+
+2.开始远程的本地安装
+
+```
+cd detectron2-main
+```
+
