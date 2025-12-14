@@ -12,7 +12,7 @@ weight: 2050       # You can add weight to some posts to override the default so
 
 # 记录：
 
-
+## 2025.12.03
 
 ColorTransferLib 的主要贡献：“三合一、一站式”
 
@@ -236,7 +236,7 @@ python main.py --test all_CT --out_path "/media/out"
 python main.py --test all_EVAL
 ```
 
-# 目前
+## 2025-12-12
 
 ```
 # 重新安装 detectron2
@@ -274,5 +274,13 @@ unzip detectron2-main.zip
 
 ```
 cd detectron2-main
+```
+
+## 2025-12-13
+
+新建虚拟环境video_grade
+
+```
+conda create -n video_grade python=3.10 -y
 ```
 
