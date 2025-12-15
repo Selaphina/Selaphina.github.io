@@ -74,8 +74,28 @@ MetalMap
 一开始不太习惯HLSL的代码结构，和CG有一定的区别，注意。
 
 ```
+Property
+{
+	……
+}
+HLSLINCLUDE
+……
+ENDHLSL
+
+Subshader
+{
+	Pass
+	{……}
+	
+	Pass
+	{……}
+}
 
 ```
+
+
+
+
 
 ## 附录：
 
