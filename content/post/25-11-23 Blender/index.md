@@ -80,9 +80,13 @@ weight: 2038       # You can add weight to some posts to override the default so
 
 ![image-20251216140608280](image-20251216140608280.png)
 
-2）新建第二个材质，也是自发光节点。材质命名为”描边“，该材质定义描边颜色
+2）新建第二个材质，也是自发光节点。材质命名为”描边“，该材质定义描边颜色。
 
 ![image-20251216140718087](image-20251216140718087.png)
+
+注意：描边材质勾选 **“背面剔除”（Backface Culling）**。这能隐藏材质正对摄像机的正面，只让我们从模型侧面和背面看到它，这是形成描边的关键。
+
+![image-20251216141708968](image-20251216141708968.png)
 
 3）添加修改器——生成——实体化
 
@@ -99,3 +103,5 @@ weight: 2038       # You can add weight to some posts to override the default so
 转到游戏引擎内使用标准着色器会更明显：
 
 ![image-20251216141044658](image-20251216141044658.png)
+
+![image-20251216141901629](image-20251216141901629.png)
