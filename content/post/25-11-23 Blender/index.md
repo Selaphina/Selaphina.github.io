@@ -68,7 +68,7 @@ weight: 2038       # You can add weight to some posts to override the default so
 
 ## 3.实体化描边
 
-（面试题）用blender'等dcc软件实体化描边比在引擎中用shader实时描边的优势？
+（面试题）用blender等dcc软件实体化描边比在引擎中用shader实时描边的优势？
 
 > 原问：“你为什么用shader实时描边，而不是在blender中用实体化描边？这样不是性能更好吗？”
 >

@@ -1,55 +1,76 @@
 ---
-title: ClaudePA运行手记
-description: 如何使用claude进行3D游戏的vibe coding
-date: 2025-12-15 10:32:30+0000
+title: Codex手记
+description: 如何安装并使用Codex进行vibe coding
+date: 2025-12-16 10:32:30+0000
 image: CUC兑换点2.png
 categories:
     - 技术笔记
-weight: 2000       # You can add weight to some posts to override the default sorting (date descending)
+weight: 1999       # You can add weight to some posts to override the default sorting (date descending)
 
 ---
 
-# 1.
+## Codex
 
-贴图
+适用于各种编码环境的单个智能体，已在 ChatGPT Plus、Pro、Business、Edu 和 Enterprise 套餐中提供。
 
-```
- 我需要你把src/models/tex中的贴图farmland.png用在游戏中的农田地块中，并用浅棕色着色。实现并运行。 
-```
+[Codex | OpenAI](https://openai.com/zh-Hans-CN/codex/)
 
-场景光照
+## 1.切换一个适合的节点
 
-```
- 目前整个游戏场景的光照很暗，很丑，告诉我怎么调整光照到适宜的程度？
-```
+![image-20251218162131643](image-20251218162131643.png)
 
-地块网格化
+## 2.Codex官网
 
-```
- 目前场景中的草地块是一整片的平面，我很难描述具体的位置。请你把场景地块换成12*8个平面地块，贴图还是使用刚刚的grass.   
-png,颜色改成C5FF6F。修改并运行。   
-```
+[Codex | OpenAI](https://openai.com/zh-Hans-CN/codex/)
 
-这样方便描述位置和坐标了！
+![image-20251218162220305](image-20251218162220305.png)
 
-![image-20251215184016519](image-20251215184016519.png)
+## 3.命令行下载
 
 ```
- 把0-3行（从前到后）的地块颜色统一改成F0CF8B（沙地的颜色）。修改运行
+win+R
+
+cmd
 ```
 
-![image-20251215184045082](image-20251215184045082.png)
-
-模型替换
+使用npm包管理器进行下载：
 
 ```
-我现在需要把僵尸植物模型：plant1.glb/plant2.glb/plant3.glb
-
+npm i -g @openai/codex
 ```
 
-
+检查是否下载成功
 
 ```
-把3个收银台都替换成src\models\SceneObjs\Out_shouyintai.glb模型
+codex -- -v
 ```
 
+成功则出现：
+
+![image-20251218162442180](image-20251218162442180.png)
+
+## 4.中转站
+
+https://uyilink.com/
+
+> 这个codex价格很便宜，Claude Code价格也算便宜，但是据说用的官方的API 用Codex的话先用这个，下面这个接入Codex时候发送请求体有点问题在修复
+
+![image-20251218162746321](image-20251218162746321.png)
+
+
+
+
+
+## 5.下载cc-switch
+
+https://github.com/farion1231/cc-switch/releases/tag/v3.8.2
+
+> 根据你的电脑win/mac，拉到最后选择对应的安装包下载：CC-Switch（用来快速配置/快速切换中转站）.
+
+![image-20251218163154220](image-20251218163154220.png)
+
+
+
+下一步
+
+![image-20251218163400100](image-20251218163400100.png)
