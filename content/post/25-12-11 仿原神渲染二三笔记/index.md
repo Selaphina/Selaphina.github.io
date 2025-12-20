@@ -155,11 +155,78 @@ Shader "EXAM1/EXAM_Shader"
 - **减少重复**：如果不使用HLSLINCLUDE，每个Pass都需要单独声明这些变量和贴图，代码会冗长且难以维护。
 - **保持一致性**：所有Pass使用同一套参数和贴图，确保渲染结果统一。
 
+**2 HLSLPROGRAM**
 
+![](image-20251221023828695.png)
+
+在Unity URP Shader中，每个Pass通常需要将顶点和片元着色器代码包裹在`HLSLPROGRAM`和`ENDHLSL`块中。
+
+Pass块中，需要在`Tags`之后添加`HLSLPROGRAM`：
+
+```
+Pass {
+    Tags { "LightMode" = "head" }
+    
+    HLSLPROGRAM
+    #pragma vertex vert
+    #pragma fragment frag
+    
+    // 您的a2v和v2f结构体定义
+    // 您的vert和frag函数定义
+    
+    ENDHLSL
+}
+```
+
+**3 在 `frag` 函数内部定义函数（HLSL 不允许）**
+
+在 `frag` 里写大量函数定义，例如：
+
+```
+half4 frag (v2f i) : SV_TARGET {
+
+    float3 shadow_ramp(...) { ... }
+    float3 Spec(...) { ... }
+    float3 Metal(...) { ... }
+    float3 edgeLight(...) { ... }
+    float3 light(...) { ... }
+    float3 Body(...) { ... }
+    float3 Face(...) { ... }
+
+    ...
+}
+
+```
+
+这是**绝对错误**的
+
+- **HLSL / ShaderLab 不支持函数嵌套定义**
+- 函数**必须定义在全局作用域**
+- DX11 编译器会直接报错（你看到的 `Compiled programs` 为空就是这个原因）
+
+**正确写法：**
+
+```
+float3 shadow_ramp(float4 lightmap, float NdotL) { ... }
+float3 Spec(...) { ... }
+float3 Metal(...) { ... }
+float3 edgeLight(...) { ... }
+float3 light(...) { ... }
+float3 Body(...) { ... }
+float3 Face(...) { ... }
+
+half4 frag(v2f i) : SV_TARGET
+{
+    ...
+}
+
+```
 
 
 
 ## 附录：
+
+
 
 一些常见问题：
 
