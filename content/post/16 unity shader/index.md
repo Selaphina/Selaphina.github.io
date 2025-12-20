@@ -1,7 +1,7 @@
 ---
 title: 16 Unity中的渲染优化技术
 description: Unity Shader 入门精要 第十六章
-date: 2024-12-30 22:10:30+0000
+date: 2024-08-05 12:10:30+0000
 image: cover1.png
 categories:
     - 技术笔记

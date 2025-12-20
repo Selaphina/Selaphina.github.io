@@ -1,7 +1,7 @@
 ---
 title: 14 非真实感渲染
 description: Unity Shader 入门精要 第十四章
-date: 2024-05-20 22:10:30+0000
+date: 2024-07-11 22:10:30+0000
 image: cover1.png
 categories:
     - 技术笔记

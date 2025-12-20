@@ -9,6 +9,8 @@ weight: 2019       # You can add weight to some posts to override the default so
 
 ---
 
+## 1 前期准备工作
+
 1.新建URP 3D项目
 
 2.点击资产面板的URP资产，此时右侧面板高亮，可以Add Render Objects
@@ -29,7 +31,10 @@ mask改为everything。
 
 ![image-20251211220842140](image-20251211220842140.png)
 
-## 2 开始
+> TODO: 有仙人曾言： // 我自己试下来，在角色身上 LowQuality 比 Medium 和 High 好
+>  // Medium 和 High 采样数多，过渡的区间大，在角色身上更容易出现 Perspective aliasing
+>
+> 等到时候自己验证一下在说 。
 
 FaceLightmap
 
@@ -69,29 +74,86 @@ MetalMap
 
 贴图设置完毕。
 
-## 代码结构
+
+
+
+
+## 2 代码结构
+
+### 1.整体结构
+
+![整体的结构](image-20251220215926595.png)
 
 一开始不太习惯HLSL的代码结构，和CG有一定的区别，注意。
 
 ```
-Property
+Shader "EXAM1/EXAM_Shader"
 {
-	……
-}
-HLSLINCLUDE
-……
-ENDHLSL
+    Property
+    {
+        ……
+    }
 
-Subshader
-{
-	Pass
-	{……}
-	
-	Pass
-	{……}
+    Subshader
+    {
+        Pass
+        {……}
+
+        Pass
+        {……}
+    }
 }
 
 ```
+
+### 2.Subshader结构
+
+![](image-20251220220214291.png)
+
+```
+ SubShader
+ {
+     HLSLINCLUDE
+     #include "../../ShaderLibrary/…….hlsl"
+     ENDHLSL
+     
+     Tags
+     {……}
+     
+     Pass
+     {……}
+     
+     Pass
+     {……}
+ }
+```
+
+## 3 试验
+
+**1.HLSLINCLUDE & ENDHLSL**
+
+```
+ SubShader
+ {
+     HLSLINCLUDE
+     //导入库
+     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"  //默认库
+     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"  //光照库        
+     ENDHLSL
+
+     Pass {  
+         };
+ }
+```
+
+**HLSLINCLUDE** 和 **ENDHLSL** 是Unity ShaderLab中的指令，它们之间的代码会被**自动包含到该着色器的所有Pass中**。
+
+相当于一个“公共头文件”，写在这里的代码（如变量声明、函数、宏定义）对所有Pass都可见。
+
+**为什么这样设计？**
+
+- **减少重复**：如果不使用HLSLINCLUDE，每个Pass都需要单独声明这些变量和贴图，代码会冗长且难以维护。
+- **保持一致性**：所有Pass使用同一套参数和贴图，确保渲染结果统一。
 
 
 
