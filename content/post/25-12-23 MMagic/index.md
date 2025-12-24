@@ -168,3 +168,64 @@ WCT2/
 
   然后访问 http://localhost:5000
 
+## Featurize
+
+安装BasicVSR
+
+```
+conda activate basicvsr
+```
+
+跑项目
+
+```
+python demo/restoration_video_demo.py configs/basicvsr_plusplus_reds4.py chkpts/basicvsr_plusplus_reds4.pth data/input000.mp4 results/output_000.mp4
+```
+
+
+
+```
+python demo/restoration_video_demo.py configs/basicvsr_plusplus_reds4.py chkpts/basicvsr_plusplus_reds4.pth data/demo_000 results/output_000
+```
+
+36-40
+
+## ─ Worked for 32m 17s ──────────────────────────────────────────────────────────────────────────────────────────
+
+• 已按 conda 环境把依赖装好并下载了权重，但 demo 运行卡在 Windows 的 DLL 文件被占用（av 的 swscale-*.dll）。我
+  这边做过的步骤如下：
+
+  - 已创建 basicvsr 环境并安装了 PyTorch 1.10.2+cu113（为匹配 Windows 的 mmcv-full 预编译包）
+  - 已安装 mmcv-full==1.5.0（cu113/torch1.10.0 轮子）
+  - 已 pip install -v -e . 安装项目依赖
+    当前错误：
+    OSError: Error loading swscale-*.dll; 另一个程序正在使用此文件
+
+  请先做这几件事之一，然后重试 demo：
+
+  1. 关闭所有可能在用 Python/AV 的进程（IDE、Jupyter、Python 脚本）
+  2. 重新打开终端（或重启电脑）再跑
+  3. 如果还不行，重新安装 av：
+
+  conda activate basicvsr
+  pip uninstall -y av
+  pip install av==12.3.0
+
+  重试 demo 命令（推荐用激活环境跑）：
+
+  conda activate basicvsr
+  python demo/restoration_video_demo.py configs/basicvsr_plusplus_reds4.py chkpts/basicvsr_plusplus_reds4.pth
+  data/demo_000 results/demo_000
+
+  如果你愿意，我也可以继续帮你：
+
+  1. 排查 DLL 占用（看是哪个进程锁住了 av）
+  2. 跑你自己的视频路径并调显存占用参数
+
+
+› python demo/restoration_video_demo.py configs/basicvsr_plusplus_reds4.py chkpts/basicvsr_plusplus_reds4.pth
+  data/demo_000 results/demo_000
+
+• 要我帮你在当前机器上执行这条 demo 命令吗？
+  如果要运行，请确认你已先 conda activate basicvsr，我就直接跑。
+
