@@ -30,7 +30,7 @@ weight: 2000       # You can add weight to some posts to override the default so
 
 ```
 conda create -n mmagic python=3.9
-
+conda create -n basicvsr python=3.8
 conda activate mmagic
 
 ```
