@@ -130,7 +130,7 @@ Shader "EXAM1/EXAM_Shader"
  }
 ```
 
-## 3 试验
+### Subshader结构
 
 **1.HLSLINCLUDE & ENDHLSL**
 
@@ -162,6 +162,8 @@ Shader "EXAM1/EXAM_Shader"
 ![](image-20251221023828695.png)
 
 在Unity URP Shader中，每个Pass通常需要将顶点和片元着色器代码包裹在`HLSLPROGRAM`和`ENDHLSL`块中。
+
+### Pass结构
 
 Pass块中，需要在`Tags`之后添加`HLSLPROGRAM`：
 
@@ -204,7 +206,7 @@ half4 frag (v2f i) : SV_TARGET {
 
 - **HLSL / ShaderLab 不支持函数嵌套定义**
 - 函数**必须定义在全局作用域**
-- DX11 编译器会直接报错（你看到的 `Compiled programs` 为空就是这个原因）
+- DX11 编译器会直接报错
 
 **正确写法：**
 
@@ -224,7 +226,29 @@ half4 frag(v2f i) : SV_TARGET
 
 ```
 
+## 3 正式开始
 
+1）a2v定义从应用阶段（CPU）到顶点着色器的顶点数据。
+
+```
+struct a2v{
+	float4 vertex : POSITION;//顶点坐标
+	float2 texcoord0 : TEXCOORD0;//纹理坐标UV0
+	float3 normal : NORMAL;//顶点法线
+	float4 tangent : TANGENT;//顶点切线
+};
+```
+
+为什么`normal`是`float3`而`tangent`是`float4`？
+
+> 1. **法线（normal）**：`float3` 法线是一个三维向量（x, y, z），表示顶点表面的朝向。 它只需要三个分量就能完整描述方向，因此使用`float3`足够。
+> 2. **切线（tangent）**：`float4` 切线通常用于法线贴图（normal mapping）计算，需要与法线和副切线（binormal/bitangent）构成切线空间（tangent space）。 前三个分量（x, y, z）表示切线的方向向量。 **第四个分量（w）是一个符号值**，通常为+1或-1，用于指示副切线的方向。
+>
+> **关键区别**：
+>
+> 1. **法线的方向是绝对的**： 法线向量(x, y, z)本身就完整定义了方向 例如，法线(0, 1, 0)明确表示"向上"，没有歧义
+> 2. **切线需要确定副切线方向**： 给定法线和切线后，副切线可以通过叉积计算：`副切线 = 叉积(法线, 切线)` **但叉积有两种可能方向**：左手系或右手系 `tangent.w`（通常±1）就是用来指定这个方向的： 如果`tangent.w = 1`：副切线 = 叉积(法线, 切线) 如果`tangent.w = -1`：副切线 = 叉积(切线, 法线)
+> 3. **几何意义**： 法线、切线、副切线构成**切线空间基** 法线是"主方向"，切线和副切线是"辅助方向" 切线的w分量确保整个坐标系的一致性（避免镜像翻转）
 
 
 
