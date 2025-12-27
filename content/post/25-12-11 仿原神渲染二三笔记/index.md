@@ -284,7 +284,7 @@ struct a2v{
 ```
 struct v2f{
 	float4 pos : SV_POSITION;//在裁剪空间的顶点位置
-	float2 uv : TEXCOORD0;//uv0，第一套纹理坐标
+	float2 uv0 : TEXCOORD0;//uv0，第一套纹理坐标
     // 这三行共同构成了一个3x4矩阵。
     float4 TtoW0 : TEXCOORD1;  //x切线,y副切线,z法线,w顶点
     float4 TtoW1 : TEXCOORD2;  //x切线,y副切线,z法线,w顶点
@@ -311,6 +311,29 @@ struct v2f{
 在顶点Shader将需要的数据传递给片元Shader，矩阵的xyzw分别存放切线，副切线，法线与顶点。
 
 ##### 3)  vert顶点shader：将需要的数据传递给片元Shader，矩阵的xyzw分别存放切线，副切线，法线与顶点。
+
+```
+v2f vert(a2v v)
+{
+	v2f o;
+	o.pos = TransformObjectToClip(v.vertex.xyz);
+	o.uv0 = v.texcoord0;
+	
+	float3 nDirWS = TransformObjectToWorldNormal(v.normal); 
+	float3 nDirWS = TransformObjectToWorld(v.tangent.xyz); 
+	float3 bDirWS = cross(nDirWS,tDirWS) * v.tangent.w;
+	float3 posWS = TransformObjectTOWorld(v.vertex.xyz);
+	
+	o.TtoW0 =  float4(nDirWS.x,nDirWS.x,bDirWS.x,posWS.x);
+	o.TtoW1 =  float4(nDirWS.y,nDirWS.y,bDirWS.y,posWS.y);
+	o.TtoW2 =  float4(nDirWS.z,nDirWS.z,bDirWS.z,posWS.z);
+	
+	return o;
+	
+}
+```
+
+> 注意 v.vertex的顶点坐标是4维，因为齐次坐标系多1维（存平移信息）
 
 ```
  //顶点Shader
