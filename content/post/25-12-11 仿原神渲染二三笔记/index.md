@@ -228,7 +228,34 @@ half4 frag(v2f i) : SV_TARGET
 
 ## 3 正式开始
 
-1）a2v定义从应用阶段（CPU）到顶点着色器的顶点数据。
+正式开始前先把计算需要用到的变量和向量等数据准备好，先来准备面板参数，面板参数如下：
+
+```
+Properties{
+
+
+}
+```
+
+URP的声明参数必须包含在CBUFFER_START(UnityPerMaterial)和CBUFFER_END之间，我们把这些代码和声明贴图的代码都用HLSLINCLUDE和ENDHLSL代码块包起来，之后写的方法也放在这里面，这样后面就不用在每个pass都声明一次了。
+
+```
+Subshader
+{
+	
+
+}
+```
+
+#### 1.第一个pass：渲染正面
+
+```
+Pass{
+	Tags{ "LightMode" = "head" }//渲染标签
+}
+```
+
+##### 1）输入结构：a2v定义从应用阶段（CPU）到顶点着色器的顶点数据。
 
 ```
 struct a2v{
@@ -249,6 +276,66 @@ struct a2v{
 > 1. **法线的方向是绝对的**： 法线向量(x, y, z)本身就完整定义了方向 例如，法线(0, 1, 0)明确表示"向上"，没有歧义
 > 2. **切线需要确定副切线方向**： 给定法线和切线后，副切线可以通过叉积计算：`副切线 = 叉积(法线, 切线)` **但叉积有两种可能方向**：左手系或右手系 `tangent.w`（通常±1）就是用来指定这个方向的： 如果`tangent.w = 1`：副切线 = 叉积(法线, 切线) 如果`tangent.w = -1`：副切线 = 叉积(切线, 法线)
 > 3. **几何意义**： 法线、切线、副切线构成**切线空间基** 法线是"主方向"，切线和副切线是"辅助方向" 切线的w分量确保整个坐标系的一致性（避免镜像翻转）
+
+##### 2）输出结构：v2f定义在顶点着色器中构建一个【切线空间到世界空间的3x4变换矩阵】，并传递到片元着色器的输出数据。
+
+> 通常被称为 **TBN矩阵**（由Tangent、Bitangent、Normal三个向量构成），它的核心作用是**搭建一座桥梁，将法线方向从“切线空间”转换到“世界空间”**，这是实现法线贴图（Normal Mapping）效果的关键步骤
+
+```
+struct v2f{
+	float4 pos : SV_POSITION;//在裁剪空间的顶点位置
+	float2 uv : TEXCOORD0;//uv0，第一套纹理坐标
+    // 这三行共同构成了一个3x4矩阵。
+    float4 TtoW0 : TEXCOORD1;  //x切线,y副切线,z法线,w顶点
+    float4 TtoW1 : TEXCOORD2;  //x切线,y副切线,z法线,w顶点
+    float4 TtoW2 : TEXCOORD3;  //x切线,y副切线,z法线,w顶点
+	//x-切线tangent
+	//y-副切线bitangent
+	//z-法线normal
+	//w-顶点
+    };
+```
+
+> 输出结构定义一个4维矩阵存放数据，以充分利用插值寄存器。
+>
+> a2v和v2f两个结构体中使用了两次**TEXCOORD0**语义，这是被允许的，因为语义就是会在两个结构体中有着不同的含义，可以理解成代号，但在之后的过程中这两个TEXCOORD0会指代不同的纹理寄存器，所以不会冲突。
+
+* `TEXCOORD0` 在不同结构体中并不代表一个固定的寄存器，而是一个语义标记，这个语义对应一个四维向量（`float4`）的存储空间，用于在着色器阶段之间传递数据。
+
+* `TEXCOORD1、TEXCOORD2、TEXCOORD3`都用于在着色器阶段间传递数据，但它们通过数字编号（1, 2, 3）来**代表不同的数据通道**，用于区分不同的信息。
+
+* **合理规划数据用量**：一个 `float4`可以存储一个四维数据，也可以存储多个低维数据（如两个 `float2`）。合理打包数据可以节省宝贵的 `TEXCOORD`通道。
+
+* **数量限制**：`TEXCOORD`通道的数量并非无限，存在上限（例如通常最多到 `TEXCOORD7`），需根据目标平台合理规划。
+
+在顶点Shader将需要的数据传递给片元Shader，矩阵的xyzw分别存放切线，副切线，法线与顶点。
+
+##### 3)  vert顶点shader：将需要的数据传递给片元Shader，矩阵的xyzw分别存放切线，副切线，法线与顶点。
+
+```
+ //顶点Shader
+ v2f vert (a2v v) {
+     v2f o;  //定义返回值
+     //MVP变换(模型空间>>世界空间>>视觉空间>>裁剪空间)
+     o.pos = TransformObjectToHClip(v.vertex.xyz);  
+     //传递uv0(无变换)
+     o.uv0 = v.texcoord0;  
+     // 世界空间法线
+     float3 nDirWS = TransformObjectToWorldNormal(v.normal); 
+     // 世界空间切线
+     float3 tDirWS = TransformObjectToWorld(v.tangent.xyz);  
+     //世界空间副切线
+     float3 bDirWS = cross(nDirWS, tDirWS) * v.tangent.w;  
+     //世界顶点位置
+     float3 posWS = TransformObjectToWorld(v.vertex.xyz);  
+     //构建矩阵
+     //x切线,y副切线,z法线,w顶点
+     o.TtoW0 = float4(tDirWS.x, bDirWS.x, nDirWS.x, posWS.x);  
+     o.TtoW1 = float4(tDirWS.y, bDirWS.y, nDirWS.y, posWS.y);  
+     o.TtoW2 = float4(tDirWS.z, bDirWS.z, nDirWS.z, posWS.z);  
+     return o;  //返回顶点Shader
+ }
+```
 
 
 
