@@ -351,7 +351,7 @@ v2f vert(a2v v)
      float3 bDirWS = cross(nDirWS, tDirWS) * v.tangent.w;  
      //世界顶点位置
      float3 posWS = TransformObjectToWorld(v.vertex.xyz);  
-     //构建矩阵
+     //构建切线-世界空间变换矩阵
      //x切线,y副切线,z法线,w顶点
      o.TtoW0 = float4(tDirWS.x, bDirWS.x, nDirWS.x, posWS.x);  
      o.TtoW1 = float4(tDirWS.y, bDirWS.y, nDirWS.y, posWS.y);  
@@ -360,7 +360,309 @@ v2f vert(a2v v)
  }
 ```
 
+![](image-20251228153854738.png)
 
+#### 4）【重点】frag 片元着色器
+
+> 回顾：在pass之前，声明的所有变量
+>
+> ```
+>  SubShader
+>  {
+>      HLSLINCLUDE
+>      //导入库
+>      #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"  //默认库
+>      #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"  //光照库
+>      CBUFFER_START(UnityPerMaterial)  //常量缓冲区开头
+>          //声明面板参数
+>          float _genshinShader;  //是否是脸部
+>          //diffuse
+>          float _fresnel;  //边缘光范围
+>          float _edgeLight;  //边缘光强度
+>          float _diffuseA;  //diffuseA
+>          float _Cutoff;  //透明阈值
+>          float4 _glow;  //自发光强度
+>          float _flicker;  //发光闪烁速度
+>          //lightmap/FaceLightmap
+>          float _bright;  //亮面范围
+>          float _grey;  //灰面范围
+>          float _dark;  //暗面范围
+>          //normal
+>          float _bumpScale;  //法线强度
+>          //ramp
+>          float _dayAndNight;  //是否是白天
+>          float _lightmapA0;  //1.0_Ramp条数
+>          float _lightmapA1;  //0.7_Ramp条数
+>          float _lightmapA2;  //0.5_Ramp条数
+>          float _lightmapA3;  //0.3_Ramp条数
+>          float _lightmapA4;  //0.0_Ramp条数
+>          //高光
+>          float _gloss;  //高光范围
+>          float _glossStrength;  //高光强度
+>          float3 _metalMapColor;  //金属反射颜色
+>          //描边
+>          float _OutlineWidth;  //描边粗细
+>          float _OutlineScale;  //描边范围
+>          float _OutlineZOffset;  //Outline Z Offset
+>          float _Alpha;  //Alpha
+>          float _AlphaClip;  //Alpha Clip
+>          float4 _OutlineColor0;  //描边颜色1
+>          float4 _OutlineColor1;  //描边颜色2
+>          float4 _OutlineColor2;  //描边颜色3
+>          float4 _OutlineColor3;  //描边颜色4
+>          float4 _OutlineColor4;  //描边颜色5
+>          float4 _CustomOutlineCol;  //Custom Outline Color
+>      CBUFFER_END  //常量缓冲区结尾
+>      //声明贴图
+>      TEXTURE2D(_diffuse);  //Diffuse
+>      SAMPLER(sampler_diffuse);
+>      TEXTURE2D(_lightmap);  //Lightmap/FaceLightmap
+>      SAMPLER(sampler_lightmap);
+>      TEXTURE2D(_bumpMap);  //Normal
+>      SAMPLER(sampler_bumpMap);
+>      TEXTURE2D(_ramp);  //Shadow_Ramp
+>      SAMPLER(sampler_ramp);
+>      TEXTURE2D(_metalMap);  //MetalMap
+>      SAMPLER(sampler_metalMap);
+>      ENDHLSL
+> 
+> ```
+
+片元着色器的主要任务是为模型表面的每一个像素计算最终颜色。它的工作流程可以概括为以下几步：
+
+1. 
+
+   **纹理采样**：从不同的纹理中读取信息。
+
+2. 
+
+   **向量准备**：计算光照和视角所需的方向向量。
+
+3. 
+
+   **光照计算**：根据不同的渲染路径（身体或脸部）计算颜色。
+
+4. 
+
+   **后期处理**：处理自发光或透明度裁剪。
+
+5. 
+
+   **输出**：返回最终的像素颜色。
+
+##### frag 片元着色器
+
+```
+ half4 frag (v2f i) : SV_TARGET {
+     //采样贴图
+     float3 baseColor = SAMPLE_TEXTURE2D(_diffuse, sampler_diffuse, i.uv0).rgb;  //diffuseRGB通道
+     float diffuseA = SAMPLE_TEXTURE2D(_diffuse,sampler_diffuse, i.uv0).a;  //diffuseA通道
+     float4 lightmap = SAMPLE_TEXTURE2D(_lightmap, sampler_lightmap, i.uv0).rgba;  //lightmap
+     //法线贴图
+     float3 nDirTS = UnpackNormal(SAMPLE_TEXTURE2D(_bumpMap, sampler_bumpMap, i.uv0)).rgb;  //切线空间法线(采样法线贴图并解码)
+     nDirTS.xy *= _bumpScale;  //法线强度
+     nDirTS.z = sqrt(1.0 - saturate(dot(nDirTS.xy, nDirTS.xy)));  //计算法线z分量
+     //准备向量
+     float3 posWS = float3(i.TtoW0.w, i.TtoW1.w, i.TtoW2.w);  //世界空间顶点
+     //切线空间法线转世界空间法线
+     float3 nDirWS = normalize(half3(dot(i.TtoW0.xyz, nDirTS), dot(i.TtoW1.xyz, nDirTS), dot(i.TtoW2.xyz, nDirTS)));
+     Light mlight = GetMainLight();  //光源
+     float3 lDirWS= normalize(mlight.direction);  //世界光源方向(平行光)
+     float3 vDirWS = normalize(_WorldSpaceCameraPos.xyz - posWS.xyz);  //世界观察方向
+     float3 nDirVS = normalize(mul((float3x3)UNITY_MATRIX_V, nDirWS));  //世界空间法线转观察空间法线
+     float3 hDirWS = normalize(vDirWS + lDirWS) ;  //半角方向
+     //向量点乘
+     float NdotL = dot(nDirWS, lDirWS);  //兰伯特
+     float NdotH = dot(nDirWS, hDirWS);  //Blinn-Phong
+     float NdotV = dot(nDirWS, vDirWS);  //菲涅尔
+
+     float3 col = float3(0.0, 0.0, 0.0);
+
+     //主体渲染
+     if(_genshinShader == 0.0){  //身体
+         col = Body(NdotL, NdotH, NdotV, lightmap, baseColor, nDirVS);
+     }else if(_genshinShader == 1.0){  //脸部
+         col = Face(lDirWS, baseColor, i.uv0);
+     }
+     //计算diffuse.a
+     if(_diffuseA == 2){  //自发光
+         float3 diffA = light(col, diffuseA);
+         col = col + diffA;
+     }else if(_diffuseA == 1){ //裁剪
+         diffuseA = smoothstep(0.05, 0.7, diffuseA);  //去除噪点
+         clip(diffuseA - _Cutoff);
+     }
+     return half4(col, 1.0);  //输出
+ }
+```
+
+其中：
+
+```
+ //切线空间法线转世界空间法线
+     float3 nDirWS = normalize(half3(dot(i.TtoW0.xyz, nDirTS), dot(i.TtoW1.xyz, nDirTS), dot(i.TtoW2.xyz, nDirTS)));
+```
+
+$$
+世界空间法线 = TBN矩阵 × 切线空间法线
+$$
+
+代码中混合使用了 `float`和 `half`精度。对于颜色等不需要高精度的数据，使用 `half`可以优化性能。
+
+> 在着色器中，颜色分量（R, G, B, A）通常被规范在 `[0, 1]`的范围内。这个范围完全在 `fixed`类型的表示能力之内.
+>
+> **人眼的感知局限**：人眼对颜色的细微变化并不像对亮度变化那样敏感。微小的颜色量化误差（例如，`0.5`和 `0.501`的红色）在绝大多数情况下是难以察觉的.
+>
+> **哪些数据需要高精度**
+>
+> 与颜色相反，以下类型的数据通常要求使用 `float`高精度：
+>
+> - **空间坐标**：尤其是**世界空间坐标**和**纹理坐标**。它们的数值范围很大且变化非常细微，高精度是确保物体位置、轮廓和纹理映射准确无误的基础。
+> - **复杂数学运算**：在进行三角函数计算（如`sin`, `cos`）、幂运算（`pow`）或复杂的插值时，必须使用 `float`来保证中间过程和最终结果的准确性，避免误差累积导致画面瑕疵。
+> - **需要高动态范围（HDR）的颜色**：虽然普通颜色用`half`足矣，但**HDR颜色**的值会远超 `[0, 1]`的范围，因此需要 `half`或 `float`来存储和处理。
+
+需要用到三个光照模型：
+
+```
+     //向量点乘
+     float NdotL = dot(nDirWS, lDirWS);  //兰伯特
+     float NdotH = dot(nDirWS, hDirWS);  //Blinn-Phong
+     float NdotV = dot(nDirWS, vDirWS);  //菲涅尔
+```
+
+在计算前，我们看一下最终的混合分别需要什么：**漫反射(半Lambet) + 高光(BlinnPhong) + 金属(MatCap) + 边缘光(菲涅尔) + 自发光** **+ 后处理(Bloom、ToneMapping、ColorAdjustments)。**那我们就按这个顺序来一一实现一下。
+
+**菲涅尔效应（Fresnel Effect）**
+
+ 是一个**核心物理规律**，用于描述**光线在物体表面的反射强度随着视角角度变化的现象**。
+
+![image-20251229010911646](image-20251229010911646.png)
+
+##### 兰伯特（Lambert）模型公式
+
+理想的漫反射：
+
+![image-20251229010923039](image-20251229010923039.png)
+$$
+I
+_{diffuse}
+	​
+
+=K
+_d
+	​
+
+⋅I
+_l
+	​
+
+⋅max(0,N⋅L)
+$$
+
+
+**半兰伯特（Half-Lambert）改进**
+
+基础兰伯特模型的一个问题是，当法线与光线方向垂直时，计算结果会直接变为0，导致背光面一片死黑。半兰伯特模型通过一个简单的缩放和平移变换来缓解这个问题
+
+这个技巧将点乘的结果从区间 [−1,1]映射到 [0,1]，使得背光区域也能保留一定的细节，常用于卡通渲染等风格化效果中
+
+![image-20251229010929777](image-20251229010929777.png)
+$$
+I
+_{half-lambert}
+	​
+
+=K
+_d
+	​
+
+⋅I
+_l
+	​
+
+⋅(0.5⋅(N⋅L)+0.5)
+$$
+
+##### 布林-冯（Blinn-Phong）模型公式
+
+布林-冯模型是一个完整的光照模型，它**结合了环境光、漫反射和镜面高光**三项。其总光照强度为
+
+![image-20251229010937476](image-20251229010937476.png)
+$$
+I
+_{total}
+	​
+
+=I
+_{ambient}
+	​
+
++I
+_{diffuse}
+	​
+
++I
+_{specular}
+	​
+$$
+环境光（Ambient）
+$$
+I
+_{ambient}
+	​
+
+=K
+a
+	​
+
+⋅I
+a
+	​
+$$
+Ka：材质的环境光反射系数
+
+漫反射（Diffuse）
+$$
+I
+_{diffuse}
+	​
+
+=K
+_d
+	​
+
+⋅I
+_l
+	​
+
+⋅max(0,N⋅L)
+$$
+
+
+ 镜面高光（Specular）·布林-冯的核心
+
+![image-20251229010944719](image-20251229010944719.png)
+$$
+I
+_specular_
+	​
+
+=K
+_s
+	​
+
+⋅I
+_l
+	​
+
+⋅(max(0,N⋅H))
+^{shininess}
+$$
+**H：半角向量**，通过将光线方向 L和视线方向 V相加后归一化得到：H=∣L+V∣L+V。
+
+**shininess：**高光指数，这是一个非常重要的参数。值越大，高光点越小、越锐利，表示表面越光滑；值越小，高光范围越大、越柔和，表示表面越粗糙。
+
+**Ks：**材质的**镜面反射系数**，决定了高光的强度和颜色
 
 ## 附录：
 
@@ -373,3 +675,5 @@ v2f vert(a2v v)
 ### Visual Studio 设置默认编码格式为 UTF-8 或 GB2312-80
 
 [Visual Studio 设置默认编码格式为 UTF-8 或 GB2312-80 与文件没有高级保存选项怎么显示_visual studio 不使用简体中文gb2312编码加载文件-CSDN博客](https://blog.csdn.net/qq_41868108/article/details/105750175)
+
+### 怎么去除边缘锯齿化

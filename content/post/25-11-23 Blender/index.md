@@ -40,11 +40,9 @@ weight: 2038       # You can add weight to some posts to override the default so
 
 右侧小图标——激活
 
-1.![image-20251123214312173](image-20251123214312173.png)
+![image-20251123214312173](image-20251123214312173.png)
 
-2.
-
-
+**!!注意：千万不要勾选【选中的物体】，除非你知道自己在做什么。**
 
 ## 2.形态键动画导出
 
