@@ -84,8 +84,6 @@ git push origin master
 git checkout feature/wsy-new-branch
 ```
 
-
-
 4. 可选：改完代码后查看修改了那些文件	
 
    ```
