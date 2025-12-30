@@ -70,13 +70,21 @@ git push origin master
    # 或者简单写 git pull （如果当前分支已跟踪远程分支）
    ```
 
-3. **创建并切换到一个新分支**：分支名要有描述性，例如`feat/user-login`或`fix/header-alignment`。
+3. **（初次）创建并切换到一个新分支**：分支名要有描述性，例如`feat/user-login`或`fix/header-alignment`。
 
    ```
-   git checkout -b feat/remote-one
+   git checkout -b feature/wsy-new-branch
    ```
 
 `-b`: 就是切换分支“branch”的意思。
+
+3. **(非初次)切换到自己的分支**
+
+```
+git checkout feature/wsy-new-branch
+```
+
+
 
 4. 可选：改完代码后查看修改了那些文件	
 
@@ -120,7 +128,7 @@ git push origin master
 2. **切回你特性（feat）分支**：
 
    ```
-   git checkout feat/remote-one
+   git checkout feat/wsy-new-branch
    ```
 
 3. **将主分支的更新合并到你的分支**（有两种主流方式）：
@@ -145,8 +153,6 @@ git push origin master
 
 ### 第四步：推送到远程并发起合并请求
 
-
-
 1. **推送特性分支到远程**：
 
    ```
@@ -156,9 +162,17 @@ git push origin master
 
 2. **在GitHub/GitLab等平台上创建Pull Request（PR）**：前往你的仓库页面，通常会有提示让你创建PR。选择你的特性分支作为源分支，选择`main`作为目标分支。在PR描述中清晰说明你的修改内容。
 
-3. **代码审查**：团队成员在PR中进行讨论和代码审查。你可能需要根据反馈继续在本地分支上提交修改，然后再次`push`，PR会自动更新。
+   > 1.左侧栏-branches
+   >
+   > ![image-20251229165656531](image-20251229165656531.png)
+   >
+   > 2.New—自动跳转New Merge Request
+   >
+   > ![image-20251229165844735](image-20251229165844735.png)
 
-4. **合并PR**：审查通过后，由有权限的人（可能就是你）将PR合并到主分支。通常平台会提供“Squash and Merge”（压缩合并）等选项，保持历史整洁。
+1. **代码审查**：团队成员在PR中进行讨论和代码审查。你可能需要根据反馈继续在本地分支上提交修改，然后再次`push`，PR会自动更新。
+
+2. **合并PR**：审查通过后，由有权限的人（可能就是你）将PR合并到主分支。通常平台会提供“Squash and Merge”（压缩合并）等选项，保持历史整洁。
 
 ### 第五步：清理
 
@@ -240,3 +254,4 @@ ssh-add ~/.ssh/id_ed25519
 - 登录 GitHub → Settings → SSH and GPG keys → New SSH key → 粘贴并保存。
 
 ![image-20251114103822658](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20251114103822658.png)
+
