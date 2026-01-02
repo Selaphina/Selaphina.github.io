@@ -1,6 +1,6 @@
 ---
-title: 毕业设计 | 水墨风格化场景渲染（其三）
-description: 毕业设计的开发日志，用于实时记录学到的trick。
+title: 毕业设计 | 水墨风格化场景渲染（其四）
+description: 毕业设计的开发日志，实现TTS模块。
 date: 2025-12-20 10:12:30+0000
 image: cover1.png
 categories:
