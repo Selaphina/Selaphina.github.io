@@ -699,7 +699,7 @@ $$
 
 
 
-#### 5)漫反射1： shadow_ramp（lightmap，NdotL）
+#### 5)漫反射： shadow_ramp（lightmap，NdotL）
 
 我们看一下最终的混合分别需要什么：**漫反射(半Lambet) + 高光(BlinnPhong) + 金属(MatCap) + 边缘光(菲涅尔) + 自发光** **+ 后处理(Bloom、ToneMapping、ColorAdjustments)。**
 
@@ -888,7 +888,7 @@ return ramp;
 
 ![image-20260102220254313](image-20260102220254313.png)
 
-* 将亮面遮罩出来，用step来处理halfLambert分出亮面和暗面。(用)
+* 将亮面遮罩出来，用step来处理halfLambert分出亮面和暗面。(用smoothstep会更平滑)
 
 ```
 float brightMask = step(_bright, halfLambert);  //亮面
@@ -915,7 +915,7 @@ return shadowRamp;  //输出结果
 
 其实就是二分亮（固有色）-暗面。
 
-![仅查看brightMask](image-20260102221749964.png)
+![左smoothstep，右step，仅brightmask](image-20260103095510912.png)
 
 ramp的采样就结束了，最后将lerp的结果乘以baseColor就可以了.
 
@@ -926,7 +926,293 @@ ramp的采样就结束了，最后将lerp的结果乘以baseColor就可以了.
 }
 ```
 
+#### 6）高光
 
+高光的计算相对简单，高光使用Blinn-Phong光照模型：
+
+```c++
+ float3 Spec(float NdotL, float NdotH, float3 nDirVS, float4 lightmap, float3 baseColor)
+ {
+     float blinnPhong = pow(max(0.0, NdotH), _gloss);  //Blinn-Phong
+     float3 specular = blinnPhong * lightmap.r * _glossStrength;  //高光强度
+     specular = specular * lightmap.b;  //混合高光细节
+     specular = baseColor * specular;  //叠加固有色
+     lightmap.g = smoothstep(0.2, 0.3, lightmap.g);  //lightmap.g
+     float halfLambert = smoothstep(0.0, _grey, NdotL + _dark) * lightmap.g;  //半Lambert
+     float brightMask = step(_bright, halfLambert);  //亮面
+     specular = specular * brightMask;  //遮罩暗面
+     return specular;  //输出结果
+ }
+```
+
+lightmap的r通道存放了模型的高光强度（值越白(1.0)的区域，高光越强；），b通道存放了模型的高光细节（形状）。
+
+![左b右r](image-20260103100955858.png)
+
+1）首先，通过经典的Blinn-Phong模型计算出一个基础的高光强度 `blinnPhong`，
+
+```
+ float blinnPhong = pow(max(0.0, NdotH), _gloss);
+```
+
+2）用Lightmap的R通道 `lightmap.r`高光强度 * 面板开放变量的 _glossStrength高光强度来调制这个高光。
+
+```
+ float3 specular = blinnPhong * lightmap.r * _glossStrength;
+```
+
+3）最后再乘以lightmap.b，得到高光形状。
+
+```
+specular = specular * lightmap.b;  //混合高光细节
+```
+
+4) 原神中角色处于暗部的部分是没有高光的，所以我们还要step一个halfLambert来遮罩亮暗部分。halfLambert的处理方式和漫反射的一样。
+
+```
+lightmap.g = smoothstep(0.2, 0.3, lightmap.g);  //lightmap.g，计算环境遮蔽AO
+float halfLambert = smoothstep(0.0, _grey, NdotL + _dark) * lightmap.g;  //半Lambert
+float brightMask = step(_bright, halfLambert);  //亮面
+specular = specular * brightMask;  //遮罩暗面
+return specular;  //输出结果
+```
+
+**在亮部区域**：半兰伯特的计算结果本身较亮，乘以 `lightmap.g`后，开阔区域（AO值为白色）保持明亮，而褶皱缝隙处（AO值为黑色或深色）则会变暗，从而自然地增添了细节。
+
+**在暗部区域**：半兰伯特的计算结果本身较暗，再乘以 `lightmap.g`的深色值，会使这些区域（如腋下、衣褶）变得**更暗**，强化了闭塞阴影，让角色不会显得轻飘，而是牢牢地“锚定”在场景中。
+
+#### 7）金属
+
+金属部分用的是MatCap采样方法。
+
+![Avatar_Tex_MetalMap](Avatar_Tex_MetalMap.png)
+
+```
+//金属
+float3 Metal(float3 nDirVS, float4 lightmap, float3 baseColor){
+    float metalMask = 1 - step(lightmap.r, 0.9);  //金属遮罩，即step(,0.9,lightmap.r)，一般不推荐取反的写法，这里标记出来纯属为了之后读到类似代码能有反应的能力。
+    //采样metalMap
+    float3 metalMap = SAMPLE_TEXTURE2D(_metalMap, sampler_metalMap, nDirVS.rg * 0.5 + 0.5).r;
+    metalMap = lerp(_metalMapColor, baseColor, metalMap);  //金属反射颜色
+    metalMap = lerp(0.0, metalMap, metalMask);  //遮罩非金属区域
+    return metalMap;  //输出结果
+}
+```
+
+> #### 为什么用nDirVS.rg * 0.5 + 0.5 采样，而不是i.uv0？
+>
+>  `_metalMap` 在这里的角色是 **MatCap / Reflection LUT**，
+>   而不是一张“表面贴图”。
+>
+> `i.uv0`的适用场景
+>
+> * albedo
+> * normal
+> * roughness
+> * AO
+> * 手绘纹理
+>
+> *一般是随着建模过程中，由建模师/画师绘制好的贴图。
+>
+> `nDirVS.rg * 0.5 + 0.5 `
+>
+> 这是基于法线方向的环境反射  MatCap 技法。
+>
+> 一张图片只有：
+>
+> - 横向（U）
+> - 纵向（V）
+>
+> 为什么选 .rg作为UV？
+>
+> >  x、y 刚好就是“屏幕平面方向”
+> >
+> > - x：左右
+> > - y：上下
+> >
+> > 而z的含义： z（b）—— 朝不朝你
+> >
+> > - z = +1：正对摄像机
+> > - z =  0：侧着
+> > - z = -1：背对摄像机
+>
+> nDirVS → UV → MatCap
+
+```
+    //采样metalMap
+    float3 metalMap = SAMPLE_TEXTURE2D(_metalMap, sampler_metalMap, nDirVS.rg * 0.5 + 0.5).r;
+    metalMap = lerp(_metalMapColor, baseColor, metalMap);  //金属反射颜色
+    metalMap = lerp(0.0, metalMap, metalMask);  //遮罩非金属区域
+```
+
+> #### 为什么metalMap要只取.r的单通道？
+>
+> 因为这张 `metalMap` 在这里的是“权重 / 强度 ”，而不是“颜色”，
+>  所以只需要一个标量通道就够了。
+>
+> 注意：
+>  👉 **你并没有直接把 metalMap 当颜色输出**
+>  👉 而是马上拿它去做 `lerp`
+>
+> ```
+> metalMap = lerp(_metalMapColor, baseColor, metalMap); 
+> ```
+>
+> 也就是说：
+>
+> - `_metalMapColor`：颜色阈值1
+> - `baseColor`：颜色阈值2
+> - `metalMap`：**混合权重**
+>
+> #### 混合权重在图形学里永远是“单通道”的。
+
+#### 8）菲涅尔（边缘光）
+
+原神中用的是屏幕深度边缘光，这里用菲涅耳实现的效果。代码非常简单，就是简单的菲涅尔用step卡出硬边，再乘baseColor即可。
+
+```
+//边缘光
+float3 edgeLight(float NdotV, float3 baseColor){
+    float3 fresnel = pow(1 - NdotV, _fresnel);  //菲涅尔范围
+    fresnel = step(0.5, fresnel) * _edgeLight * baseColor;  //边缘光强度
+    return fresnel;  //输出结果
+    }
+```
+
+![菲涅尔](image-20260103211825227.png)
+
+ 问题：
+
+- 模型内部转折也会亮
+- 鼻梁、衣服褶皱会出边
+
+##### 基于屏幕深度空间的边缘光
+
+```
+float2 screenUV = i.screenPos.xy / i.screenPos.w; // 获取屏幕UV
+float rawDepth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_CameraDepthTexture, screenUV);
+float sceneDepth = Linear01Depth(rawDepth, _ZBufferParams); // 转换为线性01深度
+```
+
+
+
+#### **9）自发光**
+
+```
+//自发光
+float3 light(float3 baseColor, float diffsueA){
+    diffsueA = smoothstep(0.0, 1.0, diffsueA);  //去除噪点
+    float3 glow = lerp(0.0, baseColor * ((sin(_Time.w * _flicker) * 0.5 + 0.5) * _glow), diffsueA);  //自发光
+    return glow;  //输出结果
+}
+```
+
+diffuse的a通道存放的是自发光遮罩(也有可能是透明遮罩)。这个遮罩有很多奇怪的噪点，smoothstep一下把噪点去除。
+
+#### 10）最终混合diffsue + metal + specular + fresnel
+
+```
+ //身体
+ float3 Body(float NdotL, float NdotH, float NdotV, float4 lightmap, float3 baseColor, float3 nDirVS){
+     float3 ramp = shadow_ramp(lightmap, NdotL) ;  //ramp
+     float3 specular = Spec(NdotL, NdotH, nDirVS, lightmap, baseColor);  //高光
+     float3 metal = Metal(nDirVS, lightmap, baseColor);  //金属
+     float3 diffsue = baseColor * ramp  ;  //漫反射
+     diffsue = diffsue * step(lightmap.r, 0.9);  //遮罩金属区域
+     float3 fresnel = edgeLight(NdotV, baseColor);  //边缘光
+     //混合最终结果
+     float3 body = diffsue + metal + specular + fresnel;
+     return body;  //输出结果
+ }
+```
+
+#### 11）脸部
+
+原神用的SDF的方法来区分脸部明暗面，这是脸部的SDF图：
+
+![image-20260103215656799](image-20260103215656799.png)
+
+[(2 封私信 / 36 条消息) 神作面部阴影渲染还原 - 知乎](https://zhuanlan.zhihu.com/p/279334552)
+
+```
+ //脸部
+ float3 Face(float3 lDirWS, float3 baseColor, float2 uv, float2 screenUV){ 
+     lDirWS = -lDirWS;
+     //采样贴图
+     float SDF = SAMPLE_TEXTURE2D(_lightmap, sampler_lightmap, uv).r;  //采样SDF
+     float SDF2 = SAMPLE_TEXTURE2D(_lightmap, sampler_lightmap, float2(1-uv.x, uv.y)).r;  //翻转x轴采样SDF
+     //计算向量
+     float3 up = float3(0,1,0);  //上方向
+     float3 front = unity_ObjectToWorld._13_23_33;  //角色前朝向
+     float3 left = cross(front, up);  //左侧朝向
+     float3 right = -cross(front, up);  //右侧朝向
+     //点乘向量
+     float frontL = dot(normalize(front.xz), normalize(lDirWS.xz));  //前点乘光
+     float leftL = dot(normalize(left.xz), normalize(lDirWS.xz));  //左点乘光
+     float rightL = dot(normalize(right.xz), normalize(lDirWS.xz));  //右点乘光
+     //计算阴影
+     float lightAttenuation = (frontL > 0) * min((SDF > leftL), 1 - (SDF2 < rightL));
+     //判断白天与夜晚
+     float rampSampling = 0.0;
+     if(_dayAndNight == 0){rampSampling = 0.5;}
+     //计算V轴
+     float rampV = _lightmapA4 * -0.1 + 1.05 - rampSampling;  //0.85
+     //采样ramp
+     float3 rampColor = SAMPLE_TEXTURE2D(_ramp, sampler_ramp, float2(lightAttenuation, rampV));
+     //混合baseColor
+     float3 face = lerp(baseColor * rampColor, baseColor, lightAttenuation);
+     return face;  //输出结果
+ }
+```
+
+我发现直接把SDF反向得到的另半边的SDF的结果是错误的，所以翻转x轴再采样了一遍SDF图。
+
+用if来判断:
+
+```
+float3 col = float3(0.0, 0.0, 0.0);
+    //主体渲染
+    if(_genshinShader == 0.0){  //身体
+    col = Body(NdotL, NdotH, NdotV, lightmap, baseColor, nDirVS,screenUV);
+    }else if(_genshinShader == 1.0){  //脸部
+    col = Face(lDirWS, baseColor, i.uv0,screenUV);
+}
+```
+
+#### **12) 添加自发光**
+
+diffuse的a通道，可能是自发光，也有可能是透明蒙版，我们需要开放一个参数给美术选择，当是自发光的时候，就把输出结果加上自发光效果，为透明蒙版的时候就按透明蒙版裁剪掉透明的像素。
+
+```
+//计算diffuse.a
+if(_diffuseA == 2){  //自发光
+    float3 diffA = light(col, diffuseA);
+    col = col + diffA;
+}else if(_diffuseA == 1){ //裁剪
+    diffuseA = smoothstep(0.05, 0.7, diffuseA);  //去除噪点
+    clip(diffuseA - _Cutoff);
+}
+```
+
+### 4 描边
+
+TODO：
+
+### 5 投影
+
+使用"ShadowCaster"Pass来产生投影。
+
+```text
+UsePass "Universal Render Pipeline/Lit/ShadowCaster"    
+```
+
+### 6 后处理
+
+后处理我使用了三个，分别是Bloom(泛光)、ToneMapping(色调映射)、ColorAdjustments(颜色调整)。
+
+
+
+我使用的是URP自带的后处理体积，好处是不用写代码了，和UE的后处理盒子类似，坏处是URP的后处理是全屏效果的，实际后处理的效果应该只影响角色。那样就要用C#脚本传递来制作后处理，用RendererFeatures的LayerMask来控制影响的对象图层，具体实现原理可以参考这篇文章。
 
 ## 附录：
 
@@ -942,7 +1228,12 @@ ramp的采样就结束了，最后将lerp的结果乘以baseColor就可以了.
 
 ### 怎么去除边缘锯齿化
 
+### 环境遮蔽AO
 
+lightmap.g通道存放的是环境遮蔽信息。它是一张由美术师预先绘制或软件生成的灰度图，用于标识模型表面哪些区域不容易接收到间接光照。
+![lightmap.g](image-20260103102807639.png)
+
+> 例如，衣服的褶皱深处、手臂与身体之间的缝隙、颈部下方等，这些地方即使在白天，也会比开阔的表面更暗。lightmap.g会在这些地方显示为黑色或深灰色。
 
 ### smoothstep 三次平滑函数
 
