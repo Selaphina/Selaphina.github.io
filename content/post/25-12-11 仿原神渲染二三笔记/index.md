@@ -999,10 +999,16 @@ float3 Metal(float3 nDirVS, float4 lightmap, float3 baseColor){
 }
 ```
 
+> ```
+>     float3 metalMap = SAMPLE_TEXTURE2D(_metalMap, sampler_metalMap, nDirVS.rg * 0.5 + 0.5).r;
+> ```
+>
+> 
+>
 > #### 为什么用nDirVS.rg * 0.5 + 0.5 采样，而不是i.uv0？
 >
->  `_metalMap` 在这里的角色是 **MatCap / Reflection LUT**，
->   而不是一张“表面贴图”。
+> `_metalMap` 在这里的角色是 **MatCap / Reflection LUT**，
+> 而不是一张“表面贴图”。
 >
 > `i.uv0`的适用场景
 >
@@ -1196,7 +1202,245 @@ if(_diffuseA == 2){  //自发光
 
 ### 4 描边
 
-TODO：
+轮廓线实现方案：**背面膨胀法**。很常见。
+
+> 在顶点着色器中，将模型的顶点沿着其法线方向向外轻微扩张。由于这个Pass只渲染模型的背面（通过Cull Front设置），扩张后的背面就会形成一个包裹在模型外的“壳”。
+
+
+
+1）（debug）查看模型中存储的平滑法线。
+
+> 美术人员可能会在UV2中存预烘焙的平滑法线，用于解决低多边形模型在轮廓线生成时的锯齿问题。我们可以假设模型里有这个平滑法线信息，输出来看看咸淡。
+
+```
+ struct a2v
+ {
+	 ……
+     float2 packSmoothNormal : TEXCOORD2;
+ };
+
+ struct v2f
+ {
+	……
+     float3 normalWS   : TEXCOORD2;
+
+ };
+
+v2f BackFaceOutlineVertex(a2v input)
+{
+    v2f o;
+	……
+	float3 smoothTS = UnpackNormalOctQuadEncode(input.packSmoothNormal);
+    o.normalWS = smoothTS;
+	……
+    return o;
+}
+
+half4 frag(v2f i, FRONT_FACE_TYPE isFrontFace : FRONT_FACE_SEMANTIC) : SV_Target
+{
+    float3 normalData = i.normalWS; // 使用解码函数后的平滑法线
+    float3 debugColor = (normalData + 1.0) * 0.5;
+  
+    return half4(debugColor, 1.0); // Alpha通道设为1，不透明
+
+}
+```
+
+![image-20260104173911106](image-20260104173911106.png)
+
+杜林模型在前发/眼睛/口腔内外部/翅膀边缘有预烘焙的平滑法线信息。这些地方的法线会特殊处理。这里也查看了一下模型的顶点颜色——顶点色是单一的，这里暂且认为顶点色不存放额外信息。
+
+正式开工：
+
+2）剔除表面 
+
+```
+Pass
+{
+    Tags { "LightMode" = "outline" }
+
+    Cull Front
+    ZWrite On
+```
+
+ shader_feature_local：本地着色器变体（Shader Variants）。表示这些特性 **只在当前 Pass 生效**，不会全局生效
+
+```
+ HLSLPROGRAM
+ #pragma vertex BackFaceOutlineVertex
+ #pragma fragment BackFaceOutlineFragment
+
+ //是否开启自定义描边颜色。
+ #pragma shader_feature_local _OUTLINE_CUSTOM_COLOR_ON 
+ //描边根据 切线方向 计算。
+ #pragma shader_feature_local _OUTLINENORMALCHANNEL_TANGENT
+ //描边根据 第二 UV 通道（平滑法线，模型中的嘴/眼/翅膀部分） 计算。
+ #pragma shader_feature_local _OUTLINENORMALCHANNEL_UV2
+
+ #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+ #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
+ TEXTURE2D(_ilmTex);
+ SAMPLER(sampler_ilmTex);
+```
+
+定义顶点输入和输出结构体
+
+```
+  struct a2v
+  {
+      float4 positionOS : POSITION;
+      float4 color      : COLOR;
+      float3 normalOS   : NORMAL;
+      float4 tangentOS  : TANGENT;
+      float2 uv1        : TEXCOORD0;
+      float2 uv2        : TEXCOORD1;
+      float2 packSmoothNormal : TEXCOORD2;
+  };
+
+  struct v2f
+  {
+      float4 positionCS : SV_POSITION;
+      float2 uv         : TEXCOORD0;
+      float4 color      : COLOR;
+      float3 positionWS : TEXCOORD1;
+      float3 normalWS   : TEXCOORD2;
+  };
+
+```
+
+3）通过 `materialID`函数，将ILM贴图的a通道的值（0到1之间）映射为不同的材质ID【0到4】，然后根据这个ID从预设的颜色数组中选择对应的轮廓颜色。这使得模型的不同区域可以根据这张贴图的定义，呈现出5种不同颜色的轮廓线。
+
+```
+float materialID(float mask)
+{
+    if (mask < 0.2) return 0;
+    if (mask < 0.4) return 1;
+    if (mask < 0.6) return 2;
+    if (mask < 0.8) return 3;
+    return 4;
+}
+```
+
+4）看顶点着色器 `BackFaceOutlineVertex` 中：
+
+1）获取用于顶点扩张的**世界空间法线方向**：通过着色器变体（`#pragma shader_feature_local`）提供了三种法线来源选择，以应对不同模型质量和效果。
+
+`OUTLINENORMALCHANNEL_`运行时只启用其中一个宏，避免 if-else 运行开销。
+
+```
+float3 GetSmoothNormalWS(a2v input)
+{
+	//描边根据默认法线通道
+    float3 smoothNormalOS = input.normalOS;
+	//描边根据 切线方向 计算。
+    #if defined(_OUTLINENORMALCHANNEL_TANGENT)
+    smoothNormalOS = input.tangentOS.xyz;
+    //描边根据 UV2 通道（平滑法线，模型中的嘴/眼/翅膀部分） 计算。
+    #elif defined(_OUTLINENORMALCHANNEL_UV2)
+  	//TNB矩阵：切线空间转换到模型空间变换矩阵
+    float3 n = normalize(input.normalOS);
+    float3 t = normalize(input.tangentOS.xyz);
+    float3 b = cross(n, t) * input.tangentOS.w;
+    //解码切线空间法线
+    float3 smoothTS = UnpackNormalOctQuadEncode(input.packSmoothNormal);
+    smoothNormalOS = mul(smoothTS, float3x3(t, b, n));
+    smoothNormalOS = smoothTS;
+    #endif
+
+    return TransformObjectToWorldNormal(smoothNormalOS);
+}
+```
+
+`input.packSmoothNormal`是存储在UV2中的美术人员预先烘焙的平滑法线。
+
+`UnpackNormalOctQuadEncode`是一个解码函数，将压缩存储的二维数据还原为三维法线向量（通常范围是[-1, 1]）。这种编码方式可以高效地在纹理通道中存储三维方向信息
+
+**输出**：`smoothTS`是在切线空间中的平滑法线向量。
+
+**描边宽度：**
+
+**基于距离的动态轮廓宽度**，解决轮廓线“近粗远细”或“远距离过粗”的问题。
+
+```
+ float GetOutlineWidth(float viewZ)
+ {
+     float fovFactor = 2.414 / UNITY_MATRIX_P[1].y;// 根据视野(FOV)进行校正
+     float z = abs(viewZ * fovFactor);
+     return 0.01 * _OutlineWidth * _OutlineScale * saturate(1.0 / z);
+ }
+
+```
+
+轮廓位置：这是顶点扩张的核心函数，负责将顶点位置偏移到轮廓位置。
+
+```
+ float4 GetOutlinePosition(VertexPositionInputs posInput, float3 normalWS, float alpha)
+ {
+     float width = GetOutlineWidth(posInput.positionVS.z) * alpha;
+     
+	// 将世界法线转换到视角空间，并忽略Z分量，确保扩张在屏幕平面进行
+     float3 normalVS = TransformWorldToViewNormal(normalWS);
+     normalVS = normalize(float3(normalVS.xy, 0));
+
+     float3 posVS = posInput.positionVS;
+     posVS += width * normalVS;
+     //处理深度冲突(Z-fighting)：将顶点轻微推向相机
+     posVS += 0.01 * _OutlineZOffset * normalize(posVS);
+	//将视角空间位置转换回裁剪空间
+     return TransformWViewToHClip(posVS);
+ }
+
+```
+
+顶点着色器：
+
+```
+ v2f BackFaceOutlineVertex(a2v input)
+ {
+     v2f o;
+
+     VertexPositionInputs posInput = GetVertexPositionInputs(input.positionOS.xyz);
+
+     float3 smoothNormalWS = GetSmoothNormalWS(input);
+     o.positionCS = GetOutlinePosition(posInput, smoothNormalWS, input.color.a);
+
+     o.uv = input.uv1;
+     o.color = input.color;
+     o.positionWS = TransformObjectToWorld(input.positionOS.xyz);
+     o.normalWS = smoothNormalWS;
+
+     return o;
+ }
+```
+
+片元着色器 (`BackFaceOutlineFragment`)
+
+```
+half4 BackFaceOutlineFragment(v2f i, FRONT_FACE_TYPE isFrontFace : FRONT_FACE_SEMANTIC) : SV_Target
+{
+    // 1. 采样纹理，获取材质ID掩码
+    half mask = SAMPLE_TEXTURE2D(_ilmTex, sampler_ilmTex, i.uv).a;
+    float id = materialID(mask); // 将掩码值映射为0-4的整数ID
+
+    // 2. 根据ID从预设颜色数组中选取轮廓色
+    int idx = (int)clamp(id, 0.0, 4.0);
+    float3 color = outlineColors[idx];
+
+    // 3. 检查是否启用自定义轮廓色覆盖
+    #if defined(_OUTLINE_CUSTOM_COLOR_ON)
+        color = _CustomOutlineCol.rgb;
+    #endif
+
+    clip(_Alpha - _AlphaClip);
+
+    return half4(color, 1); 
+}
+```
+
+![](image-20260104184611225.png)
+
+![去掉tonemapping感觉更亮了](image-20260104185207246.png)
 
 ### 5 投影
 
@@ -1213,6 +1457,10 @@ UsePass "Universal Render Pipeline/Lit/ShadowCaster"
 
 
 我使用的是URP自带的后处理体积，好处是不用写代码了，和UE的后处理盒子类似，坏处是URP的后处理是全屏效果的，实际后处理的效果应该只影响角色。那样就要用C#脚本传递来制作后处理，用RendererFeatures的LayerMask来控制影响的对象图层，具体实现原理可以参考这篇文章。
+
+
+
+
 
 ## 附录：
 
@@ -1277,3 +1525,4 @@ edge0 < x < edge1 时，中间区域，返回在 0 和 1 之间使用埃尔米�
 >
 > 所以，当 `lightmap.g`的值为 0.25 时，`smoothstep(0.2, 0.3, lightmap.g)`的输出是 **0.5**。
 
+![仅查看法线颜色：彩色龙](image-20260104182057580.png)
