@@ -73,7 +73,7 @@ git push origin master
 3. **（初次）创建并切换到一个新分支**：分支名要有描述性，例如`feat/user-login`或`fix/header-alignment`。
 
    ```
-   git checkout -b feature/wsy-new-branch
+   git checkout -b feature/wsy-shadow-branch
    ```
 
 `-b`: 就是切换分支“branch”的意思。
