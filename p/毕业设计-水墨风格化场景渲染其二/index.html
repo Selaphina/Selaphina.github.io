@@ -1,0 +1,448 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="毕业设计的开发日志，用于实时记录学到的trick。"><title>毕业设计 | 水墨风格化场景渲染（其二）</title><link rel=canonical href=https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="毕业设计 | 水墨风格化场景渲染（其二）"><meta property='og:description' content="毕业设计的开发日志，用于实时记录学到的trick。"><meta property='og:url' content='https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/'><meta property='og:site_name' content='Selaphina'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Note'><meta property='article:published_time' content='2025-12-07T10:12:30+00:00'><meta property='article:modified_time' content='2025-12-07T10:12:30+00:00'><meta property='og:image' content='https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/cover1.png'><meta name=twitter:title content="毕业设计 | 水墨风格化场景渲染（其二）"><meta name=twitter:description content="毕业设计的开发日志，用于实时记录学到的trick。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/cover1.png'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_19bb7832d48d68bd.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Selaphina</a></h1><h2 class=site-description>住在一个奇妙而荒诞的星球。</h2></div></header><ol class=menu-social><li><a href=https://github.com/Selaphina target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#1第三人称角色基础配置>1.第三人称角色基础配置</a></li><li><a href=#2-角色控制器与动画逻辑>2. 角色控制器与动画逻辑</a><ol><li><a href=#21-动画状态机>2.1 动画状态机</a></li><li><a href=#22-第三人称移动脚本>2.2 第三人称移动脚本</a></li></ol></li><li><a href=#3走路墨色特效>3.走路墨色特效</a></li><li><a href=#4贴图水墨化处理>4.贴图水墨化处理</a></li><li><a href=#5新逻辑实现计划点>5.新逻辑实现计划点</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/cover1_hu_a2507cb5e006e692.png srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/cover1_hu_a2507cb5e006e692.png 800w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/cover1_hu_8370db17030da67a.png 1600w" width=800 height=490 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其二）"></a></div><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/>技术笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/>毕业设计 | 水墨风格化场景渲染（其二）</a></h2><h3 class=article-subtitle>毕业设计的开发日志，用于实时记录学到的trick。</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2025-12-07T10:12:30Z>Dec 07, 2025</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>4 minute read</time></div></footer></div></header><section class=article-content><h1 id=进度报告>进度报告</h1><p>基于上一次水墨场景基本渲染框架已经完成的进度，本次主要记录主体交互功能的实现。</p><h2 id=1第三人称角色基础配置>1.第三人称角色基础配置</h2><p>导入第三人称猫模型，配置骨骼动画系统。为模型上自定义Shader实现动态描边效果，确保角色与场景美术风格融洽。</p><p>材质基于unity内置的unlit-Texture shader源码上进行修改，加上一定的描边。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182854916.png width=1584 height=446 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182854916_hu_9ddac03d3aee9691.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182854916_hu_c8cc49dd95f6b16e.png 1024w" loading=lazy alt=上材质前后对比 class=gallery-image data-flex-grow=355 data-flex-basis=852px></p><p>UnlitwithOutlineShader核心代码（片段）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> Properties
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl>     // Stroke Color
+</span></span><span class=line><span class=cl>		_StrokeColor (&#34;Stroke Color&#34;, Color) = (0,0,0,1)
+</span></span><span class=line><span class=cl>		// Noise Map
+</span></span><span class=line><span class=cl>		_OutlineNoise (&#34;Outline Noise Map&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_Outline (&#34;Outline&#34;, Range(0, 1)) = 0.1
+</span></span><span class=line><span class=cl>		// Outside Noise Width
+</span></span><span class=line><span class=cl>		// _OutsideNoiseWidth (&#34;Outside Noise Width&#34;, Range(1, 2)) = 1.3
+</span></span><span class=line><span class=cl>		_MaxOutlineZOffset (&#34;Max Outline Z Offset&#34;, Range(0,1)) = 0.5
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     _MainTex (&#34;Texture&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>     _OutlineColor(&#34;Outline Color&#34;,Color) = (0,0,0,1)
+</span></span><span class=line><span class=cl>     _OutlineWidth(&#34;Outline Width&#34;,Range(0.0,1.0)) = 0.05
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl> SubShader
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl>     Tags { &#34;RenderType&#34;=&#34;Opaque&#34; }
+</span></span><span class=line><span class=cl>     Pass 
+</span></span><span class=line><span class=cl>		{
+</span></span><span class=line><span class=cl>NAME &#34;OUTLINE&#34;
+</span></span><span class=line><span class=cl>Cull Front
+</span></span><span class=line><span class=cl>CGPROGRAM
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#pragma vertex vert
+</span></span><span class=line><span class=cl>#pragma fragment frag
+</span></span><span class=line><span class=cl>#include &#34;UnityCG.cginc&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>float _Outline;
+</span></span><span class=line><span class=cl>float4 _StrokeColor;
+</span></span><span class=line><span class=cl>sampler2D _OutlineNoise;
+</span></span><span class=line><span class=cl>half _MaxOutlineZOffset;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>struct a2v 
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	float4 vertex : POSITION;
+</span></span><span class=line><span class=cl>	float3 normal : NORMAL;
+</span></span><span class=line><span class=cl>}; 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>struct v2f 
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    float4 pos : SV_POSITION;
+</span></span><span class=line><span class=cl>};
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>v2f vert (a2v v) 
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	// fetch Perlin noise map here to map the vertex
+</span></span><span class=line><span class=cl>	// add some bias by the normal direction
+</span></span><span class=line><span class=cl>	float4 burn = tex2Dlod(_OutlineNoise, v.vertex);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	v2f o = (v2f)0;
+</span></span><span class=line><span class=cl>	float3 scaledir = mul((float3x3)UNITY_MATRIX_MV, v.normal);
+</span></span><span class=line><span class=cl>	scaledir += 0.5;
+</span></span><span class=line><span class=cl>	scaledir.z = 0.01;
+</span></span><span class=line><span class=cl>	scaledir = normalize(scaledir);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	// camera space
+</span></span><span class=line><span class=cl>	float4 position_cs = mul(UNITY_MATRIX_MV, v.vertex);
+</span></span><span class=line><span class=cl>	position_cs /= position_cs.w;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	float3 viewDir = normalize(position_cs.xyz);
+</span></span><span class=line><span class=cl>	float3 offset_pos_cs = position_cs.xyz + viewDir * _MaxOutlineZOffset;
+</span></span><span class=line><span class=cl>             
+</span></span><span class=line><span class=cl>             // unity_CameraProjection[1].y = fov/2
+</span></span><span class=line><span class=cl>	float linewidth = -position_cs.z / unity_CameraProjection[1].y;
+</span></span><span class=line><span class=cl>	linewidth = sqrt(linewidth);
+</span></span><span class=line><span class=cl>	position_cs.xy = offset_pos_cs.xy + scaledir.xy * linewidth * burn.x * _Outline ;
+</span></span><span class=line><span class=cl>	position_cs.z = offset_pos_cs.z;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	o.pos = mul(UNITY_MATRIX_P, position_cs);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>fixed4 frag(v2f i) : SV_Target 
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	fixed4 c = _StrokeColor;
+</span></span><span class=line><span class=cl>	return c;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>ENDCG
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>Pass
+</span></span><span class=line><span class=cl>{……}
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><ul><li>实时动态描边，边缘具有笔触质感</li><li>支持通过材质面板调整描边颜色/粗细</li></ul><h2 id=2-角色控制器与动画逻辑>2. 角色控制器与动画逻辑</h2><p>实现基于输入控制的角色移动系统，通过动画状态机管理待机/行走状态切换，添加运动平滑过渡。</p><p>参考教程：<a class=link href="https://blog.csdn.net/qq_36669063/article/details/135228468?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-135228468-blog-130305856.235%5ev43%5epc_blog_bottom_relevance_base9&amp;spm=1001.2101.3001.4242.2&amp;utm_relevant_index=3" target=_blank rel=noopener>Unity3D&ndash;如何让你的人物角色动起来？十分详细（特别教程篇）_unity如何给角色添加动作-CSDN博客</a></p><h3 id=21-动画状态机>2.1 动画状态机</h3><p>首先搭一下动画切换逻辑。Create&ndash;>Animator Controller，创建新的动画系统，命名为NewAnimator，接着我们就会看到以下状态：</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207180746877.png width=996 height=990 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207180746877_hu_dc6fa8ea3e9f43ad.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207180746877_hu_5114f51e73419d48.png 1024w" loading=lazy alt=新动画控制器 class=gallery-image data-flex-grow=100 data-flex-basis=241px></p><p>把动画片段资源（即.anim）拖进来，拉线实现状态切换。猫比较简单，只有走路和待机两种切换。其中，黄色的方块表示默认的状态，一般都是idle作为默认状态。右键可以Make Transition给其他状态块。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207180327934.png width=994 height=785 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207180327934_hu_f5f730b0d858462c.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207180327934_hu_fbbc6639936a343a.png 1024w" loading=lazy alt=image-20251207180327934 class=gallery-image data-flex-grow=126 data-flex-basis=303px></p><p>点左侧小眼睛可以打开参数列表，新建一个bool参数<code>isWalk</code>，用于传递给脚本控制【待机】——【走路】的状态切换。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207180451779.png width=912 height=951 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207180451779_hu_68509cec34efe591.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207180451779_hu_7f616708d53854a6.png 1024w" loading=lazy alt=image-20251207180451779 class=gallery-image data-flex-grow=95 data-flex-basis=230px></p><p>点击状态方块之间的连线部分，可以设置状态间切换条件。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207181124229.png width=534 height=738 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207181124229_hu_bd70e5617516f71d.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207181124229_hu_fb4185a58fc09d31.png 1024w" loading=lazy alt=image-20251207181124229 class=gallery-image data-flex-grow=72 data-flex-basis=173px></p><p>由于只有两个状态间的切换，只需要在conditions里加上一个isWalk参数并设置数值即可。</p><p>【注意：记得把Has Exit Time勾选关掉。否则动画会强制播完才能切换到下一个】</p><p>动画状态机部分设置完毕。</p><h3 id=22-第三人称移动脚本>2.2 第三人称移动脚本</h3><p>这里实现了基本控制移动+播放对应动画的脚本+相机跟随效果。</p><p>CatMove.cs</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>/*</span><span class=n>Create</span> <span class=n>By</span> <span class=n>JesonHumber_f4</span><span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=o>/*</span><span class=mf>2023.3</span><span class=o>.</span><span class=mi>10</span><span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=o>/*</span><span class=n>Unity3D</span> <span class=n>Digtal</span> <span class=n>Twin</span> <span class=n>Project</span><span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=n>using</span> <span class=n>System</span><span class=o>.</span><span class=n>Collections</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>using</span> <span class=n>System</span><span class=o>.</span><span class=n>Collections</span><span class=o>.</span><span class=n>Generic</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>using</span> <span class=n>UnityEngine</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span><span class=p>[</span><span class=n>RequireComponent</span><span class=p>(</span><span class=nb>typeof</span><span class=p>(</span><span class=err>组件类型</span><span class=p>))]</span><span class=err>的意义是：</span>
+</span></span><span class=line><span class=cl><span class=o>//</span><span class=err>为当前挂载该脚本的游戏物体添加需要的组件</span><span class=p>(</span><span class=err>这属于保险做法</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>//</span><span class=err>该操作不需要引入其他命名空间</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>RequireComponent</span><span class=p>(</span><span class=nb>typeof</span><span class=p>(</span><span class=n>CharacterController</span><span class=p>))]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span><span class=err>引入播放动画的组件</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>RequireComponent</span><span class=p>(</span><span class=nb>typeof</span><span class=p>(</span><span class=n>Animator</span><span class=p>))]</span>
+</span></span><span class=line><span class=cl><span class=n>public</span> <span class=k>class</span> <span class=n>CatMove</span><span class=p>:</span> <span class=n>MonoBehaviour</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>CharacterController</span> <span class=n>controller</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>Animator</span> <span class=n>animator</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>//</span><span class=err>人物移动速度（可自行调节）</span>
+</span></span><span class=line><span class=cl>    <span class=n>public</span> <span class=ne>float</span> <span class=n>MoveSpeed</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>public</span> <span class=n>GameObject</span> <span class=n>footprint</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>//</span><span class=err>获取键盘水平方向和垂直方向值用（</span><span class=n>GetAxis</span><span class=p>()</span><span class=err>方法）</span>
+</span></span><span class=line><span class=cl>    <span class=n>public</span> <span class=ne>float</span> <span class=n>horizontal</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>public</span> <span class=ne>float</span> <span class=n>vertical</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>//</span><span class=err>用于改变动画状态的变量</span>
+</span></span><span class=line><span class=cl>    <span class=n>public</span> <span class=ne>bool</span> <span class=n>move_var</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>//</span><span class=err>目标朝向</span>
+</span></span><span class=line><span class=cl>    <span class=n>public</span> <span class=ne>Vector3</span> <span class=n>target_dir</span> <span class=o>=</span> <span class=ne>Vector3</span><span class=o>.</span><span class=n>zero</span><span class=p>;</span>  <span class=o>//</span><span class=err>初始化为</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>)</span><span class=err>，可自行调节</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>//</span> <span class=n>Start</span> <span class=n>is</span> <span class=n>called</span> <span class=n>before</span> <span class=n>the</span> <span class=n>first</span> <span class=n>frame</span> <span class=n>update</span>
+</span></span><span class=line><span class=cl>    <span class=n>void</span> <span class=n>Start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=err>获取“角色控制器”组件（如果你要考虑物理碰撞等操作，就必须有这个组件）</span>
+</span></span><span class=line><span class=cl>        <span class=n>controller</span> <span class=o>=</span> <span class=n>GetComponent</span><span class=o>&lt;</span><span class=n>CharacterController</span><span class=o>&gt;</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=err>获取“动画制作者组件”</span>
+</span></span><span class=line><span class=cl>        <span class=n>animator</span> <span class=o>=</span> <span class=n>GetComponent</span><span class=o>&lt;</span><span class=n>Animator</span><span class=o>&gt;</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=err>初始化人物移动速度</span>
+</span></span><span class=line><span class=cl>        <span class=n>MoveSpeed</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=err>初始化动画状态变量为</span><span class=mi>0</span><span class=err>（人物静止动画播放）</span>
+</span></span><span class=line><span class=cl>        <span class=n>move_var</span> <span class=o>=</span> <span class=bp>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=err>校准“角色控制器”的胶囊体参数</span><span class=p>(</span><span class=err>物理碰撞体积</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>controller</span><span class=o>.</span><span class=n>center</span> <span class=o>=</span> <span class=n>new</span> <span class=ne>Vector3</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>controller</span><span class=o>.</span><span class=n>radius</span> <span class=o>=</span> <span class=mf>0.5</span><span class=n>f</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>controller</span><span class=o>.</span><span class=n>height</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>//</span> <span class=n>Update</span> <span class=n>is</span> <span class=n>called</span> <span class=n>once</span> <span class=n>per</span> <span class=n>frame</span>
+</span></span><span class=line><span class=cl>    <span class=n>void</span> <span class=n>Update</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>HandControl_Move</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>public</span> <span class=n>void</span> <span class=n>HandControl_Move</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=n>GetAxis</span><span class=p>(</span><span class=s2>&#34;Horizontal&#34;</span><span class=p>);</span><span class=err>对应的是键盘上的</span><span class=n>A和D键</span><span class=err>（垂直键）</span>
+</span></span><span class=line><span class=cl>        <span class=n>horizontal</span> <span class=o>=</span> <span class=ne>Input</span><span class=o>.</span><span class=n>GetAxis</span><span class=p>(</span><span class=s2>&#34;Vertical&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=n>GetAxis</span><span class=p>(</span><span class=s2>&#34;Vertical&#34;</span><span class=p>);</span><span class=err>对应的是键盘上的</span><span class=n>W和S键</span><span class=err>（水平键）</span>    
+</span></span><span class=line><span class=cl>        <span class=n>vertical</span> <span class=o>=</span> <span class=o>-</span><span class=ne>Input</span><span class=o>.</span><span class=n>GetAxis</span><span class=p>(</span><span class=s2>&#34;Horizontal&#34;</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=err>注：这上面的“水平垂直键”所映射的键位实际上可以更改，</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=err>它们只不过是默认规则</span><span class=p>,</span><span class=err>它们的最大值均为</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>horizontal</span> <span class=o>!=</span> <span class=mi>0</span> <span class=o>||</span> <span class=n>vertical</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span> <span class=o>//</span><span class=err>按键</span><span class=p>(</span><span class=err>默认：</span><span class=n>WASD</span><span class=p>)</span><span class=err>触发时就进行判断</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>footprint</span><span class=o>.</span><span class=n>SetActive</span><span class=p>(</span><span class=bp>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=o>//</span><span class=err>前进</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=ne>Input</span><span class=o>.</span><span class=n>GetKey</span><span class=p>(</span><span class=n>KeyCode</span><span class=o>.</span><span class=n>D</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>move_var</span> <span class=o>=</span> <span class=bp>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>MoveSpeed</span> <span class=o>=</span> <span class=mf>1.5</span><span class=n>f</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>transform</span><span class=o>.</span><span class=n>rotation</span> <span class=o>=</span> <span class=n>Quaternion</span><span class=o>.</span><span class=n>LookRotation</span><span class=p>(</span><span class=n>target_dir</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=o>//</span><span class=err>向后走</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=ne>Input</span><span class=o>.</span><span class=n>GetKey</span><span class=p>(</span><span class=n>KeyCode</span><span class=o>.</span><span class=n>A</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>move_var</span> <span class=o>=</span> <span class=bp>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>MoveSpeed</span> <span class=o>=</span> <span class=mf>1.5</span><span class=n>f</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>transform</span><span class=o>.</span><span class=n>rotation</span> <span class=o>=</span> <span class=n>Quaternion</span><span class=o>.</span><span class=n>LookRotation</span><span class=p>(</span><span class=n>target_dir</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=o>//</span><span class=err>向左走</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=ne>Input</span><span class=o>.</span><span class=n>GetKey</span><span class=p>(</span><span class=n>KeyCode</span><span class=o>.</span><span class=n>S</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>move_var</span> <span class=o>=</span> <span class=bp>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>MoveSpeed</span> <span class=o>=</span> <span class=mf>1.5</span><span class=n>f</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>transform</span><span class=o>.</span><span class=n>rotation</span> <span class=o>=</span> <span class=n>Quaternion</span><span class=o>.</span><span class=n>LookRotation</span><span class=p>(</span><span class=n>target_dir</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=o>//</span><span class=err>向右走</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=ne>Input</span><span class=o>.</span><span class=n>GetKey</span><span class=p>(</span><span class=n>KeyCode</span><span class=o>.</span><span class=n>W</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>move_var</span> <span class=o>=</span> <span class=bp>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>MoveSpeed</span> <span class=o>=</span> <span class=mf>1.5</span><span class=n>f</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>transform</span><span class=o>.</span><span class=n>rotation</span> <span class=o>=</span> <span class=n>Quaternion</span><span class=o>.</span><span class=n>LookRotation</span><span class=p>(</span><span class=n>target_dir</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=n>animator</span><span class=o>.</span><span class=n>SetBool</span><span class=p>(</span><span class=s2>&#34;isWalk&#34;</span><span class=p>,</span> <span class=n>move_var</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=o>//</span><span class=err>三维坐标方向坐标值更新</span>
+</span></span><span class=line><span class=cl>            <span class=o>//</span><span class=err>更新坐标值运用轴坐标参数</span>
+</span></span><span class=line><span class=cl>            <span class=n>target_dir</span> <span class=o>=</span> <span class=n>new</span> <span class=ne>Vector3</span><span class=p>(</span><span class=n>horizontal</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=n>vertical</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=o>//</span><span class=err>人物移动更新</span>
+</span></span><span class=line><span class=cl>            <span class=n>controller</span><span class=o>.</span><span class=n>Move</span><span class=p>(</span><span class=n>target_dir</span> <span class=o>*</span> <span class=n>MoveSpeed</span> <span class=o>*</span> <span class=n>Time</span><span class=o>.</span><span class=n>deltaTime</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>#region</span>
+</span></span><span class=line><span class=cl>            <span class=o>//</span><span class=err>也可以使用该方法代替</span><span class=n>controller</span><span class=o>.</span><span class=n>Move</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>            <span class=o>//</span><span class=n>this</span><span class=o>.</span><span class=n>transform</span><span class=o>.</span><span class=n>Translate</span><span class=p>(</span><span class=n>dir</span> <span class=o>*</span> <span class=n>MoveSpeed</span> <span class=o>*</span> <span class=n>Time</span><span class=o>.</span><span class=n>deltaTime</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=c1>#endregion</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>else</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>move_var</span> <span class=o>=</span> <span class=bp>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>animator</span><span class=o>.</span><span class=n>SetBool</span><span class=p>(</span><span class=s2>&#34;isWalk&#34;</span><span class=p>,</span> <span class=bp>false</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=n>MoveSpeed</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>WASD控制角色八方向移动</li><li>移动时自动平滑转向</li><li>行走/待机动画自然过渡</li><li>移动速度可通过参数调节</li></ul><h2 id=3走路墨色特效>3.走路墨色特效</h2><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/cat-1765101168652.gif width=695 height=474 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/cat-1765101168652_hu_8e6c75b023701edd.gif 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/cat-1765101168652_hu_4e478d3dadc8db58.gif 1024w" loading=lazy alt=cat class=gallery-image data-flex-grow=146 data-flex-basis=351px></p><p>使用粒子系统实现行走时的墨迹扩散效果，通过脚本控制粒子发射时机，模拟毛笔在宣纸上晕染的视觉效果。</p><p>粒子系统参数设置如下：</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182002298.png width=510 height=1121 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182002298_hu_3512e466afbc8ee4.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182002298_hu_f26b0e9669001e5f.png 1024w" loading=lazy alt=image-20251207182002298 class=gallery-image data-flex-grow=45 data-flex-basis=109px></p><p>shape模块</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182029880.png width=513 height=531 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182029880_hu_ade5ae4f4b26bd8e.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182029880_hu_c3f60078ba0346b7.png 1024w" loading=lazy alt=image-20251207182029880 class=gallery-image data-flex-grow=96 data-flex-basis=231px></p><p>color over lifetime模块</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182055097.png width=522 height=57 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182055097_hu_93e7a9e94dd29271.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182055097_hu_1c2d2765a5d59f4c.png 1024w" loading=lazy alt=image-20251207182055097 class=gallery-image data-flex-grow=915 data-flex-basis=2197px></p><p>renderer模块</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182122152.png width=509 height=581 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182122152_hu_e71ff23ca24bfb3.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182122152_hu_360434083fbc5d93.png 1024w" loading=lazy alt=image-20251207182122152 class=gallery-image data-flex-grow=87 data-flex-basis=210px></p><p>这里新建了一个Parti材质作为粒子材质导入，材质细节如下：</p><p>透明模式+透明底纹理+Particles内置shader即可。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182228157.png width=530 height=840 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182228157_hu_ed74019a5c4f7cd1.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251207182228157_hu_ada80cc2da27b0f6.png 1024w" loading=lazy alt=image-20251207182228157 class=gallery-image data-flex-grow=63 data-flex-basis=151px></p><h2 id=4贴图水墨化处理>4.贴图水墨化处理</h2><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214170228659.png width=815 height=420 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214170228659_hu_7a1adae2c62b4d15.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214170228659_hu_4c48dbfa24f0d5e1.png 1024w" loading=lazy alt=image-20251214170228659 class=gallery-image data-flex-grow=194 data-flex-basis=465px></p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214165855481.png width=1348 height=552 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214165855481_hu_e54abb7a2d0961fa.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214165855481_hu_f08c6d22de4d8f5c.png 1024w" loading=lazy alt=image-20251214165855481 class=gallery-image data-flex-grow=244 data-flex-basis=586px></p><h2 id=5新逻辑实现计划点>5.新逻辑实现计划点</h2><p><strong>【AI灵语·诗意叙事】</strong></p><p>校园中散落着一些有“灵性”的物体（一棵古树、一尊雕像、一盏路灯）。猫靠近时，玩家可以按键与之“对话”。物体的回应不是传统对话框，而是由<strong>AI实时生成的一句短诗或哲思短语</strong>，并以水墨书法字的形式浮现在空中。</p><ul><li><p><strong>技术实现</strong>： 使用<strong>Deepseek大模型的API</strong>。在Unity中，当玩家触发交互时，将当前物体的名称、预设的性格关键词（如“古树-沧桑-守护”）作为Prompt发送给API，请求返回一句符合意境的短句。 <strong>Unity侧</strong>：收到回复后，调用一个书法字体库（如使用TextMeshPro加载一种书法字体），在一个UI上以渐入、淡出的水墨动画效果显示出来。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214172453577.png width=800 height=479 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214172453577_hu_5bd5a34b93ddfc69.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214172453577_hu_5116741e7f132ec5.png 1024w" loading=lazy alt=image-20251214172453577 class=gallery-image data-flex-grow=167 data-flex-basis=400px></p></li></ul><p><strong>【墨迹扩散·环境交互】</strong></p><ul><li><strong>创意点</strong>：猫的行走不仅仅是留下脚印，更能<strong>动态“绘制”和“改变”环境</strong>。</li><li><strong>技术实现</strong>： <strong>渲染技术</strong>：使用Unity的<strong>Render Texture</strong> 作为一张全局的“虚拟宣纸”。当猫走过草地、沙地、水洼时，通过Shader采样这张Render Texture，让接触区域的纹理像墨遇水一样<strong>动态晕染开</strong>，显露出下层不同的材质（如走过草地，草地的绿色会微微扩散）。</li></ul><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214173245158.png width=1087 height=935 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214173245158_hu_c0a2b976d00248e7.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%8C/image-20251214173245158_hu_3cd703f50fdb445d.png 1024w" loading=lazy alt=image-20251214173245158 class=gallery-image data-flex-grow=116 data-flex-basis=279px></p></section><footer class=article-footer><section class=article-tags><a href=/tags/note/>Note</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%89/><div class=article-image><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%89/cover1.097562be4e510d390980afa13e8f2642_hu_290b482c007123cc.png width=250 height=150 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其三）" data-hash="md5-CXVivk5RDTkJgK+hPo8mQg=="></div><div class=article-details><h2 class=article-title>毕业设计 | 水墨风格化场景渲染（其三）</h2></div></a></article><article class=has-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E5%9B%9B/><div class=article-image><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E5%9B%9B/cover1.097562be4e510d390980afa13e8f2642_hu_290b482c007123cc.png width=250 height=150 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其四）" data-hash="md5-CXVivk5RDTkJgK+hPo8mQg=="></div><div class=article-details><h2 class=article-title>毕业设计 | 水墨风格化场景渲染（其四）</h2></div></a></article><article class=has-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/><div class=article-image><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/cover1.097562be4e510d390980afa13e8f2642_hu_290b482c007123cc.png width=250 height=150 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其一）" data-hash="md5-CXVivk5RDTkJgK+hPo8mQg=="></div><div class=article-details><h2 class=article-title>毕业设计 | 水墨风格化场景渲染（其一）</h2></div></a></article><article class=has-image><a href=/p/codex%E6%89%8B%E8%AE%B0/><div class=article-image><img src=/p/codex%E6%89%8B%E8%AE%B0/CUC%E5%85%91%E6%8D%A2%E7%82%B92.90562e7514228216736654e1c240ca2d_hu_d76f020ef12386f9.png width=250 height=150 loading=lazy alt="Featured image of post Codex手记" data-hash="md5-kFYudRQighZzZlThwkDKLQ=="></div><div class=article-details><h2 class=article-title>Codex手记</h2></div></a></article><article class=has-image><a href=/p/unity%E6%8F%92%E7%89%87%E6%A0%91/><div class=article-image><img src=/p/unity%E6%8F%92%E7%89%87%E6%A0%91/CUC%E5%85%91%E6%8D%A2%E7%82%B92.90562e7514228216736654e1c240ca2d_hu_d76f020ef12386f9.png width=250 height=150 loading=lazy alt="Featured image of post Unity插片树" data-hash="md5-kFYudRQighZzZlThwkDKLQ=="></div><div class=article-details><h2 class=article-title>Unity插片树</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2024 -
+2026 Selaphina</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.33.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
