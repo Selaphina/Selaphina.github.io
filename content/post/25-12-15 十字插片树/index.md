@@ -8,6 +8,8 @@ categories:
 weight: 1999       # You can add weight to some posts to override the default sorting (date descending)ji
 ---
 
+## Blender 模型
+
 1.Blender新建十字插片（2个平面）
 
 ![image-20260105003125349](image-20260105003125349.png)
@@ -21,6 +23,14 @@ weight: 1999       # You can add weight to some posts to override the default so
 3.新建粒子系统——毛发——勾选高级——
 
 ![image-20260105003717874](image-20260105003717874.png)
+
+重点：发射源要改为体积。
+
+![](image-20260107113731443.png)
+
+否则最终的树叶团子会中空……
+
+<img src="image-20260107113842513.png" style="zoom:67%;" />
 
 其中，渲染勾选【物体】，选择十字插片。
 
@@ -42,10 +52,22 @@ weight: 1999       # You can add weight to some posts to override the default so
 
 ![](image-20260105205404619.png)
 
-加载一下ASE，这里观察一下文件结构。
-![image-20260105213017194](image-20260105213017194.png)
+**记得把所有修改器都应用一下…^^**
 
-![image-20260105212202519](image-20260105212202519.png)
+将Blender做好的模型导出FBX，导入Unity开工。
+
+导出设置参考：
+
+![](image-20260107114414730.png)
+
+## Unity 
+
+> 导入一下ASE包，这是第一次正式使用ASE写shader，这里截图记录一下ASE的文件结构。
+> <img src="image-20260105213017194.png" style="zoom:50%;" />
+
+大佬整理出的贴图各个通道的作用。
+
+![来自b站:来一点咖啡吗](image-20260105212202519.png)
 
 导入unity连上节点后：
 
