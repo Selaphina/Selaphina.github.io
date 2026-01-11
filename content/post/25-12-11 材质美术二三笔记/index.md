@@ -84,6 +84,58 @@ diffuse：漫反射
 
   如果一个物体既有金属部分又有塑料部分，你应该使用一张 **Metallic Map（金属度贴图）**，用纯黑（0）表示非金属，纯白（1）表示金属。
 
+### 1.3 MatCap 是什么
+
+MatCap（Material Capture）是一种基于视角的材质采样技术，本质是：
+
+> **用一张 2D 纹理，直接查表“相机空间法线 → 光照结果”**，从而在无需实时光照计算的情况下，模拟复杂材质的明暗、金属感与高光。
+
+一句话总结：
+
+> **MatCap = 把“光照”和“材质响应”预烘焙进一张球面纹理，用法线方向索引它。**
+
+#### MatCap 形式
+
+通常是一张 **正方形 2D 纹理**
+
+内容看起来像一个**被照亮的球**
+
+![Avatar_Tex_MetalMap](image-20260110224843558.png)
+
+![MatCap Map Texture Example](image-20260110224956515.png)
+
+Matcap使用的是一个【视空间（View Space/ Camera Space）法线】
+
+- 法线会随**相机旋转**
+- 光照效果**始终“贴着相机”**
+- 不受世界光源影响
+
+#### 核心数学关系
+
+- `N_view = normalize( view-space normal )`
+- `N_view = (nx, ny, nz)`
+
+将法线的 **x, y 分量** 映射到 2D 纹理坐标：
+
+```
+u = nx * 0.5 + 0.5
+v = ny * 0.5 + 0.5
+```
+
+例：视空间法线（nDirVS）采样一张金属 MatCap 贴图，并用 lightmap.r 作为“是否为金属”的遮罩，最终生成一个“假金属反射颜色”。
+
+```
+//用 lightmap.r 作为“是否为金属”的遮罩
+float metalMask = step(0.9, lightmap.r);
+// Matcap采样（金属反射）
+float3 metalMap = SAMPLE_TEXTURE2D(
+    _metalMap,
+    sampler_metalMap,
+    nDirVS.rg * 0.5 + 0.5
+).r;
+// 其中，UV的计算部分：nDirVS.rg * 0.5 + 0.5
+```
+
 
 
 ### 1.3 菲涅尔（Fresnel）——边缘光
