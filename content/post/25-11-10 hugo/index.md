@@ -177,7 +177,7 @@ Hugo 在渲染某一篇 Markdown 页面时，单页渲染耗时超过 60 秒，�
 典型高风险内容：
 
 - 超长 `代码块`
-- 大量 `{{< highlight >}}` 
+- 大量highlight
 - 大量 LaTeX 数学公式（KaTeX / MathJax）
 - 复杂 shortcode 嵌套（shortcode 里又调用 shortcode）
 
