@@ -50,7 +50,7 @@ hugo server -D
 
 在浏览器中访问http://localhost:1313/ ，如果正常就会显示出页面。
 
-
+*如果出现报错多半是没有下载go。https://go.dev/dl/下载`go1.22.x.windows-amd64.msi`。
 
 ## 二、用 Hugo-Theme-Stack Starter（适合新手）
 
@@ -148,3 +148,60 @@ git push -u origin main
 上述所示，没有常规标记draft : true的草稿方式。
 
 但是！由于工作流中规定的【不允许上传未来日期/过时的帖子】。因此，如果想要上传一个公网上不可见（相当于私密的）帖子，可以把日期改为未来的日期。比如`2100年6月6日`，这样的话起码75年内都不会有人能在公网上访问你的私密帖子了。
+
+### 构建失败：超时
+
+```
+un hugo --minify --gc --buildDrafts=false
+  --buildFuture=false --buildExpired=false
+  Start building sites
+  hugo v0.154.5-a6f99cca223a29cad1d4cdaa6a1a90508ac1da71+extended linux/amd64
+  BuildDate=2026-01-11T20:53:23Z VendorInfo=gohugoio
+
+  hugo: collected modules in 674 msERROR error building site: "/home/runner/
+  work/Selaphina.github.io/Selaphina.github.io/content/post/25-12-11 仿原神渲染
+  /index.md:1:1": timed out rendering the page content. Extend the
+  timeout
+ limit in your Hugo config file: timeout after 1m0s
+  Total in 219536 ms
+  Error: Process completed with exit code 1.
+ 
+```
+
+这个原因在于：
+
+Hugo 在渲染某一篇 Markdown 页面时，单页渲染耗时超过 60 秒，直接被强制中断。
+
+这篇帖子写的太长，Markdown 中包含 **极大体量的代码块 / 数学公式 / 嵌套短代码**
+
+典型高风险内容：
+
+- 超长 `代码块`
+- 大量 `{{< highlight >}}` 或 `{{< prism >}}`
+- 大量 LaTeX 数学公式（KaTeX / MathJax）
+- 复杂 shortcode 嵌套（shortcode 里又调用 shortcode）
+
+#### 解决方案
+
+✅官解： 直接延长 Hugo timeout（必须做）
+
+在你的 `config.toml / config.yaml` 中加入：
+
+*我这里是toml
+
+![](image-20260119163930332.png)
+
+`toml`
+
+```
+timeout = "5m"
+```
+
+`YAML`
+
+```
+timeout: 5m
+```
+
+> GitHub Actions 机器慢，**1 分钟对中等偏长技术博客是完全不够的**
+
