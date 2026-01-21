@@ -302,3 +302,4 @@ VT和Texture Streaming区别
 
 其他的法线/Mask/Metal等等都不必勾选sRGB。
 
+![](image-20260121213511000.png)
