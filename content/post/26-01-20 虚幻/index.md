@@ -7,12 +7,6 @@ categories:
 weight: 1997       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
-## 
-
-
-
-## 
-
 
 
 # 虚幻引擎
@@ -297,3 +291,14 @@ VT和Texture Streaming区别
 结果：
 • 阈值不准
 • 材质行为怪异
+
+> 快捷键Enter能打开纹理的编辑器。也可以对纹理贴图右键——编辑。
+
+注意：lightmap注意勾选灰阶（grayscale G8/16）
+
+![](image-20260121213051464.png)
+
+其余，1）漫反射贴图（diffuse）； 2）Ramp图需要勾选sRGB。
+
+其他的法线/Mask/Metal等等都不必勾选sRGB。
+
