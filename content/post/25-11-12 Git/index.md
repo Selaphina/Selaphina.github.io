@@ -253,3 +253,144 @@ ssh-add ~/.ssh/id_ed25519
 
 ![image-20251114103822658](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20251114103822658.png)
 
+## git怎么同时管理多个账号
+
+当本机上有大于等于2个github账号时，登录信息可能会错乱，特别时访问组织/企业的私有仓库拉取项目时，很容易报错。
+
+```
+fatal: repository 'https://github.com/xxx-xxxx-xxxx/xxx_xxxx_xxxxx.git/' not found  
+```
+
+又或者，想切回自己的个人仓库提交东西，却发现：
+
+```
+ERROR: Permission to Selaphina/Selaphina.github.io.git denied to WangSiya010. fatal: Could not read from remote repository.
+```
+
+**仓库所有者**：`Selaphina`
+
+**你当前使用的 GitHub 账号**：`WangSiya010`
+
+在 **Windows + Git** 下，身份可能来自 **3 个地方之一**：
+
+1. **HTTPS Token（Windows Credential Manager）**
+2. **SSH key（~/.ssh/id_rsa 对应的 GitHub 账号）**
+3. **GitHub Desktop / gh CLI 登录状态**
+
+你现在这台机器 **已经在用 `WangSiya010` 的凭据**，所以 GitHub 拒绝你。
+
+### 标准解决方法
+
+#### 一、为每个 GitHub 账号生成独立 SSH Key
+
+> ⚠️ 不要复用 key，这是串号根源
+
+1.给 Selaphina 生成 key
+
+```
+ssh-keygen -t ed25519 -C "selaphina@github" -f ~/.ssh/id_ed25519_selaphina
+```
+
+2.给 WangSiya010 生成 key
+
+```
+ssh-keygen -t ed25519 -C "wangsiya010@github" -f ~/.ssh/id_ed25519_wang
+```
+
+#### 二、把 SSH Key 加入 ssh-agent（非常重要）
+
+```
+eval "$(ssh-agent -s)"
+
+ssh-add ~/.ssh/id_ed25519_selaphina
+
+ssh-add ~/.ssh/id_ed25519_wang
+```
+
+验证：
+
+```
+ssh-add -l
+```
+
+应该能看到 **两个 key**：
+
+```
+admin@BJNBC-0010887 MINGW64 ~
+$ ssh-add -l
+256 SHA256:6hL998UnHpS0zeeu1kNoWsUWiF8Dj+sRaeKsdTnjOeg selaphina@github (ED25519)
+256 SHA256:JhnksLYhb7OUNW1D1oOvKV/c5V5gTK8zeMNLDcl+Mew wangsiya010@github (ED25519)
+```
+
+
+
+#### 三、配置 `~/.ssh/config`（核心）
+
+创建 / 编辑：
+
+```
+nano ~/.ssh/config
+```
+
+填入 **完整内容**：
+
+```
+# Selaphina 主账号
+Host github-selaphina
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_selaphina
+  IdentitiesOnly yes
+
+# WangSiya010 副账号
+Host github-wang
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_wang
+  IdentitiesOnly yes
+```
+
+`Ctrl + O`保存，**直接回车即可**退出。
+
+#### 四、把 SSH 公钥分别加到 GitHub
+
+**Selaphina**
+
+```
+cat ~/.ssh/id_ed25519_selaphina.pub
+```
+
+复制 →
+ GitHub → Settings → SSH and GPG keys → **New SSH key**
+
+------
+
+**WangSiya010**
+
+```
+cat ~/.ssh/id_ed25519_wang.pub
+```
+
+同样添加到 **WangSiya010** 账号
+
+#### 五、测试（非常关键）
+
+```
+ssh -T git@github-selaphina
+```
+
+应看到：
+
+```
+Hi Selaphina! You've successfully authenticated...
+ssh -T git@github-wang
+```
+
+应看到：
+
+```
+Hi WangSiya010! You've successfully authenticated...
+```
+
+
+
