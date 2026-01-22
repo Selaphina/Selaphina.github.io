@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on Selaphina</title><link>https://Selaphina.github.io/tags/hugo/</link><description>Recent content in Hugo on Selaphina</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 Nov 2025 10:12:30 +0000</lastBuildDate><atom:link href="https://Selaphina.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo：个人博客建站指南</title><link>https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/</link><pubDate>Sun, 09 Nov 2025 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/</guid><description>&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/hugo.png" alt="Featured image of post Hugo：个人博客建站指南" /&gt;&lt;p&gt;作为Hugo建站新手，使用作者提供的 &lt;strong&gt;Stack starter template&lt;/strong&gt;，并用 &lt;strong&gt;GitHub Actions&lt;/strong&gt; 自动构建并部署到 GitHub Pages，最为方便。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;建站之初参考了很多博主的指南博客，都是手工方式在本地安装Hugo，把stack主题拉取到本地再部署到github上。然而实际操作过程中总有和博主相悖的情况发生，遂找G老师从头复盘一遍。最后一遍过。&lt;/p&gt;
+&lt;p&gt;Todo：补充自备案域名的建站方式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="一先决条件"&gt;一、先决条件
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;一个 GitHub 账号（有仓库权限）。&lt;/li&gt;
+&lt;li&gt;安装 Git（本地开发时需要）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;小提示：如果只是用 starter 模板并通过 GitHub Actions 构建部署，&lt;strong&gt;本地安装 Hugo 可以暂时跳过&lt;/strong&gt; — 但建议安装以便本地预览与调试。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;3.从Hugo资源页&lt;a class="link" href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener"
+&gt;Releases · gohugoio/hugo&lt;/a&gt;下载amd版本（查看自己的电脑为**&lt;code&gt;基于 x64 的处理器&lt;/code&gt;** -&amp;gt; &lt;strong&gt;下载 &lt;code&gt;amd64&lt;/code&gt;版本。&lt;/strong&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154753124.png"
+width="1338"
+height="231"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154753124_hu_d8236d5e78984e71.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154753124_hu_12a417f4844c1e53.png 1024w"
+loading="lazy"
+alt="image-20251107154753124"
+class="gallery-image"
+data-flex-grow="579"
+data-flex-basis="1390px"
+&gt;&lt;/p&gt;
+&lt;p&gt;由于部分主题需要 Hugo 的 Extended 版本才可以正常使用，因此建议&lt;strong&gt;一步到位直接安装 Extended 版本&lt;/strong&gt;的 Hugo，在将压缩包解压后一定不要忘记的是将 &lt;code&gt;hugo.exe&lt;/code&gt; 所在的文件夹添加至用户的**&lt;a class="link" href="https://zhida.zhihu.com/search?content_id=165841755&amp;amp;content_type=Article&amp;amp;match_order=1&amp;amp;q=%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f&amp;amp;zhida_source=entity" target="_blank" rel="noopener"
+&gt;环境变量&lt;/a&gt;**。&lt;/p&gt;
+&lt;p&gt;若是以上步骤都正常完成，那么可以在输入 &lt;code&gt;hugo version&lt;/code&gt; 命令后得到正常的版本号显示。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154836195.png"
+width="1434"
+height="255"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154836195_hu_7ed2a0842f8e6f8f.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154836195_hu_bf136d0eb157f90e.png 1024w"
+loading="lazy"
+alt="image-20251107154836195"
+class="gallery-image"
+data-flex-grow="562"
+data-flex-basis="1349px"
+&gt;&lt;/p&gt;
+&lt;p&gt;4.初始化&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo new site XXX
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;5.快速预览&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;浏览 http://localhost:1313 查看效果。注意：-D的意思是同时预览草稿。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo server -D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在浏览器中访问http://localhost:1313/ ，如果正常就会显示出页面。&lt;/p&gt;
+&lt;p&gt;*如果出现报错多半是没有下载go。https://go.dev/dl/下载&lt;code&gt;go1.22.x.windows-amd64.msi&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id="二用-hugo-theme-stack-starter适合新手"&gt;二、用 Hugo-Theme-Stack Starter（适合新手）
+&lt;/h2&gt;&lt;p&gt;Stack 作者维护了一个 starter 模板并自带 GitHub Actions 来部署，直接用模板能省很多配置工作。示例仓库与 workflow 可参考作者的 starter。&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter" target="_blank" rel="noopener"
+&gt;Hugo-Theme-Stack&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="步骤"&gt;&lt;strong&gt;步骤：&lt;/strong&gt;
+&lt;/h3&gt;&lt;h4 id="1在-github-上用模板创建仓库"&gt;1.&lt;strong&gt;在 GitHub 上用模板创建仓库&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;打开 &lt;code&gt;CaiJimmy/hugo-theme-stack-starter&lt;/code&gt; 仓库（或访问主题主页找到 starter 链接），点击 &lt;strong&gt;Use this template → Create a new repository from template&lt;/strong&gt;。选择仓库名：
+&lt;ul&gt;
+&lt;li&gt;如果你想把博客作为个人主页（username.github.io），仓库名应为 &lt;code&gt;your-github-username.github.io&lt;/code&gt;（这样 GitHub Pages 会直接在根域名托管）。&lt;/li&gt;
+&lt;li&gt;如果想作为项目页（例如 &lt;code&gt;your-username/myblog&lt;/code&gt;），可以用任意仓库名（但发布 URL 会是 &lt;code&gt;https://username.github.io/repo&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;（参考：starter 仓库自带 Actions 和样例配置。）&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter?utm_source=chatgpt.com" target="_blank" rel="noopener"
+&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="2-把仓库-clone-到本地可选但推荐"&gt;2. &lt;strong&gt;把仓库 clone 到本地（可选但推荐）&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/your-username/your-repo.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cd your-repo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="3-修改站点配置最重要的两项"&gt;3. &lt;strong&gt;修改站点配置（最重要的两项）&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;打开仓库中的 &lt;code&gt;config.toml&lt;/code&gt;（或 &lt;code&gt;config/_default/config.toml&lt;/code&gt;，starter 可能把配置拆分），修改：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;baseURL&lt;/code&gt;：部署到 GitHub Pages 时必须设置为你站点的真实 URL，例如：
+&lt;ul&gt;
+&lt;li&gt;个人主页（username.github.io）: &lt;code&gt;https://your-username.github.io/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;比如我：&lt;a class="link" href="https://selaphina.github.io/" target="_blank" rel="noopener"
+&gt;Selaphina&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;项目页：&lt;code&gt;https://your-username.github.io/repo-name/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;title&lt;/code&gt;、&lt;code&gt;author&lt;/code&gt; 等按需修改。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Starter 通常已经把 theme 配好为 Hugo module（不用把主题源码放到 &lt;code&gt;themes/&lt;/code&gt;），直接修改 baseURL 即可。参考 Stack 文档或 starter README。&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack?utm_source=chatgpt.com" target="_blank" rel="noopener"
+&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="4启动本地预览"&gt;4.&lt;strong&gt;启动本地预览&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo server -D
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 浏览 http://localhost:1313 查看效果
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="5确认-github-actions-workflow自动部署"&gt;5.&lt;strong&gt;确认 GitHub Actions workflow（自动部署）&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;starter 仓库中自带 &lt;code&gt;.github/workflows/deploy.yml&lt;/code&gt;（或类似文件），该 workflow 会在你 push 到主分支后构建 Hugo 并把 &lt;code&gt;public/&lt;/code&gt; 内容发布到 GitHub Pages（通常是 &lt;code&gt;gh-pages&lt;/code&gt; 分支或通过 &lt;code&gt;pages&lt;/code&gt; 路径）。你可以打开该文件预览构建步骤并根据需要修改 Hugo 版本或 build 参数。示例和历史记录见作者 repo。&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter/actions/workflows/deploy.yml?utm_source=chatgpt.com" target="_blank" rel="noopener"
+&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107220605272.png"
+width="1151"
+height="894"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107220605272_hu_a6f9ea395bafca7a.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107220605272_hu_2aaa0e14c727fee4.png 1024w"
+loading="lazy"
+alt="image-20251107220605272"
+class="gallery-image"
+data-flex-grow="128"
+data-flex-basis="308px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181141764.png"
+width="1172"
+height="504"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181141764_hu_2f89172ccd7afc02.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181141764_hu_64dde4c6414fdeb7.png 1024w"
+loading="lazy"
+alt="image-20251109181141764"
+class="gallery-image"
+data-flex-grow="232"
+data-flex-basis="558px"
+&gt;&lt;/p&gt;
+&lt;h4 id="6推送修改并等待自动部署"&gt;6.&lt;strong&gt;推送修改并等待自动部署&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;Customize site config&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;推送后，GitHub Actions 会触发构建并将结果发布到 GitHub Pages。你可以在仓库的 &lt;strong&gt;Actions&lt;/strong&gt; 标签页查看构建日志与历史。成功后，访问你设置的 &lt;code&gt;baseURL&lt;/code&gt; 即可看到站点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;比如：https://selaphina.github.io/&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;7.新建博客帖子：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;根目录\content\post&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181312523.png"
+width="564"
+height="531"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181312523_hu_1ad8827c9805aa4b.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181312523_hu_d517a82b1cd7880d.png 1024w"
+loading="lazy"
+alt="image-20251109181312523"
+class="gallery-image"
+data-flex-grow="106"
+data-flex-basis="254px"
+&gt;&lt;/p&gt;
+&lt;h2 id="附录"&gt;附录
+&lt;/h2&gt;&lt;h3 id="create-a-new-repository-on-the-command-line"&gt;create a new repository on the command line
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git remote add origin git@github.com:Selaphina/Selaphina.github.io.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;first commit&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="push-an-existing-repository-from-the-command-line"&gt;push an existing repository from the command line
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git remote add origin git@github.com:huoshaoweiba/Sera.github.io-.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -M main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="怎么删除帖子"&gt;怎么删除帖子？
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;本想设置草稿帖子，即在网络上访问时不显示的帖子。但是无论设置draft: true还是private：true都失败了，草稿照常显示，非常不美观。对构建config.yml等进行修改也无效果。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;删除不需要的帖子。单纯从content中删除之后，本地hugo server正常删除，而公网上的帖子仍然存在。经检查，应在&lt;code&gt;\..\【站点根目录】\public\p&lt;/code&gt;目录下的对应帖子也删除才可以。&lt;/p&gt;
+&lt;p&gt;不知是否是构建工作流没有顾及到位。总之目前只能用此方法删除。&lt;/p&gt;
+&lt;h3 id="怎么设置草稿"&gt;怎么设置草稿？
+&lt;/h3&gt;&lt;p&gt;上述所示，没有常规标记draft : true的草稿方式。&lt;/p&gt;
+&lt;p&gt;但是！由于工作流中规定的【不允许上传未来日期/过时的帖子】。因此，如果想要上传一个公网上不可见（相当于私密的）帖子，可以把日期改为未来的日期。比如&lt;code&gt;2100年6月6日&lt;/code&gt;，这样的话起码75年内都不会有人能在公网上访问你的私密帖子了。&lt;/p&gt;
+&lt;h3 id="构建失败超时"&gt;构建失败：超时
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;un hugo --minify --gc --buildDrafts=false
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --buildFuture=false --buildExpired=false
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Start building sites
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; hugo v0.154.5-a6f99cca223a29cad1d4cdaa6a1a90508ac1da71+extended linux/amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; BuildDate=2026-01-11T20:53:23Z VendorInfo=gohugoio
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; hugo: collected modules in 674 msERROR error building site: &amp;#34;/home/runner/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; work/Selaphina.github.io/Selaphina.github.io/content/post/25-12-11 仿原神渲染
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; /index.md:1:1&amp;#34;: timed out rendering the page content. Extend the
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; limit in your Hugo config file: timeout after 1m0s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Total in 219536 ms
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Error: Process completed with exit code 1.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这个原因在于：&lt;/p&gt;
+&lt;p&gt;Hugo 在渲染某一篇 Markdown 页面时，单页渲染耗时超过 60 秒，直接被强制中断。&lt;/p&gt;
+&lt;p&gt;这篇帖子写的太长，Markdown 中包含 &lt;strong&gt;极大体量的代码块 / 数学公式 / 嵌套短代码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;典型高风险内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;超长 &lt;code&gt;代码块&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;大量highlight&lt;/li&gt;
+&lt;li&gt;大量 LaTeX 数学公式（KaTeX / MathJax）&lt;/li&gt;
+&lt;li&gt;复杂 shortcode 嵌套（shortcode 里又调用 shortcode）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="解决方案"&gt;解决方案
+&lt;/h4&gt;&lt;p&gt;✅官解： 直接延长 Hugo timeout（必须做）&lt;/p&gt;
+&lt;p&gt;在你的 &lt;code&gt;config.toml / config.yaml&lt;/code&gt; 中加入：&lt;/p&gt;
+&lt;p&gt;*我这里是toml&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20260119163930332.png"
+width="638"
+height="213"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20260119163930332_hu_3ef5ffee268997a6.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20260119163930332_hu_4e90d78b5dc9029b.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="299"
+data-flex-basis="718px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;toml&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;timeout = &amp;#34;5m&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;YAML&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;timeout: 5m
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;GitHub Actions 机器慢，&lt;strong&gt;1 分钟对中等偏长技术博客是完全不够的&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item></channel></rss>
