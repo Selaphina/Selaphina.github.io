@@ -6,8 +6,7 @@ image: cover1.png
 categories:
     - 技术笔记
 tags:
-    - Unity
-	   - AI Agent
+    - AI Agent
 weight: 2000       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
