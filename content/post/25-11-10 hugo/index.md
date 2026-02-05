@@ -205,3 +205,82 @@ timeout: 5m
 
 > GitHub Actions 机器慢，**1 分钟对中等偏长技术博客是完全不够的**
 
+## Update theme失败
+
+![年底比较忙，给我整这出,每天定时更新失败一次，邮箱堆满了](D:\WSY\Selaphina\content\post\25-11-10 hugo\image-20260204012338653.png)
+
+在Action查看失败原因：
+
+![](D:\WSY\Selaphina\content\post\25-11-10 hugo\image-20260204012502151.png)
+
+```
+Run hugo mod tidy
+Error: "/tmp/hugo_cache_runner/modules/filecache/modules/pkg/mod/github.com/!cai!jimmy/hugo-theme-stack/v3@v3.34.0/layouts/partials/helper/color-from-str.html:4:1": parse failed: template: partials/helper/color-from-str.html:4: function "hash" not defined
+Error: Process completed with exit code 1.
+```
+
+> **GitHub Actions 使用的 Hugo 版本过旧，而 `hugo-theme-stack v3.34.0` 使用了新版 Hugo 才支持的 `hash` 模板函数。**
+
+因此在 GitHub 上构建失败，但你本地可能是正常的。
+
+```
+function "hash" not defined
+```
+
+
+说明：
+
+* hash 是 Hugo 新增的 template function
+
+* 当前 GitHub Actions 里的 Hugo 还没这个函数
+
+* 但 hugo-theme-stack v3.34.0 已经开始用了
+
+出问题的文件：
+
+```
+layouts/partials/helper/color-from-str.html
+```
+
+* 这是 Stack 主题 v3.34.0 新增的实现
+
+### 解决方案：升级 GitHub Actions 里的 Hugo
+
+如果你用的是官方 Hugo Action，打开你的 workflow，例如：
+
+`Selaphina.github.io/.github/workflows /update-theme.yml`
+
+目前workflow 做了两件**危险组合**的事：
+
+```yaml
+# ① 固定 Hugo 版本
+hugo-version: 0.123.8
+
+# ② 每天自动把 Stack 主题升级到“最新”
+hugo mod get -u github.com/CaiJimmy/hugo-theme-stack/v3
+
+```
+
+**这在工程上是一个不稳定系统**
+
+> **下游（主题）每天变，上游（Hugo）不变**
+
+于是某一天：
+
+- Stack `v3.34.0` → 开始使用 `hash` 模板函数
+- `hash` 需要 **Hugo ≥ 0.124**
+- 你的 CI 仍然是 **0.123.8**
+- 💥 定时任务自动升级主题 → 构建直接炸 → GitHub 给你疯狂发邮件
+
+### 修改点：
+
+```
+   hugo-version: 'latest'
+```
+
+- 既然**已经选择**让主题每天自动升级
+- 那 Hugo 就 **必须** 跟着升级
+- Stack 是 Hugo 官方生态里维护最规范的主题之一
+- **“最新 Hugo + 最新 Stack” 是被作者默认支持的组合**
+
+📌 **这是 Stack 作者自己在用的组合**
