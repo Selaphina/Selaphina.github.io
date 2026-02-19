@@ -281,6 +281,32 @@ ERROR: Permission to Selaphina/Selaphina.github.io.git denied to WangSiya010. fa
 
 ### 标准解决方法
 
+#### 如果不是初次：
+
+1. 把 SSH Key 加入 ssh-agent（非常重要）
+
+```
+eval "$(ssh-agent -s)"
+
+ssh-add ~/.ssh/id_ed25519_selaphina
+
+ssh-add ~/.ssh/id_ed25519_wang
+```
+
+2.切换到selaphina账号
+
+```
+ssh -T git@github-selaphina
+```
+
+3.接下来就可以正常操作了
+
+```
+git push
+```
+
+
+
 #### 一、为每个 GitHub 账号生成独立 SSH Key
 
 > ⚠️ 不要复用 key，这是串号根源
