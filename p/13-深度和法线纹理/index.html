@@ -1,0 +1,936 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Unity Shader 入门精要 第十三章"><title>13 深度和法线纹理</title><link rel=canonical href=https://Selaphina.github.io/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/><link rel=stylesheet href=/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css><meta property='og:title' content="13 深度和法线纹理"><meta property='og:description' content="Unity Shader 入门精要 第十三章"><meta property='og:url' content='https://Selaphina.github.io/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/'><meta property='og:site_name' content='Selaphina'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Unity Shader'><meta property='article:published_time' content='2024-06-20T22:10:30+00:00'><meta property='article:modified_time' content='2024-06-20T22:10:30+00:00'><meta property='og:image' content='https://Selaphina.github.io/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/cover1.png'><meta name=twitter:title content="13 深度和法线纹理"><meta name=twitter:description content="Unity Shader 入门精要 第十三章"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://Selaphina.github.io/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/cover1.png'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_19bb7832d48d68bd.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Selaphina</a></h1><h2 class=site-description>住在一个奇妙而荒诞的星球。</h2></div></header><ol class=menu-social><li><a href=https://github.com/Selaphina target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#1获取深度和法线纹理>1.获取深度和法线纹理</a><ol><li><a href=#1背后的原理>1）背后的原理</a></li><li><a href=#2获取深度纹理>2）获取深度纹理</a></li><li><a href=#3查看深度和法线纹理>3）查看深度和法线纹理</a></li></ol></li><li><a href=#2再谈运动模糊>2.再谈运动模糊</a><ol><li><a href=#motionblurwithdepthtexturecs>MotionBlurWithDepthTexture.cs</a></li><li><a href=#chapter13-motionblurwithdepthtexture>Chapter13-MotionBlurWithDepthTexture</a></li></ol></li><li><a href=#3全局雾效>3.全局雾效</a><ol><li><a href=#重建世界坐标>重建世界坐标</a></li><li><a href=#雾的计算>雾的计算</a></li><li><a href=#实现>实现</a><ol><li><a href=#fogwithdepthtexturecs脚本>FogWithDepthTexture.cs脚本</a></li></ol></li></ol></li><li><a href=#4新边缘检测>4.（新）边缘检测</a><ol><li><ol><li><a href=#edgedetectioncs>EdgeDetection.cs</a></li><li><a href=#chapter13-edgedetectnormalanddepth>Chapter13-EdgeDetectNormalAndDepth，</a></li></ol></li></ol></li><li><a href=#扩展阅读>扩展阅读</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/cover1_hu_e2943e4ee1c34a24.png srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/cover1_hu_e2943e4ee1c34a24.png 800w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/cover1_hu_c98519924185e750.png 1600w" width=800 height=359 loading=lazy alt="Featured image of post 13 深度和法线纹理"></a></div><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/ style=background-color:#beefe1;color:#0f3d30>技术笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/>13 深度和法线纹理</a></h2><h3 class=article-subtitle>Unity Shader 入门精要 第十三章</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2024-06-20T22:10:30Z>Jun 20, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>12 minute read</time></div></footer></div></header><section class=article-content><p>在第12章中,我们学习的屏幕后处理效果都只是在屏幕颜色图像上进行各种操作来实现的。然而,很多时候我们不仅需要当前屏幕的颜色信息,还希望得到深度和法线信息。例如,在进行边缘检测时,直接利用颜色信息会使检测到的边缘信息受物体纹理和光照等外部因素的影响,得
+到很多我们不需要的边缘点。</p><p>一种更好的方法是,我们可以在深度纹理和法线纹理上进行边缘检测,这些图像不会受纹理和光照的影响,而仅仅保存了当前渲刻染物体的模型信息,通过这样的方式检测出来的边缘更加可靠。</p><h2 id=1获取深度和法线纹理>1.获取深度和法线纹理</h2><h3 id=1背后的原理>1）背后的原理</h3><p>深度纹理实际就是一张渲染纹理，只不过它里面存储的像素值不是颜色值，而是一个高精度的深度值。由于被存储在一张纹理中，深度纹理里的深度值范围是[0,1]，而且通常是非线性分布的。</p><p>那么，这些深度值是从哪里得到的呢?要回答这个问题，我们需要回顾在第4章学过的顶点变换的过程。总体来说，这些深度值来自于顶点变换后得到的归一化的设备坐标(NormalizedDevice Coordinates ，NDC)。回顾一下，一个模型要想最终被绘制在屏幕上，需要把它的顶点从模型空间变换到齐次裁剪坐标系下，这是通过在顶点着色器中乘以MVP变换矩阵得到的。在变换的最后一步，我们需要使用一个投影矩阵来变换顶点，当我们使用的是透视投影类型的摄像机时，这个投影矩阵就是非线性的，具体过程可回顾4.6.7小节。</p><p>图13.1显示了4.6.7小节中给出的Unity 中透视投影对顶点的变换过程。图13.1中最左侧的图显示了投影变换前，即观察空间下视锥体的结构及相应的顶点位置，中间的图显示了应用透视裁剪矩阵后的变换结果，即顶点着色器阶段输出的顶点变换结果，最右侧的图则是底层硬件进行了透视除法后得到的归一化的设备坐标。</p><p>需要注意的是，这里的投影过程是建立在Unity 对坐标系的假定上的，也就是说，我们针对的是观察空间为右手坐标系，使用列矩阵在矩阵右侧进行相乘，且变换到 NDC后z分量范围将在[-1,1]之间的情况。而在类似DirectX 这样的图形接口中，变换后z分量范围将在[0,1]之间。如果需要在其他图形接口下实现本章的类似效果，需要对一些计算参数做出相应变化。关于变换时使用的矩阵运算，读者可以参考4.6.7小节。</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251201173138827.png width=117 height=111 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251201173138827_hu_921bfa1975287c8d.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251201173138827_hu_846689c9668d3a2.png 1024w" loading=lazy alt=unity的坐标系 class=gallery-image data-flex-grow=105 data-flex-basis=252px></p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251201173202845.png width=1016 height=407 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251201173202845_hu_f3b2f759ade0653f.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251201173202845_hu_a0e7ed06f8a1b449.png 1024w" loading=lazy alt=image-20251201173202845 class=gallery-image data-flex-grow=249 data-flex-basis=599px></p><p>图13.2显示了在使用正交摄像机时投影变换的过程。同样，变换后会得到一个范围为[-1,1]的立方体。正交投影使用的变换矩阵是线性的。</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251201173226154.png width=1020 height=354 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251201173226154_hu_e83b0d2f56222c74.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251201173226154_hu_d46b3a93d19ba1f.png 1024w" loading=lazy alt=image-20251201173226154 class=gallery-image data-flex-grow=288 data-flex-basis=691px></p><p>在得到 NDC后,深度纹理中的像素值就可以很方便地计算得到了,这些深度值就对应了NDC中顶点坐标的z分量的值。由于NDC中z分量的范围在[-1,1]，为了让这些值能够存储在一张图像中，我们需要使用下面的公式对其进行映射:</p>$$
+d = 0.5 \cdot z_{ndc} + 0.5
+$$<p>其中，d对应了深度纹理中的像素值，z-ndc-对应了NDC坐标中的z分量的值。那么 Unity 是怎么得到这样一张深度纹理的呢?</p><p>在 Unity 中，深度纹理可以直接来自于真正的深度缓存，也可以是由一个单独的 Pass 渲染而得，这取决于使用的渲染路径和硬件。通常来讲,当使用延迟渲染路径(包括遗留的延迟渲染路径)时，深度纹理理所当然可以访问到，因为延迟渲染会把这些信息渲染到 G-bufer 中。</p><p>而当无法直接获取深度缓存时，深度和法线纹理是通过一个单独的 Pass 渲染而得的。具体实现是，Unity会使用着色器替换 ( Shader Replacement ) 技术选择那些渲染类型 (即 SubShader的RenderType 标签 ) 为Opaque 的物体，判断它们使用的渲染队列是否小于等于2500 ( 内置的Background、Geometry和AlphaTest 渲染队列均在此范围内 )，如果满足条件，就把它渲染到深度和法线纹理中。因此，要想让物体能够出现在深度和法线纹理中，就必须在 Shader 中设置正确的 RenderType 标签
+在 Unity 中，我们可以选择让一个摄像机生成一张深度纹理或是一张深度+法线纹理。当选择前者，即只需要一张单独的深度纹理时，Unity会直接获取深度缓存或是按之前讲到的着色器替换技术，选取需要的不透明物体，并使用它投射阴影时使用的Pass(即LightMode被设置为ShadowCaster 的Pass，详见9.4节)来得到深度纹理。如果 Shader 中不包含这样一个Pass，那么这个物体就不会出现在深度纹理中(当然，它也不能向其他物体投射阴影)。深度纹理的精度通常是24位或16位，这取决于使用的深度缓存的精度。如果选择生成一张深度+法线纹理，Unity会创建一张和屏幕分辨率相同、精度为32位(每个通道为8位)的纹理，其中观察空间下的法线信息会被编码进纹理的R和G通道，而深度信息会被编码进B和A通道。法线信息的获取在延迟渲染中是可以非常容易就得到的，Unity只需要合并深度和法线缓存即可。而在前向渲染中，默认情况下是不会创建法线缓存的，因此 Unity底层使用了一个单独的 Pass 把整个场景再次渲染一遍来完成。这个Pass被包含在Unity内置的一个UnityShader中，我们可以在内置的builtin shaders-xxx/DefaultResources/Camera-DepthNormalTexture.shader 文件中找到这个用于渲染深度和法线信息的 Pass。</p><h3 id=2获取深度纹理>2）获取深度纹理</h3><p>在 Unity 中，获取深度纹理是非常简单的，我们只需要告诉 Unity:“嘿，把深度纹理给我!”然后再在 Shader 中直接访问特定的纹理属性即可。这个与Unity 沟通的过程是通过在脚本中设置摄像机的 depthTextureMode 来完成的，例如我们可以通过下面的代码来获取深度纹理:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>camera,depthTextureMode = DepthTextureMode.Depth;
+</span></span></code></pre></td></tr></table></div></div><p>一旦设置好了上面的摄像机模式后，我们就可以在Shader中通过声明CameraDepthTexture变量来访问它。这个过程非常简单，但我们需要知道这两行代码的背后，Unity为我们做了许多工作(见13.1.1节)。</p><p>同理，如果想要获取深度+法线纹理，我们只需要在代码中这样设置:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>camera.depthTextureMode = DepthTextureMode.DepthNormals;
+</span></span></code></pre></td></tr></table></div></div><p>然后在 Shader中通过声明 CameraDepth变量来访问它。TaSexture我们还可以组合这些模式，让一个摄像机同时产生一张深度和深度+法线纹理:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>camera.depthTextureMode=DepthTextureMode.Depth;
+</span></span><span class=line><span class=cl>camera.depthTextureMode=DepthTextureMode.DepthNormals;
+</span></span></code></pre></td></tr></table></div></div><p>在 Unity5中，我们还可以在摄像机的Camera 组件上看到当前摄像机是否需要渲染深度或深度+法线纹理。当在 Shader 中访问到深度纹理CameraDepthTexture后，我们就可以使用当前像素的纹理坐标对它进行采样。绝大多数情况下，我们直接使用tex2D函数采样即可，但在某些平台(例如PS3和PSP2)上，我们需要一些特殊处理。Uniy为我们提供了一个统一的宏SAMPLE DEPTH TEXTURE，用来处理这些由于平台差异造成的问题。而我们只需要在 Shader中使用 SAMPLE DEPTH TEXTURE 宏对深度纹理进行采样，例如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float d=SAMPLE DEPTH TEXTURE( CameraDepthTexture,i.uv);
+</span></span></code></pre></td></tr></table></div></div><p>其中，i.uv是一个foat2类型的变量，对应了当前像素的纹理坐标。类似的宏还有SAMPLE DEPTH TEXTURE PROJ和 SAMPLE DEPTH TEXTURE LOD。 SAMPLE DEPTHTEXTURE PROJ宏同样接受两个参数&ndash;深度纹理和一个 foat3 或 foat4 类型的纹理坐标,它的内部使用了 tex2Dproj这样的函数进行投影纹理采样，纹理坐标的前两个分量首先会除以最后一个分量，再进行纹理采样。如果提供了第四个分量，还会进行一次比较，通常用于阴影的实现中。SAMPLE DEPTH TEXTUREPROJ的第二个参数通常是由顶点着色器输出插值而得的屏幕坐标，例如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float d=SAMPLE DEPTH TEXTURE PROJ( CameraDepthTexture,UNITY PROJ COORD(i.scrPos));
+</span></span></code></pre></td></tr></table></div></div><p>其中，i.scrPos 是在顶点着色器中通过调用 ComputeScreenPos(o.pos)得到的屏幕坐标。上述这
+些宏的定义，读者可以在 Unity内置的HSLSupport.cginc 文件中找到。当通过纹理采样得到深度值后，这些深度值往往是非线性的，这种非线性来自于透视投影使用的裁剪矩阵。然而，在我们的计算过程中通常是需要线性的深度值，也就是说，我们需要把投影后的深度值变换到线性空间下，例如视角空间下的深度值。那么，我们应该如何进行这个转换呢?实际上，我们只需要倒推顶点变换的过程即可。下面我们以透视投影为例，推导如何由深度纹理中的深度信息计算得到视角空间下的深度值。
+由4.6.7节可知，当我们使用透视投影的裁剪矩阵P"对视角空间下的一个顶点进行变换后，裁剪空间下顶点的z和w分量为:</p>$$
+z_{\text{clip}} = -z_{\text{visw}} \frac{ \text{Far} + \text{Near} }{ \text{Far} - \text{Near} } - \frac{2 \cdot \text{Near} \cdot \text{Far} }{ \text{Far} - \text{Near} }
+$$$$
+w_{\text{clip}} = -z_{\text{visw}}
+$$<p>其中，Far 和Near 分别是远近裁剪平面的距离。然后，我们通过齐次除法就可以得到 NDC下的z分量:</p>$$
+z_{\text{ndc}} = \frac{z_{\text{clip}}}{w_{\text{clip}}} = \frac{ \text{Far} + \text{Near} }{ \text{Far} - \text{Near} } + \frac{2 \cdot \text{Near} \cdot \text{Far} }{ (\text{Far} - \text{Near}) \cdot z_{\text{visw}} }
+$$<p>在 13.1.1节中我们知道，深度纹理中的深度值是通过下面的公式由NDC计算而得的:</p>$$
+d = 0.5 \cdot z_{ndc} + 0.5
+$$<p>由上面的这些式子，我们可以推导出用d表示而得的z的表达式:</p>$$
+z'_{\text{visw}} = \frac{ 1 }{ \frac{ \text{Far} - \text{Near}}{\text{Near} \cdot \text{Far} } d - \frac{1}{\text{Near}}}
+$$<p>由于在 Unity 使用的视角空间中，摄像机正向对应的z值均为负值，因此为了得到深度值的正数表示，我们需要对上面的结果取反，最后得到的结果如下:</p>$$
+z_{01} = \frac{ 1 }{ \frac{ \text{Near} - \text{Far}}{\text{Near}} d + \frac{Far}{\text{Near}}}
+$$<p>幸运的是，Unity 提供了两个辅助函数来为我们进行上述的计算过程一LinearEyeDepth和Linear01Depth。</p><p>LinearEyeDepth负责把深度纹理的采样结果转换到视角空间下的深度值，也就是我们上面得到的Z&rsquo;visw。</p><p>而Linear01Depth 则会返回一个范围在[0,1]的线性深度值，也就是我们上面得到的 Z01。这两个函数内部使用了内置的 ZBuferParams 变量来得到远近裁剪平面的距离。如果我们需要获取深度+法线纹理，可以直接使用tex2D数对CameraDepthNormalsTexture进行采样，得到里面存储的深度和法线信息。Unity 提供了辅助函数来为我们对这个采样结果进行解码，从而得到深度值和法线方向。这个函数是DecodeDepthNormal，它在UnityCG.cginc 里被定义：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>inline void DecodeDepthNormal( float4 enc,out float depth, out float3 normal)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    depth =DecodeFloatRG(enc.zw);
+</span></span><span class=line><span class=cl>    normal=DecodeViewNormalStereo(enc);
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>DecodeDepthNormal的第一个参数是对深度+法线纹理的采样结果，这个采样结果是 Unity 对深度和法线信息编码后的结果,它的xy分量存储的是视角空间下的法线信息,而深度信息被编码进了 zw 分量。通过调用 DecodeDepthNormal 函数对采样结果解码后，我们就可以得到解码后的深度值和法线。这个深度值是范围在[0.11的线性深度值(这与单独的深度纹理中存储的深度值不同)，而得到的法线则是视角空间下的法线方向。同样，我们也可以通过调用DecodeFloatRG 和DecodeViewNormalStereo 来解码深度+法线纹理中的深度和法线信息。</p><p>至此，我们已经学会了如何在 Unity 里获取及使用深度和法线纹理。下面，我们会学习如何使用它们实现各种屏幕特效。</p><h3 id=3查看深度和法线纹理>3）查看深度和法线纹理</h3><p>很多时候，我们希望可以查看生成的深度和法线纹理，以便对Shader 进行调试。Unity5提供了一个方便的方法来查看摄像机生成的深度和法线纹理，这个方法就是利用帧调试器(FrameDebugger)。图13.3 显示了使用帧调试器査看到的深度纹理和深度+法线纹理。</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251202005807184.png width=1098 height=413 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251202005807184_hu_fac5834def2be947.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251202005807184_hu_954d4a18b448f959.png 1024w" loading=lazy alt=image-20251202005807184 class=gallery-image data-flex-grow=265 data-flex-basis=638px></p><p>使用帧调试器查看到的深度纹理是非线性空间的深度值,而深度+法线纹理都是由Unity 编码后的结果。有时，显示出线性空间下的深度信息或解码后的法线方向会更加有用。此时，我们可以自行在片元着色器中输出转换或解码后的深度和法线值，如图13.4所示。输出代码非常简单，我们可以使用类似下面的代码来输出线性深度值:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float depth = SAMPLE DEPTH TEXTURE( CameraDepthTexture,i.uv);
+</span></span><span class=line><span class=cl>float linearDepth = Linear01Depth(depth);
+</span></span><span class=line><span class=cl>return fixed4(linearDepth,linearDepth,linearDepth，1.0);
+</span></span></code></pre></td></tr></table></div></div><p>或是输出法线方向:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>fixed3 normal = DecodeViewNormalStereo(tex2D(_CameraDepthNormalsTexture, i.uv).xy);
+</span></span><span class=line><span class=cl>return fixed4(normal*0.5+0.5, 1.0);
+</span></span></code></pre></td></tr></table></div></div><p>在查看深度纹理时，读者得到的画面有可能几乎是全黑或全白的。这时候读者可以把摄像机的远裁剪平面的距离(Unity默认为1000)调小，使视锥体的范围刚好覆盖场景的所在区域。这是因为，由于投影变换时需要覆盖从近裁剪平面到远裁剪平面的所有深度区域，当远裁剪平面的距离过大时，会导致离摄像机较近的距离被映射到非常小的深度值，如果场景是一个封闭的区域(如图13.4所示)，那么这就会导致画面看起来几乎是全黑的。相反，如果场景是一个开放区域，且物体离摄像机的距离较远，就会导致画面几乎是全白的。</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251202010103493.png width=1023 height=297 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251202010103493_hu_783729dda3c4b33e.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251202010103493_hu_47b44f3fd61fdac5.png 1024w" loading=lazy alt=image-20251202010103493 class=gallery-image data-flex-grow=344 data-flex-basis=826px></p><h2 id=2再谈运动模糊>2.再谈运动模糊</h2><p>在12.6节中，我们学习了如何通过混合多张屏幕图像来模拟运动模糊的效果。但是，另一种应用更加广泛的技术则是使用速度映射图。速度映射图中存储了每个像素的速度，然后使用这个速度来决定模糊的方向和大小。速度缓冲的生成有多种方法，一种方法是把场景中所有物体的速度渲染到一张纹理中。但这种方法的缺点在于需要修改场景中所有物体的 Shader 代码，使其添加计算速度的代码并输出到一个渲染纹理中。</p><p>《GPU Gems3》在第27章(<a class=link href=http://http.developer target=_blank rel=noopener>http://http.developer</a>,nvidia.com/GPUGems3/gpugems3 ch27.html)中介绍了一种生成<strong>速度映射图</strong>的方法。这种方法利用深度纹理在片元着色器中为每个像素计算其在世界空间下的位置，这是通过使用当前的视角<em>投影矩阵的逆矩阵对NDC下的顶点坐标进行变换得到的。当得到世界空间中的顶点坐标后，我们使用前一帧的视角</em>投影矩阵对其进行变换，得到该位置在前一帧中的 NDC坐标。然后，我们计算前一帧和当前帧的位置差，生成该像素的速度。这种方法的优点是可以在一个屏幕后处理步骤中完成整个效果的模拟，但缺点是需要在片元着色器中进行两次矩阵乘法的操作，对性能有所影响。为了使用深度纹理模拟运动模糊，我们需要进行如下准备工作。</p><p>为了使用深度纹理模拟运动模糊，我们需要进行如下准备工作。(1)新建一个场景。在本书资源中，该场景名为Scene132。在 Unity5.2中，默认情况下场景将包含一个摄像机和一个平行光,并且使用了内置的天空盒子。在Window→ Lighting→Skybox中去掉场景中的天空盒子。
+(2)我们需要搭建一个测试运动模糊的场景。在本书资源的实现中，我们构建了一个包含3面墙的房间，并放置了4个立方体，它们都使用了我们在95节中创建的标准材质。同时，我们把本书资源中的 Translating.cs脚本拖曳给摄像机，让其在场景中不断运动。(3)新建一个脚本。在本书资源中，该脚本名为MotionBlurWithDepthTexture.cs。把该脚本拖曳到摄像机上。
+(4)新建一个Unity Shader。在本书资源中，该Shader 名为Chapter13-MotionBlurWithDepthTexture。</p><h3 id=motionblurwithdepthtexturecs>MotionBlurWithDepthTexture.cs</h3><p>我们首先来编写 MotionBlurWithDepthTexture.cs脚本。打开该脚本，并进行如下修改。</p><p>(1)首先，继承12.1节中创建的基类</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public class MotionBlurWithDepthTexture :PostEffectsBase {
+</span></span></code></pre></td></tr></table></div></div><p>(2)声明该效果需要的Shader，并据此创建相应的材质:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public Shader motionBlurShader;
+</span></span><span class=line><span class=cl>private Material motionBlurMaterial = null;
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	public Material material {  
+</span></span><span class=line><span class=cl>		get {
+</span></span><span class=line><span class=cl>			motionBlurMaterial = CheckShaderAndCreateMaterial(motionBlurShader, motionBlurMaterial);
+</span></span><span class=line><span class=cl>			return motionBlurMaterial;
+</span></span><span class=line><span class=cl>		}  
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>3)定义运动模糊时模糊图像使用的大小:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[Range(0.0f, 1.0f)]
+</span></span><span class=line><span class=cl>	public float blurSize = 0.5f;
+</span></span></code></pre></td></tr></table></div></div><p>(4)由于本节需要得到摄像机的视角和投影矩阵，我们需要定义一个Camera 类型的变量,以获取该脚本所在的摄像机组件:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	private Camera myCamera;
+</span></span><span class=line><span class=cl>	public Camera camera {
+</span></span><span class=line><span class=cl>		get {
+</span></span><span class=line><span class=cl>			if (myCamera == null) {
+</span></span><span class=line><span class=cl>				myCamera = GetComponent&lt;Camera&gt;();
+</span></span><span class=line><span class=cl>			}
+</span></span><span class=line><span class=cl>			return myCamera;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>(5)我们还需要定义一个变量来保存上一帧摄像机的视角*投影矩阵:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>private Matrix4x4 previousViewProjectionMatrix;
+</span></span></code></pre></td></tr></table></div></div><p>(6)由于本例需要获取摄像机的深度纹理，我们在脚本的 OnEnable 函数中设置摄像机的状态:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>void onEnable(){
+</span></span><span class=line><span class=cl>camera.depthTextureMode= DepthTextureMode .Depth;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>(7)最后，我们实现了OnRenderlmage 函数:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=kt>void</span> <span class=nf>OnRenderImage</span> <span class=p>(</span><span class=n>RenderTexture</span> <span class=n>src</span><span class=p>,</span> <span class=n>RenderTexture</span> <span class=n>dest</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=p>(</span><span class=n>material</span> <span class=o>!=</span> <span class=n>null</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=n>material</span><span class=p>.</span><span class=n>SetFloat</span><span class=p>(</span><span class=s>&#34;_BlurSize&#34;</span><span class=p>,</span> <span class=n>blurSize</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=n>material</span><span class=p>.</span><span class=n>SetMatrix</span><span class=p>(</span><span class=s>&#34;_PreviousViewProjectionMatrix&#34;</span><span class=p>,</span> <span class=n>previousViewProjectionMatrix</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>			<span class=n>Matrix4x4</span> <span class=n>currentViewProjectionMatrix</span> <span class=o>=</span> <span class=n>camera</span><span class=p>.</span><span class=n>projectionMatrix</span> <span class=o>*</span> <span class=n>camera</span><span class=p>.</span><span class=n>worldToCameraMatrix</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>			<span class=n>Matrix4x4</span> <span class=n>currentViewProjectionInverseMatrix</span> <span class=o>=</span> <span class=n>currentViewProjectionMatrix</span><span class=p>.</span><span class=n>inverse</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>			<span class=n>material</span><span class=p>.</span><span class=n>SetMatrix</span><span class=p>(</span><span class=s>&#34;_CurrentViewProjectionInverseMatrix&#34;</span><span class=p>,</span> <span class=n>currentViewProjectionInverseMatrix</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>			<span class=n>previousViewProjectionMatrix</span> <span class=o>=</span> <span class=n>currentViewProjectionMatrix</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=n>Graphics</span><span class=p>.</span><span class=n>Blit</span> <span class=p>(</span><span class=n>src</span><span class=p>,</span> <span class=n>dest</span><span class=p>,</span> <span class=n>material</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=n>Graphics</span><span class=p>.</span><span class=n>Blit</span><span class=p>(</span><span class=n>src</span><span class=p>,</span> <span class=n>dest</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>上面的 OnRenderImage 函数很简单，我们首先需要计算和传递运动模糊使用的各个属性。才例需要使用两个变换矩阵——<code>前一帧的视角\*投影矩阵</code>以及<code>当前帧的视角\*投影矩阵</code>的逆矩阵。因此，我们通过调用 camera.worldToCameraMatrix和 camera.projectionMatrix来分别得到当前摄像机的视角矩阵和投影矩阵。对它们相乘后取逆，得到<code>当前帧的视角*投影矩阵的逆矩阵</code>，并传递给材质。然后，我们把取逆前的结果存储在 previousViewProjectionMatrix 变量中，以便在下一帧时传递给材质的 PreviousViewProjectionMatrix属性。</p><h3 id=chapter13-motionblurwithdepthtexture>Chapter13-MotionBlurWithDepthTexture</h3><p>下面，我们来实现 Shader 的部分。打开 Chapter13-MotionBlurWithDepthTexture，进行如下修改。</p><p>(1)我们首先需要声明本例使用的各个属性:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties{
+</span></span><span class=line><span class=cl>	_MainTex(&#34;Base(RGB)&#34;2D)=&#34;white&#34;{}
+</span></span><span class=line><span class=cl>	_BlurSize (&#34;Blur Size&#34;Float)=1.0
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>MainTex 对应了输入的渲染纹理，BlurSize 是模糊图像时使用的参数。我们注意到，虽然在脚本里设置了材质的 PreviousViewProjectionMatrix和CurrentViewProjectionInverseMatrix属性，但并没有在Properties块中声明它们。这是因为Unity 没有提供矩阵类型的属性，但我们仍然可以在CG代码块中定义这些矩阵，并从脚本中设置它们。</p><p>(2)在本节中,我们使用 CGINCLUDE来组织代码。我们在 SubShader块中利用CGINCLUDE和 ENDCG 语义来定义一系列代码:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>SubShader
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	CGINCLUDE
+</span></span><span class=line><span class=cl>	……
+</span></span><span class=line><span class=cl>	ENDCG
+</span></span><span class=line><span class=cl>	……
+</span></span><span class=line><span class=cl>    }
+</span></span></code></pre></td></tr></table></div></div><p>(3)声明代码中需要使用的各个变量:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sampler2DMainTex;
+</span></span><span class=line><span class=cl>half4 MainTex TexelSize;
+</span></span><span class=line><span class=cl>sampler2DCameraDepthTexture;
+</span></span><span class=line><span class=cl>float4x4 CurrentViewProjectionInverseMatrix;
+</span></span><span class=line><span class=cl>float4x4PreviousViewProjectionMatrix;
+</span></span><span class=line><span class=cl>half Blursize;
+</span></span></code></pre></td></tr></table></div></div><p>在上面的代码中，除了定义在 Properties 声明的 MainTex和 BlurSize 属性，我们还声明了其他三个变量。CameraDepthTexture 是Unity 传递给我们的深度纹理，而 CurrentViewProjectionInverseMatrix和PreviousViewProiectionMatrix是由脚本传递而来的矩阵。除此之外，我们还声明了MainTex TexelSize 变量，它对应了主纹理的纹素大小，我们需要使用该变量来对深度纹理的采样坐标进行平台差异化处理(详见5.6.1节)。</p><p>(4)顶点着色器的代码和之前使用多次的代码基本一致，只是增加了专门用于对深度纹理采样的纹理坐标变量:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>struct v2f {
+</span></span><span class=line><span class=cl>	float4 pos : SV_POSITION;
+</span></span><span class=line><span class=cl>	half2 uv : TEXCOORD0;
+</span></span><span class=line><span class=cl>	half2 uv_depth : TEXCOORD1;
+</span></span><span class=line><span class=cl>};
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>v2f vert(appdata_img v) {
+</span></span><span class=line><span class=cl>	v2f o;
+</span></span><span class=line><span class=cl>	o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.uv = v.texcoord;
+</span></span><span class=line><span class=cl>	o.uv_depth = v.texcoord;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	#if UNITY_UV_STARTS_AT_TOP
+</span></span><span class=line><span class=cl>	if (_MainTex_TexelSize.y &lt; 0)
+</span></span><span class=line><span class=cl>		o.uv_depth.y = 1 - o.uv_depth.y;
+</span></span><span class=line><span class=cl>	#endif
+</span></span><span class=line><span class=cl>			 
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>由于在本例中，我们需要同时处理多张渲染纹理，因此在DirectX这样的平台上，我们需要处理平台差异导致的图像翻转问题。在上面的代码中，我们对深度纹理的采样坐标进行了平台差异化处理，以便在类似 Directx的平台上，在开启了抗锯齿的情况下仍然可以得到正确的结果,</p><p>(5)片元着色器是算法的重点所在:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>		fixed4 frag(v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>			// Get the depth buffer value at this pixel.
+</span></span><span class=line><span class=cl>			float d = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth);
+</span></span><span class=line><span class=cl>			// H is the viewport position at this pixel in the range -1 to 1.
+</span></span><span class=line><span class=cl>			float4 H = float4(i.uv.x * 2 - 1, i.uv.y * 2 - 1, d * 2 - 1, 1);
+</span></span><span class=line><span class=cl>			// Transform by the view-projection inverse.
+</span></span><span class=line><span class=cl>			float4 D = mul(_CurrentViewProjectionInverseMatrix, H);
+</span></span><span class=line><span class=cl>			// Divide by w to get the world position. 
+</span></span><span class=line><span class=cl>			float4 worldPos = D / D.w;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			// Current viewport position 
+</span></span><span class=line><span class=cl>			float4 currentPos = H;
+</span></span><span class=line><span class=cl>			// Use the world position, and transform by the previous view-projection matrix.  
+</span></span><span class=line><span class=cl>			float4 previousPos = mul(_PreviousViewProjectionMatrix, worldPos);
+</span></span><span class=line><span class=cl>			// Convert to nonhomogeneous points [-1,1] by dividing by w.
+</span></span><span class=line><span class=cl>			previousPos /= previousPos.w;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			// Use this frame&#39;s position and last frame&#39;s to compute the pixel velocity.
+</span></span><span class=line><span class=cl>			float2 velocity = (currentPos.xy - previousPos.xy)/2.0f;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			float2 uv = i.uv;
+</span></span><span class=line><span class=cl>			float4 c = tex2D(_MainTex, uv);
+</span></span><span class=line><span class=cl>			uv += velocity * _BlurSize;
+</span></span><span class=line><span class=cl>			for (int it = 1; it &lt; 3; it++, uv += velocity * _BlurSize) {
+</span></span><span class=line><span class=cl>				float4 currentColor = tex2D(_MainTex, uv);
+</span></span><span class=line><span class=cl>				c += currentColor;
+</span></span><span class=line><span class=cl>			}
+</span></span><span class=line><span class=cl>			c /= 3;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			return fixed4(c.rgb, 1.0);
+</span></span><span class=line><span class=cl>		}
+</span></span></code></pre></td></tr></table></div></div><p>我们首先需要利用深度纹理和当前帧的视角<em>投影矩阵的逆矩阵来求得该像素在世界空间下的坐标。过程开始于对深度纹理的采样，我们便用内置的SAMPLE DEPTH TEXTURE宏和纹理坐标对深度纹理进行采样，得到了深度值 d。由 13.1.2节可知,d是由 NDC下的坐标映射而来的。我们想要构建像素的 NDC 坐标 ，就需要把这个深度值重新映射回 NDC。这个映射很简单，只需要使用原映射的反函数即可，即d</em>2-1。同样，NDC的x分量可以由像素的纹理坐标映射而来(NDC下的xyz分量范围均为[-1,1])。当得到NDC下的坐标H后，我们就可以使用<code>当前帧的视角*投影矩阵的逆矩阵</code>对其进行变换，并把结果值除以它的w分量来得到世界空间下的坐标表示 worldPos.</p><p>一旦得到了世界空间下的坐标，我们就可以使用<code>前一帧的视角*投影矩阵</code>对它进行变换，得到前一帧在 NDC下的坐标 previousPos。然后，我们计算前一帧和当前帧在屏幕空间下的位置差,得到该像素的速度 velocity。
+当得到该像素的速度后，我们就可以使用该速度值对它的邻域像素进行采样，相加后取平均值得到一个模糊的效果。采样时我们还使用了_BlurSize 来控制采样距离。</p><p>(6)然后，我们定义了运动模糊所需的 Pass:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Pass {      
+</span></span><span class=line><span class=cl>	ZTest Always Cull Off ZWrite Off
+</span></span><span class=line><span class=cl>	    	
+</span></span><span class=line><span class=cl>	CGPROGRAM  
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	#pragma vertex vert  
+</span></span><span class=line><span class=cl>	#pragma fragment frag  
+</span></span><span class=line><span class=cl>	  
+</span></span><span class=line><span class=cl>	ENDCG  
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>(7)最后，我们关闭了shader的Fallback:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Fallback Off
+</span></span></code></pre></td></tr></table></div></div><p>完成后返回编辑器，并把 Chapter13-MotionBlurWithDepthTexture 拖曳到摄像机的 MotionBlurWithDepthTexture.cs脚本中的 motionBlurShader 参数中。当然，我们可以在 MotionBlurWithDepthTexture.cs的脚本面板中将 motionBlurShader 参数的默认值设置为 Chapter13-MotionBlurWithDepthTexture，这样就不需要以后使用时每次都手动拖曳了。</p><p>本节实现的运动模糊适用于场景静止、摄像机快速运动的情况，这是因为我们在计算时只考虑了摄像机的运动。因此，如果读者把本节中的代码应用到一个物体快速运动而摄像机静止的场景，会发现不会产生任何运动模糊效果。如果我们想要对快速移动的物体产生运动模糊的效果，就需要生成更加精确的速度映射图。读者可以在 Unity 自带的ImageEfect包中找到更多的运动模糊的实现方法。
+本节选择在片元着色器中使用逆矩阵来重建每个像素在世界空间下的位置。但是，这种做法往往会影响性能，在13.3节中，我们会介绍一种更快速的由深度纹理重建世界坐标的方法。</p><h2 id=3全局雾效>3.全局雾效</h2><p>雾效(Fog)是游戏里经常使用的一种效果。Unity内置的雾效可以产生基于距离的线性或指数雾效。然而，要想在自己编写的顶点/片元着色器中实现这些雾效，我们需要在Shader 中添加#pragma multi compile fog指令，同时还需要使用相关的内置宏，例如 UNITY FOG COORDS、UNITY TRANSFERFOG和UNITY APPLY FOG等。这种方法的缺点在于，我们不仅需要为场景中所有物体添加相关的渲染代码，而且能够实现的效果也非常有限。当我们需要对雾效进行些个性化操作时，例如使用基于高度的雾效等，仅仅使用Unity内置的雾效就变得不再可行。</p><p>在本节中，我们将会学习一种基于屏幕后处理的全局雾效的实现。使用这种方法，我们不需要更改场景内渲染的物体所使用的Shader代码，而仅仅依靠一次屏幕后处理的步骤即可这种方法的自由性很高，我们可以方便地模拟各种雾效，例如均匀的雾效、基于距离的线性指数雾效、基于高度的雾效等。在学习完本节后，我们可以得到类似图13.5中的效果。</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251202012321171.png width=549 height=260 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251202012321171_hu_a361b1291ddd32bf.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251202012321171_hu_4967a5799d9a1796.png 1024w" loading=lazy alt=image-20251202012321171 class=gallery-image data-flex-grow=211 data-flex-basis=506px></p><p>基于屏幕后处理的全局雾效的关键是，根据深度纹理来重建每个像素在世界空间下的位置。尽管在 13.2节中，我们在模拟运动模糊时已经实现了这个要求，即构建出当前像素的NDC坐标，再通过当前摄像机的视角*投影矩阵的逆矩阵来得到世界空间下的像素坐标，但是，这样的实现需要在片元着色器中进行矩阵乘法的操作，而这通常会影响游戏性能。</p><p>在本节中，我们将会学习一个快速从深度纹理中重建世界坐标的方法。这种方法首先对图像空间下的视锥体射线(从摄像机出发，指向图像上的某点的射线)进行插值，这条射线存储了该像素在世界空间下到摄像机的方向信息。然后，我们把该射线和线性化后的视角空间下的深度值相乘，再加上摄像机的世界位置，就可以得到该像素在世界空间下的位置。</p><p>当我们得到世界坐标后，就可以轻松地使用各个公式来模拟全局雾效了。</p><h3 id=重建世界坐标>重建世界坐标</h3><p>在开始动手写代码之前，我们首先来了解如何从深度纹理中重建世界坐标。我们知道，坐标系中的一个顶点坐标可以通过它相对于另一个顶点坐标的偏移量来求得。</p><p>重建像素的世界坐标也是基于这样的思想。我们只需要知道摄像机在世界空间下的位置，以及世界空间下该像素相对于摄像机的偏移量，把它们相加就可以得到该像素的世界坐标。整个过程可以使用下面的代码来表示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float3 worldPos = _WorldSpaceCameraPos + linearDepth * i.interpolatedRay.xyz;
+</span></span></code></pre></td></tr></table></div></div><p>其中，WorldSpaceCameraPos是摄像机在世界空间下的位置，这可以由Unity 的内置变量直接访问得到。而 linearDepth*interpolatedRay 则可以计算得到该像素相对于摄像机的偏移量,linearDepth 是由深度纹理得到的线性深度值，interpolatedRay 是由顶点着色器输出并插值后得到的射线，它不仅包含了该像素到摄像机的方向，也包含了距离信息。linearDepth的获取我们已经在 13.1.2节中详细解释过了，因此，本节着重解释imnterpolatedRay的求法。
+interpolatedRay 来源于对近裁剪平面的4个角的某个特定向量的插值，这4个向量包含了它们到摄像机的方向和距离信息，我们可以利用摄像机的近裁剪平面距离、FOV、横纵比计算而得。图 13.6显示了计算时使用的一些辅助向量。为了方便计算，我们可以先计算两个向量——toTop和toRight,它们是起点位于近裁剪平面中心、分别指向摄像机正上方和正右方的向量。它们的计算公式如下:</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209004640857.png width=509 height=152 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209004640857_hu_b1a0ce3eec73a383.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209004640857_hu_b89803093803d2f1.png 1024w" loading=lazy alt=image-20251209004640857 class=gallery-image data-flex-grow=334 data-flex-basis=803px></p><p>其中，Near 是近裁剪平面的距离，FOV是竖直方向的视角范围，camera.up、camera.right 分别对应了摄像机的正上方和正右方。</p><p>当得到这两个辅助向量后，我们就可以计算4个角相对于摄像机的方向了。我们以左上角为例(见图13.6中的TL点)，它的计算公式如下:</p>$$
+TL=camera.forwardNear+tolop-toRight
+$$<p>读者可以依靠基本的矢量运算验证上面的结果。同理，其他3个角的计算也是类似的:</p>$$
+TR=camera.forward·Near+toTop+toRight
+$$$$
+BL=camera.forward·Near-toTop-toRight
+$$$$
+BR=camera.forward·Near-toTop+toRight
+$$<p>注意，上面求得的4个向量不仅包含了方向信息，它们的模对应了4个点到摄像机的空间距离。由于我们得到的线性深度值并非是点到摄像机的欧式距离，而是在z方向上的距离，因此，我们不能直接使用深度值和4个角的单位方向的乘积来计算它们到摄像机的偏移量，如图13.7所示。</p><p>想要把深度值转换成到摄像机的欧式距离也很简单，我们以TL点为例，根据相似三角形原理，TL所在的射线上，像素的深度值和它到摄像机的实际距离的比等于近裁剪平面的距离和 TL向量的模的比，即</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005014060.png width=246 height=87 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005014060_hu_ea2790e25b671f92.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005014060_hu_5e75d2a1d51f7c82.png 1024w" loading=lazy alt=image-20251209005014060 class=gallery-image data-flex-grow=282 data-flex-basis=678px></p><p>由此可得，我们需要的T距离摄像机的欧氏距离 dist:</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005028027.png width=285 height=75 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005028027_hu_80c470dae0e40abf.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005028027_hu_26c3427a0ab2d543.png 1024w" loading=lazy alt=image-20251209005028027 class=gallery-image data-flex-grow=380 data-flex-basis=912px></p><p>由于4个点相互对称，因此其他3个向量的模和TL相等，即我们可以使用同一个因子和单位向量相乘，得到它们对应的向量值:</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005043022.png width=213 height=75 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005043022_hu_6b2881a6bead0ed0.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005043022_hu_a49a49064861a3ac.png 1024w" loading=lazy alt=image-20251209005043022 class=gallery-image data-flex-grow=284 data-flex-basis=681px></p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005048360.png width=672 height=174 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005048360_hu_cc345f3e5867232d.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005048360_hu_189ff5a45b286a0e.png 1024w" loading=lazy alt=image-20251209005048360 class=gallery-image data-flex-grow=386 data-flex-basis=926px></p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005056007.png width=1077 height=348 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005056007_hu_a782121306ddade7.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005056007_hu_a618bf9638dfbf07.png 1024w" loading=lazy alt=image-20251209005056007 class=gallery-image data-flex-grow=309 data-flex-basis=742px></p><p>屏幕后处理的原理是使用特定的材质去渲染一个刚好填充整个屏幕的四边形面片。这个四边形面片的4个顶点就对应了近裁剪平面的4个角。因此，我们可以把上面的计算结果传递给顶点着色器，顶点着色器根据当前的位置选择它所对应的向量，然后再将其输出，经插值后传递给片元着色器得到 interpolatedRay，我们就可以直接利用本节一开始提到的公式重建该像素在世界空间下的位置了。</p><h3 id=雾的计算>雾的计算</h3><p>在简单的雾效实现中，我们需要计算一个雾效系数f,作为混合原始颜色和雾的颜色的混合系数:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float3 afterFog = f * fogColor + ( 1 - f ) * origColor;
+</span></span></code></pre></td></tr></table></div></div><p>这个雾效系数 f 有很多计算方法。在Unity内置的雾效实现中,支持三种雾的计算方式——线性(Linear)、指数(Exponential)以及指数的平方(Exponential Squared)。当给定距离z后，f的计算公式分别如下:</p><p>Linear：</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005331070.png width=912 height=77 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005331070_hu_e7392a3407acc2dc.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005331070_hu_17b8b336d497b68c.png 1024w" loading=lazy alt=image-20251209005331070 class=gallery-image data-flex-grow=1184 data-flex-basis=2842px></p><p>Exponential:</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005344500.png width=432 height=48 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005344500_hu_e882db50e82017c0.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005344500_hu_a5942d69241c1314.png 1024w" loading=lazy alt=image-20251209005344500 class=gallery-image data-flex-grow=900 data-flex-basis=2160px></p><p>Exponential Squared:</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005406605.png width=504 height=42 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005406605_hu_db9ac7f8912f222e.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005406605_hu_897b79b3d0aa99ae.png 1024w" loading=lazy alt=image-20251209005406605 class=gallery-image data-flex-grow=1200 data-flex-basis=2880px></p><p>在本节中，我们将使用类似线性雾的计算方式，计算基于高度的雾效。具体方法是，当给定一点在世界空间下的高度y后，f的计算公式为:</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005433481.png width=885 height=83 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005433481_hu_60b34367fa0bf926.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209005433481_hu_26b94d4ec16e4ab7.png 1024w" loading=lazy alt=image-20251209005433481 class=gallery-image data-flex-grow=1066 data-flex-basis=2559px></p><h3 id=实现>实现</h3><p>为了在 Unity中实现基于屏幕后处理的雾效，我们需要进行如下准备工作。</p><p>(1)新建一个场景。在本书资源中，该场景名为Scene 133。在Unity5.2中，默认情况下场景将包含一个摄像机和一个平行光,并且使用了内置的天空盒子。在 Window->Lighting->Skybox中去掉场景中的天空盒子。</p><p>(2)我们需要搭建一个测试雾效的场景。在本书资源的实现中，我们构建了一个包含3面墙的房间，并放置了两个立方体和两个球体，它们都使用了我们在9.5节中创建的标准材质。同时我们把本书资源中的 Translating.cs脚本拖曳给摄像机，让其在场景中不断运动。</p><p>(3)新建一个脚本。在本书资源中，该脚本名为FogWithDepthTexture.cs。把该脚本拖曳到摄像机上。</p><p>(4)新建一个 Unity Shader。在本书资源中，该Shader名为 Chapter13-FogWithDepthTexture。</p><h4 id=fogwithdepthtexturecs脚本>FogWithDepthTexture.cs脚本</h4><p>我们首先来编写 FogWithDepthTexture.cs脚本。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public class FogWithDepthTexture : PostEffectsBase {
+</span></span></code></pre></td></tr></table></div></div><p>声明该效果需要的Shader，并据此创建相应的材质：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	public Shader fogShader;
+</span></span><span class=line><span class=cl>	private Material fogMaterial = null;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	public Material material {  
+</span></span><span class=line><span class=cl>		get {
+</span></span><span class=line><span class=cl>			fogMaterial = CheckShaderAndCreateMaterial(fogShader, fogMaterial);
+</span></span><span class=line><span class=cl>			return fogMaterial;
+</span></span><span class=line><span class=cl>		}  
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>(3)在本节中，我们需要获取摄像机的相关参数，如近裁剪平面的距离、FOV等，同时还需要获取摄像机在世界空间下的前方、上方和右方等方向，因此我们用两个变量存储摄像机的Camera 组件和Transform组件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>private Camera myCamera;
+</span></span><span class=line><span class=cl>	public Camera camera {
+</span></span><span class=line><span class=cl>		get {
+</span></span><span class=line><span class=cl>			if (myCamera == null) {
+</span></span><span class=line><span class=cl>				myCamera = GetComponent&lt;Camera&gt;();
+</span></span><span class=line><span class=cl>			}
+</span></span><span class=line><span class=cl>			return myCamera;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	private Transform myCameraTransform;
+</span></span><span class=line><span class=cl>	public Transform cameraTransform {
+</span></span><span class=line><span class=cl>		get {
+</span></span><span class=line><span class=cl>			if (myCameraTransform == null) {
+</span></span><span class=line><span class=cl>				myCameraTransform = camera.transform;
+</span></span><span class=line><span class=cl>			}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			return myCameraTransform;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>（4)定义模拟雾效时使用的各个参数:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[Range(0.0f, 3.0f)]
+</span></span><span class=line><span class=cl>	public float fogDensity = 1.0f;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	public Color fogColor = Color.white;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	public float fogStart = 0.0f;
+</span></span><span class=line><span class=cl>	public float fogEnd = 2.0f;
+</span></span></code></pre></td></tr></table></div></div><p>fogDensity 用于控制雾的浓度，fogColor 用于控制雾的颜色。我们使用的雾效模拟函数是基于高度的，因此参数 fogStart 用于控制雾效的起始高度，fogEnd 用于控制雾效的终止高度。</p><p>(5)由于本例需要获取摄像机的深度纹理,我们在脚本的 OnEnable 函数中设置摄像机的相应状态:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>void OnEnable() {
+</span></span><span class=line><span class=cl>camera.depthTextureMode |= DepthTextureMode.Depth;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>6）最后，我们实现了 OnRenderlmage 函数:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>void OnRenderImage (RenderTexture src, RenderTexture dest) {
+</span></span><span class=line><span class=cl>		if (material != null) {
+</span></span><span class=line><span class=cl>			Matrix4x4 frustumCorners = Matrix4x4.identity;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			float fov = camera.fieldOfView;
+</span></span><span class=line><span class=cl>			float near = camera.nearClipPlane;
+</span></span><span class=line><span class=cl>			float aspect = camera.aspect;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			float halfHeight = near * Mathf.Tan(fov * 0.5f * Mathf.Deg2Rad);
+</span></span><span class=line><span class=cl>			Vector3 toRight = cameraTransform.right * halfHeight * aspect;
+</span></span><span class=line><span class=cl>			Vector3 toTop = cameraTransform.up * halfHeight;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Vector3 topLeft = cameraTransform.forward * near + toTop - toRight;
+</span></span><span class=line><span class=cl>			float scale = topLeft.magnitude / near;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			topLeft.Normalize();
+</span></span><span class=line><span class=cl>			topLeft *= scale;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Vector3 topRight = cameraTransform.forward * near + toRight + toTop;
+</span></span><span class=line><span class=cl>			topRight.Normalize();
+</span></span><span class=line><span class=cl>			topRight *= scale;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Vector3 bottomLeft = cameraTransform.forward * near - toTop - toRight;
+</span></span><span class=line><span class=cl>			bottomLeft.Normalize();
+</span></span><span class=line><span class=cl>			bottomLeft *= scale;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Vector3 bottomRight = cameraTransform.forward * near + toRight - toTop;
+</span></span><span class=line><span class=cl>			bottomRight.Normalize();
+</span></span><span class=line><span class=cl>			bottomRight *= scale;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			frustumCorners.SetRow(0, bottomLeft);
+</span></span><span class=line><span class=cl>			frustumCorners.SetRow(1, bottomRight);
+</span></span><span class=line><span class=cl>			frustumCorners.SetRow(2, topRight);
+</span></span><span class=line><span class=cl>			frustumCorners.SetRow(3, topLeft);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			material.SetMatrix(&#34;_FrustumCornersRay&#34;, frustumCorners);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			material.SetFloat(&#34;_FogDensity&#34;, fogDensity);
+</span></span><span class=line><span class=cl>			material.SetColor(&#34;_FogColor&#34;, fogColor);
+</span></span><span class=line><span class=cl>			material.SetFloat(&#34;_FogStart&#34;, fogStart);
+</span></span><span class=line><span class=cl>			material.SetFloat(&#34;_FogEnd&#34;, fogEnd);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Graphics.Blit (src, dest, material);
+</span></span><span class=line><span class=cl>		} else {
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>OnRenderlmage 首先计算了近裁剪平面的四个角对应的向量，并把它们存储在一个矩阵类型的变量(frustumComers)中。计算过程我们已经在13.3.1节中详细解释过了，代码只是套用了之前讲过的公式而已。我们按一定顺序把这四个方向存储到了fustumComers 不同的行中，这个顺序是非常重要的，因为这决定了我们在顶点着色器中使用哪一行作为该点的待插值向量。随后，我们把结果和其他参数传递给材质，并调用 Graphics.Blit(src,dest,material)把渲染结果显示在屏幕上。</p><p>下面，我们来实现 Shader 的部分。打开 Chapter13-FogWithDepthTexture，进行如下修改。</p><p>(1)我们首先需要声明本例使用的各个属性:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties {
+</span></span><span class=line><span class=cl>	_MainTex (&#34;Base (RGB)&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>	_FogDensity (&#34;Fog Density&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>	_FogColor (&#34;Fog Color&#34;, Color) = (1, 1, 1, 1)
+</span></span><span class=line><span class=cl>	_FogStart (&#34;Fog Start&#34;, Float) = 0.0
+</span></span><span class=line><span class=cl>	_FogEnd (&#34;Fog End&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>(2)在本节中,我们使用 CGINCLUDE来组织代码。我们在 SubShader块中利用CGINCLUDE和ENDCG 语义来定义一系列代码:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>SubShader {
+</span></span><span class=line><span class=cl>	CGINCLUDE
+</span></span><span class=line><span class=cl>	……
+</span></span><span class=line><span class=cl>	ENDCG
+</span></span><span class=line><span class=cl>	……
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>（3）声明代码中需要使用的各个变量:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float4x4 _FrustumCornersRay;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sampler2D _MainTex;
+</span></span><span class=line><span class=cl>half4 _MainTex_TexelSize;
+</span></span><span class=line><span class=cl>sampler2D _CameraDepthTexture;
+</span></span><span class=line><span class=cl>half _FogDensity;
+</span></span><span class=line><span class=cl>fixed4 _FogColor;
+</span></span><span class=line><span class=cl>float _FogStart;
+</span></span><span class=line><span class=cl>float _FogEnd;
+</span></span></code></pre></td></tr></table></div></div><p>FrustumCormersRay虽然没有在Properties中声明，但仍可由脚本传递给 Shader。除了Properties 中声明的各个属性，我们还声明了深度纹理 CameraDepthTexture，Unity 会在背后把得到的深度纹理传递给该值。</p><p>(4)定义顶点着色器:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>struct v2f {
+</span></span><span class=line><span class=cl>	float4 pos : SV_POSITION;
+</span></span><span class=line><span class=cl>	half2 uv : TEXCOORD0;
+</span></span><span class=line><span class=cl>	half2 uv_depth : TEXCOORD1;
+</span></span><span class=line><span class=cl>	float4 interpolatedRay : TEXCOORD2;
+</span></span><span class=line><span class=cl>};
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>v2f vert(appdata_img v) {
+</span></span><span class=line><span class=cl>	v2f o;
+</span></span><span class=line><span class=cl>	o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.uv = v.texcoord;
+</span></span><span class=line><span class=cl>	o.uv_depth = v.texcoord;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	#if UNITY_UV_STARTS_AT_TOP
+</span></span><span class=line><span class=cl>	if (_MainTex_TexelSize.y &lt; 0)
+</span></span><span class=line><span class=cl>		o.uv_depth.y = 1 - o.uv_depth.y;
+</span></span><span class=line><span class=cl>	#endif
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	int index = 0;
+</span></span><span class=line><span class=cl>	if (v.texcoord.x &lt; 0.5 &amp;&amp; v.texcoord.y &lt; 0.5) {
+</span></span><span class=line><span class=cl>		index = 0;
+</span></span><span class=line><span class=cl>	} else if (v.texcoord.x &gt; 0.5 &amp;&amp; v.texcoord.y &lt; 0.5) {
+</span></span><span class=line><span class=cl>		index = 1;
+</span></span><span class=line><span class=cl>	} else if (v.texcoord.x &gt; 0.5 &amp;&amp; v.texcoord.y &gt; 0.5) {
+</span></span><span class=line><span class=cl>		index = 2;
+</span></span><span class=line><span class=cl>	} else {
+</span></span><span class=line><span class=cl>		index = 3;
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	#if UNITY_UV_STARTS_AT_TOP
+</span></span><span class=line><span class=cl>	if (_MainTex_TexelSize.y &lt; 0)
+</span></span><span class=line><span class=cl>		index = 3 - index;
+</span></span><span class=line><span class=cl>	#endif
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.interpolatedRay = _FrustumCornersRay[index];
+</span></span><span class=line><span class=cl>		 	 
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>在 v2f 结构体中，我们除了定义顶点位置、屏幕图像和深度纹理的纹理坐标外，还定义了interpolatedRay 变量存储插值后的像素向量。</p><p>在顶点着色器中，我们对深度纹理的采样坐标进行了平台差异化处理。更重要的是，我们要决定该点对应了4个角中的哪个角。我们采用的方法是判断它的纹理坐标。我们知道，在 Unity 中，纹理坐标的(0,0)点对应了左下角，而(1,1)点对应了右上角。我们据此来判断该顶点对应的索引，这个对应关系和我们在脚本中对frustumCorners 的赋值顺序是一致的。实际上，不同平台的纹理坐标不一定是满足上面的条件的，例如 DirectX 和Metal 这样的平台，左上角对应了(0,0)点，但大多数情况下 Unity 会把这些平台下的屏幕图像进行翻转，因此我们仍然可以利用这个条件。</p><p>但如果在类似DirectX 的平台上开启了抗锯齿，Unity就不会进行这个翻转。为了此时仍然可以得到相应顶点位置的索引值，我们对索引值也进行了平台差异化处理(详见5.6.1节)，以便在必要时也对索引值进行翻转。最后，我们使用索引值来获取 FrustumCornersRay中对应的行作为该顶点的interpolatedRay 值。</p><p>尽管我们这里使用了很多判断语句，但由于屏幕后处理所用的模型是一个四边形网格，只包含4个顶点，因此这些操作不会对性能造成很大影响。</p><p>(5)我们定义了片元着色器来产生雾效:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>fixed4 frag(v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>	float linearDepth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth));
+</span></span><span class=line><span class=cl>	float3 worldPos = _WorldSpaceCameraPos + linearDepth * i.interpolatedRay.xyz;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>	float fogDensity = (_FogEnd - worldPos.y) / (_FogEnd - _FogStart); 
+</span></span><span class=line><span class=cl>	fogDensity = saturate(fogDensity * _FogDensity);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	fixed4 finalColor = tex2D(_MainTex, i.uv);
+</span></span><span class=line><span class=cl>	finalColor.rgb = lerp(finalColor.rgb, _FogColor.rgb, fogDensity);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	return finalColor;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>首先,我们需要重建该像素在世界空间中的位置。为此,我们首先使用 SAMPLE DEPTH TEXTURE对深度纹理进行采样，再使用LinearEyeDepth 得到视角空间下的线性深度值。之后，与imnterpolatedRay
+相乘后再和世界空间下的摄像机位置相加，即可得到世界空间下的位置。得到世界坐标后，模拟雾效就变得非常容易。在本例中，我们选择实现基于高度的雾效模拟，计算公式可参见13.3.2节。我们根据材质属性FogEnd和 FogStart计算当前的像素高度 worldPos.y对应的雾效系数 fogDensity，再和参数 FogDensity 相乘后，利用 saturate 函数截取到[0,1]范围内，作为最后的雾效系数。然后，我们使用该系数将雾的颜色和原始颜色进行混合后返回。读者也可以使用不同的公式来实现其他种类的雾效。</p><p>6)随后，我们定义了雾效渲染所需的Pass:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Pass {
+</span></span><span class=line><span class=cl>	ZTest Always Cull Off ZWrite Off
+</span></span><span class=line><span class=cl>	     	
+</span></span><span class=line><span class=cl>	CGPROGRAM  
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	#pragma vertex vert  
+</span></span><span class=line><span class=cl>	#pragma fragment frag  
+</span></span><span class=line><span class=cl>	  
+</span></span><span class=line><span class=cl>	ENDCG  
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>(7)最后，我们关闭了Shader的Fallback:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Fallback Off
+</span></span></code></pre></td></tr></table></div></div><p>完成后返回编辑器,并把 Chapter13-FogWithDepthTexture 拖曳到摄像机的FogWithDepthTexture.cs脚本中的 fogShader 参数中。</p><p>本节介绍的使用深度纹理重建像素的世界坐标的方法是非常有用的。但需要注意的是，这里的实现是基于摄像机的投影类型是透视投影的前提下。如果需要在正交投影的情况下重建世界坐标，需要使用不同的公式，但请读者相信，这个过程不会比透视投影的情况更加复杂。有兴趣的读者可以尝试自行推导，或参考这篇博客(http:/www.derschmale.com/2014/03/19/reconstructingpositions-from-the-depth-buffer-pt-2-perspective-and-orthographic-general-case/)来实现。</p><h2 id=4新边缘检测>4.（新）边缘检测</h2><p>在 12.3节中，我们曾介绍如何使用 Sobel 算子对屏幕图像进行边缘检测，实现描边的效果。但是，这种直接利用颜色信息进行边缘检测的方法会产生很多我们不希望得到的边缘线，如图 13.8所示。可以看出，物体的纹理、阴影等位置也被描上黑边，而这往往不是我们希望看到的。在本节中，我们将学习如何在深度和法线纹理上进行边缘检测，这些图像不会受纹理和光照的影响，而仅仅保存了当前渲染物体的模型信息，通过这样的方式检测出来的边缘更加可靠。在学习完本节后，我们可以得到类似图13.9中的效果。</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209010908683.png width=1038 height=281 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209010908683_hu_aa5b06ce75a50921.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209010908683_hu_4065dd0a949c83f1.png 1024w" loading=lazy alt=image-20251209010908683 class=gallery-image data-flex-grow=369 data-flex-basis=886px></p><p>与12.3节使用Sobel算子不同，本节将使用Roberts算子来进行边缘检测。它使用的卷积核如图13.10所示。</p><p><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209010929804.png width=228 height=173 srcset="/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209010929804_hu_dea19cad682488dd.png 480w, /p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/image-20251209010929804_hu_752169406173514b.png 1024w" loading=lazy alt=image-20251209010929804 class=gallery-image data-flex-grow=131 data-flex-basis=316px></p><p>Roberts 算子的本质就是计算左上角和右下角的差值，乘以右上角和左下角的差值，作为评估边缘的依据。在下面的实现中，我们也会按这样的方式，取对角方向的深度或法线值，比较它们之间的差值，如果超过某个阈值(可由参数控制)，就认为它们之间存在一条边。</p><p>首先，我们需要进行如下准备工作。</p><p>(1)新建一个场景。在本书资源中，该场景名为Scene 134。在Unity5.2中，默认情况下场景将包含一个摄像机和一个平行光，并且使用了内置的天空盒子。在 Window→Lighting→Skybox中去掉场景中的天空盒子。</p><p>(2)我们需要搭建一个测试雾效的场景。在本书资源的实现中，我们构建了一个包含3面墙的房间，并放置了两个立方体和两个球体，它们都使用了我们在95节中创建的标准材质。同时，我们把本书资源中的 Translating.cs脚本拖曳给摄像机，让其在场景中不断运动。</p><p>(3)新建一个脚本。在本书资源中，该脚本名为EdgeDetectNormalsAndDepth.cs。把该脚本拖曳到摄像机上。</p><p>(4)新建一个Unity Shader。在本书资源中，该Shader 名为 Chapter13-</p><h4 id=edgedetectioncs>EdgeDetection.cs</h4><p>我们首先来编写 EdgeDetectNormalsAndDepth.cs脚本。该脚本与 12.3 节中实现的 EdgeDetection.cs脚本几乎完全一样，只是添加了一些新的属性。为了完整性，我们再次说明对该脚本进行的修改。</p><p>(1)首先，继承12.1节中创建的基类:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public class EdgeDetectNormalsAndDepth :PostEffectsBase{
+</span></span><span class=line><span class=cl>……
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>(2)声明该效果需要的Shader，并据此创建相应的材质:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public Shader edgeDetectShader;
+</span></span><span class=line><span class=cl>	private Material edgeDetectMaterial = null;
+</span></span><span class=line><span class=cl>	public Material material {  
+</span></span><span class=line><span class=cl>		get {
+</span></span><span class=line><span class=cl>			edgeDetectMaterial = CheckShaderAndCreateMaterial(edgeDetectShader, edgeDetectMaterial);
+</span></span><span class=line><span class=cl>			return edgeDetectMaterial;
+</span></span><span class=line><span class=cl>		}  
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>(3)在脚本中提供了调整边缘线强度描边颜色以及背景颜色的参数。同时添加了控制采样距离以及对深度和法线进行边缘检测时的灵敏度参数:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[Range(0.0f, 1.0f)]
+</span></span><span class=line><span class=cl>	public float edgesOnly = 0.0f;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	public Color edgeColor = Color.black;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	public Color backgroundColor = Color.white;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	public float sampleDistance = 1.0f;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	public float sensitivityDepth = 1.0f;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	public float sensitivityNormals = 1.0f;
+</span></span></code></pre></td></tr></table></div></div><p>sampleDistance用于控制对深度+法线纹理采样时，使用的采样距离。从视觉上来看，sampleDistance 值越大，描边越宽。sensitivityDepth 和 sensitivityNormals 将会影响当邻域的深度值或法线值相差多少时，会被认为存在一条边界。如果把灵敏度调得很大，那么可能即使是深度或法线上很小的变化也会形成一条边。</p><p>(4)由于本例需要获取摄像机的深度+法线纹理，我们在脚本的 OnEnable 函数中设置摄像机的相应状态:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>void OnEnable(){
+</span></span><span class=line><span class=cl>GetComponent&lt;Camera&gt;().depthTextureMode |= DepthTextureMode.DepthNormals;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>(5)实现OnRenderlmage函数，把各个参数传递给材质:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[ImageEffectOpaque]
+</span></span><span class=line><span class=cl>	void OnRenderImage (RenderTexture src, RenderTexture dest) {
+</span></span><span class=line><span class=cl>		if (material != null) {
+</span></span><span class=line><span class=cl>			material.SetFloat(&#34;_EdgeOnly&#34;, edgesOnly);
+</span></span><span class=line><span class=cl>			material.SetColor(&#34;_EdgeColor&#34;, edgeColor);
+</span></span><span class=line><span class=cl>			material.SetColor(&#34;_BackgroundColor&#34;, backgroundColor);
+</span></span><span class=line><span class=cl>			material.SetFloat(&#34;_SampleDistance&#34;, sampleDistance);
+</span></span><span class=line><span class=cl>			material.SetVector(&#34;_Sensitivity&#34;, new Vector4(sensitivityNormals, sensitivityDepth, 0.0f, 0.0f));
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest, material);
+</span></span><span class=line><span class=cl>		} else {
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>需要注意的是，这里我们为OnRenderlmage 函数添加了[mageEfectOpaque]属性。我们曾在 12.1节中提到过该属性的含义。在默认情况下，OnRenderlmage 函数会在所有的不透明和透明的 Pass 执行完毕后被调用，以便对场景中所有游戏对象都产生影响。但有时，我们希望在不透明的Pass(即渲染队列小于等于2500的Pass，内置的 Background、Geometry和 AlphaTest 渲染队列均在此范围内)执行完毕后立即调用该函数，而不对透明物体(渲染队列为Transparent 的Pass)产生影响，此时，我们可以在 OnRenderlmage 函数前添加 ImageEfectOpaque 属性来实现这样的目的。在本例中，我们只希望对不透明物体进行描边，而不希望透明物体也被描边，因此需要添加该属性。</p><h4 id=chapter13-edgedetectnormalanddepth>Chapter13-EdgeDetectNormalAndDepth，</h4><p>1)声明</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	Properties {
+</span></span><span class=line><span class=cl>		_MainTex (&#34;Base (RGB)&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_EdgeOnly (&#34;Edge Only&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>		_EdgeColor (&#34;Edge Color&#34;, Color) = (0, 0, 0, 1)
+</span></span><span class=line><span class=cl>		_BackgroundColor (&#34;Background Color&#34;, Color) = (1, 1, 1, 1)
+</span></span><span class=line><span class=cl>		_SampleDistance (&#34;Sample Distance&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>		_Sensitivity (&#34;Sensitivity&#34;, Vector) = (1, 1, 1, 1)
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>其中， Sensitivity 的xy分量分别对应了法线和深度的检测灵敏度,zw 分量则没有实际用途。</p><p>(2)在本节中,我们使用 CGINCLUDE来组织代码。我们在 SubShader 块中利用CGINCLUDE和ENDCG语义来定义一系列代码:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>SubShader
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	CGINCLUDE
+</span></span><span class=line><span class=cl>	……
+</span></span><span class=line><span class=cl>	ENDCG
+</span></span><span class=line><span class=cl>	……
+</span></span><span class=line><span class=cl>    }
+</span></span></code></pre></td></tr></table></div></div><p>(3)为了在代码中访问各个属性，我们需要在CG代码块中声明对应的变量:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sampler2D _MainTex;
+</span></span><span class=line><span class=cl>half4 _MainTex_TexelSize;
+</span></span><span class=line><span class=cl>fixed _EdgeOnly;
+</span></span><span class=line><span class=cl>fixed4 _EdgeColor;
+</span></span><span class=line><span class=cl>fixed4 _BackgroundColor;
+</span></span><span class=line><span class=cl>float _SampleDistance;
+</span></span><span class=line><span class=cl>half4 _Sensitivity;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sampler2D _CameraDepthNormalsTexture;
+</span></span></code></pre></td></tr></table></div></div><p>在上面的代码中，我们声明了需要获取的深度+法线纹理CameraDepthNormalsTexture。由于我们需要对邻域像素进行纹理采样，所以还声明了存储纹素大小的变量MainTexTexelSize。</p><p>(4)定义顶点着色器</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>struct v2f {
+</span></span><span class=line><span class=cl>	float4 pos : SV_POSITION;
+</span></span><span class=line><span class=cl>	half2 uv[5]: TEXCOORD0;
+</span></span><span class=line><span class=cl>};
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>v2f vert(appdata_img v) {
+</span></span><span class=line><span class=cl>	v2f o;
+</span></span><span class=line><span class=cl>	o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	half2 uv = v.texcoord;
+</span></span><span class=line><span class=cl>	o.uv[0] = uv;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	#if UNITY_UV_STARTS_AT_TOP
+</span></span><span class=line><span class=cl>	if (_MainTex_TexelSize.y &lt; 0)
+</span></span><span class=line><span class=cl>		uv.y = 1 - uv.y;
+</span></span><span class=line><span class=cl>	#endif
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.uv[1] = uv + _MainTex_TexelSize.xy * half2(1,1) * _SampleDistance;
+</span></span><span class=line><span class=cl>	o.uv[2] = uv + _MainTex_TexelSize.xy * half2(-1,-1) * _SampleDistance;
+</span></span><span class=line><span class=cl>	o.uv[3] = uv + _MainTex_TexelSize.xy * half2(-1,1) * _SampleDistance;
+</span></span><span class=line><span class=cl>	o.uv[4] = uv + _MainTex_TexelSize.xy * half2(1,-1) * _SampleDistance;
+</span></span><span class=line><span class=cl>			 
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>我们在 v2f结构体中定义了一个维数为5的纹理坐标数组。这个数组的第一个坐标存储了屏幕颜色图像的采样纹理。我们对深度纹理的采样坐标进行了平台差异化处理，在必要情况下对它的竖直方向进行了翻转。数组中剩余的4个坐标则存储了使用Roberts 算子时需要采样的纹理坐标，我们还使用了 SampleDistance 来控制采样距离。通过把计算采样纹理坐标的代码从片元着色器中转移到顶点着色器中，可以减少运算，提高性能。由于从顶点着色器到片元着色器的插值是线性的，因此这样的转移并不会影响纹理坐标的计算结果。</p><p>(5)然后，我们定义了片元着色器:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>fixed4 fragRobertsCrossDepthAndNormal(v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>	half4 sample1 = tex2D(_CameraDepthNormalsTexture, i.uv[1]);
+</span></span><span class=line><span class=cl>	half4 sample2 = tex2D(_CameraDepthNormalsTexture, i.uv[2]);
+</span></span><span class=line><span class=cl>	half4 sample3 = tex2D(_CameraDepthNormalsTexture, i.uv[3]);
+</span></span><span class=line><span class=cl>	half4 sample4 = tex2D(_CameraDepthNormalsTexture, i.uv[4]);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	half edge = 1.0;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	edge *= CheckSame(sample1, sample2);
+</span></span><span class=line><span class=cl>	edge *= CheckSame(sample3, sample4);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	fixed4 withEdgeColor = lerp(_EdgeColor, tex2D(_MainTex, i.uv[0]), edge);
+</span></span><span class=line><span class=cl>	fixed4 onlyEdgeColor = lerp(_EdgeColor, _BackgroundColor, edge);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	return lerp(withEdgeColor, onlyEdgeColor, _EdgeOnly);
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>		
+</span></span></code></pre></td></tr></table></div></div><p>我们首先使用4个纹理坐标对深度+法线纹理进行采样，再调用CheckSame函数来分别计算对角线上两个纹理值的差值。CheckSame函数的返回值要么是0，要么是1，返回0时表明这两点之间存在一条边界，反之则返回1。它的定义如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>		half CheckSame(half4 center, half4 sample) {
+</span></span><span class=line><span class=cl>			half2 centerNormal = center.xy;
+</span></span><span class=line><span class=cl>			float centerDepth = DecodeFloatRG(center.zw);
+</span></span><span class=line><span class=cl>			half2 sampleNormal = sample.xy;
+</span></span><span class=line><span class=cl>			float sampleDepth = DecodeFloatRG(sample.zw);
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			// difference in normals
+</span></span><span class=line><span class=cl>			// do not bother decoding normals - there&#39;s no need here
+</span></span><span class=line><span class=cl>			half2 diffNormal = abs(centerNormal - sampleNormal) * _Sensitivity.x;
+</span></span><span class=line><span class=cl>			int isSameNormal = (diffNormal.x + diffNormal.y) &lt; 0.1;
+</span></span><span class=line><span class=cl>			// difference in depth
+</span></span><span class=line><span class=cl>			float diffDepth = abs(centerDepth - sampleDepth) * _Sensitivity.y;
+</span></span><span class=line><span class=cl>			// scale the required threshold by the distance
+</span></span><span class=line><span class=cl>			int isSameDepth = diffDepth &lt; 0.1 * centerDepth;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			// return:
+</span></span><span class=line><span class=cl>			// 1 - if normals and depth are similar enough
+</span></span><span class=line><span class=cl>			// 0 - otherwise
+</span></span><span class=line><span class=cl>			return isSameNormal * isSameDepth ? 1.0 : 0.0;
+</span></span><span class=line><span class=cl>		}
+</span></span></code></pre></td></tr></table></div></div><p>CheckSame 首先对输入参数进行处理，得到两个采样点的法线和深度值。值得注意的是，这里我们并没有解码得到真正的法线值，而是直接使用了x分量。这是因为我们只需要比较两个采样值之间的差异度，而并不需要知道它们真正的法线值。然后，我们把两个采样点的对应值相减并取绝对值，再乘以灵敏度参数，把差异值的每个分量相加再和一个值比较，如果它们的和小于阈值，则返回1，说明差异不明显，不存在一条边界;否则返回0。最后，我们把法线和深度的检查结果相乘，作为组合后的返回值。</p><p>当通过CheckSame 函数得到边缘信息后，片元着色器就利用该值进行颜色混合，这和12.3节中的步骤一致.</p><p>6)然后，我们定义了边缘检测需要使用的Pass:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Pass { 
+</span></span><span class=line><span class=cl>	ZTest Always Cull Off ZWrite Off
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	CGPROGRAM      
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	#pragma vertex vert  
+</span></span><span class=line><span class=cl>	#pragma fragment fragRobertsCrossDepthAndNormal
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	ENDCG  
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>(7)最后，我们关闭了该Shader的Fallback:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Fallback Off
+</span></span></code></pre></td></tr></table></div></div><p>完成后返回编辑器，并把 Chapter13-EdgeDetectNormalAndDepth 拖曳到摄像机的 EdgeDetectNormalsAndDepth.cs 脚本中的 edgeDetectShader 参数中。当然，我们可以在 EdgeDetectNormalsAndDepth.cs 的脚本面板中将 edgeDetectShader 参数的默认值设置为 Chapter13-EdgeDetectNormaAndDept，这样就不需要以后使用时每次都手动拖曳了。</p><p>本节实现的描边效果是基于整个屏幕空间进行的，也就是说，场景内的所有物体都会被添加描边效果。但有时，我们希望只对特定的物体进行描边，例如当玩家选中场景中的某个物体后，我们想要在该物体周围添加一层描边效果。这时，我们可以使用Unity提供的Graphics.DrawMesh或Graphics.DrawMeshNow 函数把需要描边的物体再次渲染一遍(在所有不透明物体渲染完毕之后)，然后再使用本节提到的边缘检测算法计算深度或法线纹理中每个像素的梯度值,判断它们是否小于某个阈值，如果是，就在 Shader 中使用 clipO)函数将该像素剔除掉，从而显示出原来的物体颜色。</p><h2 id=扩展阅读>扩展阅读</h2><p>在本章中，我们介绍了如何使用深度和法线纹理实现诸如全局雾效、边缘检测等效果。尽管我们只使用了深度和法线纹理，但实际上我们可以在Unity 中创建任何需要的缓存纹理。这可以通过使用 Unity 的着色器替换(Shader Replacement)功能(即调用 Camera,RenderWithShader(shader.replacementTag)函数)把整个场景再次渲染一遍来得到，而在很多时候，这实际也是 Unity 创建深度和法线纹理时使用的方法。</p><p>深度和法线纹理在屏幕特效的实现中往往扮演了重要的角色。许多特殊的屏幕效果都需要依靠这两种纹理的帮助。Unity曾在2011年的SIGGRAPH(计算图形学的顶级会议)上做了一个关于使用深度纹理实现各种特效的演讲(<a class=link href=http://blogs.unity target=_blank rel=noopener>http://blogs.unity</a>3d,com/2011/09/08/special-efects-withdepth-talk-at-siggraph/)。在这个演讲中，Unity 的工作人员解释了如何利用深度纹理来实现特定物体的描边、角色护盾、相交线的高光模拟等效果。在 Unity的Image Effect(<a class=link href=http://docs.unity3d.comManualcomp-ImageEfects.html target=_blank rel=noopener>http://docs.unity3d.comManualcomp-ImageEfects.html</a>)包中，读者也可以找到一些传统的使用深度纹理实现屏幕特效的例子，例如屏幕空间的环境遮挡(ScreenSpaceAmbientOcclusion，SSAO)等效果。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/unity-shader/>Unity Shader</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/18-%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93/><div class=article-image><img src=/p/18-%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 18 基于物理的渲染" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>18 基于物理的渲染</h2></div></a></article><article class=has-image><a href=/p/17-%E8%A1%A8%E9%9D%A2%E7%9D%80%E8%89%B2%E5%99%A8/><div class=article-image><img src=/p/17-%E8%A1%A8%E9%9D%A2%E7%9D%80%E8%89%B2%E5%99%A8/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 17 表面着色器" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>17 表面着色器</h2></div></a></article><article class=has-image><a href=/p/16-unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/><div class=article-image><img src=/p/16-unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 16 Unity中的渲染优化技术" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>16 Unity中的渲染优化技术</h2></div></a></article><article class=has-image><a href=/p/15-%E5%99%AA%E5%A3%B0%E8%BF%90%E7%94%A8/><div class=article-image><img src=/p/15-%E5%99%AA%E5%A3%B0%E8%BF%90%E7%94%A8/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 15 噪声运用" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>15 噪声运用</h2></div></a></article><article class=has-image><a href=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/><div class=article-image><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 14 非真实感渲染" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>14 非真实感渲染</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2024 -
+2026 Selaphina</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.34.2>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

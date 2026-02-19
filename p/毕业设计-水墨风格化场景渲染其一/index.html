@@ -1,0 +1,323 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="毕业设计的开发日志，用于实时记录学到的trick。"><title>毕业设计 | 水墨风格化场景渲染（其一）</title><link rel=canonical href=https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/><link rel=stylesheet href=/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css><meta property='og:title' content="毕业设计 | 水墨风格化场景渲染（其一）"><meta property='og:description' content="毕业设计的开发日志，用于实时记录学到的trick。"><meta property='og:url' content='https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/'><meta property='og:site_name' content='Selaphina'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Note'><meta property='article:published_time' content='2025-11-11T10:12:30+00:00'><meta property='article:modified_time' content='2025-11-11T10:12:30+00:00'><meta property='og:image' content='https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/cover1.png'><meta name=twitter:title content="毕业设计 | 水墨风格化场景渲染（其一）"><meta name=twitter:description content="毕业设计的开发日志，用于实时记录学到的trick。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://Selaphina.github.io/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/cover1.png'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_19bb7832d48d68bd.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Selaphina</a></h1><h2 class=site-description>住在一个奇妙而荒诞的星球。</h2></div></header><ol class=menu-social><li><a href=https://github.com/Selaphina target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#1插件unrealtounity>1.插件：UnrealToUnity</a></li><li><a href=#2简单水墨渲染的初步实现>2.简单水墨渲染的初步实现</a><ol><li><a href=#21-轮廓线的渲染>2.1 轮廓线的渲染</a></li><li><a href=#22-内部着色>2.2 内部着色</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/cover1_hu_a2507cb5e006e692.png srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/cover1_hu_a2507cb5e006e692.png 800w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/cover1_hu_8370db17030da67a.png 1600w" width=800 height=490 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其一）"></a></div><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/ style=background-color:#beefe1;color:#0f3d30>技术笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/>毕业设计 | 水墨风格化场景渲染（其一）</a></h2><h3 class=article-subtitle>毕业设计的开发日志，用于实时记录学到的trick。</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2025-11-11T10:12:30Z>Nov 11, 2025</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>4 minute read</time></div></footer></div></header><section class=article-content><h2 id=1插件unrealtounity>1.插件：UnrealToUnity</h2><p>在日常创作中，经常碰到一些好的UE美术资源，可以使用这个插件把它转换到Unity当中。</p><p><a class=link href="https://pan.baidu.com/s/1P5AMJ177SIdE4-fjiRFEXg?pwd=6666" target=_blank rel=noopener>百度网盘链接</a></p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-c29b95f89891b425695cec5e69071dbd_1440w.jpg width=179 height=130 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-c29b95f89891b425695cec5e69071dbd_1440w_hu_b6fbf98d2975ab88.jpg 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-c29b95f89891b425695cec5e69071dbd_1440w_hu_e8ab2e4ba0a5c700.jpg 1024w" loading=lazy alt=img class=gallery-image data-flex-grow=137 data-flex-basis=330px></p><p>Unity：2019以上的版本</p><p>UE：版本根据自己的安装插件对应的版本自行选择，我选择的是5.3.2</p><p><strong>步骤：</strong></p><ol><li><strong>解压对应版本的UE插件：</strong></li></ol><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150443177.png width=819 height=744 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150443177_hu_640d0b4606aed75f.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150443177_hu_c7661847e0f0bcc5.png 1024w" loading=lazy alt=压缩包内部结构 class=gallery-image data-flex-grow=110 data-flex-basis=264px></p><ol start=2><li><strong>新建一个UE工程。</strong></li></ol><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150049173.png width=963 height=621 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150049173_hu_a35510a9979f5713.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150049173_hu_d8627ec39edeeb0a.png 1024w" loading=lazy class=gallery-image data-flex-grow=155 data-flex-basis=372px></p><p>找到工程目录，新建一个Plugins文件夹，如下：</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150636303.png width=441 height=494 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150636303_hu_b4d940c3509a2e0b.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150636303_hu_23542a0f94678dcb.png 1024w" loading=lazy class=gallery-image data-flex-grow=89 data-flex-basis=214px></p><ol start=3><li><strong>把解压后的插件文件夹整个复制到Plugins文件夹下。</strong></li></ol><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150754424.png width=999 height=396 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150754424_hu_7f8f883afbd4bdf5.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150754424_hu_7d7db440eddb0454.png 1024w" loading=lazy class=gallery-image data-flex-grow=252 data-flex-basis=605px></p><ol start=4><li><strong>重启UE，插件会在菜单栏上显示，可直接点击使用。</strong></li></ol><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150908079.png width=1806 height=867 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150908079_hu_2793e3a308865b82.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150908079_hu_26792e8c64fd3b29.png 1024w" loading=lazy class=gallery-image data-flex-grow=208 data-flex-basis=499px></p><p>把需要转成unity资产的ue美术素材uasset拖到世界中，即可。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150924765.png width=678 height=362 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150924765_hu_dadba3e098fb96c.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111150924765_hu_160566db4c2afc93.png 1024w" loading=lazy class=gallery-image data-flex-grow=187 data-flex-basis=449px></p><p>默认设置即可导出。可以选择取消勾选shader等，因为会与unity本体的shader有冲突。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111151019722.png width=759 height=885 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111151019722_hu_e7476eab303159b8.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111151019722_hu_f8d6c8afa55960f1.png 1024w" loading=lazy alt=image-20251111151019722 class=gallery-image data-flex-grow=85 data-flex-basis=205px></p><blockquote><p>事实上，导入unity后大概率会进入报错的安全模式，按照console窗口的报错一步步注释掉UE转生过来的代码即可，很快就能清理完毕。另外，还是强调，尽量把ue带来的shader删除干净，在unity里重新写一遍shader。</p></blockquote><h2 id=2简单水墨渲染的初步实现>2.简单水墨渲染的初步实现</h2><h3 id=21-轮廓线的渲染>2.1 轮廓线的渲染</h3><p>《unity shader入门精要 14章》已经详细介绍轮廓线的渲染方法。</p><p><strong>过程式集合轮廓线渲染方法：</strong>
+1）单独一个pass将模型沿法线扩张一点，渲染成轮廓线的颜色，</p><p>2）然后再用一个pass正常内部渲染着色，遮住前面的部分。留下显示出来的部分就是轮廓线了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties 
+</span></span><span class=line><span class=cl>	{
+</span></span><span class=line><span class=cl>		[Header(OutLine)]
+</span></span><span class=line><span class=cl>		// Stroke Color 描边颜色
+</span></span><span class=line><span class=cl>		_StrokeColor (&#34;Stroke Color&#34;, Color) = (0,0,0,1)
+</span></span><span class=line><span class=cl>		// Noise Map 噪声图
+</span></span><span class=line><span class=cl>		_OutlineNoise (&#34;Outline Noise Map&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		// First Outline Width 
+</span></span><span class=line><span class=cl>		_Outline (&#34;Outline Width&#34;, Range(0, 1)) = 0.1
+</span></span><span class=line><span class=cl>		// Second Outline Width
+</span></span><span class=line><span class=cl>		_OutsideNoiseWidth (&#34;Outside Noise Width&#34;, Range(1, 2)) = 1.3
+</span></span><span class=line><span class=cl>		_MaxOutlineZOffset (&#34;Max Outline Z Offset&#34;, Range(0,1)) = 0.5
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>    SubShader 
+</span></span><span class=line><span class=cl>	{
+</span></span><span class=line><span class=cl>		Tags { &#34;RenderType&#34;=&#34;Opaque&#34; &#34;Queue&#34;=&#34;Geometry&#34;}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		// the first outline pass
+</span></span><span class=line><span class=cl>		Pass 
+</span></span><span class=line><span class=cl>		{
+</span></span><span class=line><span class=cl>                // 主要在vertex shader内进行计算 省略部分基本参数设置
+</span></span><span class=line><span class=cl>			v2f vert (a2v v) 
+</span></span><span class=line><span class=cl>			{
+</span></span><span class=line><span class=cl>				// fetch Perlin noise map here to map the vertex
+</span></span><span class=line><span class=cl>				// add some bias by the normal direction
+</span></span><span class=line><span class=cl>				float4 burn = tex2Dlod(_OutlineNoise, v.vertex);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				v2f o = (v2f)0;
+</span></span><span class=line><span class=cl>				float3 scaledir = mul((float3x3)UNITY_MATRIX_MV, normalize(v.normal.xyz));
+</span></span><span class=line><span class=cl>				scaledir += 0.5;
+</span></span><span class=line><span class=cl>				scaledir.z = 0.01;
+</span></span><span class=line><span class=cl>				scaledir = normalize(scaledir);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				// camera space
+</span></span><span class=line><span class=cl>				float4 position_cs = mul(UNITY_MATRIX_MV, v.vertex);
+</span></span><span class=line><span class=cl>				position_cs /= position_cs.w;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				float3 viewDir = normalize(position_cs.xyz);
+</span></span><span class=line><span class=cl>				float3 offset_pos_cs = position_cs.xyz + viewDir * _MaxOutlineZOffset;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				// y = cos（fov/2）
+</span></span><span class=line><span class=cl>				float linewidth = -position_cs.z / (unity_CameraProjection[1].y);
+</span></span><span class=line><span class=cl>				linewidth = sqrt(linewidth);
+</span></span><span class=line><span class=cl>				position_cs.xy = offset_pos_cs.xy + scaledir.xy * linewidth * burn.x * _Outline ;
+</span></span><span class=line><span class=cl>				position_cs.z = offset_pos_cs.z;
+</span></span><span class=line><span class=cl>				o.pos = mul(UNITY_MATRIX_P, position_cs);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				return o;
+</span></span><span class=line><span class=cl>			}
+</span></span><span class=line><span class=cl>                // fragment shader只是输出了一个颜色 不赘述
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>水墨画风格渲染，做了一个最简单的noise干扰，在这里使用noise纹理图片（_OutlineNoise）进行采样，这样又个好处就是随机出来的<strong>轮廓不会随着视角的改变而改变。</strong></p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/noise.jpg width=512 height=512 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/noise_hu_9754cff8771bd8fa.jpg 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/noise_hu_5e159464aa861b30.jpg 1024w" loading=lazy alt=noise class=gallery-image data-flex-grow=100 data-flex-basis=240px></p><p>其中，</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// y = cos（fov/2）
+</span></span><span class=line><span class=cl>				float linewidth = -position_cs.z / (unity_CameraProjection[1].y);
+</span></span></code></pre></td></tr></table></div></div><p>增加了一个linewidth的操作，因为unity_CameraProjection[1].y = cos（fov/2）。</p><p>**目的：**保证轮廓线随着FOV的变换也是成一定比例，近大远小，而不是远近一样粗细。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221055648.png width=1529 height=1157 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221055648_hu_35f23d14606d19e9.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221055648_hu_fe7bcbbb4cedac4b.png 1024w" loading=lazy alt=image-20251110221055648 class=gallery-image data-flex-grow=132 data-flex-basis=317px></p><p>最后一个小trick是，再增加了一个pass进行完全相同的操作，只是宽度再稍微增加一点，然后在fragment shader里根据noise再进行一下剔除。这也是在属性里面，之前没有用到的_OutsideNoiseWidth，来控制第二个pass的轮廓线的宽度，理论上它要大于1，比第一个pass稍微宽一些。简要的代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// 在vertex shader内 只需要稍微改变一点
+</span></span><span class=line><span class=cl>position_cs.xy = offset_pos_cs.xy + scaledir.xy * linewidth * burn.y * _Outline * _OutsideNoiseWidth ;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 在fragment shader内 也稍微根据noise突变做了下剔除
+</span></span><span class=line><span class=cl>fixed4 frag(v2f i) : SV_Target 
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	//clip randome outline here
+</span></span><span class=line><span class=cl>	fixed4 c = _StrokeColor;
+</span></span><span class=line><span class=cl>	fixed3 burn = tex2D(_OutlineNoise, i.uv).rgb;
+</span></span><span class=line><span class=cl>	if (burn.x &gt; 0.5)
+</span></span><span class=line><span class=cl>		discard;
+</span></span><span class=line><span class=cl>	return c;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111165604073.png width=963 height=1005 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111165604073_hu_51c0d24c1fd1fc18.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111165604073_hu_71f95105107aaa1f.png 1024w" loading=lazy alt=这个噪声控制的是笔触的毛边效果 class=gallery-image data-flex-grow=95 data-flex-basis=229px></p><p>这样可以形成毛笔笔触边缘毛边的效果：</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111162848528.png width=416 height=207 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111162848528_hu_8bdc24910f18fb79.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251111162848528_hu_d0bcad983e6edccb.png 1024w" loading=lazy alt=前后对比 class=gallery-image data-flex-grow=200 data-flex-basis=482px></p><h3 id=22-内部着色>2.2 内部着色</h3><p>而内部着色的基本思想和unity卡通渲染的一致，使用最基本的光照方程，再映射到一张ramp图上进行采样，最后形成的就是阶梯状的颜色过渡。在这里基础物体用的ramp图如下：</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-02a14c743e478ce75fd317787f12b6c3_r.jpg width=512 height=64 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-02a14c743e478ce75fd317787f12b6c3_r_hu_4ca6bcab7e69bd49.jpg 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/v2-02a14c743e478ce75fd317787f12b6c3_r_hu_f746c43d408e6a70.jpg 1024w" loading=lazy alt=Ramp class=gallery-image data-flex-grow=800 data-flex-basis=1920px></p><p>天空盒用的ramp图进行了反转，否则黑天和灰色墨迹很丑：</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/Ramp_Texture6flip.png width=512 height=64 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/Ramp_Texture6flip_hu_dde0e55431f79b56.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/Ramp_Texture6flip_hu_e0eaa859397fd0cd.png 1024w" loading=lazy alt=这里用sai快速画的，有点不对，以后优化的时候改一下。 class=gallery-image data-flex-grow=800 data-flex-basis=1920px></p><p>将纹理笔触作为一个noise贴图，扰动uv的值之后再进行一次高斯模糊。在这里是用了一张笔触纹理和一个noise贴图混合的一起扰动uv。</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/ssstroke4b-1762850698712.png width=910 height=283 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/ssstroke4b-1762850698712_hu_fe725dee13e995e.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/ssstroke4b-1762850698712_hu_560ed9b638ee8613.png 1024w" loading=lazy alt=笔触纹理 class=gallery-image data-flex-grow=321 data-flex-basis=771px></p><p><strong>内部着色步骤：</strong></p><ol><li><p>先计算半郎伯特漫反射系数;</p></li><li><p>用笔触纹理+noise纹理稍微扰动一下。</p></li><li><p>在采样ramp纹理的时候进行高斯模糊。</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=n>Shader</span> <span class=s>&#34;ChinesePainting/MountainShader&#34;</span> 
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>Properties</span> 
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=na>		[Header(OutLine)]</span>
+</span></span><span class=line><span class=cl>		<span class=c1>//...省略上述已介绍过的</span>
+</span></span><span class=line><span class=cl><span class=na>
+</span></span></span><span class=line><span class=cl><span class=na>		[Header(Interior)]</span>
+</span></span><span class=line><span class=cl>		<span class=n>_Ramp</span> <span class=p>(</span><span class=s>&#34;Ramp Texture&#34;</span><span class=p>,</span> <span class=m>2D</span><span class=p>)</span> <span class=p>=</span> <span class=s>&#34;white&#34;</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// Stroke Map</span>
+</span></span><span class=line><span class=cl>		<span class=n>_StrokeTex</span> <span class=p>(</span><span class=s>&#34;Stroke Tex&#34;</span><span class=p>,</span> <span class=m>2D</span><span class=p>)</span> <span class=p>=</span> <span class=s>&#34;white&#34;</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>		<span class=n>_InteriorNoise</span> <span class=p>(</span><span class=s>&#34;Interior Noise Map&#34;</span><span class=p>,</span> <span class=m>2D</span><span class=p>)</span> <span class=p>=</span> <span class=s>&#34;white&#34;</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// Interior Noise Level</span>
+</span></span><span class=line><span class=cl>		<span class=n>_InteriorNoiseLevel</span> <span class=p>(</span><span class=s>&#34;Interior Noise Level&#34;</span><span class=p>,</span> <span class=n>Range</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=m>1</span><span class=p>))</span> <span class=p>=</span> <span class=m>0.15</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// Guassian Blur</span>
+</span></span><span class=line><span class=cl>		<span class=n>radius</span> <span class=p>(</span><span class=s>&#34;Guassian Blur Radius&#34;</span><span class=p>,</span> <span class=n>Range</span><span class=p>(</span><span class=m>0</span><span class=p>,</span><span class=m>60</span><span class=p>))</span> <span class=p>=</span> <span class=m>30</span>
+</span></span><span class=line><span class=cl>                <span class=n>resolution</span> <span class=p>(</span><span class=s>&#34;Resolution&#34;</span><span class=p>,</span> <span class=kt>float</span><span class=p>)</span> <span class=p>=</span> <span class=m>800</span>  
+</span></span><span class=line><span class=cl>                <span class=n>hstep</span><span class=p>(</span><span class=s>&#34;HorizontalStep&#34;</span><span class=p>,</span> <span class=n>Range</span><span class=p>(</span><span class=m>0</span><span class=p>,</span><span class=m>1</span><span class=p>))</span> <span class=p>=</span> <span class=m>0.5</span>
+</span></span><span class=line><span class=cl>                <span class=n>vstep</span><span class=p>(</span><span class=s>&#34;VerticalStep&#34;</span><span class=p>,</span> <span class=n>Range</span><span class=p>(</span><span class=m>0</span><span class=p>,</span><span class=m>1</span><span class=p>))</span> <span class=p>=</span> <span class=m>0.5</span>  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=n>SubShader</span> 
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=n>Tags</span> <span class=p>{</span> <span class=s>&#34;RenderType&#34;</span><span class=p>=</span><span class=s>&#34;Opaque&#34;</span> <span class=s>&#34;Queue&#34;</span><span class=p>=</span><span class=s>&#34;Geometry&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=c1>// the first outline pass</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 省略</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=c1>// the second outline pass for random part, a little bit wider than last one</span>
+</span></span><span class=line><span class=cl>	        <span class=c1>// 省略</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=c1>// the interior pass</span>
+</span></span><span class=line><span class=cl>                <span class=n>Pass</span> 
+</span></span><span class=line><span class=cl>		<span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// 之前的vertex shader部分没有特殊操作  省略</span>
+</span></span><span class=line><span class=cl>			<span class=n>float4</span> <span class=n>frag</span><span class=p>(</span><span class=n>v2f</span> <span class=n>i</span><span class=p>)</span> <span class=p>:</span> <span class=n>SV_Target</span> 
+</span></span><span class=line><span class=cl>			<span class=p>{</span> 
+</span></span><span class=line><span class=cl>				<span class=n>fixed3</span> <span class=n>worldNormal</span> <span class=p>=</span> <span class=n>normalize</span><span class=p>(</span><span class=n>i</span><span class=p>.</span><span class=n>worldNormal</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>				<span class=n>fixed3</span> <span class=n>worldLightDir</span> <span class=p>=</span> <span class=n>normalize</span><span class=p>(</span><span class=n>UnityWorldSpaceLightDir</span><span class=p>(</span><span class=n>i</span><span class=p>.</span><span class=n>worldPos</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				<span class=c1>// Noise</span>
+</span></span><span class=line><span class=cl>				<span class=c1>// For the bias of the coordiante</span>
+</span></span><span class=line><span class=cl>				<span class=n>float4</span> <span class=n>burn</span> <span class=p>=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_InteriorNoise</span><span class=p>,</span> <span class=n>i</span><span class=p>.</span><span class=n>uv</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>				<span class=c1>//a little bit disturbance</span>
+</span></span><span class=line><span class=cl>				<span class=k>fixed</span> <span class=n>diff</span> <span class=p>=</span>  <span class=n>dot</span><span class=p>(</span><span class=n>worldNormal</span><span class=p>,</span> <span class=n>worldLightDir</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>				<span class=n>diff</span> <span class=p>=</span> <span class=p>(</span><span class=n>diff</span> <span class=p>*</span> <span class=m>0.5</span> <span class=p>+</span> <span class=m>0.5</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>				<span class=n>float2</span> <span class=n>k</span> <span class=p>=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_StrokeTex</span><span class=p>,</span> <span class=n>i</span><span class=p>.</span><span class=n>uv</span><span class=p>).</span><span class=n>xy</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>				<span class=n>float2</span> <span class=n>cuv</span> <span class=p>=</span> <span class=n>float2</span><span class=p>(</span><span class=n>diff</span><span class=p>,</span> <span class=n>diff</span><span class=p>)</span> <span class=p>+</span> <span class=n>k</span> <span class=p>*</span> <span class=n>burn</span><span class=p>.</span><span class=n>xy</span> <span class=p>*</span> <span class=n>_InteriorNoiseLevel</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				<span class=c1>// This iniminate the bias of the uv movement</span>
+</span></span><span class=line><span class=cl>				<span class=k>if</span> <span class=p>(</span><span class=n>cuv</span><span class=p>.</span><span class=n>x</span> <span class=p>&gt;</span> <span class=m>0.95</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>				<span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=n>cuv</span><span class=p>.</span><span class=n>x</span> <span class=p>=</span> <span class=m>0.95</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>					<span class=n>cuv</span><span class=p>.</span><span class=n>y</span> <span class=p>=</span> <span class=m>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=k>if</span> <span class=p>(</span><span class=n>cuv</span><span class=p>.</span><span class=n>y</span> <span class=p>&gt;</span>  <span class=m>0.95</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>				<span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=n>cuv</span><span class=p>.</span><span class=n>x</span> <span class=p>=</span> <span class=m>0.95</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>					<span class=n>cuv</span><span class=p>.</span><span class=n>y</span> <span class=p>=</span> <span class=m>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=n>cuv</span> <span class=p>=</span> <span class=n>clamp</span><span class=p>(</span><span class=n>cuv</span><span class=p>,</span> <span class=m>0</span><span class=p>,</span> <span class=m>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				<span class=c1>// Guassian Blur</span>
+</span></span><span class=line><span class=cl>				<span class=n>float4</span> <span class=n>sum</span> <span class=p>=</span> <span class=n>float4</span><span class=p>(</span><span class=m>0.0</span><span class=p>,</span> <span class=m>0.0</span><span class=p>,</span> <span class=m>0.0</span><span class=p>,</span> <span class=m>0.0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                                <span class=n>float2</span> <span class=n>tc</span> <span class=p>=</span> <span class=n>cuv</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                                <span class=c1>// blur radius in pixels</span>
+</span></span><span class=line><span class=cl>                                <span class=kt>float</span> <span class=n>blur</span> <span class=p>=</span> <span class=n>radius</span><span class=p>/</span><span class=n>resolution</span><span class=p>/</span><span class=m>4</span><span class=p>;</span>     
+</span></span><span class=line><span class=cl>                                <span class=n>sum</span> <span class=p>+=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_Ramp</span><span class=p>,</span> <span class=n>float2</span><span class=p>(</span><span class=n>tc</span><span class=p>.</span><span class=n>x</span> <span class=p>-</span> <span class=m>4.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>hstep</span><span class=p>,</span> <span class=n>tc</span><span class=p>.</span><span class=n>y</span> <span class=p>-</span> <span class=m>4.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>vstep</span><span class=p>))</span> <span class=p>*</span> <span class=m>0.0162162162</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                                <span class=n>sum</span> <span class=p>+=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_Ramp</span><span class=p>,</span> <span class=n>float2</span><span class=p>(</span><span class=n>tc</span><span class=p>.</span><span class=n>x</span> <span class=p>-</span> <span class=m>3.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>hstep</span><span class=p>,</span> <span class=n>tc</span><span class=p>.</span><span class=n>y</span> <span class=p>-</span> <span class=m>3.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>vstep</span><span class=p>))</span> <span class=p>*</span> <span class=m>0.0540540541</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                                <span class=n>sum</span> <span class=p>+=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_Ramp</span><span class=p>,</span> <span class=n>float2</span><span class=p>(</span><span class=n>tc</span><span class=p>.</span><span class=n>x</span> <span class=p>-</span> <span class=m>2.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>hstep</span><span class=p>,</span> <span class=n>tc</span><span class=p>.</span><span class=n>y</span> <span class=p>-</span> <span class=m>2.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>vstep</span><span class=p>))</span> <span class=p>*</span> <span class=m>0.1216216216</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                                <span class=n>sum</span> <span class=p>+=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_Ramp</span><span class=p>,</span> <span class=n>float2</span><span class=p>(</span><span class=n>tc</span><span class=p>.</span><span class=n>x</span> <span class=p>-</span> <span class=m>1.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>hstep</span><span class=p>,</span> <span class=n>tc</span><span class=p>.</span><span class=n>y</span> <span class=p>-</span> <span class=m>1.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>vstep</span><span class=p>))</span> <span class=p>*</span> <span class=m>0.1945945946</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                                <span class=n>sum</span> <span class=p>+=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_Ramp</span><span class=p>,</span> <span class=n>float2</span><span class=p>(</span><span class=n>tc</span><span class=p>.</span><span class=n>x</span><span class=p>,</span> <span class=n>tc</span><span class=p>.</span><span class=n>y</span><span class=p>))</span> <span class=p>*</span> <span class=m>0.2270270270</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                                <span class=n>sum</span> <span class=p>+=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_Ramp</span><span class=p>,</span> <span class=n>float2</span><span class=p>(</span><span class=n>tc</span><span class=p>.</span><span class=n>x</span> <span class=p>+</span> <span class=m>1.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>hstep</span><span class=p>,</span> <span class=n>tc</span><span class=p>.</span><span class=n>y</span> <span class=p>+</span> <span class=m>1.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>vstep</span><span class=p>))</span> <span class=p>*</span> <span class=m>0.1945945946</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                                <span class=n>sum</span> <span class=p>+=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_Ramp</span><span class=p>,</span> <span class=n>float2</span><span class=p>(</span><span class=n>tc</span><span class=p>.</span><span class=n>x</span> <span class=p>+</span> <span class=m>2.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>hstep</span><span class=p>,</span> <span class=n>tc</span><span class=p>.</span><span class=n>y</span> <span class=p>+</span> <span class=m>2.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>vstep</span><span class=p>))</span> <span class=p>*</span> <span class=m>0.1216216216</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                                <span class=n>sum</span> <span class=p>+=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_Ramp</span><span class=p>,</span> <span class=n>float2</span><span class=p>(</span><span class=n>tc</span><span class=p>.</span><span class=n>x</span> <span class=p>+</span> <span class=m>3.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>hstep</span><span class=p>,</span> <span class=n>tc</span><span class=p>.</span><span class=n>y</span> <span class=p>+</span> <span class=m>3.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>vstep</span><span class=p>))</span> <span class=p>*</span> <span class=m>0.0540540541</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                                <span class=n>sum</span> <span class=p>+=</span> <span class=n>tex2D</span><span class=p>(</span><span class=n>_Ramp</span><span class=p>,</span> <span class=n>float2</span><span class=p>(</span><span class=n>tc</span><span class=p>.</span><span class=n>x</span> <span class=p>+</span> <span class=m>4.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>hstep</span><span class=p>,</span> <span class=n>tc</span><span class=p>.</span><span class=n>y</span> <span class=p>+</span> <span class=m>4.0</span><span class=p>*</span><span class=n>blur</span><span class=p>*</span><span class=n>vstep</span><span class=p>))</span> <span class=p>*</span> <span class=m>0.0162162162</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				<span class=k>return</span> <span class=n>float4</span><span class=p>(</span><span class=n>sum</span><span class=p>.</span><span class=n>rgb</span><span class=p>,</span> <span class=m>1.0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=n>ENDCG</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=n>FallBack</span> <span class=s>&#34;Diffuse&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>目前是这样的效果：</p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110220857186.png width=1031 height=1145 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110220857186_hu_13023b4195d8ab28.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110220857186_hu_c50051fcb44c7330.png 1024w" loading=lazy alt=正视图 class=gallery-image data-flex-grow=90 data-flex-basis=216px></p><p><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221308701.png width=1511 height=1305 srcset="/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221308701_hu_916624ff8df2d797.png 480w, /p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%80/image-20251110221308701_hu_58d9162eadfe254e.png 1024w" loading=lazy alt=半侧面 class=gallery-image data-flex-grow=115 data-flex-basis=277px></p></section><footer class=article-footer><section class=article-tags><a href=/tags/note/>Note</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%94/><div class=article-image><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%94/cover1.097562be4e510d390980afa13e8f2642_hu_290b482c007123cc.png width=250 height=150 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其五）" data-hash="md5-CXVivk5RDTkJgK+hPo8mQg=="></div><div class=article-details><h2 class=article-title>毕业设计 | 水墨风格化场景渲染（其五）</h2></div></a></article><article class=has-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%89/><div class=article-image><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%89/cover1.097562be4e510d390980afa13e8f2642_hu_290b482c007123cc.png width=250 height=150 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其三）" data-hash="md5-CXVivk5RDTkJgK+hPo8mQg=="></div><div class=article-details><h2 class=article-title>毕业设计 | 水墨风格化场景渲染（其三）</h2></div></a></article><article class=has-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E5%9B%9B/><div class=article-image><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E5%9B%9B/cover1.097562be4e510d390980afa13e8f2642_hu_290b482c007123cc.png width=250 height=150 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其四）" data-hash="md5-CXVivk5RDTkJgK+hPo8mQg=="></div><div class=article-details><h2 class=article-title>毕业设计 | 水墨风格化场景渲染（其四）</h2></div></a></article><article class=has-image><a href=/p/unity-mcp-%E5%85%A8%E6%B5%81%E7%A8%8B/><div class=article-image><img src=/p/unity-mcp-%E5%85%A8%E6%B5%81%E7%A8%8B/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post Unity MCP 全流程" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>Unity MCP 全流程</h2></div></a></article><article class=has-image><a href=/p/unity%E5%8A%A8%E7%94%BB%E5%88%A0%E5%B8%A7%E4%BC%98%E5%8C%96%E5%B7%A5%E5%85%B7/><div class=article-image><img src=/p/unity%E5%8A%A8%E7%94%BB%E5%88%A0%E5%B8%A7%E4%BC%98%E5%8C%96%E5%B7%A5%E5%85%B7/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post Unity动画删帧优化工具" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>Unity动画删帧优化工具</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2024 -
+2026 Selaphina</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.34.2>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

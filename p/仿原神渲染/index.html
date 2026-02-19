@@ -1,0 +1,1306 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="记录"><title>仿原神渲染</title><link rel=canonical href=https://Selaphina.github.io/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/><link rel=stylesheet href=/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css><meta property='og:title' content="仿原神渲染"><meta property='og:description' content="记录"><meta property='og:url' content='https://Selaphina.github.io/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/'><meta property='og:site_name' content='Selaphina'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2025-12-11T20:32:30+00:00'><meta property='article:modified_time' content='2025-12-11T20:32:30+00:00'><meta property='og:image' content='https://Selaphina.github.io/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/CUC%E5%85%91%E6%8D%A2%E7%82%B92.png'><meta name=twitter:title content="仿原神渲染"><meta name=twitter:description content="记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://Selaphina.github.io/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/CUC%E5%85%91%E6%8D%A2%E7%82%B92.png'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_19bb7832d48d68bd.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Selaphina</a></h1><h2 class=site-description>住在一个奇妙而荒诞的星球。</h2></div></header><ol class=menu-social><li><a href=https://github.com/Selaphina target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#1-前期准备工作>1 前期准备工作</a></li><li><a href=#2-代码结构>2 代码结构</a><ol><li><a href=#1整体结构>1.整体结构</a></li><li><a href=#2subshader结构>2.Subshader结构</a></li><li><a href=#subshader结构>Subshader结构</a></li><li><a href=#pass结构>Pass结构</a></li></ol></li><li><a href=#3-正式开始>3 正式开始</a><ol><li><ol><li><a href=#1第一个pass渲染正面>1.第一个pass：渲染正面</a></li><li><a href=#4重点frag-片元着色器>4）【重点】frag 片元着色器</a></li></ol></li><li><a href=#为什么纹理和采样器分开声明>为什么纹理和采样器分开声明？</a><ol><li></li><li><a href=#5漫反射-shadow_ramplightmapndotl>5)漫反射： shadow_ramp（lightmap，NdotL）</a></li><li><a href=#半兰伯特模型变体>半兰伯特模型变体</a></li><li><a href=#6高光>6）高光</a></li><li><a href=#7金属>7）金属</a></li><li><a href=#为什么用ndirvsrg--05--05-采样而不是iuv0>为什么用nDirVS.rg * 0.5 + 0.5 采样，而不是i.uv0？</a></li><li><a href=#为什么metalmap要只取r的单通道>为什么metalMap要只取.r的单通道？</a></li><li><a href=#混合权重在图形学里永远是单通道的>混合权重在图形学里永远是“单通道”的。</a></li><li><a href=#8菲涅尔边缘光>8）菲涅尔（边缘光）</a></li><li><a href=#9自发光><strong>9）自发光</strong></a></li><li><a href=#10最终混合diffsue--metal--specular--fresnel>10）最终混合diffsue + metal + specular + fresnel</a></li><li><a href=#11脸部>11）脸部</a></li><li><a href=#12-添加自发光><strong>12) 添加自发光</strong></a></li></ol></li><li><a href=#4-描边>4 描边</a></li><li><a href=#5-投影>5 投影</a></li><li><a href=#6-后处理>6 后处理</a></li></ol></li><li><a href=#附录>附录：</a><ol><li><a href=#visual-studio-设置默认编码格式为-utf-8-或-gb2312-80>Visual Studio 设置默认编码格式为 UTF-8 或 GB2312-80</a></li><li><a href=#怎么去除边缘锯齿化>怎么去除边缘锯齿化</a></li><li><a href=#环境遮蔽ao>环境遮蔽AO</a></li><li><a href=#smoothstep-三次平滑函数>smoothstep 三次平滑函数</a></li><li><a href=#举例计算-lightmapg--025-时的输出>举例计算 lightmap.g = 0.25 时的输出</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/CUC%E5%85%91%E6%8D%A2%E7%82%B92_hu_7c97ba8e63f01fe8.png srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/CUC%E5%85%91%E6%8D%A2%E7%82%B92_hu_7c97ba8e63f01fe8.png 800w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/CUC%E5%85%91%E6%8D%A2%E7%82%B92_hu_b062dbeb1846ba82.png 1600w" width=800 height=340 loading=lazy alt="Featured image of post 仿原神渲染"></a></div><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/ style=background-color:#beefe1;color:#0f3d30>技术笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/>仿原神渲染</a></h2><h3 class=article-subtitle>记录</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2025-12-11T20:32:30Z>Dec 11, 2025</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>17 minute read</time></div></footer></div></header><section class=article-content><h2 id=1-前期准备工作>1 前期准备工作</h2><p>1.新建URP 3D项目</p><p>2.点击资产面板的URP资产，此时右侧面板高亮，可以Add Render Objects</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220748882.png width=539 height=471 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220748882_hu_bf07d46a8890988a.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220748882_hu_94f865ae66a2ff0c.png 1024w" loading=lazy alt=设置 class=gallery-image data-flex-grow=114 data-flex-basis=274px></p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220808619.png width=663 height=940 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220808619_hu_371fa032e5ae1f23.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220808619_hu_4b24ad964c99c80e.png 1024w" loading=lazy alt="此时可以添加render feature" class=gallery-image data-flex-grow=70 data-flex-basis=169px></p><p>添加Render Objects</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220951165.png width=629 height=361 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220951165_hu_f2c6b8181250a18b.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220951165_hu_e057fd7a1f12b218.png 1024w" loading=lazy alt=image-20251211220951165 class=gallery-image data-flex-grow=174 data-flex-basis=418px></p><p>添加3个pass。</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220916403.png width=639 height=493 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220916403_hu_7be3decc0e9e08b5.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220916403_hu_8978a6105bd2bd0c.png 1024w" loading=lazy alt=image-20251211220916403 class=gallery-image data-flex-grow=129 data-flex-basis=311px></p><p>mask改为everything。</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220842140.png width=924 height=1006 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220842140_hu_1b72da422ac89658.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211220842140_hu_97ba2d7aa6061501.png 1024w" loading=lazy alt=image-20251211220842140 class=gallery-image data-flex-grow=91 data-flex-basis=220px></p><blockquote><p>TODO: 有仙人曾言： // 我自己试下来，在角色身上 LowQuality 比 Medium 和 High 好
+// Medium 和 High 采样数多，过渡的区间大，在角色身上更容易出现 Perspective aliasing</p><p>等到时候自己验证一下在说 。</p></blockquote><p>FaceLightmap</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211221505443.png width=608 height=1284 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211221505443_hu_df6e589e83216e0b.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211221505443_hu_99842372904fc230.png 1024w" loading=lazy alt=FaceLightmap class=gallery-image data-flex-grow=47 data-flex-basis=113px></p><p>Body_Diffuse</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211221635125.png width=641 height=1319 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211221635125_hu_d18c98c2db12475e.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211221635125_hu_6c8ff8f476093668.png 1024w" loading=lazy alt=image-20251211221635125 class=gallery-image data-flex-grow=48 data-flex-basis=116px></p><p>Body_lightmap</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211221733472.png width=642 height=1316 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211221733472_hu_1f02da27a61d4106.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211221733472_hu_34dd427a6028ecd.png 1024w" loading=lazy alt=image-20251211221733472 class=gallery-image data-flex-grow=48 data-flex-basis=117px></p><p>法线图</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222108578.png width=631 height=1313 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222108578_hu_b958c3b379d422b4.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222108578_hu_8bddba3869aa9573.png 1024w" loading=lazy alt=image-20251211222108578 class=gallery-image data-flex-grow=48 data-flex-basis=115px></p><p>shadow ramp</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222233237.png width=646 height=1298 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222233237_hu_e5d0e88262262941.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222233237_hu_e5e69896e19900b2.png 1024w" loading=lazy alt=image-20251211222233237 class=gallery-image data-flex-grow=49 data-flex-basis=119px></p><p>Face_Diffuse</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222320885.png width=635 height=1284 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222320885_hu_cc55d0dbd4028f59.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222320885_hu_294b38344a2ea3bc.png 1024w" loading=lazy alt=image-20251211222320885 class=gallery-image data-flex-grow=49 data-flex-basis=118px></p><p>Hair_Diffuse</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222358382.png width=640 height=1301 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222358382_hu_20472422dcce121c.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222358382_hu_d067d64240b5c356.png 1024w" loading=lazy alt=头发漫反射 class=gallery-image data-flex-grow=49 data-flex-basis=118px></p><p>hair_lightmap</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222446504.png width=616 height=1295 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222446504_hu_16f7e2b36974d711.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222446504_hu_2e0f16cccb2a18b4.png 1024w" loading=lazy alt=image-20251211222446504 class=gallery-image data-flex-grow=47 data-flex-basis=114px></p><p>MetalMap</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222623823.png width=655 height=1389 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222623823_hu_351776d3e7ca9ec9.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251211222623823_hu_dcceaaa550475451.png 1024w" loading=lazy alt=image-20251211222623823 class=gallery-image data-flex-grow=47 data-flex-basis=113px></p><p>贴图设置完毕。</p><p>值得注意的是 杜林的翅膀贴图是和头发放在一起，观察一下贴图纹理的对应。</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251221163249828.png width=1416 height=613 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251221163249828_hu_16dfba1c577f2763.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251221163249828_hu_b84af76bf5c53ca2.png 1024w" loading=lazy alt=image-20251221163249828 class=gallery-image data-flex-grow=230 data-flex-basis=554px></p><h2 id=2-代码结构>2 代码结构</h2><h3 id=1整体结构>1.整体结构</h3><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251220215926595.png width=671 height=268 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251220215926595_hu_47c770abfc485e7.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251220215926595_hu_ad0e5468261c05b.png 1024w" loading=lazy alt=整体的结构 class=gallery-image data-flex-grow=250 data-flex-basis=600px></p><p>一开始不太习惯HLSL的代码结构，和CG有一定的区别，注意。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Shader &#34;EXAM1/EXAM_Shader&#34;
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    Property
+</span></span><span class=line><span class=cl>    {
+</span></span><span class=line><span class=cl>        ……
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    Subshader
+</span></span><span class=line><span class=cl>    {
+</span></span><span class=line><span class=cl>        Pass
+</span></span><span class=line><span class=cl>        {……}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        Pass
+</span></span><span class=line><span class=cl>        {……}
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h3 id=2subshader结构>2.Subshader结构</h3><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251220220214291.png width=864 height=719 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251220220214291_hu_9b61cc86f4570b70.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251220220214291_hu_9db4f3371bb2b2c9.png 1024w" loading=lazy class=gallery-image data-flex-grow=120 data-flex-basis=288px></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> SubShader
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl>     HLSLINCLUDE
+</span></span><span class=line><span class=cl>     #include &#34;../../ShaderLibrary/…….hlsl&#34;
+</span></span><span class=line><span class=cl>     ENDHLSL
+</span></span><span class=line><span class=cl>     
+</span></span><span class=line><span class=cl>     Tags
+</span></span><span class=line><span class=cl>     {……}
+</span></span><span class=line><span class=cl>     
+</span></span><span class=line><span class=cl>     Pass
+</span></span><span class=line><span class=cl>     {……}
+</span></span><span class=line><span class=cl>     
+</span></span><span class=line><span class=cl>     Pass
+</span></span><span class=line><span class=cl>     {……}
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><h3 id=subshader结构>Subshader结构</h3><p><strong>1.HLSLINCLUDE & ENDHLSL</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> SubShader
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl>     HLSLINCLUDE
+</span></span><span class=line><span class=cl>     //导入库
+</span></span><span class=line><span class=cl>     #include &#34;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl&#34;  //默认库
+</span></span><span class=line><span class=cl>     #include &#34;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl&#34;  //光照库        
+</span></span><span class=line><span class=cl>     ENDHLSL
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     Pass {  
+</span></span><span class=line><span class=cl>         };
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><p><strong>HLSLINCLUDE</strong> 和 <strong>ENDHLSL</strong> 是Unity ShaderLab中的指令，它们之间的代码会被<strong>自动包含到该着色器的所有Pass中</strong>。</p><p>相当于一个“公共头文件”，写在这里的代码（如变量声明、函数、宏定义）对所有Pass都可见。</p><p><strong>为什么这样设计？</strong></p><ul><li><strong>减少重复</strong>：如果不使用HLSLINCLUDE，每个Pass都需要单独声明这些变量和贴图，代码会冗长且难以维护。</li><li><strong>保持一致性</strong>：所有Pass使用同一套参数和贴图，确保渲染结果统一。</li></ul><p><strong>2 HLSLPROGRAM</strong></p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251221023828695.png width=792 height=567 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251221023828695_hu_c89efb2b49806885.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251221023828695_hu_407dc2cca76a61ad.png 1024w" loading=lazy class=gallery-image data-flex-grow=139 data-flex-basis=335px></p><p>在Unity URP Shader中，每个Pass通常需要将顶点和片元着色器代码包裹在<code>HLSLPROGRAM</code>和<code>ENDHLSL</code>块中。</p><h3 id=pass结构>Pass结构</h3><p>Pass块中，需要在<code>Tags</code>之后添加<code>HLSLPROGRAM</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Pass {
+</span></span><span class=line><span class=cl>    Tags { &#34;LightMode&#34; = &#34;head&#34; }
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    HLSLPROGRAM
+</span></span><span class=line><span class=cl>    #pragma vertex vert
+</span></span><span class=line><span class=cl>    #pragma fragment frag
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    // 您的a2v和v2f结构体定义
+</span></span><span class=line><span class=cl>    // 您的vert和frag函数定义
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    ENDHLSL
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><strong>3 在 <code>frag</code> 函数内部定义函数（HLSL 不允许）</strong></p><p>在 <code>frag</code> 里写大量函数定义，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>half4 frag (v2f i) : SV_TARGET {
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    float3 shadow_ramp(...) { ... }
+</span></span><span class=line><span class=cl>    float3 Spec(...) { ... }
+</span></span><span class=line><span class=cl>    float3 Metal(...) { ... }
+</span></span><span class=line><span class=cl>    float3 edgeLight(...) { ... }
+</span></span><span class=line><span class=cl>    float3 light(...) { ... }
+</span></span><span class=line><span class=cl>    float3 Body(...) { ... }
+</span></span><span class=line><span class=cl>    float3 Face(...) { ... }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    ...
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>这是<strong>绝对错误</strong>的</p><ul><li><strong>HLSL / ShaderLab 不支持函数嵌套定义</strong></li><li>函数<strong>必须定义在全局作用域</strong></li><li>DX11 编译器会直接报错</li></ul><p><strong>正确写法：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float3 shadow_ramp(float4 lightmap, float NdotL) { ... }
+</span></span><span class=line><span class=cl>float3 Spec(...) { ... }
+</span></span><span class=line><span class=cl>float3 Metal(...) { ... }
+</span></span><span class=line><span class=cl>float3 edgeLight(...) { ... }
+</span></span><span class=line><span class=cl>float3 light(...) { ... }
+</span></span><span class=line><span class=cl>float3 Body(...) { ... }
+</span></span><span class=line><span class=cl>float3 Face(...) { ... }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>half4 frag(v2f i) : SV_TARGET
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    ...
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=3-正式开始>3 正式开始</h2><p>正式开始前先把计算需要用到的变量和向量等数据准备好，先来准备面板参数，面板参数如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties{
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>URP的声明参数必须包含在CBUFFER_START(UnityPerMaterial)和CBUFFER_END之间，我们把这些代码和声明贴图的代码都用HLSLINCLUDE和ENDHLSL代码块包起来，之后写的方法也放在这里面，这样后面就不用在每个pass都声明一次了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Subshader
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h4 id=1第一个pass渲染正面>1.第一个pass：渲染正面</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Pass{
+</span></span><span class=line><span class=cl>	Tags{ &#34;LightMode&#34; = &#34;head&#34; }//渲染标签
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h5 id=1输入结构a2v定义从应用阶段cpu到顶点着色器的顶点数据>1）输入结构：a2v定义从应用阶段（CPU）到顶点着色器的顶点数据。</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>struct a2v{
+</span></span><span class=line><span class=cl>	float4 vertex : POSITION;//顶点坐标
+</span></span><span class=line><span class=cl>	float2 texcoord0 : TEXCOORD0;//纹理坐标UV0
+</span></span><span class=line><span class=cl>	float3 normal : NORMAL;//顶点法线
+</span></span><span class=line><span class=cl>	float4 tangent : TANGENT;//顶点切线
+</span></span><span class=line><span class=cl>};
+</span></span></code></pre></td></tr></table></div></div><p>为什么<code>normal</code>是<code>float3</code>而<code>tangent</code>是<code>float4</code>？</p><blockquote><ol><li><strong>法线（normal）</strong>：<code>float3</code> 法线是一个三维向量（x, y, z），表示顶点表面的朝向。 它只需要三个分量就能完整描述方向，因此使用<code>float3</code>足够。</li><li><strong>切线（tangent）</strong>：<code>float4</code> 切线通常用于法线贴图（normal mapping）计算，需要与法线和副切线（binormal/bitangent）构成切线空间（tangent space）。 前三个分量（x, y, z）表示切线的方向向量。 <strong>第四个分量（w）是一个符号值</strong>，通常为+1或-1，用于指示副切线的方向。</li></ol><p><strong>关键区别</strong>：</p><ol><li><strong>法线的方向是绝对的</strong>： 法线向量(x, y, z)本身就完整定义了方向 例如，法线(0, 1, 0)明确表示"向上"，没有歧义</li><li><strong>切线需要确定副切线方向</strong>： 给定法线和切线后，副切线可以通过叉积计算：<code>副切线 = 叉积(法线, 切线)</code> <strong>但叉积有两种可能方向</strong>：左手系或右手系 <code>tangent.w</code>（通常±1）就是用来指定这个方向的： 如果<code>tangent.w = 1</code>：副切线 = 叉积(法线, 切线) 如果<code>tangent.w = -1</code>：副切线 = 叉积(切线, 法线)</li><li><strong>几何意义</strong>： 法线、切线、副切线构成<strong>切线空间基</strong> 法线是"主方向"，切线和副切线是"辅助方向" 切线的w分量确保整个坐标系的一致性（避免镜像翻转）</li></ol></blockquote><h5 id=2输出结构v2f定义在顶点着色器中构建一个切线空间到世界空间的3x4变换矩阵并传递到片元着色器的输出数据>2）输出结构：v2f定义在顶点着色器中构建一个【切线空间到世界空间的3x4变换矩阵】，并传递到片元着色器的输出数据。</h5><blockquote><p>通常被称为 <strong>TBN矩阵</strong>（由Tangent、Bitangent、Normal三个向量构成），它的核心作用是<strong>搭建一座桥梁，将法线方向从“切线空间”转换到“世界空间”</strong>，这是实现法线贴图（Normal Mapping）效果的关键步骤</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>struct v2f{
+</span></span><span class=line><span class=cl>	float4 pos : SV_POSITION;//在裁剪空间的顶点位置
+</span></span><span class=line><span class=cl>	float2 uv0 : TEXCOORD0;//uv0，第一套纹理坐标
+</span></span><span class=line><span class=cl>    // 这三行共同构成了一个3x4矩阵。
+</span></span><span class=line><span class=cl>    float4 TtoW0 : TEXCOORD1;  //x切线,y副切线,z法线,w顶点
+</span></span><span class=line><span class=cl>    float4 TtoW1 : TEXCOORD2;  //x切线,y副切线,z法线,w顶点
+</span></span><span class=line><span class=cl>    float4 TtoW2 : TEXCOORD3;  //x切线,y副切线,z法线,w顶点
+</span></span><span class=line><span class=cl>	//x-切线tangent
+</span></span><span class=line><span class=cl>	//y-副切线bitangent
+</span></span><span class=line><span class=cl>	//z-法线normal
+</span></span><span class=line><span class=cl>	//w-顶点
+</span></span><span class=line><span class=cl>    };
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>输出结构定义一个4维矩阵存放数据，以充分利用插值寄存器。</p><p>a2v和v2f两个结构体中使用了两次<strong>TEXCOORD0</strong>语义，这是被允许的，因为语义就是会在两个结构体中有着不同的含义，可以理解成代号，但在之后的过程中这两个TEXCOORD0会指代不同的纹理寄存器，所以不会冲突。</p></blockquote><ul><li><p><code>TEXCOORD0</code> 在不同结构体中并不代表一个固定的寄存器，而是一个语义标记，这个语义对应一个四维向量（<code>float4</code>）的存储空间，用于在着色器阶段之间传递数据。</p></li><li><p><code>TEXCOORD1、TEXCOORD2、TEXCOORD3</code>都用于在着色器阶段间传递数据，但它们通过数字编号（1, 2, 3）来<strong>代表不同的数据通道</strong>，用于区分不同的信息。</p></li><li><p><strong>合理规划数据用量</strong>：一个 <code>float4</code>可以存储一个四维数据，也可以存储多个低维数据（如两个 <code>float2</code>）。合理打包数据可以节省宝贵的 <code>TEXCOORD</code>通道。</p></li><li><p><strong>数量限制</strong>：<code>TEXCOORD</code>通道的数量并非无限，存在上限（例如通常最多到 <code>TEXCOORD7</code>），需根据目标平台合理规划。</p></li></ul><p>在顶点Shader将需要的数据传递给片元Shader，矩阵的xyzw分别存放切线，副切线，法线与顶点。</p><h5 id=3--vert顶点shader将需要的数据传递给片元shader矩阵的xyzw分别存放切线副切线法线与顶点>3) vert顶点shader：将需要的数据传递给片元Shader，矩阵的xyzw分别存放切线，副切线，法线与顶点。</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>v2f vert(a2v v)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	v2f o;
+</span></span><span class=line><span class=cl>	o.pos = TransformObjectToClip(v.vertex.xyz);
+</span></span><span class=line><span class=cl>	o.uv0 = v.texcoord0;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	float3 nDirWS = TransformObjectToWorldNormal(v.normal); 
+</span></span><span class=line><span class=cl>	float3 tDirWS = TransformObjectToWorld(v.tangent.xyz); 
+</span></span><span class=line><span class=cl>	float3 bDirWS = cross(nDirWS,tDirWS) * v.tangent.w;
+</span></span><span class=line><span class=cl>	float3 posWS = TransformObjectTOWorld(v.vertex.xyz);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.TtoW0 =  float4(nDirWS.x,nDirWS.x,bDirWS.x,posWS.x);
+</span></span><span class=line><span class=cl>	o.TtoW1 =  float4(nDirWS.y,nDirWS.y,bDirWS.y,posWS.y);
+</span></span><span class=line><span class=cl>	o.TtoW2 =  float4(nDirWS.z,nDirWS.z,bDirWS.z,posWS.z);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>注意 v.vertex的顶点坐标是4维，因为齐次坐标系多1维（存平移信息）</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> //顶点Shader
+</span></span><span class=line><span class=cl> v2f vert (a2v v) {
+</span></span><span class=line><span class=cl>     v2f o;  //定义返回值
+</span></span><span class=line><span class=cl>     //MVP变换(模型空间&gt;&gt;世界空间&gt;&gt;视觉空间&gt;&gt;裁剪空间)
+</span></span><span class=line><span class=cl>     o.pos = TransformObjectToHClip(v.vertex.xyz);  
+</span></span><span class=line><span class=cl>     //传递uv0(无变换)
+</span></span><span class=line><span class=cl>     o.uv0 = v.texcoord0;  
+</span></span><span class=line><span class=cl>     // 世界空间法线
+</span></span><span class=line><span class=cl>     float3 nDirWS = TransformObjectToWorldNormal(v.normal); 
+</span></span><span class=line><span class=cl>     // 世界空间切线
+</span></span><span class=line><span class=cl>     float3 tDirWS = TransformObjectToWorld(v.tangent.xyz);  
+</span></span><span class=line><span class=cl>     //世界空间副切线
+</span></span><span class=line><span class=cl>     float3 bDirWS = cross(nDirWS, tDirWS) * v.tangent.w;  
+</span></span><span class=line><span class=cl>     //世界顶点位置
+</span></span><span class=line><span class=cl>     float3 posWS = TransformObjectToWorld(v.vertex.xyz);  
+</span></span><span class=line><span class=cl>     //构建切线-世界空间变换矩阵
+</span></span><span class=line><span class=cl>     //x切线,y副切线,z法线,w顶点
+</span></span><span class=line><span class=cl>     o.TtoW0 = float4(tDirWS.x, bDirWS.x, nDirWS.x, posWS.x);  
+</span></span><span class=line><span class=cl>     o.TtoW1 = float4(tDirWS.y, bDirWS.y, nDirWS.y, posWS.y);  
+</span></span><span class=line><span class=cl>     o.TtoW2 = float4(tDirWS.z, bDirWS.z, nDirWS.z, posWS.z);  
+</span></span><span class=line><span class=cl>     return o;  //返回顶点Shader
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251228153854738.png width=722 height=334 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251228153854738_hu_5a2234fb0ad402cd.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251228153854738_hu_6b9b16b726348bc4.png 1024w" loading=lazy class=gallery-image data-flex-grow=216 data-flex-basis=518px></p><h4 id=4重点frag-片元着色器>4）【重点】frag 片元着色器</h4><blockquote><p>回顾：在pass之前，声明的所有变量</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>SubShader
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  HLSLINCLUDE
+</span></span><span class=line><span class=cl>  //导入库
+</span></span><span class=line><span class=cl>  #include &#34;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl&#34;  //默认库
+</span></span><span class=line><span class=cl>  #include &#34;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl&#34;  //光照库
+</span></span><span class=line><span class=cl>  CBUFFER_START(UnityPerMaterial)  //常量缓冲区开头
+</span></span><span class=line><span class=cl>      //声明面板参数
+</span></span><span class=line><span class=cl>      float _genshinShader;  //是否是脸部
+</span></span><span class=line><span class=cl>      //diffuse
+</span></span><span class=line><span class=cl>      float _fresnel;  //边缘光范围
+</span></span><span class=line><span class=cl>      float _edgeLight;  //边缘光强度
+</span></span><span class=line><span class=cl>      float _diffuseA;  //diffuseA
+</span></span><span class=line><span class=cl>      float _Cutoff;  //透明阈值
+</span></span><span class=line><span class=cl>      float4 _glow;  //自发光强度
+</span></span><span class=line><span class=cl>      float _flicker;  //发光闪烁速度
+</span></span><span class=line><span class=cl>      //lightmap/FaceLightmap
+</span></span><span class=line><span class=cl>      float _bright;  //亮面范围
+</span></span><span class=line><span class=cl>      float _grey;  //灰面范围
+</span></span><span class=line><span class=cl>      float _dark;  //暗面范围
+</span></span><span class=line><span class=cl>      //normal
+</span></span><span class=line><span class=cl>      float _bumpScale;  //法线强度
+</span></span><span class=line><span class=cl>      //ramp
+</span></span><span class=line><span class=cl>      float _dayAndNight;  //是否是白天
+</span></span><span class=line><span class=cl>      float _lightmapA0;  //1.0_Ramp条数
+</span></span><span class=line><span class=cl>      float _lightmapA1;  //0.7_Ramp条数
+</span></span><span class=line><span class=cl>      float _lightmapA2;  //0.5_Ramp条数
+</span></span><span class=line><span class=cl>      float _lightmapA3;  //0.3_Ramp条数
+</span></span><span class=line><span class=cl>      float _lightmapA4;  //0.0_Ramp条数
+</span></span><span class=line><span class=cl>      //高光
+</span></span><span class=line><span class=cl>      float _gloss;  //高光范围
+</span></span><span class=line><span class=cl>      float _glossStrength;  //高光强度
+</span></span><span class=line><span class=cl>      float3 _metalMapColor;  //金属反射颜色
+</span></span><span class=line><span class=cl>      //描边
+</span></span><span class=line><span class=cl>      float _OutlineWidth;  //描边粗细
+</span></span><span class=line><span class=cl>      float _OutlineScale;  //描边范围
+</span></span><span class=line><span class=cl>      float _OutlineZOffset;  //Outline Z Offset
+</span></span><span class=line><span class=cl>      float _Alpha;  //Alpha
+</span></span><span class=line><span class=cl>      float _AlphaClip;  //Alpha Clip
+</span></span><span class=line><span class=cl>      float4 _OutlineColor0;  //描边颜色1
+</span></span><span class=line><span class=cl>      float4 _OutlineColor1;  //描边颜色2
+</span></span><span class=line><span class=cl>      float4 _OutlineColor2;  //描边颜色3
+</span></span><span class=line><span class=cl>      float4 _OutlineColor3;  //描边颜色4
+</span></span><span class=line><span class=cl>      float4 _OutlineColor4;  //描边颜色5
+</span></span><span class=line><span class=cl>      float4 _CustomOutlineCol;  //Custom Outline Color
+</span></span><span class=line><span class=cl>  CBUFFER_END  //常量缓冲区结尾
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  //------声明贴图-------
+</span></span><span class=line><span class=cl>  //1.声明 纹理对象：漫反射纹理
+</span></span><span class=line><span class=cl>  TEXTURE2D(_diffuse);  //Diffuse
+</span></span><span class=line><span class=cl>  //2.声明 采样器对象：漫反射采样器
+</span></span><span class=line><span class=cl>  SAMPLER(sampler_diffuse);
+</span></span><span class=line><span class=cl>  //3.以此类推
+</span></span><span class=line><span class=cl>  TEXTURE2D(_lightmap);  //Lightmap/FaceLightmap
+</span></span><span class=line><span class=cl>  SAMPLER(sampler_lightmap);
+</span></span><span class=line><span class=cl>  TEXTURE2D(_bumpMap);  //Normal
+</span></span><span class=line><span class=cl>  SAMPLER(sampler_bumpMap);
+</span></span><span class=line><span class=cl>  TEXTURE2D(_ramp);  //Shadow_Ramp
+</span></span><span class=line><span class=cl>  SAMPLER(sampler_ramp);
+</span></span><span class=line><span class=cl>  TEXTURE2D(_metalMap);  //MetalMap
+</span></span><span class=line><span class=cl>  SAMPLER(sampler_metalMap);
+</span></span><span class=line><span class=cl>  ENDHLSL
+</span></span></code></pre></td></tr></table></div></div><h3 id=为什么纹理和采样器分开声明>为什么纹理和采样器分开声明？</h3><p>纹理和采样器分开声明的方式，是现代图形API的常见做法（如DirectX 11及以上、Vulkan、Metal等）的特性。以实现更灵活的纹理采样和更好的性能。</p><p><strong>作用：复用采样器。</strong></p><p>这是最直接的好处。在同一个Shader中，如果多张纹理需要使用相同的过滤模式（如Linear）和包裹模式（如Repeat），那么只需声明一个具有相应模式的采样器，所有纹理都可以共享它。</p></blockquote><p>片元着色器的主要任务是为模型表面的每一个像素计算最终颜色。它的工作流程可以概括为以下几步：</p><ol><li><p><strong>纹理采样</strong>：从不同的纹理中读取信息。</p></li><li><p><strong>向量准备</strong>：计算光照和视角所需的方向向量。</p></li><li><p><strong>光照计算</strong>：根据不同的渲染路径（身体或脸部）计算颜色。</p></li><li><p><strong>后期处理</strong>：处理自发光或透明度裁剪。</p></li><li><p><strong>输出</strong>：返回最终的像素颜色。</p></li></ol><h5 id=frag-片元着色器>frag 片元着色器</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> half4 frag (v2f i) : SV_TARGET {
+</span></span><span class=line><span class=cl>     //采样贴图
+</span></span><span class=line><span class=cl>     float3 baseColor = SAMPLE_TEXTURE2D(_diffuse, sampler_diffuse, i.uv0).rgb;  //diffuseRGB通道
+</span></span><span class=line><span class=cl>     float diffuseA = SAMPLE_TEXTURE2D(_diffuse,sampler_diffuse, i.uv0).a;  //diffuseA通道
+</span></span><span class=line><span class=cl>     float4 lightmap = SAMPLE_TEXTURE2D(_lightmap, sampler_lightmap, i.uv0).rgba;  //lightmap
+</span></span><span class=line><span class=cl>     //法线贴图
+</span></span><span class=line><span class=cl>     float3 nDirTS = UnpackNormal(SAMPLE_TEXTURE2D(_bumpMap, sampler_bumpMap, i.uv0)).rgb;  //切线空间法线(采样法线贴图并解码)
+</span></span><span class=line><span class=cl>     nDirTS.xy *= _bumpScale;  //法线强度
+</span></span><span class=line><span class=cl>     nDirTS.z = sqrt(1.0 - saturate(dot(nDirTS.xy, nDirTS.xy)));  //计算法线z分量
+</span></span><span class=line><span class=cl>     //saturate的作用是把输入值钳制在（0.0, 1.0）之间.
+</span></span><span class=line><span class=cl>     //准备向量
+</span></span><span class=line><span class=cl>     float3 posWS = float3(i.TtoW0.w, i.TtoW1.w, i.TtoW2.w);  //世界空间顶点
+</span></span><span class=line><span class=cl>     //切线空间法线转世界空间法线
+</span></span><span class=line><span class=cl>     float3 nDirWS = normalize(half3(dot(i.TtoW0.xyz, nDirTS), dot(i.TtoW1.xyz, nDirTS), dot(i.TtoW2.xyz, nDirTS)));
+</span></span><span class=line><span class=cl>     Light mlight = GetMainLight();  //光源
+</span></span><span class=line><span class=cl>     float3 lDirWS= normalize(mlight.direction);  //世界光源方向(平行光)
+</span></span><span class=line><span class=cl>     float3 vDirWS = normalize(_WorldSpaceCameraPos.xyz - posWS.xyz);  //世界观察方向
+</span></span><span class=line><span class=cl>     float3 nDirVS = normalize(mul((float3x3)UNITY_MATRIX_V, nDirWS));  //世界空间法线转观察空间法线
+</span></span><span class=line><span class=cl>     float3 hDirWS = normalize(vDirWS + lDirWS) ;  //半角方向
+</span></span><span class=line><span class=cl>     //向量点乘
+</span></span><span class=line><span class=cl>     float NdotL = dot(nDirWS, lDirWS);  //兰伯特
+</span></span><span class=line><span class=cl>     float NdotH = dot(nDirWS, hDirWS);  //Blinn-Phong
+</span></span><span class=line><span class=cl>     float NdotV = dot(nDirWS, vDirWS);  //菲涅尔
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     float3 col = float3(0.0, 0.0, 0.0);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     //主体渲染
+</span></span><span class=line><span class=cl>     if(_genshinShader == 0.0){  //身体
+</span></span><span class=line><span class=cl>         col = Body(NdotL, NdotH, NdotV, lightmap, baseColor, nDirVS);
+</span></span><span class=line><span class=cl>     }else if(_genshinShader == 1.0){  //脸部
+</span></span><span class=line><span class=cl>         col = Face(lDirWS, baseColor, i.uv0);
+</span></span><span class=line><span class=cl>     }
+</span></span><span class=line><span class=cl>     //计算diffuse.a
+</span></span><span class=line><span class=cl>     if(_diffuseA == 2){  //自发光
+</span></span><span class=line><span class=cl>         float3 diffA = light(col, diffuseA);
+</span></span><span class=line><span class=cl>         col = col + diffA;
+</span></span><span class=line><span class=cl>     }else if(_diffuseA == 1){ //裁剪
+</span></span><span class=line><span class=cl>         diffuseA = smoothstep(0.05, 0.7, diffuseA);  //去除噪点
+</span></span><span class=line><span class=cl>         clip(diffuseA - _Cutoff);
+</span></span><span class=line><span class=cl>     }
+</span></span><span class=line><span class=cl>     return half4(col, 1.0);  //输出
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><p>其中：</p><h5 id=1-saturate>1 Saturate</h5><p>Saturate是钳制函数，作用是将输入值限制在0.0~1.0之间。</p><ul><li><p>如果输入值 <strong>小于0</strong>，则返回 <strong>0</strong>。</p></li><li><p>如果输入值 <strong>大于1</strong>，则返回 <strong>1</strong>。</p></li><li><p>如果输入值 <strong>在0和1之间</strong>，则<strong>原样返回</strong>。</p></li></ul><p>法线的z值<code>nDirTS.z = sqrt (1.0 - saturate( dot ( nDirTS.xy , nDirTS.xy ) ) );</code>等价于<code>z = sqrt(1 - (x² + y²))</code></p><p>数学上，平方和 <code>x² + y²</code>有可能略微超过1（例如由于纹理采样的精度问题）。如果不对其进行钳制，<code>1.0 - (x² + y²)</code>可能会得到一个负数，而对负数进行 <code>sqrt</code>开方运算会产生无效的结果（在Shader中通常会导致不可预知的渲染错误，如出现黑色斑点或NaN）。使用 <code>saturate</code>确保了开方运算的内容永远是一个非负数，从而避免了这种错误。</p><h5 id=2-tbn矩阵>2 TBN矩阵</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> //切线空间法线转世界空间法线
+</span></span><span class=line><span class=cl>     float3 nDirWS = normalize(half3(dot(i.TtoW0.xyz, nDirTS), dot(i.TtoW1.xyz, nDirTS), dot(i.TtoW2.xyz, nDirTS)));
+</span></span></code></pre></td></tr></table></div></div>$$
+世界空间法线 = TBN矩阵 × 切线空间法线
+$$<p>代码中混合使用了 <code>float</code>和 <code>half</code>精度。对于颜色等不需要高精度的数据，使用 <code>half</code>可以优化性能。</p><blockquote><p>在着色器中，颜色分量（R, G, B, A）通常被规范在 <code>[0, 1]</code>的范围内。这个范围完全在 <code>fixed</code>类型的表示能力之内.</p><p><strong>人眼的感知局限</strong>：人眼对颜色的细微变化并不像对亮度变化那样敏感。微小的颜色量化误差（例如，<code>0.5</code>和 <code>0.501</code>的红色）在绝大多数情况下是难以察觉的.</p><p><strong>哪些数据需要高精度</strong></p><p>与颜色相反，以下类型的数据通常要求使用 <code>float</code>高精度：</p><ul><li><strong>空间坐标</strong>：尤其是<strong>世界空间坐标</strong>和<strong>纹理坐标</strong>。它们的数值范围很大且变化非常细微，高精度是确保物体位置、轮廓和纹理映射准确无误的基础。</li><li><strong>复杂数学运算</strong>：在进行三角函数计算（如<code>sin</code>, <code>cos</code>）、幂运算（<code>pow</code>）或复杂的插值时，必须使用 <code>float</code>来保证中间过程和最终结果的准确性，避免误差累积导致画面瑕疵。</li><li><strong>需要高动态范围（HDR）的颜色</strong>：虽然普通颜色用<code>half</code>足矣，但<strong>HDR颜色</strong>的值会远超 <code>[0, 1]</code>的范围，因此需要 <code>half</code>或 <code>float</code>来存储和处理。</li></ul></blockquote><h5 id=3-切线空间法线贴图>3 切线空间法线贴图</h5><p><strong>颜色特征</strong>:</p><p>整体<strong>偏蓝紫色</strong></p><p><strong>核心优势:</strong></p><p><strong>旋转不变性</strong>、可复用性高</p><p><strong>适用场景:</strong></p><p>通用性强，适用于可变形、动画模型</p><h5 id=4-三个光照模型>4 三个光照模型：</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>     //向量点乘
+</span></span><span class=line><span class=cl>     float NdotL = dot(nDirWS, lDirWS);  //兰伯特
+</span></span><span class=line><span class=cl>     float NdotH = dot(nDirWS, hDirWS);  //Blinn-Phong
+</span></span><span class=line><span class=cl>     float NdotV = dot(nDirWS, vDirWS);  //菲涅尔
+</span></span></code></pre></td></tr></table></div></div><p>在计算前，我们看一下最终的混合分别需要什么：<strong>漫反射(半Lambet) + 高光(BlinnPhong) + 金属(MatCap) + 边缘光(菲涅尔) + 自发光</strong> **+ 后处理(Bloom、ToneMapping、ColorAdjustments)。**那我们就按这个顺序来一一实现一下。</p><h5 id=菲涅尔效应fresnel-effect><strong>菲涅尔效应（Fresnel Effect）</strong></h5><p>是一个<strong>核心物理规律</strong>，用于描述<strong>光线在物体表面的反射强度随着视角角度变化的现象</strong>。</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010911646.png width=875 height=693 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010911646_hu_e257641c851496d9.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010911646_hu_a00d5df67c2f220c.png 1024w" loading=lazy alt=image-20251229010911646 class=gallery-image data-flex-grow=126 data-flex-basis=303px></p><h5 id=兰伯特lambert模型公式>兰伯特（Lambert）模型公式</h5><p>理想的漫反射：</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010923039.png width=401 height=61 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010923039_hu_101c86167f9e1e9b.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010923039_hu_897cbf12ce570840.png 1024w" loading=lazy alt=image-20251229010923039 class=gallery-image data-flex-grow=657 data-flex-basis=1577px>
+$$
+I
+_{diffuse}
+​</p><p>=K
+_d
+​</p><p>⋅I
+_l
+​</p><p>⋅max(0,N⋅L)
+$$</p><p><strong>半兰伯特（Half-Lambert）改进</strong></p><p>基础兰伯特模型的一个问题是，当法线与光线方向垂直时，计算结果会直接变为0，导致背光面一片死黑。半兰伯特模型通过一个简单的缩放和平移变换来缓解这个问题</p><p>这个技巧将点乘的结果从区间 [−1,1]映射到 [0,1]，使得背光区域也能保留一定的细节，常用于卡通渲染等风格化效果中</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010929777.png width=503 height=39 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010929777_hu_1d0d27c7d90075c2.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010929777_hu_ba84aee447d6e25e.png 1024w" loading=lazy alt=image-20251229010929777 class=gallery-image data-flex-grow=1289 data-flex-basis=3095px>
+$$
+I
+_{half-lambert}
+​</p><p>=K
+_d
+​</p><p>⋅I
+_l
+​</p><p>⋅(0.5⋅(N⋅L)+0.5)
+$$</p><h5 id=布林-冯blinn-phong模型公式>布林-冯（Blinn-Phong）模型公式</h5><p>布林-冯模型是一个完整的光照模型，它<strong>结合了环境光、漫反射和镜面高光</strong>三项。其总光照强度为</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010937476.png width=454 height=57 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010937476_hu_1baf60a70c4a11f8.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010937476_hu_b448ef846c228851.png 1024w" loading=lazy alt=image-20251229010937476 class=gallery-image data-flex-grow=796 data-flex-basis=1911px>
+$$
+I
+_{total}
+​</p><p>=I
+_{ambient}
+​</p><p>+I
+_{diffuse}
+​</p><p>+I
+_{specular}
+​</p>$$
+**环境光（Ambient）**
+$$<p>I
+_{ambient}
+​</p><p>=K
+a
+​</p><p>⋅I
+a
+​
+$$
+Ka：材质的环境光反射系数</p><p><strong>漫反射（Diffuse）</strong>
+$$
+I
+_{diffuse}
+​</p><p>=K
+_d
+​</p><p>⋅I
+_l
+​</p><p>⋅max(0,N⋅L)
+$$</p><p><strong>镜面高光（Specular）·布林-冯的核心</strong></p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010944719.png width=598 height=57 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010944719_hu_2b37b714dc46ee1f.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20251229010944719_hu_9e54c1180762a441.png 1024w" loading=lazy alt=image-20251229010944719 class=gallery-image data-flex-grow=1049 data-flex-basis=2517px>
+$$
+I
+<em>specular</em>
+​</p><p>=K
+_s
+​</p><p>⋅I
+_l
+​</p><p>⋅(max(0,N⋅H))
+^{shininess}
+$$
+<strong>H：半角向量</strong>，通过将光线方向 L和视线方向 V相加后归一化得到：H=∣L+V∣L+V。</p><p>**shininess：**高光指数，这是一个非常重要的参数。值越大，高光点越小、越锐利，表示表面越光滑；值越小，高光范围越大、越柔和，表示表面越粗糙。</p><p><strong>Ks：<strong>材质的</strong>镜面反射系数</strong>，决定了高光的强度和颜色</p><h4 id=5漫反射-shadow_ramplightmapndotl>5)漫反射： shadow_ramp（lightmap，NdotL）</h4><p>我们看一下最终的混合分别需要什么：<strong>漫反射(半Lambet) + 高光(BlinnPhong) + 金属(MatCap) + 边缘光(菲涅尔) + 自发光</strong> <strong>+ 后处理(Bloom、ToneMapping、ColorAdjustments)。</strong></p><blockquote><p>原神角色的漫反射，最重要的是ramp的部分，先看一下原神的ramp图。</p><ul><li><p>共2张shadowmap，一张给body，一张给hair</p></li><li><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102162158756.png width=557 height=41 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102162158756_hu_76c1d1c12da4472a.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102162158756_hu_1265bd505dae91db.png 1024w" loading=lazy alt=image-20260102162158756 class=gallery-image data-flex-grow=1358 data-flex-basis=3260px></p></li><li><p>原神的ramp一共十条颜色，上面五条代表白天，下面五条代表晚上</p></li><li><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/Avatar_Boy_Sword_Durin_Tex_Body_Shadow_Ramp.png width=256 height=20 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/Avatar_Boy_Sword_Durin_Tex_Body_Shadow_Ramp_hu_23eb008952972e23.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/Avatar_Boy_Sword_Durin_Tex_Body_Shadow_Ramp_hu_a39849def0fe1311.png 1024w" loading=lazy alt=Avatar_Boy_Sword_Durin_Tex_Body_Shadow_Ramp class=gallery-image data-flex-grow=1280 data-flex-basis=3072px></p></li><li><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/Avatar_Boy_Sword_Durin_Tex_Hair_Shadow_Ramp-1767342279742.png width=256 height=20 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/Avatar_Boy_Sword_Durin_Tex_Hair_Shadow_Ramp-1767342279742_hu_a46810a20150505.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/Avatar_Boy_Sword_Durin_Tex_Hair_Shadow_Ramp-1767342279742_hu_291beacaee960f20.png 1024w" loading=lazy alt=Avatar_Boy_Sword_Durin_Tex_Hair_Shadow_Ramp class=gallery-image data-flex-grow=1280 data-flex-basis=3072px></p></li></ul></blockquote><p><strong>怎样采样这张ramp呢？</strong></p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102203705888.png width=1688 height=1020 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102203705888_hu_c11b642c639103ff.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102203705888_hu_9b6ad942649f42b1.png 1024w" loading=lazy alt=一般采样ramp会采用u轴用halfLambert，v轴给一个(0.05~0.95)的数值来采样。 class=gallery-image data-flex-grow=165 data-flex-basis=397px></p><p>+0.05：防止采样到色块边缘。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//lightmap/FaceLightmap
+</span></span><span class=line><span class=cl>float _bright;  //亮面范围
+</span></span><span class=line><span class=cl>float _grey;  //灰面范围
+</span></span><span class=line><span class=cl>float _dark;  //暗面范围
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//完整的shadow_ramp
+</span></span><span class=line><span class=cl>float3 shadow_ramp(float4 lightmap, float NdotL){
+</span></span><span class=line><span class=cl>     lightmap.g = smoothstep(0.2, 0.5, lightmap.g);  //lightmap.g
+</span></span><span class=line><span class=cl>     float halfLambert = smoothstep(0.0, _grey, NdotL + _dark) * lightmap.g;  //半Lambert
+</span></span><span class=line><span class=cl>     float brightMask = step(_bright, halfLambert);  //亮面
+</span></span><span class=line><span class=cl>     //判断白天与夜晚
+</span></span><span class=line><span class=cl>     float rampSampling = 0.0;
+</span></span><span class=line><span class=cl>     if(_dayAndNight == 0){rampSampling = 0.5;}
+</span></span><span class=line><span class=cl>     //计算ramp采样条数
+</span></span><span class=line><span class=cl>     float ramp0 = _lightmapA0 * -0.1 + 1.05 - rampSampling;  //0.95
+</span></span><span class=line><span class=cl>     float ramp1 = _lightmapA1 * -0.1 + 1.05 - rampSampling;  //0.65
+</span></span><span class=line><span class=cl>     float ramp2 = _lightmapA2 * -0.1 + 1.05 - rampSampling;  //0.75
+</span></span><span class=line><span class=cl>     float ramp3 = _lightmapA3 * -0.1 + 1.05 - rampSampling;  //0.55
+</span></span><span class=line><span class=cl>     float ramp4 = _lightmapA4 * -0.1 + 1.05 - rampSampling;  //0.45
+</span></span><span class=line><span class=cl>     //分离lightmap.a各材质
+</span></span><span class=line><span class=cl>     float lightmapA2 = step(0.25, lightmap.a);  //0.3
+</span></span><span class=line><span class=cl>     float lightmapA3 = step(0.45, lightmap.a);  //0.5
+</span></span><span class=line><span class=cl>     float lightmapA4 = step(0.65, lightmap.a);  //0.7
+</span></span><span class=line><span class=cl>     float lightmapA5 = step(0.95, lightmap.a);  //1.0
+</span></span><span class=line><span class=cl>     //重组lightmap.a
+</span></span><span class=line><span class=cl>     float rampV = ramp0;  //0.0
+</span></span><span class=line><span class=cl>     rampV = lerp(rampV, ramp1, lightmapA2);  //0.3
+</span></span><span class=line><span class=cl>     rampV = lerp(rampV, ramp2, lightmapA3);  //0.5
+</span></span><span class=line><span class=cl>     rampV = lerp(rampV, ramp3, lightmapA4);  //0.7
+</span></span><span class=line><span class=cl>     rampV = lerp(rampV, ramp4, lightmapA5);  //1.0
+</span></span><span class=line><span class=cl>     //采样ramp
+</span></span><span class=line><span class=cl>     float3 ramp = SAMPLE_TEXTURE2D(_ramp, sampler_ramp, float2(halfLambert, rampV)); 
+</span></span><span class=line><span class=cl>     float3 shadowRamp = lerp(ramp, halfLambert, brightMask);  //遮罩亮面
+</span></span><span class=line><span class=cl>     return shadowRamp;  //输出结果
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><h5 id=51-lightmapg>5.1 Lightmap.g</h5><p>lightmap.g该图的g通道存储了模型的AO，仅看lightmap.g结果如下：</p><img src=image-20260102202024190.png alt=image-20260102202024190 style=zoom:33%><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102215549345.png width=1130 height=628 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102215549345_hu_1ddabae0dc34bd39.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102215549345_hu_ccb00c67fa61091f.png 1024w" loading=lazy alt=直接看lightmap对应在模型的区域（晃瞎老花眼了） class=gallery-image data-flex-grow=179 data-flex-basis=431px></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//这里仅做测试代码
+</span></span><span class=line><span class=cl>//ramp
+</span></span><span class=line><span class=cl>float3 shadow_ramp(float4 lightmap, float NdotL){
+</span></span><span class=line><span class=cl>    float3 ramp = lerp(0, 1, lightmap.g); 
+</span></span><span class=line><span class=cl>    return ramp;  
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>//身体//身体
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>float3 Body(){
+</span></span><span class=line><span class=cl>    float3 ramp = shadow_ramp(lightmap, NdotL);  //ramp
+</span></span><span class=line><span class=cl>    ……
+</span></span><span class=line><span class=cl>    float3 body = ramp;
+</span></span><span class=line><span class=cl>    return body;  //输出结果
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102200220872.png width=865 height=745 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102200220872_hu_1ebf73ff08cb5a3a.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102200220872_hu_6077e8ac6fd4f151.png 1024w" loading=lazy alt=仅lightmap.g的AO图 class=gallery-image data-flex-grow=116 data-flex-basis=278px></p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102195523895.png width=592 height=537 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102195523895_hu_e155e677fee1ce2e.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102195523895_hu_ea4ba15ff8c4ddad.png 1024w" loading=lazy alt=lightmap.g的smoothstep图 class=gallery-image data-flex-grow=110 data-flex-basis=264px></p><blockquote><p>很显然，仅lightmap.g的AO边缘锯齿明显，smoothstep后的则平滑。</p></blockquote><h5 id=52-halflambert采样rampu轴>5.2 halfLambert采样ramp（U轴）</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>lightmap.g = smoothstep(0.2, 0.5, lightmap.g);  //lightmap.g，0.2-0.5是我截取lightmap的rgb值估计的一个范围
+</span></span><span class=line><span class=cl>float halfLambert = smoothstep(0.0, _grey, NdotL + _dark) * lightmap.g;  //半Lambert变体
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>NdotL是顶点法向量与光照方向点积的结果，传统范围是 [-1, 1].</p><p>传统半Lambert: <strong>halfLambert = 0.5（NdotL）+0.5</strong></p><p>把NdotL的范围压缩到（0，1）内。这样原本位于（-1，0）的暗部也会提亮。</p><h4 id=半兰伯特模型变体>半兰伯特模型变体</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>halfLambert (0.0, _grey, NdotL + _dark) 
+</span></span></code></pre></td></tr></table></div></div><ul><li>smoothstep(0.0,_grey, &mldr;)：这个函数将 (NdotL + _dark)的值映射为：<ul><li>所有小于 0.0的值被压成0（最暗），</li><li>所有大于 _grey的值被提成1（最亮），</li><li>介于 0.0和 _grey之间的值则产生平滑的过渡。</li></ul></li><li>grey参数控制了从<strong>暗部过渡到亮部的区域宽度</strong>。</li><li>NdotL + _dark：这里的 _dark是一个偏移量（对应传统半Lambert的0.5），可以理解为<strong>暗部阈值</strong>。增加 _dark会整体提亮模型，因为更多的值会超过 _grey阈值；<strong>减小它则会变暗</strong>。</li></ul></blockquote><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102211202394.png width=1198 height=800 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102211202394_hu_6f8a26de0f3a8804.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102211202394_hu_9b6aa5c57ca0be86.png 1024w" loading=lazy alt=对照一下AO对应到最终渲染的区域 class=gallery-image data-flex-grow=149 data-flex-basis=359px></p><h5 id=53-rampv采样lightmapv轴>5.3 rampV采样lightmap（V轴）</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-reStructuredText data-lang=reStructuredText><span class=line><span class=cl>//判断白天与夜晚<span class=err>
+</span></span></span><span class=line><span class=cl>float rampSampling = 0.0;<span class=err>
+</span></span></span><span class=line><span class=cl>if(_dayAndNight == 0){rampSampling = 0.5;}<span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>然后开放5个参数在面板上，方便美术调节。并把面板上1-5的采样条数转换成ramp图的取值范围。如果是白天，则是采样到0.55-0.95，而晚上则是采样到0.05-0.45.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//计算ramp采样条数
+</span></span><span class=line><span class=cl>float ramp0 = _lightmapA0 * -0.1 + 1.05 - rampSampling;  //0.95 | 0.45
+</span></span><span class=line><span class=cl>float ramp1 = _lightmapA1 * -0.1 + 1.05 - rampSampling;  //0.65 | 0.35
+</span></span><span class=line><span class=cl>float ramp2 = _lightmapA2 * -0.1 + 1.05 - rampSampling;  //0.75 | 0.25
+</span></span><span class=line><span class=cl>float ramp3 = _lightmapA3 * -0.1 + 1.05 - rampSampling;  //0.55 | 0.15
+</span></span><span class=line><span class=cl>float ramp4 = _lightmapA4 * -0.1 + 1.05 - rampSampling;  //0.45 | 0.05
+</span></span></code></pre></td></tr></table></div></div><p>然后用step将lightmap.a的各个材质分离出来。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//分离lightmap.a各材质
+</span></span><span class=line><span class=cl>float lightmapA2 = step(0.25, lightmap.a);  //0.3
+</span></span><span class=line><span class=cl>float lightmapA3 = step(0.45, lightmap.a);  //0.5
+</span></span><span class=line><span class=cl>float lightmapA4 = step(0.65, lightmap.a);  //0.7
+</span></span><span class=line><span class=cl>float lightmapA5 = step(0.95, lightmap.a);  //1.0
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>step(a, b)的含义</p><div class=table-wrapper><table><thead><tr><th>b&lt;a</th><th>b>=a</th></tr></thead><tbody><tr><td>0</td><td>1</td></tr></tbody></table></div><p>所以 lightmapA2/3/4/5的值可以看作一个开关：要么是1，要么是0.</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//重组lightmap.a
+</span></span><span class=line><span class=cl>float rampV = ramp0;  
+</span></span><span class=line><span class=cl>rampV = lerp(rampV, ramp1, lightmapA2);  //0.3
+</span></span><span class=line><span class=cl>rampV = lerp(rampV, ramp2, lightmapA3);  //0.5
+</span></span><span class=line><span class=cl>rampV = lerp(rampV, ramp3, lightmapA4);  //0.7
+</span></span><span class=line><span class=cl>rampV = lerp(rampV, ramp4, lightmapA5);  //1.0
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>lerp(a, b, t)</p><p><code>t = 0</code> → = a</p><p><code>t = 1</code> → = b</p></blockquote><p>这整个流程就是一个<strong>条件覆盖链</strong>：
+如果区域 ≥ 0.25 → rampV换成 ramp1
+如果区域 ≥ 0.45 → rampV再换成 ramp2
+如果区域 ≥ 0.65 → rampV再换成 ramp3
+如果区域 ≥ 0.95 → rampV最终换成 ramp4</p><h5 id=54-u兰伯特vrampv采样shadowramp图>5.4 U（兰伯特）+V（rampV）采样shadowramp图</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//采样ramp
+</span></span><span class=line><span class=cl>float3 ramp = SAMPLE_TEXTURE2D(_ramp, sampler_ramp, float2(halfLambert, rampV)); 
+</span></span><span class=line><span class=cl>return ramp;
+</span></span></code></pre></td></tr></table></div></div><p>可以得到：</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102220254313.png width=678 height=622 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102220254313_hu_a273685d503c2ab1.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102220254313_hu_d2f45faaf0edb471.png 1024w" loading=lazy alt=image-20260102220254313 class=gallery-image data-flex-grow=109 data-flex-basis=261px></p><ul><li>将亮面遮罩出来，用step来处理halfLambert分出亮面和暗面。(用smoothstep会更平滑)</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float brightMask = step(_bright, halfLambert);  //亮面
+</span></span></code></pre></td></tr></table></div></div><p>_bright开放变量给inspector手动设置，一般0.90-0.99,对 step (bright, halfLambert)来说</p><div class=table-wrapper><table><thead><tr><th>halfLambert</th><th>brightMask</th><th>说明</th></tr></thead><tbody><tr><td>&lt; _bright</td><td>0</td><td>暗面</td></tr><tr><td>≥ _bright</td><td>1</td><td>亮面</td></tr></tbody></table></div><ul><li>用lerp遮罩ramp和halfLambert。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float3 shadowRamp = lerp(ramp, halfLambert, brightMask);  //遮罩亮面
+</span></span><span class=line><span class=cl>return shadowRamp;  //输出结果
+</span></span></code></pre></td></tr></table></div></div><div class=table-wrapper><table><thead><tr><th>brightMask</th><th>使用结果</th></tr></thead><tbody><tr><td>0（暗面）</td><td>ramp</td></tr><tr><td>1（亮面）</td><td>halfLambert</td></tr></tbody></table></div><p>其实就是二分亮（固有色）-暗面。</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103095510912.png width=1204 height=627 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103095510912_hu_339053a0b8d14c2f.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103095510912_hu_50abb6af99e68186.png 1024w" loading=lazy alt=左smoothstep，右step，仅brightmask class=gallery-image data-flex-grow=192 data-flex-basis=460px></p><p>ramp的采样就结束了，最后将lerp的结果乘以baseColor就可以了.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>    float3 Body(float NdotL, float NdotH, float NdotV, float4 lightmap, float3 baseColor, float3 nDirVS){
+</span></span><span class=line><span class=cl>    float3 ramp = shadow_ramp(lightmap, NdotL) ;  //ramp
+</span></span><span class=line><span class=cl>    float3 diffsue = baseColor * ramp  ;  //漫反射
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h4 id=6高光>6）高光</h4><p>高光的计算相对简单，高光使用Blinn-Phong光照模型：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl> <span class=n>float3</span> <span class=nf>Spec</span><span class=p>(</span><span class=kt>float</span> <span class=n>NdotL</span><span class=p>,</span> <span class=kt>float</span> <span class=n>NdotH</span><span class=p>,</span> <span class=n>float3</span> <span class=n>nDirVS</span><span class=p>,</span> <span class=n>float4</span> <span class=n>lightmap</span><span class=p>,</span> <span class=n>float3</span> <span class=n>baseColor</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>{</span>
+</span></span><span class=line><span class=cl>     <span class=kt>float</span> <span class=n>blinnPhong</span> <span class=o>=</span> <span class=n>pow</span><span class=p>(</span><span class=n>max</span><span class=p>(</span><span class=mf>0.0</span><span class=p>,</span> <span class=n>NdotH</span><span class=p>),</span> <span class=n>_gloss</span><span class=p>);</span>  <span class=c1>//Blinn-Phong
+</span></span></span><span class=line><span class=cl>     <span class=n>float3</span> <span class=n>specular</span> <span class=o>=</span> <span class=n>blinnPhong</span> <span class=o>*</span> <span class=n>lightmap</span><span class=p>.</span><span class=n>r</span> <span class=o>*</span> <span class=n>_glossStrength</span><span class=p>;</span>  <span class=c1>//高光强度
+</span></span></span><span class=line><span class=cl>     <span class=n>specular</span> <span class=o>=</span> <span class=n>specular</span> <span class=o>*</span> <span class=n>lightmap</span><span class=p>.</span><span class=n>b</span><span class=p>;</span>  <span class=c1>//混合高光细节
+</span></span></span><span class=line><span class=cl>     <span class=n>specular</span> <span class=o>=</span> <span class=n>baseColor</span> <span class=o>*</span> <span class=n>specular</span><span class=p>;</span>  <span class=c1>//叠加固有色
+</span></span></span><span class=line><span class=cl>     <span class=n>lightmap</span><span class=p>.</span><span class=n>g</span> <span class=o>=</span> <span class=n>smoothstep</span><span class=p>(</span><span class=mf>0.2</span><span class=p>,</span> <span class=mf>0.3</span><span class=p>,</span> <span class=n>lightmap</span><span class=p>.</span><span class=n>g</span><span class=p>);</span>  <span class=c1>//lightmap.g
+</span></span></span><span class=line><span class=cl>     <span class=kt>float</span> <span class=n>halfLambert</span> <span class=o>=</span> <span class=n>smoothstep</span><span class=p>(</span><span class=mf>0.0</span><span class=p>,</span> <span class=n>_grey</span><span class=p>,</span> <span class=n>NdotL</span> <span class=o>+</span> <span class=n>_dark</span><span class=p>)</span> <span class=o>*</span> <span class=n>lightmap</span><span class=p>.</span><span class=n>g</span><span class=p>;</span>  <span class=c1>//半Lambert
+</span></span></span><span class=line><span class=cl>     <span class=kt>float</span> <span class=n>brightMask</span> <span class=o>=</span> <span class=n>step</span><span class=p>(</span><span class=n>_bright</span><span class=p>,</span> <span class=n>halfLambert</span><span class=p>);</span>  <span class=c1>//亮面
+</span></span></span><span class=line><span class=cl>     <span class=n>specular</span> <span class=o>=</span> <span class=n>specular</span> <span class=o>*</span> <span class=n>brightMask</span><span class=p>;</span>  <span class=c1>//遮罩暗面
+</span></span></span><span class=line><span class=cl>     <span class=k>return</span> <span class=n>specular</span><span class=p>;</span>  <span class=c1>//输出结果
+</span></span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>lightmap的r通道存放了模型的高光强度（值越白(1.0)的区域，高光越强；），b通道存放了模型的高光细节（形状）。</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103100955858.png width=1064 height=727 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103100955858_hu_3f3101ce4b875f8c.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103100955858_hu_4e47b273d417c5a1.png 1024w" loading=lazy alt=左b右r class=gallery-image data-flex-grow=146 data-flex-basis=351px></p><p>1）首先，通过经典的Blinn-Phong模型计算出一个基础的高光强度 <code>blinnPhong</code>，</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> float blinnPhong = pow(max(0.0, NdotH), _gloss);
+</span></span></code></pre></td></tr></table></div></div><p>2）用Lightmap的R通道 <code>lightmap.r</code>高光强度 * 面板开放变量的 _glossStrength高光强度来调制这个高光。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> float3 specular = blinnPhong * lightmap.r * _glossStrength;
+</span></span></code></pre></td></tr></table></div></div><p>3）最后再乘以lightmap.b，得到高光形状。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>specular = specular * lightmap.b;  //混合高光细节
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>原神中角色处于暗部的部分是没有高光的，所以我们还要step一个halfLambert来遮罩亮暗部分。halfLambert的处理方式和漫反射的一样。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>lightmap.g = smoothstep(0.2, 0.3, lightmap.g);  //lightmap.g，计算环境遮蔽AO
+</span></span><span class=line><span class=cl>float halfLambert = smoothstep(0.0, _grey, NdotL + _dark) * lightmap.g;  //半Lambert
+</span></span><span class=line><span class=cl>float brightMask = step(_bright, halfLambert);  //亮面
+</span></span><span class=line><span class=cl>specular = specular * brightMask;  //遮罩暗面
+</span></span><span class=line><span class=cl>return specular;  //输出结果
+</span></span></code></pre></td></tr></table></div></div><p><strong>在亮部区域</strong>：半兰伯特的计算结果本身较亮，乘以 <code>lightmap.g</code>后，开阔区域（AO值为白色）保持明亮，而褶皱缝隙处（AO值为黑色或深色）则会变暗，从而自然地增添了细节。</p><p><strong>在暗部区域</strong>：半兰伯特的计算结果本身较暗，再乘以 <code>lightmap.g</code>的深色值，会使这些区域（如腋下、衣褶）变得<strong>更暗</strong>，强化了闭塞阴影，让角色不会显得轻飘，而是牢牢地“锚定”在场景中。</p><h4 id=7金属>7）金属</h4><p>金属部分用的是MatCap采样方法。</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/Avatar_Tex_MetalMap.png width=256 height=256 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/Avatar_Tex_MetalMap_hu_dfd9fc6b07882894.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/Avatar_Tex_MetalMap_hu_4082027c8a8c37cd.png 1024w" loading=lazy alt=Avatar_Tex_MetalMap class=gallery-image data-flex-grow=100 data-flex-basis=240px></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//金属
+</span></span><span class=line><span class=cl>float3 Metal(float3 nDirVS, float4 lightmap, float3 baseColor){
+</span></span><span class=line><span class=cl>    float metalMask = 1 - step(lightmap.r, 0.9);  //金属遮罩，即step(,0.9,lightmap.r)，一般不推荐取反的写法，这里标记出来纯属为了之后读到类似代码能有反应的能力。
+</span></span><span class=line><span class=cl>    //采样metalMap
+</span></span><span class=line><span class=cl>    float3 metalMap = SAMPLE_TEXTURE2D(_metalMap, sampler_metalMap, nDirVS.rg * 0.5 + 0.5).r;
+</span></span><span class=line><span class=cl>    metalMap = lerp(_metalMapColor, baseColor, metalMap);  //金属反射颜色
+</span></span><span class=line><span class=cl>    metalMap = lerp(0.0, metalMap, metalMask);  //遮罩非金属区域
+</span></span><span class=line><span class=cl>    return metalMap;  //输出结果
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>    float3 metalMap = SAMPLE_TEXTURE2D(_metalMap, sampler_metalMap, nDirVS.rg * 0.5 + 0.5).r;
+</span></span></code></pre></td></tr></table></div></div><h4 id=为什么用ndirvsrg--05--05-采样而不是iuv0>为什么用nDirVS.rg * 0.5 + 0.5 采样，而不是i.uv0？</h4><p><code>_metalMap</code> 在这里的角色是 <strong>MatCap / Reflection LUT</strong>，
+而不是一张“表面贴图”。</p><p><code>i.uv0</code>的适用场景</p><ul><li>albedo</li><li>normal</li><li>roughness</li><li>AO</li><li>手绘纹理</li></ul><p>*一般是随着建模过程中，由建模师/画师绘制好的贴图。</p><p><code>nDirVS.rg * 0.5 + 0.5</code></p><p>这是基于法线方向的环境反射 MatCap 技法。</p><p>一张图片只有：</p><ul><li>横向（U）</li><li>纵向（V）</li></ul><p>为什么选 .rg作为UV？</p><blockquote><p>x、y 刚好就是“屏幕平面方向”</p><ul><li>x：左右</li><li>y：上下</li></ul><p>而z的含义： z（b）—— 朝不朝你</p><ul><li>z = +1：正对摄像机</li><li>z = 0：侧着</li><li>z = -1：背对摄像机</li></ul></blockquote><p>nDirVS → UV → MatCap</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>    //采样metalMap
+</span></span><span class=line><span class=cl>    float3 metalMap = SAMPLE_TEXTURE2D(_metalMap, sampler_metalMap, nDirVS.rg * 0.5 + 0.5).r;
+</span></span><span class=line><span class=cl>    metalMap = lerp(_metalMapColor, baseColor, metalMap);  //金属反射颜色
+</span></span><span class=line><span class=cl>    metalMap = lerp(0.0, metalMap, metalMask);  //遮罩非金属区域
+</span></span></code></pre></td></tr></table></div></div><blockquote><h4 id=为什么metalmap要只取r的单通道>为什么metalMap要只取.r的单通道？</h4><p>因为这张 <code>metalMap</code> 在这里的是“权重 / 强度 ”，而不是“颜色”，
+所以只需要一个标量通道就够了。</p><p>注意：
+👉 <strong>你并没有直接把 metalMap 当颜色输出</strong>
+👉 而是马上拿它去做 <code>lerp</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>metalMap = lerp(_metalMapColor, baseColor, metalMap); 
+</span></span></code></pre></td></tr></table></div></div><p>也就是说：</p><ul><li><code>_metalMapColor</code>：颜色阈值1</li><li><code>baseColor</code>：颜色阈值2</li><li><code>metalMap</code>：<strong>混合权重</strong></li></ul><h4 id=混合权重在图形学里永远是单通道的>混合权重在图形学里永远是“单通道”的。</h4></blockquote><h4 id=8菲涅尔边缘光>8）菲涅尔（边缘光）</h4><p>原神中用的是屏幕深度边缘光，这里用菲涅耳实现的效果。代码非常简单，就是简单的菲涅尔用step卡出硬边，再乘baseColor即可。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//边缘光
+</span></span><span class=line><span class=cl>float3 edgeLight(float NdotV, float3 baseColor){
+</span></span><span class=line><span class=cl>    float3 fresnel = pow(1 - NdotV, _fresnel);  //菲涅尔范围
+</span></span><span class=line><span class=cl>    fresnel = step(0.5, fresnel) * _edgeLight * baseColor;  //边缘光强度
+</span></span><span class=line><span class=cl>    return fresnel;  //输出结果
+</span></span><span class=line><span class=cl>    }
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103211825227.png width=656 height=142 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103211825227_hu_9026a85c04de4a4d.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103211825227_hu_19d1738e7542ade.png 1024w" loading=lazy alt=菲涅尔 class=gallery-image data-flex-grow=461 data-flex-basis=1108px></p><p>问题：</p><ul><li>模型内部转折也会亮</li><li>鼻梁、衣服褶皱会出边</li></ul><h5 id=基于屏幕深度空间的边缘光>基于屏幕深度空间的边缘光</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float2 screenUV = i.screenPos.xy / i.screenPos.w; // 获取屏幕UV
+</span></span><span class=line><span class=cl>float rawDepth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_CameraDepthTexture, screenUV);
+</span></span><span class=line><span class=cl>float sceneDepth = Linear01Depth(rawDepth, _ZBufferParams); // 转换为线性01深度
+</span></span></code></pre></td></tr></table></div></div><h4 id=9自发光><strong>9）自发光</strong></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//自发光
+</span></span><span class=line><span class=cl>float3 light(float3 baseColor, float diffsueA){
+</span></span><span class=line><span class=cl>    diffsueA = smoothstep(0.0, 1.0, diffsueA);  //去除噪点
+</span></span><span class=line><span class=cl>    float3 glow = lerp(0.0, baseColor * ((sin(_Time.w * _flicker) * 0.5 + 0.5) * _glow), diffsueA);  //自发光
+</span></span><span class=line><span class=cl>    return glow;  //输出结果
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>diffuse的a通道存放的是自发光遮罩(也有可能是透明遮罩)。这个遮罩有很多奇怪的噪点，smoothstep一下把噪点去除。</p><h4 id=10最终混合diffsue--metal--specular--fresnel>10）最终混合diffsue + metal + specular + fresnel</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> //身体
+</span></span><span class=line><span class=cl> float3 Body(float NdotL, float NdotH, float NdotV, float4 lightmap, float3 baseColor, float3 nDirVS){
+</span></span><span class=line><span class=cl>     float3 ramp = shadow_ramp(lightmap, NdotL) ;  //ramp
+</span></span><span class=line><span class=cl>     float3 specular = Spec(NdotL, NdotH, nDirVS, lightmap, baseColor);  //高光
+</span></span><span class=line><span class=cl>     float3 metal = Metal(nDirVS, lightmap, baseColor);  //金属
+</span></span><span class=line><span class=cl>     float3 diffsue = baseColor * ramp  ;  //漫反射
+</span></span><span class=line><span class=cl>     diffsue = diffsue * step(lightmap.r, 0.9);  //遮罩金属区域
+</span></span><span class=line><span class=cl>     float3 fresnel = edgeLight(NdotV, baseColor);  //边缘光
+</span></span><span class=line><span class=cl>     //混合最终结果
+</span></span><span class=line><span class=cl>     float3 body = diffsue + metal + specular + fresnel;
+</span></span><span class=line><span class=cl>     return body;  //输出结果
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><h4 id=11脸部>11）脸部</h4><p>原神用的SDF的方法来区分脸部明暗面，这是脸部的SDF图：</p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103215656799.png width=455 height=429 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103215656799_hu_5e4434c729c19c1c.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103215656799_hu_7be7190b94ce2222.png 1024w" loading=lazy alt=image-20260103215656799 class=gallery-image data-flex-grow=106 data-flex-basis=254px></p><p><a class=link href=https://zhuanlan.zhihu.com/p/279334552 target=_blank rel=noopener>(2 封私信 / 36 条消息) 神作面部阴影渲染还原 - 知乎</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> //脸部
+</span></span><span class=line><span class=cl> float3 Face(float3 lDirWS, float3 baseColor, float2 uv, float2 screenUV){ 
+</span></span><span class=line><span class=cl>     lDirWS = -lDirWS;
+</span></span><span class=line><span class=cl>     //采样贴图
+</span></span><span class=line><span class=cl>     float SDF = SAMPLE_TEXTURE2D(_lightmap, sampler_lightmap, uv).r;  //采样SDF
+</span></span><span class=line><span class=cl>     float SDF2 = SAMPLE_TEXTURE2D(_lightmap, sampler_lightmap, float2(1-uv.x, uv.y)).r;  //翻转x轴采样SDF
+</span></span><span class=line><span class=cl>     //计算向量
+</span></span><span class=line><span class=cl>     float3 up = float3(0,1,0);  //上方向
+</span></span><span class=line><span class=cl>     float3 front = unity_ObjectToWorld._13_23_33;  //角色前朝向
+</span></span><span class=line><span class=cl>     float3 left = cross(front, up);  //左侧朝向
+</span></span><span class=line><span class=cl>     float3 right = -cross(front, up);  //右侧朝向
+</span></span><span class=line><span class=cl>     //点乘向量
+</span></span><span class=line><span class=cl>     float frontL = dot(normalize(front.xz), normalize(lDirWS.xz));  //前点乘光
+</span></span><span class=line><span class=cl>     float leftL = dot(normalize(left.xz), normalize(lDirWS.xz));  //左点乘光
+</span></span><span class=line><span class=cl>     float rightL = dot(normalize(right.xz), normalize(lDirWS.xz));  //右点乘光
+</span></span><span class=line><span class=cl>     //计算阴影
+</span></span><span class=line><span class=cl>     float lightAttenuation = (frontL &gt; 0) * min((SDF &gt; leftL), 1 - (SDF2 &lt; rightL));
+</span></span><span class=line><span class=cl>     //判断白天与夜晚
+</span></span><span class=line><span class=cl>     float rampSampling = 0.0;
+</span></span><span class=line><span class=cl>     if(_dayAndNight == 0){rampSampling = 0.5;}
+</span></span><span class=line><span class=cl>     //计算V轴
+</span></span><span class=line><span class=cl>     float rampV = _lightmapA4 * -0.1 + 1.05 - rampSampling;  //0.85
+</span></span><span class=line><span class=cl>     //采样ramp
+</span></span><span class=line><span class=cl>     float3 rampColor = SAMPLE_TEXTURE2D(_ramp, sampler_ramp, float2(lightAttenuation, rampV));
+</span></span><span class=line><span class=cl>     //混合baseColor
+</span></span><span class=line><span class=cl>     float3 face = lerp(baseColor * rampColor, baseColor, lightAttenuation);
+</span></span><span class=line><span class=cl>     return face;  //输出结果
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><p>我发现直接把SDF反向得到的另半边的SDF的结果是错误的，所以翻转x轴再采样了一遍SDF图。</p><p>用if来判断:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float3 col = float3(0.0, 0.0, 0.0);
+</span></span><span class=line><span class=cl>    //主体渲染
+</span></span><span class=line><span class=cl>    if(_genshinShader == 0.0){  //身体
+</span></span><span class=line><span class=cl>    col = Body(NdotL, NdotH, NdotV, lightmap, baseColor, nDirVS,screenUV);
+</span></span><span class=line><span class=cl>    }else if(_genshinShader == 1.0){  //脸部
+</span></span><span class=line><span class=cl>    col = Face(lDirWS, baseColor, i.uv0,screenUV);
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h4 id=12-添加自发光><strong>12) 添加自发光</strong></h4><p>diffuse的a通道，可能是自发光，也有可能是透明蒙版，我们需要开放一个参数给美术选择，当是自发光的时候，就把输出结果加上自发光效果，为透明蒙版的时候就按透明蒙版裁剪掉透明的像素。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>//计算diffuse.a
+</span></span><span class=line><span class=cl>if(_diffuseA == 2){  //自发光
+</span></span><span class=line><span class=cl>    float3 diffA = light(col, diffuseA);
+</span></span><span class=line><span class=cl>    col = col + diffA;
+</span></span><span class=line><span class=cl>}else if(_diffuseA == 1){ //裁剪
+</span></span><span class=line><span class=cl>    diffuseA = smoothstep(0.05, 0.7, diffuseA);  //去除噪点
+</span></span><span class=line><span class=cl>    clip(diffuseA - _Cutoff);
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h3 id=4-描边>4 描边</h3><p>轮廓线实现方案：<strong>背面膨胀法</strong>。很常见。</p><blockquote><p>在顶点着色器中，将模型的顶点沿着其法线方向向外轻微扩张。由于这个Pass只渲染模型的背面（通过Cull Front设置），扩张后的背面就会形成一个包裹在模型外的“壳”。</p></blockquote><p>1）（debug）查看模型中存储的平滑法线。</p><blockquote><p>美术人员可能会在UV2中存预烘焙的平滑法线，用于解决低多边形模型在轮廓线生成时的锯齿问题。我们可以假设模型里有这个平滑法线信息，输出来看看咸淡。</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> struct a2v
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl>	 ……
+</span></span><span class=line><span class=cl>     float2 packSmoothNormal : TEXCOORD2;
+</span></span><span class=line><span class=cl> };
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> struct v2f
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl>	……
+</span></span><span class=line><span class=cl>     float3 normalWS   : TEXCOORD2;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> };
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>v2f BackFaceOutlineVertex(a2v input)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    v2f o;
+</span></span><span class=line><span class=cl>	……
+</span></span><span class=line><span class=cl>	float3 smoothTS = UnpackNormalOctQuadEncode(input.packSmoothNormal);
+</span></span><span class=line><span class=cl>    o.normalWS = smoothTS;
+</span></span><span class=line><span class=cl>	……
+</span></span><span class=line><span class=cl>    return o;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>half4 frag(v2f i, FRONT_FACE_TYPE isFrontFace : FRONT_FACE_SEMANTIC) : SV_Target
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    float3 normalData = i.normalWS; // 使用解码函数后的平滑法线
+</span></span><span class=line><span class=cl>    float3 debugColor = (normalData + 1.0) * 0.5;
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    return half4(debugColor, 1.0); // Alpha通道设为1，不透明
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104173911106.png width=442 height=743 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104173911106_hu_d2ec7ea42cd17bd6.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104173911106_hu_3030242cb57953a9.png 1024w" loading=lazy alt=image-20260104173911106 class=gallery-image data-flex-grow=59 data-flex-basis=142px></p><p>杜林模型在前发/眼睛/口腔内外部/翅膀边缘有预烘焙的平滑法线信息。这些地方的法线会特殊处理。这里也查看了一下模型的顶点颜色——顶点色是单一的，这里暂且认为顶点色不存放额外信息。</p><blockquote><p>后记：其实在虚幻里很明显可以看出口眼鼻有平滑法线。<img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260122211744817.png width=305 height=296 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260122211744817_hu_3fbd05085f5aa821.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260122211744817_hu_247290cc0cf21d2b.png 1024w" loading=lazy class=gallery-image data-flex-grow=103 data-flex-basis=247px></p></blockquote><p>正式开工：</p><p>2）剔除表面</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Pass
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    Tags { &#34;LightMode&#34; = &#34;outline&#34; }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    Cull Front
+</span></span><span class=line><span class=cl>    ZWrite On
+</span></span></code></pre></td></tr></table></div></div><p>shader_feature_local：本地着色器变体（Shader Variants）。表示这些特性 <strong>只在当前 Pass 生效</strong>，不会全局生效</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> HLSLPROGRAM
+</span></span><span class=line><span class=cl> #pragma vertex BackFaceOutlineVertex
+</span></span><span class=line><span class=cl> #pragma fragment BackFaceOutlineFragment
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> //是否开启自定义描边颜色。
+</span></span><span class=line><span class=cl> #pragma shader_feature_local _OUTLINE_CUSTOM_COLOR_ON 
+</span></span><span class=line><span class=cl> //描边根据 切线方向 计算。
+</span></span><span class=line><span class=cl> #pragma shader_feature_local _OUTLINENORMALCHANNEL_TANGENT
+</span></span><span class=line><span class=cl> //描边根据 第二 UV 通道（平滑法线，模型中的嘴/眼/翅膀部分） 计算。
+</span></span><span class=line><span class=cl> #pragma shader_feature_local _OUTLINENORMALCHANNEL_UV2
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> #include &#34;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl&#34;
+</span></span><span class=line><span class=cl> #include &#34;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> TEXTURE2D(_ilmTex);
+</span></span><span class=line><span class=cl> SAMPLER(sampler_ilmTex);
+</span></span></code></pre></td></tr></table></div></div><p>定义顶点输入和输出结构体</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>  struct a2v
+</span></span><span class=line><span class=cl>  {
+</span></span><span class=line><span class=cl>      float4 positionOS : POSITION;
+</span></span><span class=line><span class=cl>      float4 color      : COLOR;
+</span></span><span class=line><span class=cl>      float3 normalOS   : NORMAL;
+</span></span><span class=line><span class=cl>      float4 tangentOS  : TANGENT;
+</span></span><span class=line><span class=cl>      float2 uv1        : TEXCOORD0;
+</span></span><span class=line><span class=cl>      float2 uv2        : TEXCOORD1;
+</span></span><span class=line><span class=cl>      float2 packSmoothNormal : TEXCOORD2;
+</span></span><span class=line><span class=cl>  };
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  struct v2f
+</span></span><span class=line><span class=cl>  {
+</span></span><span class=line><span class=cl>      float4 positionCS : SV_POSITION;
+</span></span><span class=line><span class=cl>      float2 uv         : TEXCOORD0;
+</span></span><span class=line><span class=cl>      float4 color      : COLOR;
+</span></span><span class=line><span class=cl>      float3 positionWS : TEXCOORD1;
+</span></span><span class=line><span class=cl>      float3 normalWS   : TEXCOORD2;
+</span></span><span class=line><span class=cl>  };
+</span></span></code></pre></td></tr></table></div></div><p>3）通过 <code>materialID</code>函数，将ILM贴图的a通道的值（0到1之间）映射为不同的材质ID【0到4】，然后根据这个ID从预设的颜色数组中选择对应的轮廓颜色。这使得模型的不同区域可以根据这张贴图的定义，呈现出5种不同颜色的轮廓线。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float materialID(float mask)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    if (mask &lt; 0.2) return 0;
+</span></span><span class=line><span class=cl>    if (mask &lt; 0.4) return 1;
+</span></span><span class=line><span class=cl>    if (mask &lt; 0.6) return 2;
+</span></span><span class=line><span class=cl>    if (mask &lt; 0.8) return 3;
+</span></span><span class=line><span class=cl>    return 4;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>4）看顶点着色器 <code>BackFaceOutlineVertex</code> 中：</p><p>1）获取用于顶点扩张的<strong>世界空间法线方向</strong>：通过着色器变体（<code>#pragma shader_feature_local</code>）提供了三种法线来源选择，以应对不同模型质量和效果。</p><p><code>OUTLINENORMALCHANNEL_</code>运行时只启用其中一个宏，避免 if-else 运行开销。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float3 GetSmoothNormalWS(a2v input)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	//描边根据默认法线通道
+</span></span><span class=line><span class=cl>    float3 smoothNormalOS = input.normalOS;
+</span></span><span class=line><span class=cl>	//描边根据 切线方向 计算。
+</span></span><span class=line><span class=cl>    #if defined(_OUTLINENORMALCHANNEL_TANGENT)
+</span></span><span class=line><span class=cl>    smoothNormalOS = input.tangentOS.xyz;
+</span></span><span class=line><span class=cl>    //描边根据 UV2 通道（平滑法线，模型中的嘴/眼/翅膀部分） 计算。
+</span></span><span class=line><span class=cl>    #elif defined(_OUTLINENORMALCHANNEL_UV2)
+</span></span><span class=line><span class=cl>  	//TNB矩阵：切线空间转换到模型空间变换矩阵
+</span></span><span class=line><span class=cl>    float3 n = normalize(input.normalOS);
+</span></span><span class=line><span class=cl>    float3 t = normalize(input.tangentOS.xyz);
+</span></span><span class=line><span class=cl>    float3 b = cross(n, t) * input.tangentOS.w;
+</span></span><span class=line><span class=cl>    //解码切线空间法线
+</span></span><span class=line><span class=cl>    float3 smoothTS = UnpackNormalOctQuadEncode(input.packSmoothNormal);
+</span></span><span class=line><span class=cl>    smoothNormalOS = mul(smoothTS, float3x3(t, b, n));
+</span></span><span class=line><span class=cl>    smoothNormalOS = smoothTS;
+</span></span><span class=line><span class=cl>    #endif
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    return TransformObjectToWorldNormal(smoothNormalOS);
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><code>input.packSmoothNormal</code>是存储在UV2中的美术人员预先烘焙的平滑法线。</p><p><code>UnpackNormalOctQuadEncode</code>是一个解码函数，将压缩存储的二维数据还原为三维法线向量（通常范围是[-1, 1]）。这种编码方式可以高效地在纹理通道中存储三维方向信息</p><p><strong>输出</strong>：<code>smoothTS</code>是在切线空间中的平滑法线向量。</p><p><strong>描边宽度：</strong></p><p><strong>基于距离的动态轮廓宽度</strong>，解决轮廓线“近粗远细”或“远距离过粗”的问题。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> float GetOutlineWidth(float viewZ)
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl>     float fovFactor = 2.414 / UNITY_MATRIX_P[1].y;// 根据视野(FOV)进行校正
+</span></span><span class=line><span class=cl>     float z = abs(viewZ * fovFactor);
+</span></span><span class=line><span class=cl>     return 0.01 * _OutlineWidth * _OutlineScale * saturate(1.0 / z);
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><p>轮廓位置：这是顶点扩张的核心函数，负责将顶点位置偏移到轮廓位置。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> float4 GetOutlinePosition(VertexPositionInputs posInput, float3 normalWS, float alpha)
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl>     float width = GetOutlineWidth(posInput.positionVS.z) * alpha;
+</span></span><span class=line><span class=cl>     
+</span></span><span class=line><span class=cl>	// 将世界法线转换到视角空间，并忽略Z分量，确保扩张在屏幕平面进行
+</span></span><span class=line><span class=cl>     float3 normalVS = TransformWorldToViewNormal(normalWS);
+</span></span><span class=line><span class=cl>     normalVS = normalize(float3(normalVS.xy, 0));
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     float3 posVS = posInput.positionVS;
+</span></span><span class=line><span class=cl>     posVS += width * normalVS;
+</span></span><span class=line><span class=cl>     //处理深度冲突(Z-fighting)：将顶点轻微推向相机
+</span></span><span class=line><span class=cl>     posVS += 0.01 * _OutlineZOffset * normalize(posVS);
+</span></span><span class=line><span class=cl>	//将视角空间位置转换回裁剪空间
+</span></span><span class=line><span class=cl>     return TransformWViewToHClip(posVS);
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><p>顶点着色器：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> v2f BackFaceOutlineVertex(a2v input)
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl>     v2f o;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     VertexPositionInputs posInput = GetVertexPositionInputs(input.positionOS.xyz);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     float3 smoothNormalWS = GetSmoothNormalWS(input);
+</span></span><span class=line><span class=cl>     o.positionCS = GetOutlinePosition(posInput, smoothNormalWS, input.color.a);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     o.uv = input.uv1;
+</span></span><span class=line><span class=cl>     o.color = input.color;
+</span></span><span class=line><span class=cl>     o.positionWS = TransformObjectToWorld(input.positionOS.xyz);
+</span></span><span class=line><span class=cl>     o.normalWS = smoothNormalWS;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     return o;
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><p>片元着色器 (<code>BackFaceOutlineFragment</code>)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>half4 BackFaceOutlineFragment(v2f i, FRONT_FACE_TYPE isFrontFace : FRONT_FACE_SEMANTIC) : SV_Target
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    // 1. 采样纹理，获取材质ID掩码
+</span></span><span class=line><span class=cl>    half mask = SAMPLE_TEXTURE2D(_ilmTex, sampler_ilmTex, i.uv).a;
+</span></span><span class=line><span class=cl>    float id = materialID(mask); // 将掩码值映射为0-4的整数ID
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    // 2. 根据ID从预设颜色数组中选取轮廓色
+</span></span><span class=line><span class=cl>    int idx = (int)clamp(id, 0.0, 4.0);
+</span></span><span class=line><span class=cl>    float3 color = outlineColors[idx];
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    // 3. 检查是否启用自定义轮廓色覆盖
+</span></span><span class=line><span class=cl>    #if defined(_OUTLINE_CUSTOM_COLOR_ON)
+</span></span><span class=line><span class=cl>        color = _CustomOutlineCol.rgb;
+</span></span><span class=line><span class=cl>    #endif
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    clip(_Alpha - _AlphaClip);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    return half4(color, 1); 
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104184611225.png width=890 height=988 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104184611225_hu_1ccb88bce6ae87aa.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104184611225_hu_fb14377e88ddeabb.png 1024w" loading=lazy class=gallery-image data-flex-grow=90 data-flex-basis=216px></p><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104185207246.png width=700 height=819 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104185207246_hu_aeaac1401a987bc1.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104185207246_hu_a72ee4c9138efbaf.png 1024w" loading=lazy alt=去掉tonemapping感觉更亮了 class=gallery-image data-flex-grow=85 data-flex-basis=205px></p><h3 id=5-投影>5 投影</h3><p>使用"ShadowCaster"Pass来产生投影。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>UsePass &#34;Universal Render Pipeline/Lit/ShadowCaster&#34;    
+</span></span></code></pre></td></tr></table></div></div><h3 id=6-后处理>6 后处理</h3><p>后处理我使用了三个，分别是Bloom(泛光)、ToneMapping(色调映射)、ColorAdjustments(颜色调整)。</p><p>我使用的是URP自带的后处理体积，好处是不用写代码了，和UE的后处理盒子类似，坏处是URP的后处理是全屏效果的，实际后处理的效果应该只影响角色。那样就要用C#脚本传递来制作后处理，用RendererFeatures的LayerMask来控制影响的对象图层，具体实现原理可以参考这篇文章。</p><h2 id=附录>附录：</h2><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102220238886.png width=660 height=232 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102220238886_hu_7bdf521cbe312793.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102220238886_hu_5b3bad37b3f53ea4.png 1024w" loading=lazy alt=image-20260102220238886 class=gallery-image data-flex-grow=284 data-flex-basis=682px></p><p>一些常见问题：</p><p>报错：INVALID UTF8 STRING</p><h3 id=visual-studio-设置默认编码格式为-utf-8-或-gb2312-80>Visual Studio 设置默认编码格式为 UTF-8 或 GB2312-80</h3><p><a class=link href=https://blog.csdn.net/qq_41868108/article/details/105750175 target=_blank rel=noopener>Visual Studio 设置默认编码格式为 UTF-8 或 GB2312-80 与文件没有高级保存选项怎么显示_visual studio 不使用简体中文gb2312编码加载文件-CSDN博客</a></p><h3 id=怎么去除边缘锯齿化>怎么去除边缘锯齿化</h3><h3 id=环境遮蔽ao>环境遮蔽AO</h3><p>lightmap.g通道存放的是环境遮蔽信息。它是一张由美术师预先绘制或软件生成的灰度图，用于标识模型表面哪些区域不容易接收到间接光照。
+<img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103102807639.png width=422 height=575 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103102807639_hu_b571eb902c6836ba.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260103102807639_hu_2d0aef6a5ecfe022.png 1024w" loading=lazy alt=lightmap.g class=gallery-image data-flex-grow=73 data-flex-basis=176px></p><blockquote><p>例如，衣服的褶皱深处、手臂与身体之间的缝隙、颈部下方等，这些地方即使在白天，也会比开阔的表面更暗。lightmap.g会在这些地方显示为黑色或深灰色。</p></blockquote><h3 id=smoothstep-三次平滑函数>smoothstep 三次平滑函数</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>smoothstep(edge0, edge1, x)
+</span></span></code></pre></td></tr></table></div></div><p>基本形式 <strong>Smoothstep₁(t) = t²(3 - 2t)</strong>。它用于在两个值之间生成一条平滑的S形过渡曲线。</p><p><strong>工作原理</strong>：</p><p>Smoothstep(edge0, edge1, x)在三个区间内的返回值规则是</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>x &lt;= edge0 时，返回 0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>x &gt;= edge1 时，返回 1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>edge0 &lt; x &lt; edge1 时，中间区域，返回在 0 和 1 之间使用埃尔米特插值得到的平滑过渡。
+</span></span></code></pre></td></tr></table></div></div><p>其中：中间区域通过三次多项式 t²(3 - 2t)产生平滑过渡。这种S形曲线在起点和终点的斜率接近零，过渡非常自然。</p><p><a class=link href="https://www.desmos.com/calculator/1z7pfidmne?lang=zh-CN" target=_blank rel=noopener>smoothstep-三次平滑函数 | Desmos</a></p><blockquote><p>这里可以拉参数看变化来直观感受这个三次平滑函数。</p></blockquote><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102180313800.png width=911 height=480 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102180313800_hu_61c55c8019932de8.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260102180313800_hu_f564e44b7551b94c.png 1024w" loading=lazy alt=image-20260102180313800 class=gallery-image data-flex-grow=189 data-flex-basis=455px></p><blockquote><h3 id=举例计算-lightmapg--025-时的输出>举例计算 lightmap.g = 0.25 时的输出</h3><p>我们来具体计算 <code>smoothstep(0.2, 0.3, 0.25)</code>的值。计算过程完全遵循其数学定义：</p><ol><li><p><strong>缩放与钳位</strong>：首先将 <code>x</code>映射到 0 到 1 的区间。</p><p><code>(0.25 - 0.2) / (0.3 - 0.2) = 0.05 / 0.1 = 0.5</code></p></li><li><p><strong>三次多项式插值</strong>：然后对结果进行平滑插值。</p><p><code>0.5 * 0.5 * (3 - 2 * 0.5) = 0.25 * (3 - 1) = 0.25 * 2 = 0.5</code></p></li></ol><p>所以，当 <code>lightmap.g</code>的值为 0.25 时，<code>smoothstep(0.2, 0.3, lightmap.g)</code>的输出是 <strong>0.5</strong>。</p></blockquote><p><img src=/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104182057580.png width=435 height=508 srcset="/p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104182057580_hu_505fc52cd5701637.png 480w, /p/%E4%BB%BF%E5%8E%9F%E7%A5%9E%E6%B8%B2%E6%9F%93/image-20260104182057580_hu_a7cdb2a2b053fec9.png 1024w" loading=lazy alt=仅查看法线颜色：彩色龙 class=gallery-image data-flex-grow=85 data-flex-basis=205px></p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/unity-mcp-%E5%85%A8%E6%B5%81%E7%A8%8B/><div class=article-image><img src=/p/unity-mcp-%E5%85%A8%E6%B5%81%E7%A8%8B/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post Unity MCP 全流程" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>Unity MCP 全流程</h2></div></a></article><article class=has-image><a href=/p/unity%E5%8A%A8%E7%94%BB%E5%88%A0%E5%B8%A7%E4%BC%98%E5%8C%96%E5%B7%A5%E5%85%B7/><div class=article-image><img src=/p/unity%E5%8A%A8%E7%94%BB%E5%88%A0%E5%B8%A7%E4%BC%98%E5%8C%96%E5%B7%A5%E5%85%B7/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post Unity动画删帧优化工具" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>Unity动画删帧优化工具</h2></div></a></article><article class=has-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%94/><div class=article-image><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%BA%94/cover1.097562be4e510d390980afa13e8f2642_hu_290b482c007123cc.png width=250 height=150 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其五）" data-hash="md5-CXVivk5RDTkJgK+hPo8mQg=="></div><div class=article-details><h2 class=article-title>毕业设计 | 水墨风格化场景渲染（其五）</h2></div></a></article><article class=has-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%89/><div class=article-image><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E4%B8%89/cover1.097562be4e510d390980afa13e8f2642_hu_290b482c007123cc.png width=250 height=150 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其三）" data-hash="md5-CXVivk5RDTkJgK+hPo8mQg=="></div><div class=article-details><h2 class=article-title>毕业设计 | 水墨风格化场景渲染（其三）</h2></div></a></article><article class=has-image><a href=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E5%9B%9B/><div class=article-image><img src=/p/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%B0%B4%E5%A2%A8%E9%A3%8E%E6%A0%BC%E5%8C%96%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E5%85%B6%E5%9B%9B/cover1.097562be4e510d390980afa13e8f2642_hu_290b482c007123cc.png width=250 height=150 loading=lazy alt="Featured image of post 毕业设计 | 水墨风格化场景渲染（其四）" data-hash="md5-CXVivk5RDTkJgK+hPo8mQg=="></div><div class=article-details><h2 class=article-title>毕业设计 | 水墨风格化场景渲染（其四）</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2024 -
+2026 Selaphina</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.34.2>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -1,0 +1,398 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Unity Shader 入门精要 第十四章"><title>14 非真实感渲染</title><link rel=canonical href=https://Selaphina.github.io/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/><link rel=stylesheet href=/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css><meta property='og:title' content="14 非真实感渲染"><meta property='og:description' content="Unity Shader 入门精要 第十四章"><meta property='og:url' content='https://Selaphina.github.io/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/'><meta property='og:site_name' content='Selaphina'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Unity Shader'><meta property='article:published_time' content='2024-07-11T22:10:30+00:00'><meta property='article:modified_time' content='2024-07-11T22:10:30+00:00'><meta property='og:image' content='https://Selaphina.github.io/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/cover1.png'><meta name=twitter:title content="14 非真实感渲染"><meta name=twitter:description content="Unity Shader 入门精要 第十四章"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://Selaphina.github.io/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/cover1.png'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_19bb7832d48d68bd.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Selaphina</a></h1><h2 class=site-description>住在一个奇妙而荒诞的星球。</h2></div></header><ol class=menu-social><li><a href=https://github.com/Selaphina target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#1卡通风格的渲染>1.卡通风格的渲染</a><ol><li><a href=#11-渲染轮廓线的方法>1.1 渲染轮廓线的方法</a></li><li><a href=#12-添加高光>1.2 添加高光</a><ol><li><a href=#扩展>扩展：</a></li></ol></li><li><a href=#toonshadingshader>ToonShading.shader</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/cover1_hu_e2943e4ee1c34a24.png srcset="/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/cover1_hu_e2943e4ee1c34a24.png 800w, /p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/cover1_hu_c98519924185e750.png 1600w" width=800 height=359 loading=lazy alt="Featured image of post 14 非真实感渲染"></a></div><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/ style=background-color:#beefe1;color:#0f3d30>技术笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/>14 非真实感渲染</a></h2><h3 class=article-subtitle>Unity Shader 入门精要 第十四章</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2024-07-11T22:10:30Z>Jul 11, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>5 minute read</time></div></footer></div></header><section class=article-content><p>**非真实感渲染(Non-Photorealistic Rendering , NPR )**的一个主要目标是，使用一些渲染方法使得画面达到和某些特殊的绘画风格相似的效果，例如卡通、水彩风格等。</p><h2 id=1卡通风格的渲染>1.卡通风格的渲染</h2><p>卡通风格是游戏中常见的一种渲染风格。使用这种风格的游戏画面通常有一些共有的特点，例如物体都被黑色的线条描边，以及分明的明暗变化等。由日本卡普空(英文名:Capcom)株式会社开发的游戏《大神》(英文名:Okami)就使用了水墨+卡通风格来渲染整个画面。</p><p><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251112122205934.png width=915 height=399 srcset="/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251112122205934_hu_5479cac6fb9b42e1.png 480w, /p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251112122205934_hu_77ccf01c24b785b7.png 1024w" loading=lazy alt=《Okami》游戏截图 class=gallery-image data-flex-grow=229 data-flex-basis=550px></p><p>除了光照模型不同外，卡通风格通常还需要在物体边缘部分绘制轮廓。在之前的章节中，我们曾介绍使用屏幕后处理技术对屏幕图像进行描边。</p><p>在本节，我们将会介绍<strong>基于模型的描边方法</strong>，这种方法的实现更加简单，而且在很多情况下也能得到不错的效果。</p><p>要实现卡通渲染有很多方法，其中之一就是使用基于色调的着色技术(tone-based shading)。Gooch 等人在他们1998年的一篇论文!中提出并实现了基于色调的光照模型。</p><p><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251112122610785.png width=681 height=458 srcset="/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251112122610785_hu_d06da078488580dc.png 480w, /p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251112122610785_hu_68a0177440d225f2.png 1024w" loading=lazy alt="基于颜色映射（Color Ramps）的漫反射" class=gallery-image data-flex-grow=148 data-flex-basis=356px></p><p>在实现中，我们往往会使用漫反射系数对一张一维纹理进行采样，以控制漫反射的色调。我们曾在7.3节使用渐变纹理实现过这样的效果。卡通风格的高光效果也和我们之前学习的光照不同。在卡通风格中，模型的高光往往是一块块分界明显的纯色区域。</p><h3 id=11-渲染轮廓线的方法>1.1 渲染轮廓线的方法</h3><p>在《Real Time Rendering, 3th》一书中，作者把绘制模型轮廓线的方法分成了
+5种类型。</p><ul><li>**基于观察角度和表面法线的轮廓线渲染。**这种方法使用视角方向和表面法线的点乘结果来得到轮廓线的信息。这种方法简单快速，可以在一个Pass中就得到渲染结果，但局限性很大，很多模型渲染出来的描边效果都不尽如人意。</li><li>**过程式几何轮廓线渲染。<strong>这种方法的核心是使用</strong><u>两个Pass</u>**渲染。第一个Pass渲染背面的面片，并使用某些技术让它的轮廓可见;第二个Pass再正常渲染正面的面片。这种方法的优点在于快速有效，并且适用于绝大多数表面平滑的模型，但它的缺点是不适合类似于立方体这样平整的模型。</li><li>**基于图像处理的轮廓线渲染。**我们在第12、13章介绍的边缘检测的方法就属于这个类别。这种方法的优点在于，可以适用于任何种类的模型。但它也有自身的局限所在，一些深度和法线变化很小的轮廓无法被检测出来，例如桌子上的纸张。</li><li>**基于轮廓边检测的轮廓线渲染。**上面提到的各种方法，一个最大的问题是，无法控制轮廓线的风格渲染。对于一些情况,我们希望可以渲染出独特风格的轮廓线,例如水墨风格等。为此，我们希望可以检测出精确的轮廓边，然后直接渲染它们。检测一条边是否是轮廓边的公式很简单，我们只需要检查和这条边相邻的两个三角面片是否满足以下条件:</li></ul>$$
+(n_0 \cdot v > 0) \neq (n_1 \cdot v > 0)
+$$<p>其中，<strong>n0</strong>和<strong>n1</strong>分别表示两个相邻三角面片的法向，v是从视角到该边上任意顶点的方向。上述公式的本质在于检查两个相邻的三角面片是否一个朝正面、一个朝背面。我们可以在几何着色器(Geometry Shader)的帮助下实现上面的检测过程。</p><p>当然，这种方法也有缺点，除了实现相对复杂外，它还会有动画连贯性的问题。也就是说，由于是逐帧单独提取轮廓，所以在帧与帧之间会出现跳跃性。</p><ul><li>**混合上述的几种渲染方法。**例如，首先找到精确的轮边，把模型和轮廓边渲染到纹理中，再使用图像处理的方法识别出轮廓线，并在图像空间下进行风格化渲染。</li></ul><p>本节方法中，使用到的是【过程式几何轮廓线渲染】</p><p>在第一个Pass中，，我们会使用轮廓线颜色来渲染整个背面的面片，并在视角空间下把模型顶点沿着法线方向向外扩张一段距离：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>viewPos = viewPos + viewNormal * _Outline;
+</span></span></code></pre></td></tr></table></div></div><p>但是直接使用法线外扩展，对于一些内凹的模型，就可能发生背面面片遮住正面面片的情况。为了避免这种情况，我们要：</p><p>1）对顶点法线在z分量进行处理，等于一个定值。</p><p>2）把法线归一化，然后再对顶点进行扩张。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>viewNormal.z = -0.5;
+</span></span><span class=line><span class=cl>viewNormal = normalize(viewNormal);
+</span></span><span class=line><span class=cl>viewPos = viewPos + viewNormal * _Outline;
+</span></span></code></pre></td></tr></table></div></div><h3 id=12-添加高光>1.2 添加高光</h3><p>前面提到过，卡通风格中的高光往往是模型上一块块分界明显的纯色区域。为了实现这种效果，我们就不能再使用之前学习的光照模型。</p><p>回顾一下，在之前实现 Blinn-Phong 模型的过程中:</p><p>法线 dot 1/2（光照方向+视角方向）+ _Gloss</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float spec = pow(max(0,dot(normal,halfDir)), _Gloss);
+</span></span></code></pre></td></tr></table></div></div><p>由于卡通渲染的高光区域是分界明显的纯色区域，我们不能用原先标准的光照自然过渡的样子，而是要把高光截断。具体而言：
+1）计算normal和halfDir的结果</p><p>2）把该值和一个阈值比较，如果小于该阈值，则高光反射系数为0；否则返回1.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float spec = dot(worldNormal,worldHalfDir);
+</span></span><span class=line><span class=cl>spec = step(threshold, spec);
+</span></span></code></pre></td></tr></table></div></div><p>在上面的代码中，我们使用CG的step函数来实现和值比较的目的。step函数接受两个参数，第一个参数是参考值，第二个参数是待比较的数值。如果第二个参数大于等于第一个参数，则返回1，否则返回0。</p><p>但是，这种粗暴的判断方法会在高光区域的边界造成锯齿，如图14.3左图所示。出现这种问题的原因在于，高光区域的边缘不是平滑渐变的，而是由0突变到1。要想对其进行抗锯齿处理我们可以在边界处很小的一块区域内，进行平滑处理。代码如下:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float spec = dot(worldNormal,worldHalfDir);
+</span></span><span class=line><span class=cl>spec=lerp(0,1,smoothstep(-w，w，spec-threshold));
+</span></span></code></pre></td></tr></table></div></div><p>在上面的代码中，我们没有像之前一样直接使用step函数返回0或1，而是首先使用了CG的 smoothstep函数。其中,w是一个很小的值，当spec-threshold小于-w时，返回0,大于w时,返回1，否则在0到1之间进行插值。这样的效果是，我们可以在[-w,w]区间内，即高光区域的边界处，得到一个从0到1平滑变化的spec值，从而实现抗锯齿的目的。尽管我们可以把w设为一个很小的定值，但在本例中，我们选择使用邻域像素之间的近似导数值，这可以通过CG的fwidth 函数来得到。</p><h4 id=扩展>扩展：</h4><p>如果希望随意伸缩，方块化光照区域，可以参考乐乐姐的这篇：</p><p><a class=link href=http://blog.csdn.net/candycat1992/article/details/47284289 target=_blank rel=noopener>http://blog.csdn.net/candycat1992/article/details/47284289</a></p><h3 id=toonshadingshader>ToonShading.shader</h3><p>1）声明</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties{
+</span></span><span class=line><span class=cl>// ===固有色===
+</span></span><span class=line><span class=cl>	_Color (&#34;Color Tint&#34;,Color) = (1,1,1,1)
+</span></span><span class=line><span class=cl>	_MainTex (&#34;Main Tex&#34;,2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>	_Ramp (&#34;Ramp Texture&#34;,2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>// ===描边===
+</span></span><span class=line><span class=cl>	_Outline (&#34;Outline&#34;,Range(0,1)) = 0.1
+</span></span><span class=line><span class=cl>	_OutlineColor (&#34;Outline Color&#34;,Color) = (0,0,0,1)
+</span></span><span class=line><span class=cl>// ===高光===
+</span></span><span class=line><span class=cl>	_SpecularColor (&#34;SpecularColor&#34;,Color) = (1,1,1,1)
+</span></span><span class=line><span class=cl>	_SpecularScale (&#34;Specular Scale&#34;,Range(0,0.1)) = 0.01
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>其中，Ramp是用于控制漫反射色调的渐变纹理，Outline用于控制轮线宽度，OutlineColor对应了轮廓线颜色，Specular是高光反射颜色，SpecularScale 用于控制计算高光反射时使用的阈值。</p><p>2）定义渲染轮廓线需要的pass，这个pass只渲染北面的三角面片</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> SubShader {
+</span></span><span class=line><span class=cl>		Tags { &#34;RenderType&#34;=&#34;Opaque&#34; &#34;Queue&#34;=&#34;Geometry&#34;}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		Pass {
+</span></span><span class=line><span class=cl>			NAME &#34;OUTLINE&#34;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			Cull Front
+</span></span></code></pre></td></tr></table></div></div><p><code>Cull Front</code>使用cull指令把正面的三角面片剔除，只渲染背面。值得注意的是，描边在非真实感渲染中是非常常见的，为该Pass定义名称可以让我们在后面的使用中不需要再重复编写此Pass，而只需要调用它的名字即可。</p><p>3）顶点和片元着色器</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>			v2f vert (a2v v) {
+</span></span><span class=line><span class=cl>				v2f o;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				float4 pos = mul(UNITY_MATRIX_MV, v.vertex); 
+</span></span><span class=line><span class=cl>				float3 normal = mul((float3x3)UNITY_MATRIX_IT_MV, v.normal);  
+</span></span><span class=line><span class=cl>				normal.z = -0.5;
+</span></span><span class=line><span class=cl>				pos = pos + float4(normalize(normal), 0) * _Outline;
+</span></span><span class=line><span class=cl>				o.pos = mul(UNITY_MATRIX_P, pos);
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				return o;
+</span></span><span class=line><span class=cl>			}
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			float4 frag(v2f i) : SV_Target { 
+</span></span><span class=line><span class=cl>				return float4(_OutlineColor.rgb, 1);               
+</span></span><span class=line><span class=cl>			}
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			ENDCG
+</span></span><span class=line><span class=cl>		}
+</span></span></code></pre></td></tr></table></div></div><p>在顶点着色器中我们首先把顶点和法线变换到视角空间下，这是为了让描边可以在观察空间达到最好的效果。随后，我们设置法线的z分量，对其归一化后再将顶点沿其方向扩张，得到扩张后的顶点坐标。对法线的处理是为了尽可能避免背面扩张后的顶点挡住正面的面片。最后，我们把顶点从视角空间变换到裁剪空间。</p><p>4）定义光照模型所需要的Pass，以渲染模型的正面。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Pass {
+</span></span><span class=line><span class=cl>			Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			Cull Back
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>			CGPROGRAM
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>			#pragma vertex vert
+</span></span><span class=line><span class=cl>			#pragma fragment frag
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			#pragma multi_compile_fwdbase
+</span></span><span class=line><span class=cl>		
+</span></span></code></pre></td></tr></table></div></div><p>在上面的代码中，我们将LightMode设置为ForwardBase，指令，这些都是为了让Shader中的光照变量可以被正确赋值。并且使用#pragma语句设置了编译。</p><p>5）顶点着色器</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>			v2f vert (a2v v) {
+</span></span><span class=line><span class=cl>				v2f o;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				o.pos = mul( UNITY_MATRIX_MVP, v.vertex);
+</span></span><span class=line><span class=cl>				o.uv = TRANSFORM_TEX (v.texcoord, _MainTex);
+</span></span><span class=line><span class=cl>				o.worldNormal  = UnityObjectToWorldNormal(v.normal);
+</span></span><span class=line><span class=cl>				o.worldPos = mul(_Object2World, v.vertex).xyz;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				TRANSFER_SHADOW(o);
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				return o;
+</span></span><span class=line><span class=cl>			}
+</span></span></code></pre></td></tr></table></div></div><p>在上面的代码中，我们计算了世界空间下的法线方向和顶点位置，并使用Unity提供的内置宏SHADOWCOORDS和TRANSFERSHADOW来计算阴影所需的各个变量。这些宏的实现原理可以参见 9.4节。</p><p>6）片元着色器中包含了计算光照模型的关键代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float4 frag(v2f i) : SV_Target { 
+</span></span><span class=line><span class=cl>				fixed3 worldNormal = normalize(i.worldNormal);
+</span></span><span class=line><span class=cl>				fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));
+</span></span><span class=line><span class=cl>				fixed3 worldViewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
+</span></span><span class=line><span class=cl>				fixed3 worldHalfDir = normalize(worldLightDir + worldViewDir);
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				fixed4 c = tex2D (_MainTex, i.uv);
+</span></span><span class=line><span class=cl>				fixed3 albedo = c.rgb * _Color.rgb;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				fixed diff =  dot(worldNormal, worldLightDir);
+</span></span><span class=line><span class=cl>				diff = (diff * 0.5 + 0.5) * atten;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				fixed3 diffuse = _LightColor0.rgb * albedo * tex2D(_Ramp, float2(diff, diff)).rgb;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				fixed spec = dot(worldNormal, worldHalfDir);
+</span></span><span class=line><span class=cl>				fixed w = fwidth(spec) * 2.0;
+</span></span><span class=line><span class=cl>				fixed3 specular = _Specular.rgb * lerp(0, 1, smoothstep(-w, w, spec + _SpecularScale - 1)) * step(0.0001, _SpecularScale);
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				return fixed4(ambient + diffuse + specular, 1.0);
+</span></span><span class=line><span class=cl>			}
+</span></span></code></pre></td></tr></table></div></div><p>7）最后为shader设置了合适的fallback</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	FallBack &#34;Diffuse&#34;
+</span></span></code></pre></td></tr></table></div></div><p>类似于cocos 的引擎内，其实已经内置了toon shader，可以快速实现这种二分明确/有描边的卡通渲染。</p><blockquote><p>贴图设置问题，如果出现亮部有黑点，是贴图设置问题。</p><p><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122021420066.png width=441 height=348 srcset="/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122021420066_hu_e5cf7d82485ab3fb.png 480w, /p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122021420066_hu_73ebc326a696898a.png 1024w" loading=lazy alt=image-20251122021420066 class=gallery-image data-flex-grow=126 data-flex-basis=304px></p></blockquote><p><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122021409951.png width=432 height=701 srcset="/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122021409951_hu_f038ed31b6af5571.png 480w, /p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122021409951_hu_6d417ee607ae444d.png 1024w" loading=lazy alt=image-20251122021409951 class=gallery-image data-flex-grow=61 data-flex-basis=147px></p><p>微软研究院的Praun等人在2001年的SIGGRAPH 上发表了一篇非常著名的论文。在这篇文章中，他们使用了提前生成的素描纹理来实现实时的素描风格渲染,这些纹理组成了一个色调艺术映射(TonalArt Map,TAM),如图 14.4所示。在图14.4中，从左到右纹理中的笔触逐渐增多，用于模拟不同光照下的漫反射效果，从上到下则对应了每张纹理的多级渐远纹理(mipmaps)。这些多级渐远纹理的生成并不是简单的对上层纹理进行降采样，而是需要保持笔触之间的间隔，以便更真实地模拟素描效果。</p><p><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122021513144.png width=792 height=261 srcset="/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122021513144_hu_fd568a3ed6715c30.png 480w, /p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122021513144_hu_5ddf52f285cf94b1.png 1024w" loading=lazy alt=image-20251122021513144 class=gallery-image data-flex-grow=303 data-flex-basis=728px></p><p>**1.**本文简化了论文的操作方式，不需要用mipmap，使用6张纹理即可</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	Properties {
+</span></span><span class=line><span class=cl>		_Color (&#34;Color Tint&#34;, Color) = (1, 1, 1, 1)
+</span></span><span class=line><span class=cl>		_TileFactor (&#34;Tile Factor&#34;, Float) = 1
+</span></span><span class=line><span class=cl>		_Outline (&#34;Outline&#34;, Range(0, 1)) = 0.1
+</span></span><span class=line><span class=cl>		_Hatch0 (&#34;Hatch 0&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_Hatch1 (&#34;Hatch 1&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_Hatch2 (&#34;Hatch 2&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_Hatch3 (&#34;Hatch 3&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_Hatch4 (&#34;Hatch 4&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_Hatch5 (&#34;Hatch 5&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>其中， Color 是用于控制模型颜色的属性。 TileFactor 是纹理的平铺系数， TileFactor 越大,模型上的素描线条越密,在实现图14.5的过程中,我们把 TileFactor设置为8。Hatch0至 Hatch5对应了渲染时使用的6张素描纹理，它们的线条密度依次增大。</p><p>**2.**由于素描风格往往也需要在物体周围渲染轮廓线，因此我们直接使用14.1节中渲染轮廓</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>SubShader {
+</span></span><span class=line><span class=cl>		Tags { &#34;RenderType&#34;=&#34;Opaque&#34; &#34;Queue&#34;=&#34;Geometry&#34;}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		UsePass &#34;Unity Shaders Book/Chapter 14/Toon Shading/OUTLINE&#34;
+</span></span><span class=line><span class=cl>		
+</span></span></code></pre></td></tr></table></div></div><p>我们使用 UsePass 命令调用了 14.1节中实现的轮廓线渲染的 Pass,Unity Shaders Book/Chapter14/Toon Shading 对应了14.1 节中 Chapter14-ToonShading 文件里 Shader 的名字，而 Unity 内部会把 Pass的名称全部转成大写格式，所以我们需要在 UsePass 中使用大写格式的 Pass 名称。</p><ol start=3><li>下面，我们需要定义光照模型所在的Pass。为了能够正确获取各个光照变量，我们设置了Pass的标签和相关的编译指令</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	Pass {
+</span></span><span class=line><span class=cl>			Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			CGPROGRAM
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			#pragma vertex vert
+</span></span><span class=line><span class=cl>			#pragma fragment frag 
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			#pragma multi_compile_fwdbase
+</span></span></code></pre></td></tr></table></div></div><p>(4)由于我们需要在顶点着色器中计算6张纹理的混合权重，我们首先需要在 v2f结构体中添加相应的变量:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>			struct v2f {
+</span></span><span class=line><span class=cl>				float4 pos : SV_POSITION;
+</span></span><span class=line><span class=cl>				float2 uv : TEXCOORD0;
+</span></span><span class=line><span class=cl>				fixed3 hatchWeights0 : TEXCOORD1;
+</span></span><span class=line><span class=cl>				fixed3 hatchWeights1 : TEXCOORD2;
+</span></span><span class=line><span class=cl>				float3 worldPos : TEXCOORD3;
+</span></span><span class=line><span class=cl>				SHADOW_COORDS(4)
+</span></span><span class=line><span class=cl>			};
+</span></span></code></pre></td></tr></table></div></div><p>由于一共声明了6张纹理，这意味着需要6个混合权重，我们把它们存储在两个fixed3 类型的变量(hatchWeights0 和 hatchWeights1)中。为了添加阴影效果，我们还声明了 worldPos 变量,并使用 SHADOWCOORDS宏声明了阴影纹理的采样坐标。</p><p>5)然后，我们定义了关键的顶点着色器:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>v2f vert(a2v v) {
+</span></span><span class=line><span class=cl>				v2f o;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				o.uv = v.texcoord.xy * _TileFactor;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				fixed3 worldLightDir = normalize(WorldSpaceLightDir(v.vertex));
+</span></span><span class=line><span class=cl>				fixed3 worldNormal = UnityObjectToWorldNormal(v.normal);
+</span></span><span class=line><span class=cl>				fixed diff = max(0, dot(worldLightDir, worldNormal));
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				o.hatchWeights0 = fixed3(0, 0, 0);
+</span></span><span class=line><span class=cl>				o.hatchWeights1 = fixed3(0, 0, 0);
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				float hatchFactor = diff * 7.0;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				if (hatchFactor &gt; 6.0) {
+</span></span><span class=line><span class=cl>					// Pure white, do nothing
+</span></span><span class=line><span class=cl>				} else if (hatchFactor &gt; 5.0) {
+</span></span><span class=line><span class=cl>					o.hatchWeights0.x = hatchFactor - 5.0;
+</span></span><span class=line><span class=cl>				} else if (hatchFactor &gt; 4.0) {
+</span></span><span class=line><span class=cl>					o.hatchWeights0.x = hatchFactor - 4.0;
+</span></span><span class=line><span class=cl>					o.hatchWeights0.y = 1.0 - o.hatchWeights0.x;
+</span></span><span class=line><span class=cl>				} else if (hatchFactor &gt; 3.0) {
+</span></span><span class=line><span class=cl>					o.hatchWeights0.y = hatchFactor - 3.0;
+</span></span><span class=line><span class=cl>					o.hatchWeights0.z = 1.0 - o.hatchWeights0.y;
+</span></span><span class=line><span class=cl>				} else if (hatchFactor &gt; 2.0) {
+</span></span><span class=line><span class=cl>					o.hatchWeights0.z = hatchFactor - 2.0;
+</span></span><span class=line><span class=cl>					o.hatchWeights1.x = 1.0 - o.hatchWeights0.z;
+</span></span><span class=line><span class=cl>				} else if (hatchFactor &gt; 1.0) {
+</span></span><span class=line><span class=cl>					o.hatchWeights1.x = hatchFactor - 1.0;
+</span></span><span class=line><span class=cl>					o.hatchWeights1.y = 1.0 - o.hatchWeights1.x;
+</span></span><span class=line><span class=cl>				} else {
+</span></span><span class=line><span class=cl>					o.hatchWeights1.y = hatchFactor;
+</span></span><span class=line><span class=cl>					o.hatchWeights1.z = 1.0 - o.hatchWeights1.y;
+</span></span><span class=line><span class=cl>				}
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				TRANSFER_SHADOW(o);
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				return o; 
+</span></span><span class=line><span class=cl>			}
+</span></span></code></pre></td></tr></table></div></div><p>我们首先对顶点进行了基本的坐标变换。然后，使用TileFactor 得到了纹理采样坐标。在计算6张纹理的混合权重之前，我们首先需要计算逐顶点光照。因此，我们使用世界空间下的光照方向和法线方向得到漫反射系数 diff。</p><p>之后,我们把权重值初始化为0,并把 diff缩放到[0,7]范围，得到 hatchFactor。</p><p>我们把[0,7]的区间均匀划分为7个子区间，通过判断 hatchFactor 所处的子区间来计算对应的纹理混合权重。</p><p>最后，我们计算了顶点的世界坐标，并使用TRANSFERSHADOW宏来计算阴影纹理的采样坐标。</p><p>6.片元着色器</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>fixed4 frag(v2f i) : SV_Target {			
+</span></span><span class=line><span class=cl>				fixed4 hatchTex0 = tex2D(_Hatch0, i.uv) * i.hatchWeights0.x;
+</span></span><span class=line><span class=cl>				fixed4 hatchTex1 = tex2D(_Hatch1, i.uv) * i.hatchWeights0.y;
+</span></span><span class=line><span class=cl>				fixed4 hatchTex2 = tex2D(_Hatch2, i.uv) * i.hatchWeights0.z;
+</span></span><span class=line><span class=cl>				fixed4 hatchTex3 = tex2D(_Hatch3, i.uv) * i.hatchWeights1.x;
+</span></span><span class=line><span class=cl>				fixed4 hatchTex4 = tex2D(_Hatch4, i.uv) * i.hatchWeights1.y;
+</span></span><span class=line><span class=cl>				fixed4 hatchTex5 = tex2D(_Hatch5, i.uv) * i.hatchWeights1.z;
+</span></span><span class=line><span class=cl>				fixed4 whiteColor = fixed4(1, 1, 1, 1) * (1 - i.hatchWeights0.x - i.hatchWeights0.y - i.hatchWeights0.z - 
+</span></span><span class=line><span class=cl>							i.hatchWeights1.x - i.hatchWeights1.y - i.hatchWeights1.z);
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				fixed4 hatchColor = hatchTex0 + hatchTex1 + hatchTex2 + hatchTex3 + hatchTex4 + hatchTex5 + whiteColor;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
+</span></span><span class=line><span class=cl>								
+</span></span><span class=line><span class=cl>				return fixed4(hatchColor.rgb * _Color.rgb * atten, 1.0);
+</span></span><span class=line><span class=cl>			}
+</span></span></code></pre></td></tr></table></div></div><p>7.合适的fallback</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Fallback “Diffuse”
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122024632284.png width=1076 height=465 srcset="/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122024632284_hu_34bef263c1fd8a9e.png 480w, /p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/image-20251122024632284_hu_84921ba3e23bc225.png 1024w" loading=lazy alt=image-20251122024632284 class=gallery-image data-flex-grow=231 data-flex-basis=555px></p></section><footer class=article-footer><section class=article-tags><a href=/tags/unity-shader/>Unity Shader</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/18-%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93/><div class=article-image><img src=/p/18-%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 18 基于物理的渲染" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>18 基于物理的渲染</h2></div></a></article><article class=has-image><a href=/p/17-%E8%A1%A8%E9%9D%A2%E7%9D%80%E8%89%B2%E5%99%A8/><div class=article-image><img src=/p/17-%E8%A1%A8%E9%9D%A2%E7%9D%80%E8%89%B2%E5%99%A8/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 17 表面着色器" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>17 表面着色器</h2></div></a></article><article class=has-image><a href=/p/16-unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/><div class=article-image><img src=/p/16-unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 16 Unity中的渲染优化技术" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>16 Unity中的渲染优化技术</h2></div></a></article><article class=has-image><a href=/p/15-%E5%99%AA%E5%A3%B0%E8%BF%90%E7%94%A8/><div class=article-image><img src=/p/15-%E5%99%AA%E5%A3%B0%E8%BF%90%E7%94%A8/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 15 噪声运用" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>15 噪声运用</h2></div></a></article><article class=has-image><a href=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/><div class=article-image><img src=/p/13-%E6%B7%B1%E5%BA%A6%E5%92%8C%E6%B3%95%E7%BA%BF%E7%BA%B9%E7%90%86/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 13 深度和法线纹理" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>13 深度和法线纹理</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2024 -
+2026 Selaphina</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.34.2>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Obsidian on Selaphina</title><link>https://Selaphina.github.io/tags/obsidian/</link><description>Recent content in Obsidian on Selaphina</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 19 Feb 2026 10:20:12 +0000</lastBuildDate><atom:link href="https://Selaphina.github.io/tags/obsidian/index.xml" rel="self" type="application/rss+xml"/><item><title>Obsidian多端同步</title><link>https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/</link><pubDate>Thu, 19 Feb 2026 10:20:12 +0000</pubDate><guid>https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/</guid><description>&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/cover1.png" alt="Featured image of post Obsidian多端同步" /&gt;&lt;p&gt;c&lt;/p&gt;
+&lt;p&gt;春节假期间，更替了一下笔记软件。主要用于教程指路：
+&lt;a class="link" href="https://zhuanlan.zhihu.com/p/586431408" target="_blank" rel="noopener"
+&gt;https://zhuanlan.zhihu.com/p/586431408&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="电脑端"&gt;电脑端：
+&lt;/h2&gt;&lt;p&gt;整体需要：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;u&gt;坚果云&lt;/u&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Obsidian安装Remotely Save插件&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="1安装-remotely-save"&gt;1.安装 Remotely Save
+&lt;/h3&gt;&lt;p&gt;在社区插件市场搜索“Remotely Save”，安装并启用该插件。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223218298.png"
+width="1133"
+height="1051"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223218298_hu_58ba046bc2b355a7.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223218298_hu_8ec6b4d48a7e2997.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="107"
+data-flex-basis="258px"
+&gt;&lt;/p&gt;
+&lt;h3 id="2坚果云"&gt;2.坚果云
+&lt;/h3&gt;&lt;p&gt;打开&lt;a class="link" href="https://link.zhihu.com/?target=https%3A//www.jianguoyun.com/" target="_blank" rel="noopener"
+&gt;坚果云&lt;/a&gt;，登录/注册账号。 创建一个个人同步文件夹，注意&lt;strong&gt;文件夹名称要和被同步的 Obsidian 库的库名一致&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;比如，我的Obsidian 库名为：MyCalendar，那么新建的同步文件夹也要命名为：MyCalendar。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225335753.png"
+width="688"
+height="367"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225335753_hu_14f31084464b182.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225335753_hu_63af8acf1b3d3f2f.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="187"
+data-flex-basis="449px"
+&gt;&lt;/p&gt;
+&lt;p&gt;设置—— 第三方应用管理——添加应用密码&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223001298.png"
+width="749"
+height="945"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223001298_hu_9a5bfdf2fd70d61a.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223001298_hu_9c540db62c8b9ac9.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="190px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223026973.png"
+width="751"
+height="949"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223026973_hu_fae959dfe2bec27b.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223026973_hu_faecc3dcab53be68.png 1024w"
+loading="lazy"
+alt="image-20260219223026973"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="189px"
+&gt;&lt;/p&gt;
+&lt;p&gt;复制生成的密码。（也可以在刚刚建立的应用处点击“显示密码”来查看密码）&lt;/p&gt;
+&lt;h3 id="3-设置-remotely-save"&gt;3 设置 Remotely Save
+&lt;/h3&gt;&lt;p&gt;进入 Remotely Save 的设置界面，选择远程服务为 Webdav。&lt;/p&gt;
+&lt;p&gt;Webdav 设置中的“服务器地址”、“用户名”、“密码”分别对应输入刚刚“用户信息-安全选项-第三方应用管理”界面中的“服务器地址”、“账号”、“应用密码”（刚刚复制的密码）。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225601456.png"
+width="1137"
+height="564"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225601456_hu_72424662b840fdb0.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225601456_hu_b916647fc3a73d01.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="201"
+data-flex-basis="483px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225712476.png"
+width="1138"
+height="1110"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225712476_hu_25a8054e95751158.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225712476_hu_de7d76d1021d7fe7.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+&gt;&lt;/p&gt;
+&lt;p&gt;设置好后点击“检查”，测试服务器连接状况。&lt;/p&gt;
+&lt;p&gt;参考设置：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225824691.png"
+width="1121"
+height="670"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225824691_hu_b3f511cc0347485d.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225824691_hu_c0578951c3e05164.png 1024w"
+loading="lazy"
+alt="image-20260219225824691"
+class="gallery-image"
+data-flex-grow="167"
+data-flex-basis="401px"
+&gt;&lt;/p&gt;
+&lt;h2 id="ipad端"&gt;ipad端
+&lt;/h2&gt;&lt;p&gt;Obsidian 库就是一个文件夹，直接把它打包（必须zip）发送到移动端，然后解压——到移动端的obsidian打开即可。&lt;/p&gt;
+&lt;p&gt;打开移动端 Obsidian，选择“Open folder as vault”，选择刚刚解压的文件夹作为 Obsidian 库，然后 Obsidian 会自动进入主界面。&lt;/p&gt;
+&lt;p&gt;点击“同步”，测试服务器连接成功！&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219231252346.png"
+width="960"
+height="512"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219231252346_hu_c5e603d630e37153.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219231252346_hu_c8100f55dde77185.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="187"
+data-flex-basis="450px"
+&gt;&lt;/p&gt;</description></item></channel></rss>

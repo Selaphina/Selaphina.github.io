@@ -1,0 +1,210 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="记录： 2025.12.03 ColorTransferLib 的主要贡献：“三合一、一站式”\n1.算法大全 把 2001-2023 年公开发表的 11 种颜色迁移、5 种风格迁移、3 种上色算法全部收进一个库，并统一重写成相同接口；既有经典（Reinhard 等）也有最新 SOTA（HistoGAN、DDColor 等）。\n2.数据类型全覆盖 同一套 API 可直接处理图像、视频、光场、体积视频、点云、纹理网格、3D Gaussian Splatting，免去了为不同模态反复改写代码的麻烦。\n3.客观评价基准 内置 20 项无参考/全参考指标（PSNR、LPIPS、VSI、CTQM、NIMA 等），可一次性输出“与参考图颜色一致性、与源图结构保真度、整体感知质量”三类量化结果，方便论文对比和调参。\n一句话：ColorTransferLib 让颜色迁移研究从“零散脚本”变成“统一平台”，开发、对比、评估都能一条命令完成。\n记录：\n(1) 在远端服务器上添加环境目录（因为多用户的conda环境中，非管理员用户没有对conda环境（位于/opt/miniconda3）的写权限。）\n1 2 3 4 EnvironmentNotWritableError: The current user does not have write permissions to the target environment. environment location: /opt/miniconda3 uid: 1004 gid: 1004 正确的做法是：\n"><title>colorTransferLab艰难配环境中</title><link rel=canonical href=https://Selaphina.github.io/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/><link rel=stylesheet href=/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css><meta property='og:title' content="colorTransferLab艰难配环境中"><meta property='og:description' content="记录： 2025.12.03 ColorTransferLib 的主要贡献：“三合一、一站式”\n1.算法大全 把 2001-2023 年公开发表的 11 种颜色迁移、5 种风格迁移、3 种上色算法全部收进一个库，并统一重写成相同接口；既有经典（Reinhard 等）也有最新 SOTA（HistoGAN、DDColor 等）。\n2.数据类型全覆盖 同一套 API 可直接处理图像、视频、光场、体积视频、点云、纹理网格、3D Gaussian Splatting，免去了为不同模态反复改写代码的麻烦。\n3.客观评价基准 内置 20 项无参考/全参考指标（PSNR、LPIPS、VSI、CTQM、NIMA 等），可一次性输出“与参考图颜色一致性、与源图结构保真度、整体感知质量”三类量化结果，方便论文对比和调参。\n一句话：ColorTransferLib 让颜色迁移研究从“零散脚本”变成“统一平台”，开发、对比、评估都能一条命令完成。\n记录：\n(1) 在远端服务器上添加环境目录（因为多用户的conda环境中，非管理员用户没有对conda环境（位于/opt/miniconda3）的写权限。）\n1 2 3 4 EnvironmentNotWritableError: The current user does not have write permissions to the target environment. environment location: /opt/miniconda3 uid: 1004 gid: 1004 正确的做法是：\n"><meta property='og:url' content='https://Selaphina.github.io/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/'><meta property='og:site_name' content='Selaphina'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2025-12-03T10:12:30+00:00'><meta property='article:modified_time' content='2025-12-03T10:12:30+00:00'><meta property='og:image' content='https://Selaphina.github.io/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/CUC%E5%85%91%E6%8D%A2%E7%82%B92.png'><meta name=twitter:title content="colorTransferLab艰难配环境中"><meta name=twitter:description content="记录： 2025.12.03 ColorTransferLib 的主要贡献：“三合一、一站式”\n1.算法大全 把 2001-2023 年公开发表的 11 种颜色迁移、5 种风格迁移、3 种上色算法全部收进一个库，并统一重写成相同接口；既有经典（Reinhard 等）也有最新 SOTA（HistoGAN、DDColor 等）。\n2.数据类型全覆盖 同一套 API 可直接处理图像、视频、光场、体积视频、点云、纹理网格、3D Gaussian Splatting，免去了为不同模态反复改写代码的麻烦。\n3.客观评价基准 内置 20 项无参考/全参考指标（PSNR、LPIPS、VSI、CTQM、NIMA 等），可一次性输出“与参考图颜色一致性、与源图结构保真度、整体感知质量”三类量化结果，方便论文对比和调参。\n一句话：ColorTransferLib 让颜色迁移研究从“零散脚本”变成“统一平台”，开发、对比、评估都能一条命令完成。\n记录：\n(1) 在远端服务器上添加环境目录（因为多用户的conda环境中，非管理员用户没有对conda环境（位于/opt/miniconda3）的写权限。）\n1 2 3 4 EnvironmentNotWritableError: The current user does not have write permissions to the target environment. environment location: /opt/miniconda3 uid: 1004 gid: 1004 正确的做法是：\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://Selaphina.github.io/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/CUC%E5%85%91%E6%8D%A2%E7%82%B92.png'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_19bb7832d48d68bd.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Selaphina</a></h1><h2 class=site-description>住在一个奇妙而荒诞的星球。</h2></div></header><ol class=menu-social><li><a href=https://github.com/Selaphina target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#20251203>2025.12.03</a><ol><li><a href=#1算法大全>1.<strong>算法大全</strong></a></li><li><a href=#2数据类型全覆盖>2.<strong>数据类型全覆盖</strong></a></li><li><a href=#3客观评价基准>3.客观评价基准</a></li><li><a href=#install-via-pypi>Install via PyPI</a></li><li><a href=#install-from-source>Install from source</a></li></ol></li><li><a href=#usage>Usage</a><ol><li><a href=#color-transfer>Color Transfer</a></li><li><a href=#evaluation>Evaluation</a></li></ol></li><li><a href=#test>Test</a></li><li><a href=#2025-12-12>2025-12-12</a></li><li><a href=#2025-12-13>2025-12-13</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/><img src=/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/CUC%E5%85%91%E6%8D%A2%E7%82%B92_hu_7c97ba8e63f01fe8.png srcset="/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/CUC%E5%85%91%E6%8D%A2%E7%82%B92_hu_7c97ba8e63f01fe8.png 800w, /p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/CUC%E5%85%91%E6%8D%A2%E7%82%B92_hu_b062dbeb1846ba82.png 1600w" width=800 height=340 loading=lazy alt="Featured image of post colorTransferLab艰难配环境中"></a></div><div class=article-details><header class=article-category><a href=/categories/%E5%B7%A5%E5%85%B7%E6%8C%87%E5%8D%97/ style=background-color:#e1efbe;color:#303d0f>工具指南</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/>colorTransferLab艰难配环境中</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2025-12-03T10:12:30Z>Dec 03, 2025</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>3 minute read</time></div></footer></div></header><section class=article-content><h1 id=记录>记录：</h1><h2 id=20251203>2025.12.03</h2><p>ColorTransferLib 的主要贡献：“三合一、一站式”</p><h3 id=1算法大全>1.<strong>算法大全</strong></h3><p>把 2001-2023 年公开发表的 11 种颜色迁移、5 种风格迁移、3 种上色算法全部收进一个库，并统一重写成相同接口；既有经典（Reinhard 等）也有最新 SOTA（HistoGAN、DDColor 等）。</p><p><img src=/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251205011133282.png width=867 height=1167 srcset="/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251205011133282_hu_857703437dd004aa.png 480w, /p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251205011133282_hu_d832cf2a871a4c85.png 1024w" loading=lazy alt=image-20251205011133282 class=gallery-image data-flex-grow=74 data-flex-basis=178px></p><h3 id=2数据类型全覆盖>2.<strong>数据类型全覆盖</strong></h3><p>同一套 API 可直接处理图像、视频、光场、体积视频、点云、纹理网格、3D Gaussian Splatting，免去了为不同模态反复改写代码的麻烦。</p><p><img src=/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251205011150856.png width=1290 height=711 srcset="/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251205011150856_hu_2953e83c0131b2fa.png 480w, /p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251205011150856_hu_6ddee46e1dee3ed6.png 1024w" loading=lazy alt=image-20251205011150856 class=gallery-image data-flex-grow=181 data-flex-basis=435px></p><h3 id=3客观评价基准>3.客观评价基准</h3><p>内置 20 项无参考/全参考指标（PSNR、LPIPS、VSI、CTQM、NIMA 等），可一次性输出“与参考图颜色一致性、与源图结构保真度、整体感知质量”三类量化结果，方便论文对比和调参。</p><p><img src=/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251205011219597.png width=852 height=1254 srcset="/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251205011219597_hu_9d6a9e78a9ec83c5.png 480w, /p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251205011219597_hu_c99e5af72ac8f9d.png 1024w" loading=lazy alt=image-20251205011219597 class=gallery-image data-flex-grow=67 data-flex-basis=163px></p><p>一句话：ColorTransferLib 让颜色迁移研究从“零散脚本”变成“统一平台”，开发、对比、评估都能一条命令完成。</p><p>记录：</p><p><strong>(1)</strong> 在远端服务器上添加环境目录（因为多用户的conda环境中，非管理员用户没有对conda环境（位于/opt/miniconda3）的写权限。）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>EnvironmentNotWritableError: The current user does not have write permissions to the target environment.
+</span></span><span class=line><span class=cl>  environment location: /opt/miniconda3
+</span></span><span class=line><span class=cl>  uid: 1004
+</span></span><span class=line><span class=cl>  gid: 1004
+</span></span></code></pre></td></tr></table></div></div><p>正确的做法是：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 创建用户conda目录
+</span></span><span class=line><span class=cl>mkdir -p ~/.conda/envs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 添加用户目录到conda环境路径（使用--prepend）
+</span></span><span class=line><span class=cl>conda config --prepend envs_dirs ~/.conda/envs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 3. 查看当前的conda环境路径配置
+</span></span><span class=line><span class=cl>conda config --show envs_dirs
+</span></span></code></pre></td></tr></table></div></div><p>(2)直接创建环境并激活安装包</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 尝试直接创建环境（最简单的方案）
+</span></span><span class=line><span class=cl>conda create -n colorTS python=3.12
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 如果成功，激活并安装包
+</span></span><span class=line><span class=cl>conda activate colorTS
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 3.pip安装colortransfer
+</span></span><span class=line><span class=cl>pip install colortransferlib
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 4.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>conda install -c conda-forge octave ffmpeg 
+</span></span></code></pre></td></tr></table></div></div><p>检查一下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 3. 验证安装
+</span></span><span class=line><span class=cl>octave --version
+</span></span><span class=line><span class=cl>ffmpeg -version
+</span></span></code></pre></td></tr></table></div></div><p>3）git原文</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># activate octave environment
+</span></span><span class=line><span class=cl>octave
+</span></span><span class=line><span class=cl># install packages
+</span></span><span class=line><span class=cl>octave:1&gt; pkg install -forge image
+</span></span><span class=line><span class=cl>octave:2&gt; pkg install -forge statistics
+</span></span></code></pre></td></tr></table></div></div><p>实际上直接运行会报错：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>octave:1&gt; pkg install -forge image
+</span></span><span class=line><span class=cl>configure: error: in `/tmp/oct-Z0XxUS/image-2.18.1/src&#39;:
+</span></span><span class=line><span class=cl>configure: error: C++ compiler cannot create executables
+</span></span><span class=line><span class=cl>See `config.log&#39; for more details
+</span></span><span class=line><span class=cl>checking for mkoctfile... /home/wsy/.conda/envs/colortransfer/bin/mkoctfile-10.3.0
+</span></span><span class=line><span class=cl>checking whether the C++ compiler works... no
+</span></span></code></pre></td></tr></table></div></div><p>这个错误表明在安装 Octave 的 image 包时，缺少必要的 C++ 编译环境。</p><p>所以：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 在 conda 环境中安装必要的编译工具
+</span></span><span class=line><span class=cl>conda install -c conda-forge gxx_linux-64 make cmake
+</span></span></code></pre></td></tr></table></div></div><p><strong>安装 Octave 开发依赖</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 安装 Octave 开发依赖
+</span></span><span class=line><span class=cl>conda install -c conda-forge octave-devel
+</span></span></code></pre></td></tr></table></div></div><p><strong>安装 image 包所需的依赖</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 安装图像处理库
+</span></span><span class=line><span class=cl>conda install -c conda-forge libtiff libjpeg-turbo libpng
+</span></span></code></pre></td></tr></table></div></div><p><strong>尝试重新安装 image 包</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback></code></pre></td></tr></table></div></div><p>(3) Run the <code>gbvs_install.m</code> to make the evaluation metric VSI runnable:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>user@pc:~/&lt;Project Path&gt;/ColorTransferLib/Evaluation/VIS/gbvs$ ocatve
+</span></span><span class=line><span class=cl>octave:1&gt; gbvs_install.m
+</span></span></code></pre></td></tr></table></div></div><h3 id=install-via-pypi>Install via PyPI</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>pip install colortransferlib
+</span></span><span class=line><span class=cl>pip install git+https://github.com/facebookresearch/detectron2.git@main
+</span></span></code></pre></td></tr></table></div></div><h3 id=install-from-source>Install from source</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>pip install -r requirements/requirements.txt
+</span></span><span class=line><span class=cl>python setup.py bdist_wheel
+</span></span><span class=line><span class=cl>pip install ../ColorTransferLib/dist/ColorTransferLib-2.0.3-py3-none-any.whl 
+</span></span><span class=line><span class=cl>pip install git+https://github.com/facebookresearch/detectron2.git@main
+</span></span></code></pre></td></tr></table></div></div><h2 id=usage>Usage</h2><h3 id=color-transfer>Color Transfer</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from ColorTransferLib.ColorTransfer import ColorTransfer
+</span></span><span class=line><span class=cl>from ColorTransferLib.DataTypes.Image import Image
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>src = Image(file_path=&#39;/media/source.png&#39;)
+</span></span><span class=line><span class=cl>ref = Image(file_path=&#39;/media/reference.png&#39;) 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>algo = &#34;GLO&#34;
+</span></span><span class=line><span class=cl>ct = ColorTransfer(src, ref, algo)
+</span></span><span class=line><span class=cl>out = ct.apply()
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># No output file extension has to be given
+</span></span><span class=line><span class=cl>if out[&#34;status_code&#34;] == 0:
+</span></span><span class=line><span class=cl>    out[&#34;object&#34;].write(&#34;/media/out&#34;)
+</span></span><span class=line><span class=cl>else:
+</span></span><span class=line><span class=cl>    print(&#34;Error: &#34; + out[&#34;response&#34;])
+</span></span></code></pre></td></tr></table></div></div><h3 id=evaluation>Evaluation</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from ColorTransferLib.ColorTransfer import ColorTransferEvaluation
+</span></span><span class=line><span class=cl>from ColorTransferLib.DataTypes.Image import Image
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>src = Image(file_path=&#39;/media/source.png&#39;)
+</span></span><span class=line><span class=cl>ref = Image(file_path=&#39;/media/reference.png&#39;) 
+</span></span><span class=line><span class=cl>out = Image(file_path=&#39;/media/output.png&#39;) 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>cte = ColorTransferEvaluation(src, ref, out)
+</span></span><span class=line><span class=cl>eva = cte.apply(method)
+</span></span><span class=line><span class=cl>print(eva)
+</span></span></code></pre></td></tr></table></div></div><h2 id=test>Test</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># Test all Color Transfer algorithms with all data type combinations
+</span></span><span class=line><span class=cl>python main.py --test all_CT --out_path &#34;/media/out&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Test all Style Transfer algorithms with all data type combinations
+</span></span><span class=line><span class=cl>python main.py --test all_ST --out_path &#34;/media/out&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Test all Colorization algorithms with all data type combinations
+</span></span><span class=line><span class=cl>python main.py --test all_CT --out_path &#34;/media/out&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Test all evaluation metric on src, ref and out images
+</span></span><span class=line><span class=cl>python main.py --test all_EVAL
+</span></span></code></pre></td></tr></table></div></div><h2 id=2025-12-12>2025-12-12</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 重新安装 detectron2
+</span></span><span class=line><span class=cl>pip install git+https://github.com/facebookresearch/detectron2.git
+</span></span></code></pre></td></tr></table></div></div><p>还是卡在 detectron2。无进度。</p><p>网络问题实在安装不上，直接下载zip了</p><p><img src=/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251212160923938.png width=923 height=472 srcset="/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251212160923938_hu_a695b9e5ed64b383.png 480w, /p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251212160923938_hu_141479ebb0aad2b2.png 1024w" loading=lazy alt=image-20251212160923938 class=gallery-image data-flex-grow=195 data-flex-basis=469px></p><p>把zip拖进文件夹：</p><p><img src=/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251212161023486.png width=362 height=381 srcset="/p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251212161023486_hu_4a3f29dacd7b343f.png 480w, /p/colortransferlab%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83%E4%B8%AD/image-20251212161023486_hu_dadcffffffe19036.png 1024w" loading=lazy alt=嗯这会儿已经被移走了…… class=gallery-image data-flex-grow=95 data-flex-basis=228px></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 回到根文件夹
+</span></span><span class=line><span class=cl>cd ~
+</span></span></code></pre></td></tr></table></div></div><p>移动文件夹（这个命令甚至是meshy ai的面试题）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>mv detectron2-main.zip /workspace/wsy/
+</span></span></code></pre></td></tr></table></div></div><p>解压</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>unzip detectron2-main.zip
+</span></span></code></pre></td></tr></table></div></div><p>2.开始远程的本地安装</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>cd detectron2-main
+</span></span></code></pre></td></tr></table></div></div><h2 id=2025-12-13>2025-12-13</h2><p>新建虚拟环境video_grade</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>conda create -n video_grade python=3.10 -y
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/><div class=article-image><img src=/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post Obsidian多端同步" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>Obsidian多端同步</h2></div></a></article><article class=has-image><a href=/p/unity%E7%9A%84anim%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8A%A8%E7%94%BB%E8%BD%AC%E6%88%90fbx/><div class=article-image><img src=/p/unity%E7%9A%84anim%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8A%A8%E7%94%BB%E8%BD%AC%E6%88%90fbx/CUC%E5%85%91%E6%8D%A2%E7%82%B92.90562e7514228216736654e1c240ca2d_hu_d76f020ef12386f9.png width=250 height=150 loading=lazy alt="Featured image of post unity的anim格式的动画转成FBX" data-hash="md5-kFYudRQighZzZlThwkDKLQ=="></div><div class=article-details><h2 class=article-title>unity的anim格式的动画转成FBX</h2></div></a></article><article class=has-image><a href=/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/><div class=article-image><img src=/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/CUC%E5%85%91%E6%8D%A2%E7%82%B92.90562e7514228216736654e1c240ca2d_hu_d76f020ef12386f9.png width=250 height=150 loading=lazy alt="Featured image of post python虚拟环境" data-hash="md5-kFYudRQighZzZlThwkDKLQ=="></div><div class=article-details><h2 class=article-title>python虚拟环境</h2></div></a></article><article class=has-image><a href=/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/><div class=article-image><img src=/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/CUC%E5%85%91%E6%8D%A2%E7%82%B92.90562e7514228216736654e1c240ca2d_hu_d76f020ef12386f9.png width=250 height=150 loading=lazy alt="Featured image of post 压缩包密码破解 Ziperello" data-hash="md5-kFYudRQighZzZlThwkDKLQ=="></div><div class=article-details><h2 class=article-title>压缩包密码破解 Ziperello</h2></div></a></article><article class=has-image><a href=/p/%E5%9B%BE%E9%9B%86%E6%89%93%E5%8C%85%E5%99%A8/><div class=article-image><img src=/p/%E5%9B%BE%E9%9B%86%E6%89%93%E5%8C%85%E5%99%A8/CUC%E5%85%91%E6%8D%A2%E7%82%B92.90562e7514228216736654e1c240ca2d_hu_d76f020ef12386f9.png width=250 height=150 loading=lazy alt="Featured image of post 图集打包器" data-hash="md5-kFYudRQighZzZlThwkDKLQ=="></div><div class=article-details><h2 class=article-title>图集打包器</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2024 -
+2026 Selaphina</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.34.2>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

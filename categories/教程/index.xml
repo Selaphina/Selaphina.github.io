@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>教程 on Selaphina</title><link>https://Selaphina.github.io/categories/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on Selaphina</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 14 Nov 2025 10:12:30 +0000</lastBuildDate><atom:link href="https://Selaphina.github.io/categories/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>猴子也能学会的！ | Ae入门级教程（48th宣传）</title><link>https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/</link><pubDate>Fri, 14 Nov 2025 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/</guid><description>&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/cover.png" alt="Featured image of post 猴子也能学会的！ | Ae入门级教程（48th宣传）" /&gt;&lt;h2 id="ae是什么"&gt;Ae是什么？
+&lt;/h2&gt;&lt;p&gt;AE 全称 &lt;strong&gt;Adobe After Effects&lt;/strong&gt;，它是一个 &lt;strong&gt;视频特效与动态图形设计软件&lt;/strong&gt;。
+最主要完成的三件事：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;动画！&lt;/strong&gt;（动画制作）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特效！&lt;/strong&gt;（爆炸、粒子、灯光、抖动等）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;合成！&lt;/strong&gt;（把图片、视频、文字、素材组合成一个画面）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;使用门槛：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;搞懂两个基本概念就可以。使用门槛其实比想象更低，学 30 分钟做出简单动画完全没问题滴。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;图层&lt;/strong&gt;（PS/Procreate/Sai2等等，有多图层的工具都同理）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键帧&lt;/strong&gt;（剪映/PR/Unity/Blender等等，有时间轴的工具都同理）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="强力推荐的入门教程"&gt;强力推荐的入门教程
+&lt;/h2&gt;
+&lt;div class="video-wrapper"&gt;
+&lt;iframe src="https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=1&amp;bvid=BV1ZA411g7Sb"
+scrolling="no"
+frameborder="no"
+framespacing="0"
+allowfullscreen="true"
+&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;h2 id="为什么要用ae"&gt;为什么要用Ae？
+&lt;/h2&gt;&lt;p&gt;&lt;del&gt;招新宣传片&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;社团/活动开场动画&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;前后缀动态效果&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;动态海报（招生、晚会、文创）&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;LOGO 动画&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;主视觉 Key visual 动画化&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;活动倒计时、字幕条、弹幕效果&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;UP 主、运营团队&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;学会 AE 简历更亮&lt;/del&gt;&lt;/p&gt;
+&lt;h1 id="给自推occpcb自设等等-拉磨产粮罢了"&gt;给自推/OC/CP/CB/自设等等 拉磨产粮罢了。
+&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;高端的食材往往只需要最朴素的烹饪方式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/GIF.gif"
+width="954"
+height="512"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/GIF_hu_52679059b2444c56.gif 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/GIF_hu_1a0b40d0084cf3e0.gif 1024w"
+loading="lazy"
+alt="给朋友设计的游戏角色做的手书"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115153908893.png"
+width="2235"
+height="1497"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115153908893_hu_309c6b0bde67224d.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115153908893_hu_9616c89bb98691fc.png 1024w"
+loading="lazy"
+alt="给自推产的手书"
+class="gallery-image"
+data-flex-grow="149"
+data-flex-basis="358px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/GIF3.gif"
+width="953"
+height="546"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/GIF3_hu_c606ff28c7165436.gif 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/GIF3_hu_c04b8acb07f2458b.gif 1024w"
+loading="lazy"
+alt="给独立游戏做的加载动画"
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="418px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;以上是本人从纯萌新开始，边学边产出，用ae做的小样例。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AE对于制作动态效果，是自由度非常高，非常称手的工具。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以和PS，AI ( Adobe Illustrator ) 等adobe家的工具配套使用，非常方便。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;那么不用AE可以做到吗？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自然是可以的，工具只是工具，掌握了方法之后，用什么都可以做创意。&lt;/li&gt;
+&lt;li&gt;AE之外的工具不在本次教程的讨论范围内。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1基本介绍"&gt;1.基本介绍：
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 1.什么是合成（ctrl+K 合成设置-主要是做长度控制）&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 2.常用尺寸1920x1080 / 前缀尺寸: 1079 x 607&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 3.背景颜色默认，是透明的，不会显示。&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 4.图层&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 5.锚点的概念（放缩/旋转的中心点）&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 6.快捷键：
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 位移（P）&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 缩放（S）&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 旋转（R）&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 不透明度（T）&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 所有有变化的属性关键帧 （U）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="工具快捷键"&gt;工具/快捷键
+&lt;/h2&gt;&lt;p&gt;0.窗口设置&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115164130789.png"
+width="1128"
+height="1422"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115164130789_hu_582ec5e6df2cd430.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115164130789_hu_1d52dd65ee7350ce.png 1024w"
+loading="lazy"
+alt="如果不小心关闭了面板，可以在此处打开"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="190px"
+&gt;&lt;/p&gt;
+&lt;p&gt;1.按住alt键轻敲工具栏图标即可切换常用功能&lt;/p&gt;
+&lt;p&gt;2.ctrl + shift + D 切断素材&lt;/p&gt;
+&lt;p&gt;3.选中所有关键帧+alt键：等比例缩放&lt;/p&gt;
+&lt;p&gt;4.顶部菜单栏——动画——关键帧辅助——时间反向关键帧&lt;/p&gt;
+&lt;p&gt;5.ctrl+shift+C预合成&lt;/p&gt;
+&lt;p&gt;6.消隐&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251114182654593.png"
+width="810"
+height="462"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251114182654593_hu_40a7750aa690b747.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251114182654593_hu_fd22244e6f8eaef9.png 1024w"
+loading="lazy"
+alt="消隐-可以暂时隐藏用不到的元素"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="420px"
+&gt;&lt;/p&gt;
+&lt;p&gt;7.运动模糊&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116014031360.png"
+width="1671"
+height="1224"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116014031360_hu_654f4508332aef50.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116014031360_hu_7296df8962fc0ca1.png 1024w"
+loading="lazy"
+alt="开启运动模糊"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="327px"
+&gt;&lt;/p&gt;
+&lt;h2 id="2文字动画"&gt;2.文字动画
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181230896.png"
+width="1860"
+height="1254"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181230896_hu_cf077113ed29d576.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181230896_hu_1e604b65b2807135.png 1024w"
+loading="lazy"
+alt="新建文本-动画"
+class="gallery-image"
+data-flex-grow="148"
+data-flex-basis="355px"
+&gt;&lt;/p&gt;
+&lt;p&gt;注意对齐方式，决定了动画的间距从何处放大/缩小.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181403386.png"
+width="2483"
+height="1026"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181403386_hu_eb2904e79dab2b11.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181403386_hu_4623085db40cfdd7.png 1024w"
+loading="lazy"
+alt="段落-对齐"
+class="gallery-image"
+data-flex-grow="242"
+data-flex-basis="580px"
+&gt;&lt;/p&gt;
+&lt;h4 id="什么是线性动画什么是非线性动画"&gt;什么是线性动画?什么是非线性动画?
+&lt;/h4&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181600447.png"
+width="1047"
+height="465"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181600447_hu_3dede88887921d08.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181600447_hu_18e2288ac9b10b72.png 1024w"
+loading="lazy"
+alt="务必选中关键帧"
+class="gallery-image"
+data-flex-grow="225"
+data-flex-basis="540px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181706212.png"
+width="1161"
+height="513"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181706212_hu_9e83d820f54ac362.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115181706212_hu_ffce60fd3348b8cc.png 1024w"
+loading="lazy"
+alt="打开图表"
+class="gallery-image"
+data-flex-grow="226"
+data-flex-basis="543px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;从图表可见, 关键帧动画默认是线性的,即匀速运动.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;再次点击图表,返回关键帧时间轴,选中所有关键帧并按F9, 加上缓动效果.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115182113611.png"
+width="1371"
+height="516"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115182113611_hu_cea5a3600d4670d3.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115182113611_hu_b2d940a6a44078b9.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="265"
+data-flex-basis="637px"
+&gt;&lt;/p&gt;
+&lt;p&gt;此时的图表:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115182143004.png"
+width="714"
+height="461"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115182143004_hu_53537f7658d19778.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115182143004_hu_307512a76bcd1a77.png 1024w"
+loading="lazy"
+alt="缓动图表,不再是线性函数，即非线性动画"
+class="gallery-image"
+data-flex-grow="154"
+data-flex-basis="371px"
+&gt;&lt;/p&gt;
+&lt;p&gt;夸张一点,动画效果更明显.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115182328232.png"
+width="1434"
+height="555"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115182328232_hu_d1df3b8062ed527e.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115182328232_hu_88e1a5663d3bdb64.png 1024w"
+loading="lazy"
+alt="常见的拉曲线图表"
+class="gallery-image"
+data-flex-grow="258"
+data-flex-basis="620px"
+&gt;&lt;/p&gt;
+&lt;p&gt;将图表类型改为速度:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115211441887.png"
+width="1680"
+height="513"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115211441887_hu_60ae7509797edba.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115211441887_hu_60d50b4da84fb262.png 1024w"
+loading="lazy"
+alt="记住这个速度的曲线,大部分的动效都能用到"
+class="gallery-image"
+data-flex-grow="327"
+data-flex-basis="785px"
+&gt;&lt;/p&gt;
+&lt;p&gt;注意：当选择了某个内容的同时,点击形状,此时添加到画布上的是蒙版,而非真正的形状.&lt;/p&gt;
+&lt;h4 id="什么是蒙版"&gt;什么是蒙版?
+&lt;/h4&gt;&lt;p&gt;就是:&lt;/p&gt;
+&lt;p&gt;蒙版: 自行选择区域&amp;ndash;只展示这个区域.&lt;/p&gt;
+&lt;h4 id="轨道遮罩"&gt;轨道遮罩
+&lt;/h4&gt;&lt;p&gt;跟蒙版的作用类似,比蒙版更灵活一点.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115220218881.png"
+width="875"
+height="503"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115220218881_hu_8a3762b9781e050d.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115220218881_hu_211155a0e34f4c3b.png 1024w"
+loading="lazy"
+alt="左下角切换开关/模式"
+class="gallery-image"
+data-flex-grow="173"
+data-flex-basis="417px"
+&gt;&lt;/p&gt;
+&lt;h2 id="3-随堂作业-水杯装水"&gt;3. 随堂作业-水杯装水
+&lt;/h2&gt;&lt;p&gt;超级简单的小测试。&lt;/p&gt;
+&lt;p&gt;**限时：**5-10min&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;目标：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;结合上述教程，完成一个水杯装水的小动画。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/GIF4.gif"
+width="843"
+height="492"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/GIF4_hu_281672230c072c8.gif 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/GIF4_hu_581674c528339a0b.gif 1024w"
+loading="lazy"
+alt="简单的装水动画，相信你已经知道怎么做了"
+class="gallery-image"
+data-flex-grow="171"
+data-flex-basis="411px"
+&gt;&lt;/p&gt;
+&lt;h2 id="4效果控件"&gt;4.效果控件
+&lt;/h2&gt;&lt;p&gt;比如：高斯模糊&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116013302257.png"
+width="2559"
+height="1311"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116013302257_hu_3a76788480fec7ca.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116013302257_hu_6e49f30cd07d72e4.png 1024w"
+loading="lazy"
+alt="在右侧栏搜：高斯模糊"
+class="gallery-image"
+data-flex-grow="195"
+data-flex-basis="468px"
+&gt;&lt;/p&gt;
+&lt;p&gt;加关键帧即可，实现一个模糊-清晰的入场。&lt;/p&gt;
+&lt;p&gt;比如：发光效果&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116013739829.png"
+width="2541"
+height="1101"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116013739829_hu_f0533058e3c7b259.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116013739829_hu_6b728b1556cb4314.png 1024w"
+loading="lazy"
+alt="风格化-发光"
+class="gallery-image"
+data-flex-grow="230"
+data-flex-basis="553px"
+&gt;&lt;/p&gt;
+&lt;p&gt;设置发光半径和发光强度即可。&lt;/p&gt;
+&lt;h2 id="5-进阶操作"&gt;5. 进阶操作
+&lt;/h2&gt;&lt;h3 id="如何导入psd"&gt;如何导入psd
+&lt;/h3&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115163303449.png"
+width="564"
+height="465"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115163303449_hu_bea16ce16b73e095.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115163303449_hu_6a36f4ee1fc4252.png 1024w"
+loading="lazy"
+alt="素材来源自B站：Genji是真想教会你"
+class="gallery-image"
+data-flex-grow="121"
+data-flex-basis="291px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这样就可以按照PS分好的图层进行移动了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="图钉工具"&gt;图钉工具
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;大名鼎鼎的图钉工具。新手非常容易上手。可以做飘动的头发丝，叶子，衣服，丝带，挥动的手臂，抬腿，点头，呼吸等等，一切你能想到的，和你想不到的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116004516563.png"
+width="1106"
+height="798"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116004516563_hu_c7bdd49024077acd.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116004516563_hu_ac43e9ce82289ed1.png 1024w"
+loading="lazy"
+alt="上方菜单栏的图钉，点一下即可"
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="332px"
+&gt;&lt;/p&gt;
+&lt;h3 id="什么是预合成"&gt;什么是预合成？
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;预合成, 就是把多个图层“打包成一个&amp;quot;小合成 &amp;ldquo;，让画面更干净、方便统一加动画或特效的一种分组操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116005503370.png"
+width="624"
+height="432"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116005503370_hu_e771ef99fe219949.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116005503370_hu_34c118c62d9546b8.png 1024w"
+loading="lazy"
+alt="预合成按默认设置直接点击确定即可"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="346px"
+&gt;&lt;/p&gt;
+&lt;p&gt;为了让叶子和影子一起动，先选中对应叶子+影子，shift + ctrl + C，预合成。&lt;/p&gt;
+&lt;p&gt;接下来，对整个预合成打图钉，并给图钉添加关键帧即可。非常简单。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116005936155.png"
+width="903"
+height="843"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116005936155_hu_8a62253c784fa34e.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116005936155_hu_71aa5da2e155a754.png 1024w"
+loading="lazy"
+alt="注意对选中的图层的非透明区域，进行图钉操作"
+class="gallery-image"
+data-flex-grow="107"
+data-flex-basis="257px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;怎么删除：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在画面窗口中 &lt;strong&gt;点击要删除的图钉&lt;/strong&gt;（选中后会变成黄色/高亮）&lt;/p&gt;
+&lt;p&gt;按键盘 &lt;strong&gt;Delete / Backspace&lt;/strong&gt;
+→ 那个钉子会被删除。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116010643094.png"
+width="1248"
+height="449"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116010643094_hu_406b724d85cb651d.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116010643094_hu_8b925576002a86a8.png 1024w"
+loading="lazy"
+alt="选中要图钉操作的元素，按U打开操纵列表"
+class="gallery-image"
+data-flex-grow="277"
+data-flex-basis="667px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116010736462.png"
+width="1734"
+height="1304"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116010736462_hu_ddbbfc249c239788.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116010736462_hu_9e84b5b0d2d7c8e2.png 1024w"
+loading="lazy"
+alt="可以在画面中拖动钉子，控制形变"
+class="gallery-image"
+data-flex-grow="132"
+data-flex-basis="319px"
+&gt;&lt;/p&gt;
+&lt;p&gt;变形过程记得拖动时间轴，打上关键帧。&lt;/p&gt;
+&lt;h3 id="循环表达式"&gt;循环表达式
+&lt;/h3&gt;&lt;p&gt;将鼠标移动至关键帧动画对应的操纵点的【秒表标志】上，按住alt的同时点秒表标志。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116011201949.png"
+width="1086"
+height="501"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116011201949_hu_f185f07415733f01.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116011201949_hu_e89840044b34a0cb.png 1024w"
+loading="lazy"
+alt="鼠标悬停时ae内会自动提示"
+class="gallery-image"
+data-flex-grow="216"
+data-flex-basis="520px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116010941060.png"
+width="1374"
+height="510"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116010941060_hu_8d4a15f00ad16c7d.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116010941060_hu_6d4b7ae5c98ee4ce.png 1024w"
+loading="lazy"
+alt="输入代码loopOut(“pingpong”)"
+class="gallery-image"
+data-flex-grow="269"
+data-flex-basis="646px"
+&gt;&lt;/p&gt;
+&lt;p&gt;输入&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;loopOut(&amp;#34;pingpong&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;loopOut(&amp;#34;cycle&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;即可实现来回循环（pingpong）或者单向循环（cycle）动画。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;pingpong 和 cycle的区别&lt;/p&gt;
+&lt;p&gt;pingpong ： 1-2-3-4—&lt;strong&gt;4-3-2-1&lt;/strong&gt;——1-2-3-4——……&lt;/p&gt;
+&lt;p&gt;cycle : 1-2-3-4—1-2-3-4——1-2-3-4——……&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="抖动表达式"&gt;抖动表达式
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wiggle(1, 12)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;意思是：每秒抖动 1 次，最大偏移 12像素。
+用于：手持镜头晃动感、抖动标题、光点晃动，等等，这里用来实现泳圈漂移。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116012619735.png"
+width="1668"
+height="1197"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116012619735_hu_a28b412225f3103e.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116012619735_hu_28eb358b33060134.png 1024w"
+loading="lazy"
+alt="选中紫圈–打开表达式-输入wiggle(1, 12)"
+class="gallery-image"
+data-flex-grow="139"
+data-flex-basis="334px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116012708475.png"
+width="1626"
+height="1086"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116012708475_hu_cdcf0573a9ca4a68.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116012708475_hu_b2e98c5a05e0e4fe.png 1024w"
+loading="lazy"
+alt="表达式不用背，小三角点开来可以挑选，并看函数的参数"
+class="gallery-image"
+data-flex-grow="149"
+data-flex-basis="359px"
+&gt;&lt;/p&gt;
+&lt;p&gt;5.路径动画&lt;/p&gt;
+&lt;p&gt;1.普通形状or图片图层&lt;/p&gt;
+&lt;p&gt;正常k位移动画，选中位移关键帧后，图层——变换——自动定向&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116015402710.png"
+width="1221"
+height="1149"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116015402710_hu_3e4645a1ce3b04ee.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116015402710_hu_3b07ab18ba2cb307.png 1024w"
+loading="lazy"
+alt="图层——变换——自动定向"
+class="gallery-image"
+data-flex-grow="106"
+data-flex-basis="255px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2.文字路径动画&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤 1：创建文字&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新建文字图层&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;步骤 2：给文字图层画一条路径（Mask）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116020728136.png"
+width="1284"
+height="642"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116020728136_hu_a322406053cdcae.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116020728136_hu_f82e3b7ad0923349.png 1024w"
+loading="lazy"
+alt="曲线"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="480px"
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;选中文字图层&lt;/li&gt;
+&lt;li&gt;选择钢笔工具（G）, 注意，钢笔画出曲线：定点的同时，按住鼠标不松开并拖动。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在文字图层上画一条曲线/直线&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;画完后，你会看到一个 Mask（蒙版）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;说明：
+虽然你是在文字图层上画蒙版，但 AE 允许&lt;strong&gt;把蒙版作为文字路径来使用&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤 3：启用文字的 Path Options&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116020817767.png"
+width="807"
+height="512"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116020817767_hu_c060ef04f8f773c6.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116020817767_hu_ce3aacaa6546958b.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="157"
+data-flex-basis="378px"
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;展开文字图层：文本——路径选项&lt;/li&gt;
+&lt;li&gt;将 None 改成你的 &lt;strong&gt;蒙版1&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;文字就会自动贴着你画的那条路径了！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤 4：做“沿路径移动”的动画（核心）&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;仍在 Path Options&lt;/li&gt;
+&lt;li&gt;找到 &lt;strong&gt;First Margin&lt;/strong&gt;（首端边距）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这是控制文字在路径上的位置的参数。&lt;/p&gt;
+&lt;h2 id="6导出"&gt;6.导出
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116022000519.png"
+width="969"
+height="1533"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116022000519_hu_9521fd150adbe3d4.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116022000519_hu_6d9c64ab695064c7.png 1024w"
+loading="lazy"
+alt="直接添加到渲染队列"
+class="gallery-image"
+data-flex-grow="63"
+data-flex-basis="151px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116022110552.png"
+width="2553"
+height="519"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116022110552_hu_b923498182377312.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116022110552_hu_469527db2ff51d66.png 1024w"
+loading="lazy"
+alt="点击输出到：修改文件导出路径"
+class="gallery-image"
+data-flex-grow="491"
+data-flex-basis="1180px"
+&gt;&lt;/p&gt;
+&lt;p&gt;修改路径和文件名后，别忘了点右上角的渲染，然后才开始导出。&lt;/p&gt;
+&lt;p&gt;注意，ae内只能导出avi文件，比较大，该尺寸10s视频大概到1-2G以上。&lt;/p&gt;
+&lt;h3 id="转换格式"&gt;转换格式：
+&lt;/h3&gt;&lt;p&gt;下载ffmpeg：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FFmpeg 是一个用于处理视频、音频等多媒体文件的开源工具包。它支持几乎所有的多媒体格式转换、剪辑和编辑，是开发者和多媒体工作者必备的工具。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;打开 &lt;a class="link" href="https://ffmpeg.org/download.html" target="_blank" rel="noopener"
+&gt;Dpwnload FFmpeg&lt;/a&gt; 官网，选择安装包Windows builds from gyan.dev&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024309772.png"
+width="1023"
+height="1230"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024309772_hu_f0e57b4a09f09639.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024309772_hu_1b3da382af9d905a.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="83"
+data-flex-basis="199px"
+&gt;&lt;/p&gt;
+&lt;p&gt;下滑找到release bulids部分，选择ffmpeg-7.0.2-essentials_build.zip&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="..%5c..%5c..%5c..%5c..%5c%e8%bf%85%e9%9b%b7%e4%b8%8b%e8%bd%bd%5cffmpeg-8.0-essentials_build.7z" &gt;ffmpeg-8.0-essentials_build.7z&lt;/a&gt;
+打开文件夹，复制bin文件的路径，并添加进系统的环境变量中。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024426927.png"
+width="1166"
+height="780"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024426927_hu_585a2ed4eee4e09b.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024426927_hu_df64f2eb25098227.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="149"
+data-flex-basis="358px"
+&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;D:\迅雷下载\ffmpeg-8.0-essentials_build\bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024448089.png"
+width="714"
+height="845"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024448089_hu_f1f64824f84ba846.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024448089_hu_699c5afb456afb71.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="84"
+data-flex-basis="202px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024504012.png"
+width="939"
+height="494"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024504012_hu_956491fa660c4b39.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024504012_hu_7ad132e4239500d2.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="456px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024529818.png"
+width="834"
+height="786"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024529818_hu_a4b561fbe59024c7.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251116024529818_hu_6665cfc6306c62fe.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="106"
+data-flex-basis="254px"
+&gt;&lt;/p&gt;
+&lt;p&gt;打开avi所在文件的根目录，将avi视频压缩后再转换格式。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ffmpeg -i input.avi -vf &amp;#34;fps=15,scale=640:-1:flags=lanczos&amp;#34; -loop 0 output.gif
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;原文链接：https://blog.csdn.net/Natsuago/article/details/143231558&lt;/p&gt;
+&lt;h2 id="前后缀的规范"&gt;前后缀的规范：
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/640.gif"
+width="1079"
+height="607"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/640_hu_77865dee6e2b2772.gif 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/640_hu_b5412f67085e09c8.gif 1024w"
+loading="lazy"
+alt="45th前缀-21数媒网络叶谨娴"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/min%E5%89%8D%E7%BC%80.gif"
+width="1079"
+height="607"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/min%E5%89%8D%E7%BC%80_hu_dc4fd60b3e617c8f.gif 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/min%E5%89%8D%E7%BC%80_hu_ab7b992b5c888c0b.gif 1024w"
+loading="lazy"
+alt="46-47th前缀-22数媒技王思雅"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;**前缀尺寸：**1079 x 607&lt;/li&gt;
+&lt;li&gt;**元素要求：**有学校的元素/CUC STU/48 th (届数)，颜色不宜过多（2-3种），其他可以相对自由发挥！&lt;/li&gt;
+&lt;li&gt;**时间要求：**时长7-10s是ok的，视觉上尽量快速，吸睛。&lt;/li&gt;
+&lt;li&gt;**文件大小：**10MB以内（微信公众平台限制）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115172950261.png"
+width="1280"
+height="1416"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115172950261_hu_e0dd46b099821baf.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115172950261_hu_8b4c36a6d310e147.png 1024w"
+loading="lazy"
+alt="45th后缀图-21数媒网络叶谨娴"
+class="gallery-image"
+data-flex-grow="90"
+data-flex-basis="216px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115173025202.png"
+width="1134"
+height="1131"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115173025202_hu_e4b2716e6a93622e.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115173025202_hu_8bf5a385eb22dd3f.png 1024w"
+loading="lazy"
+alt="45th后缀往期回顾-21数媒网络叶谨娴"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115172924831.png"
+width="1280"
+height="1416"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115172924831_hu_50b045befbe559a4.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115172924831_hu_2084b11024a8c254.png 1024w"
+loading="lazy"
+alt="46-47th后缀图-22数媒技王思雅"
+class="gallery-image"
+data-flex-grow="90"
+data-flex-basis="216px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115173109281.png"
+width="1149"
+height="1116"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115173109281_hu_56bf00cf2c41696a.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115173109281_hu_1ca410ffaa003797.png 1024w"
+loading="lazy"
+alt="46-47th后缀往期回顾-22广告亓妙薇"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="247px"
+&gt;&lt;/p&gt;
+&lt;p&gt;**1.后缀尾图：**1280 x 1416&lt;/p&gt;
+&lt;p&gt;**2.往期回顾：**宽1080，高不限定。&lt;/p&gt;
+&lt;p&gt;**3.内容要求：**配色和风格互相呼应；微博和公众号的二维码；参考往届的文字信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4.注意事项：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;后缀一共4张图。
+&lt;ul&gt;
+&lt;li&gt;后缀尾图：1张&lt;/li&gt;
+&lt;li&gt;往期回顾：3张&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;往期回顾3张都是透明底。&lt;/li&gt;
+&lt;li&gt;设计的元素不要压在图片上，否则换图会很麻烦。&lt;/li&gt;
+&lt;li&gt;制作过程中，记得检查深色模式和浅色模式是不是都可以显示，用两种方式都比较显眼的灰色。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="作业选做"&gt;作业（选做）
+&lt;/h2&gt;&lt;p&gt;1.上手试试做个前缀吧！7-10s。&lt;/p&gt;
+&lt;p&gt;2.把自己手上现有的一张/多张图改成动态版，时长不限。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一般流程：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1.定主题颜色（2-3种）&lt;/p&gt;
+&lt;p&gt;2.找参考，小红书/b站……拆解分析一个ae动态视频/动态效果/动态海报的各个环节用到了哪些技巧。对应找教程。&lt;/p&gt;
+&lt;p&gt;3.写个简单的分镜草稿，1-3个画面即可，过审一下。&lt;/p&gt;
+&lt;p&gt;4.ps/ai/ae开搞！&lt;/p&gt;
+&lt;h2 id="附录"&gt;附录
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Me未安装（已经安装但AE找不到路径）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115135014291.png"
+width="969"
+height="393"
+srcset="https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115135014291_hu_392f03e677bfb528.png 480w, https://Selaphina.github.io/p/%E7%8C%B4%E5%AD%90%E4%B9%9F%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%9A%84-ae%E5%85%A5%E9%97%A8%E7%BA%A7%E6%95%99%E7%A8%8B48th%E5%AE%A3%E4%BC%A0/image-20251115135014291_hu_26e8426891517a4d.png 1024w"
+loading="lazy"
+alt="image-20251115135014291"
+class="gallery-image"
+data-flex-grow="246"
+data-flex-basis="591px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：AE或者PR和AME的版本要一致，比如都是2020版的才能实现。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用mklink命令在命令提示符处创建符号链接&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.左下角搜索框中输入cmd，右键以管理员身份运行（很重要不然会被拒绝访问）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;或者在文件夹C:\WINDOWS\system32中找到cmd.exe右键以管理员身份运行。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.在cmd窗口中输入命令行&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;按照所安装的media encoder的版本全称和更改的安装路径输入，比如：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Adobe Media Encoder 2020&lt;/code&gt;修改的安装地址是在D:\Program Files\Adobe&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mklink /J &amp;#34;C:\Program Files\Adobe\Adobe Media Encoder 2020&amp;#34; &amp;#34;F:\Program Files (x86)\Adobe\ME2021\Adobe Media Encoder 2020&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;3.操作成功时显示&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;为 C:\Program Files\Adobe\Adobe Media Encoder 2020 &amp;amp;lt;&amp;amp;lt;===&amp;amp;gt;&amp;amp;gt; D:\Program Files\Adobe\Adobe Media Encoder 2020 创建的联接
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;说明已经创建成功.&lt;/p&gt;</description></item></channel></rss>

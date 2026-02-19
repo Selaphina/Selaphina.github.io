@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blender on Selaphina</title><link>https://Selaphina.github.io/tags/blender/</link><description>Recent content in Blender on Selaphina</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 22 Nov 2025 10:20:12 +0000</lastBuildDate><atom:link href="https://Selaphina.github.io/tags/blender/index.xml" rel="self" type="application/rss+xml"/><item><title>Blender常用需求</title><link>https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/</link><pubDate>Sat, 22 Nov 2025 10:20:12 +0000</pubDate><guid>https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/</guid><description>&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/cover1.png" alt="Featured image of post Blender常用需求" /&gt;&lt;h2 id="1-blender导出带贴图模型"&gt;1. Blender导出带贴图模型
+&lt;/h2&gt;&lt;p&gt;{{BV1384y1j7wt}}&lt;/p&gt;
+&lt;p&gt;1.文件—— 外部数据 ——打包资源——（第二项）将文件写至当前目录&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123213913006.png"
+width="589"
+height="335"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123213913006_hu_bf6e8c7e6606e81b.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123213913006_hu_6f4a817954803ee4.png 1024w"
+loading="lazy"
+alt="image-20251123213913006"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="421px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2.着色器编辑器：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123213936700.png"
+width="1010"
+height="366"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123213936700_hu_6b530a30da0aaa39.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123213936700_hu_17aeba1724c94701.png 1024w"
+loading="lazy"
+alt="image-20251123213936700"
+class="gallery-image"
+data-flex-grow="275"
+data-flex-basis="662px"
+&gt;&lt;/p&gt;
+&lt;p&gt;所有shader节点的贴图文件处，都需要：解包项——将文件写至当前目录（覆盖现有文件）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214055334.png"
+width="390"
+height="204"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214055334_hu_2bbcff7ffbbee5ee.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214055334_hu_cc53f6a667e9d426.png 1024w"
+loading="lazy"
+alt="image-20251123214055334"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="458px"
+&gt;&lt;/p&gt;
+&lt;p&gt;操作之后，确保图标变化：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214149107.png"
+width="392"
+height="381"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214149107_hu_7d579bc9a36bb95f.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214149107_hu_476148c3f6c46328.png 1024w"
+loading="lazy"
+alt="image-20251123214149107"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+&gt;&lt;/p&gt;
+&lt;p&gt;3.导出——fbx&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214226752.png"
+width="639"
+height="804"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214226752_hu_d4847cf8c95265f5.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214226752_hu_341710f466f22855.png 1024w"
+loading="lazy"
+alt="image-20251123214226752"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="190px"
+&gt;&lt;/p&gt;
+&lt;p&gt;两处修改：&lt;/p&gt;
+&lt;p&gt;路径模式——复制&lt;/p&gt;
+&lt;p&gt;右侧小图标——激活&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214312173.png"
+width="356"
+height="125"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214312173_hu_ddebb02797a3d955.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123214312173_hu_2a1cd03523f81688.png 1024w"
+loading="lazy"
+alt="image-20251123214312173"
+class="gallery-image"
+data-flex-grow="284"
+data-flex-basis="683px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;!!注意：千万不要勾选【选中的物体】，除非你知道自己在做什么。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="2形态键动画导出"&gt;2.形态键动画导出
+&lt;/h2&gt;&lt;p&gt;1.分为两个动画：&lt;/p&gt;
+&lt;p&gt;动作动画&lt;/p&gt;
+&lt;p&gt;形态键动画&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123221119471.png"
+width="2068"
+height="489"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123221119471_hu_f12bae206b1adea9.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123221119471_hu_b48ed04d72a6f8d8.png 1024w"
+loading="lazy"
+alt="image-20251123221119471"
+class="gallery-image"
+data-flex-grow="422"
+data-flex-basis="1014px"
+&gt;&lt;/p&gt;
+&lt;p&gt;要求：&lt;/p&gt;
+&lt;p&gt;动作动画长度一定要&amp;gt;=形态键动画&lt;/p&gt;
+&lt;p&gt;导出：&lt;/p&gt;
+&lt;p&gt;1.&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123223229361.png"
+width="320"
+height="231"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123223229361_hu_cc04354d5774ffa6.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123223229361_hu_9045a694d58158e2.png 1024w"
+loading="lazy"
+alt="image-20251123223229361"
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="332px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2.&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123223258583.png"
+width="295"
+height="260"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123223258583_hu_15a5ae9ebc766dec.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251123223258583_hu_92183a2f82e21c69.png 1024w"
+loading="lazy"
+alt="image-20251123223258583"
+class="gallery-image"
+data-flex-grow="113"
+data-flex-basis="272px"
+&gt;&lt;/p&gt;
+&lt;h2 id="3实体化描边"&gt;3.实体化描边
+&lt;/h2&gt;&lt;p&gt;（面试题）用blender等dcc软件实体化描边比在引擎中用shader实时描边的优势？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;原问：“你为什么用shader实时描边，而不是在blender中用实体化描边？这样不是性能更好吗？”&lt;/p&gt;
+&lt;p&gt;我：……&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216120501350.png"
+width="590"
+height="622"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216120501350_hu_3e71abace6dffdda.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216120501350_hu_834742a32a8512cd.png 1024w"
+loading="lazy"
+alt="image-20251216120501350"
+class="gallery-image"
+data-flex-grow="94"
+data-flex-basis="227px"
+&gt;&lt;/p&gt;
+&lt;p&gt;1）打开一个简单的 箭头网格体。将节点改成着色器-自发光（只是为方便查看效果，没有特别的作用）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140608280.png"
+width="377"
+height="300"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140608280_hu_3f114c97cea62248.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140608280_hu_7bbcf8b3f7865431.png 1024w"
+loading="lazy"
+alt="image-20251216140608280"
+class="gallery-image"
+data-flex-grow="125"
+data-flex-basis="301px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2）新建第二个材质，也是自发光节点。材质命名为”描边“，该材质定义描边颜色。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140718087.png"
+width="233"
+height="233"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140718087_hu_87f8195952cbd3b9.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140718087_hu_a21d256a1f1ac417.png 1024w"
+loading="lazy"
+alt="image-20251216140718087"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+&gt;&lt;/p&gt;
+&lt;p&gt;注意：描边材质勾选 &lt;strong&gt;“背面剔除”（Backface Culling）&lt;/strong&gt;。这能隐藏材质正对摄像机的正面，只让我们从模型侧面和背面看到它，这是形成描边的关键。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141708968.png"
+width="193"
+height="458"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141708968_hu_6ab293119f46ad4d.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141708968_hu_fdf62e328c7f7877.png 1024w"
+loading="lazy"
+alt="image-20251216141708968"
+class="gallery-image"
+data-flex-grow="42"
+data-flex-basis="101px"
+&gt;&lt;/p&gt;
+&lt;p&gt;3）添加修改器——生成——实体化&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140753116.png"
+width="325"
+height="426"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140753116_hu_10e58c7d9b7865c9.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140753116_hu_a63de214e7996996.png 1024w"
+loading="lazy"
+alt="image-20251216140753116"
+class="gallery-image"
+data-flex-grow="76"
+data-flex-basis="183px"
+&gt;&lt;/p&gt;
+&lt;p&gt;1：法向翻转；&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;翻转&lt;/strong&gt;：在“法向”选项中勾选&lt;strong&gt;翻转&lt;/strong&gt;。这会使模型背面可见，与“背面剔除”的描边材质配合形成描边&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2：添加材质偏移&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140929458.png"
+width="190"
+height="474"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140929458_hu_8cfe64ce4f1243c6.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216140929458_hu_aefc3b48b363dc74.png 1024w"
+loading="lazy"
+alt="image-20251216140929458"
+class="gallery-image"
+data-flex-grow="40"
+data-flex-basis="96px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;材质偏移&lt;/strong&gt;：如果模型有多个材质槽，将此参数设置为&lt;strong&gt;1&lt;/strong&gt;，可使实体化修改器使用材质列表中排在下一个（索引号+1）的材质，也就是我们刚刚创建的描边材质。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最后，只需要调整厚（宽）度就可以查看到描边的效果。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141006557.png"
+width="441"
+height="206"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141006557_hu_ce4956710938d2fa.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141006557_hu_a38ef58e338a0a29.png 1024w"
+loading="lazy"
+alt="image-20251216141006557"
+class="gallery-image"
+data-flex-grow="214"
+data-flex-basis="513px"
+&gt;&lt;/p&gt;
+&lt;p&gt;转到游戏引擎内使用标准着色器会更明显：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141044658.png"
+width="298"
+height="232"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141044658_hu_e38a5c7bcf65c968.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141044658_hu_55498b5a1e28ca34.png 1024w"
+loading="lazy"
+alt="image-20251216141044658"
+class="gallery-image"
+data-flex-grow="128"
+data-flex-basis="308px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141901629.png"
+width="387"
+height="183"
+srcset="https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141901629_hu_2e40637e6d5dcb0d.png 480w, https://Selaphina.github.io/p/blender%E5%B8%B8%E7%94%A8%E9%9C%80%E6%B1%82/image-20251216141901629_hu_a9087833f825d538.png 1024w"
+loading="lazy"
+alt="image-20251216141901629"
+class="gallery-image"
+data-flex-grow="211"
+data-flex-basis="507px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;法线外扩与背面显示&lt;/strong&gt;：当勾选“翻转”法线后，模型表面的&lt;strong&gt;背面&lt;/strong&gt;变得可见。实体化修改器根据厚度值，沿着模型顶点的法线方向创造出一个新的、略大一圈的“外壳”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;材质赋予与正面剔除&lt;/strong&gt;：我们将设置了“背面剔除”的黑色材质赋予这个新外壳。这意味着，从这个外壳的&lt;strong&gt;正面&lt;/strong&gt;（即朝向摄像机的方向）看，它是“透明”的；但从其&lt;strong&gt;背面&lt;/strong&gt;（即边缘部分）看，它显示为描边颜色。&lt;/p&gt;</description></item></channel></rss>

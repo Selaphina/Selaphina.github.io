@@ -1,0 +1,374 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Unity Shader 入门精要 第十一章"><title>11 动态纹理</title><link rel=canonical href=https://Selaphina.github.io/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/><link rel=stylesheet href=/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css><meta property='og:title' content="11 动态纹理"><meta property='og:description' content="Unity Shader 入门精要 第十一章"><meta property='og:url' content='https://Selaphina.github.io/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/'><meta property='og:site_name' content='Selaphina'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Unity Shader'><meta property='article:published_time' content='2024-04-20T19:10:20+00:00'><meta property='article:modified_time' content='2024-04-20T19:10:20+00:00'><meta property='og:image' content='https://Selaphina.github.io/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/cover1.png'><meta name=twitter:title content="11 动态纹理"><meta name=twitter:description content="Unity Shader 入门精要 第十一章"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://Selaphina.github.io/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/cover1.png'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_19bb7832d48d68bd.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Selaphina</a></h1><h2 class=site-description>住在一个奇妙而荒诞的星球。</h2></div></header><ol class=menu-social><li><a href=https://github.com/Selaphina target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#111-播放序列帧动画>11.1 播放序列帧动画</a></li><li><a href=#112-视差效果>11.2 视差效果</a></li><li><a href=#113-顶点动画>11.3 顶点动画</a><ol><li><a href=#顶点动画阴影>顶点动画阴影</a></li></ol></li><li><a href=#114-广告牌>11.4 广告牌</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/cover1_hu_e2943e4ee1c34a24.png srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/cover1_hu_e2943e4ee1c34a24.png 800w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/cover1_hu_c98519924185e750.png 1600w" width=800 height=359 loading=lazy alt="Featured image of post 11 动态纹理"></a></div><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/ style=background-color:#beefe1;color:#0f3d30>技术笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/>11 动态纹理</a></h2><h3 class=article-subtitle>Unity Shader 入门精要 第十一章</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2024-04-20T19:10:20Z>Apr 20, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>5 minute read</time></div></footer></div></header><section class=article-content><h1 id=11-动态纹理>11 动态纹理</h1><p>Unity shader内置的时间变量</p><div class=table-wrapper><table><thead><tr><th>名称</th><th>类型</th><th>描述</th></tr></thead><tbody><tr><td>_Time</td><td>float4</td><td>t是自该场景加载开始所经过的时间，4个分量的值分别是(t/20,t,2t,3t)。</td></tr><tr><td>_SinTime</td><td>float4</td><td>t是时间的正弦值，4个分量的值分别是(t/8,t/4,t/2,t)</td></tr><tr><td>_CosTime</td><td>float4</td><td>t是时间的余弦值，4个分量的值分别是(t/8,t/4,t/2,t)</td></tr><tr><td>unity_DeltaTime</td><td>float4</td><td>dt是时间增量，4个分量的值分别是(dt,1/dt,smoothDt,1/smoothDt)</td></tr></tbody></table></div><h2 id=111-播放序列帧动画>11.1 播放序列帧动画</h2><p>首先，新建material ，新建shader，并赋给一个新建的quad（四边形）。</p><p>上述序列帧动画的精髓在于，我们需要在每个时刻计算该时刻下应该播放的关键帧的位置，并对该关键帧进行纹理采样。打开新建的 Chapter11-ImageSequenceAnimation，删除原有的代码，并添加如下关键代码。</p><ol><li>声明。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties {
+</span></span><span class=line><span class=cl>	_Color (&#34;Color Tint&#34;, Color) = (1, 1, 1, 1)
+</span></span><span class=line><span class=cl>	_MainTex (&#34;Image Sequence&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>   	_HorizontalAmount (&#34;Horizontal Amount&#34;, Float) = 4
+</span></span><span class=line><span class=cl>   	_VerticalAmount (&#34;Vertical Amount&#34;, Float) = 4
+</span></span><span class=line><span class=cl>   	_Speed (&#34;Speed&#34;, Range(1, 100)) = 30
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>MainTex 就是包含了所有关键帧图像的纹理。 HorizontalAmount和 VerticalAmount 分别代表了该图像在水平方向和竖直方向包含的关键帧图像的个数。而Speed 属性用于控制序列帧动画
+的播放速度。</p><p>2）序列帧通常透明底，需要渲染透明效果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Tags {&#34;Queue&#34;=&#34;Transparent&#34; &#34;IgnoreProjector&#34;=&#34;True&#34; &#34;RenderType&#34;=&#34;Transparent&#34;}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Pass {
+</span></span><span class=line><span class=cl>	Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	ZWrite Off
+</span></span><span class=line><span class=cl>	Blend SrcAlpha OneMinusSrcAlpha
+</span></span></code></pre></td></tr></table></div></div><p>通过blend命令来开启设置透明模式，并关闭深度写入。</p><p>3）顶点着色器</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>v2f vert (a2v v) {  
+</span></span><span class=line><span class=cl>	v2f o;  
+</span></span><span class=line><span class=cl>	o.pos = UnityObjectToClipPos(v.vertex);  
+</span></span><span class=line><span class=cl>	o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);  
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>} 
+</span></span></code></pre></td></tr></table></div></div><p>4）片元着色器</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>			fixed4 frag (v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>				float time = floor(_Time.y * _Speed);  
+</span></span><span class=line><span class=cl>				float row = floor(time / _HorizontalAmount);
+</span></span><span class=line><span class=cl>				float column = time - row * _HorizontalAmount;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>//				half2 uv = float2(i.uv.x /_HorizontalAmount, i.uv.y / _VerticalAmount);
+</span></span><span class=line><span class=cl>//				uv.x += column / _HorizontalAmount;
+</span></span><span class=line><span class=cl>//				uv.y -= row / _VerticalAmount;
+</span></span><span class=line><span class=cl>				half2 uv = i.uv + half2(column, -row);
+</span></span><span class=line><span class=cl>				uv.x /=  _HorizontalAmount;
+</span></span><span class=line><span class=cl>				uv.y /= _VerticalAmount;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				fixed4 c = tex2D(_MainTex, uv);
+</span></span><span class=line><span class=cl>				c.rgb *= _Color;
+</span></span><span class=line><span class=cl>				
+</span></span><span class=line><span class=cl>				return c;
+</span></span><span class=line><span class=cl>			}
+</span></span></code></pre></td></tr></table></div></div><p>我们需要计算出每个时刻需要播放的关键帧在纹理中的位置。而由于序列帧纹理都是按行按列排列的，因此这个位置可以认为是该关键帧所在的行列索引数。因此，在上面的代码的前3行中我们计算了行列数，其中使用了Unity的内置时间变量Time。由11.1节可以知道， Time.y就是自该场景加载后所经过的时间。我们首先把Time.y 和速度属性Speed 相乘来得到模拟的时间，并使用CG的oor 函数对结果值取整来得到整数时间time。然后，我们使用time除以HorizontalAmount 的结果值的商来作为当前对应的行索引，除法结果的余数则是列索引。</p><p>5)回调</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>FallBack &#34;Transparent/VertexLit&#34;
+</span></span></code></pre></td></tr></table></div></div><h2 id=112-视差效果>11.2 视差效果</h2><p>很多2D游戏都使用了不断滚动的背景来模拟游戏角色在场景中的穿梭，这些背景往往包含了多个层(layers)来模拟一种视差效果。</p><ol><li>在Window→LightingSkybox中去掉场景中的天空盒子。由于本例模拟的是 2D游戏中的滚动背景，因此我们需要把摄像机的投影模式设置为正交投影。
+(2) 新建一个材质。在本书资源中，该材质名为ScrollingBackgroundMat，新建一个 UnityShader。在本书资源中,该 Shader 名为 Chapter11-ScrollingBackground。把新的 Shader 赋给第2步中创建的材质。</li></ol><p>1）声明</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    _MainTex (&#34;Base Layer (RGB)&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>    _DetailTex (&#34;2nd Layer (RGB)&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>    _ScrollX (&#34;Base Layer speed&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>    _Scroll2X (&#34;2nd Layer speed&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>    _Multiplier(&#34;Layer Multiplier&#34;,Float) = 1
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>其中，MainTex和 DetailTex分别是第一层(较远)和第二层(较近)的背景纹理，而 ScrollX和 Scrol2X对应了各自的水平滚动速度。 Multiplier 参数则用于控制纹理的整体亮度。</p><p>2）顶点着色器</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>v2f vert (a2v v) {
+</span></span><span class=line><span class=cl>	v2f o;
+</span></span><span class=line><span class=cl>	o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.uv.xy = TRANSFORM_TEX(v.texcoord, _MainTex) + frac(float2(_ScrollX, 0.0) * _Time.y);
+</span></span><span class=line><span class=cl>	o.uv.zw = TRANSFORM_TEX(v.texcoord, _DetailTex) + frac(float2(_Scroll2X, 0.0) * _Time.y);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><code>frac</code>是一个 HLSL/Cg 中的内置数学函数，它的作用是<strong>提取一个数值的小数部分</strong>。<code>frac(x)</code>的数学定义是 <code>x - floor(x)</code>，其中 <code>floor(x)</code>函数返回的是不大于 <code>x</code>的最大整数</p><p>例如：frac（3.7） = 0.7；</p><p>作用：</p><ol><li><strong>随时间偏移</strong>：<code>_ScrollX</code>是一个控制滚动速度的属性，<code>_Time.y</code>是自游戏开始以来经过的时间（以秒为单位）。两者相乘 <code>(_ScrollX * _Time.y)</code>得到一个持续线性增大的偏移量。</li><li><strong>利用frac实现循环</strong>：直接使用这个持续增大的偏移量，纹理坐标会变得非常大，可能导致精度问题或非预期的采样。用 <code>frac</code>对这个偏移量取小数部分，能确保用于实际偏移的值始终被限制在 <code>[0, 1)</code>的范围内。</li><li><strong>无缝滚动</strong>：当偏移量的整数部分被 <code>frac</code>函数“剥离”后，小数部分会从0增长到接近1，然后瞬间跳回0，接着重新开始增长。这个过程循环往复，就形成了纹理在指定方向上平滑、无限循环的滚动效果，而不会出现任何跳跃或断层。</li></ol><ol start=3><li>片元着色器</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>fixed4 frag (v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>	fixed4 firstLayer = tex2D(_MainTex, i.uv.xy);
+</span></span><span class=line><span class=cl>	fixed4 secondLayer = tex2D(_DetailTex, i.uv.zw);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	fixed4 c = lerp(firstLayer, secondLayer, secondLayer.a);
+</span></span><span class=line><span class=cl>	c.rgb *= _Multiplier;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	return c;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><code>lerp</code>函数会根据第三个参数（混合因子，这里用的是<code>secondLayer.a</code>）的值，在前两个参数（<code>firstLayer</code>和<code>secondLayer</code>）之间进行平滑的插值。</p><p>这意味着：</p><ul><li>在<code>secondLayer.a</code>值为<strong>0</strong>（完全透明）的地方，<code>lerp</code>函数返回<code>firstLayer</code>的颜色，即完全显示第一层背景。</li><li>在<code>secondLayer.a</code>值为<strong>1</strong>（完全不透明）的地方，<code>lerp</code>函数返回<code>secondLayer</code>的颜色，即完全显示第二层背景。</li><li>在<code>secondLayer.a</code>值介于<strong>0和1之间</strong>的地方，则显示两层背景的混合色，实现平滑的过渡效果。这相当于把第二层纹理的Alpha通道当作了一个<strong>蒙版</strong>，来控制第二层显示多少以及如何与第一层融合</li></ul><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029111917970.png width=825 height=672 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029111917970_hu_122b049a8e87547c.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029111917970_hu_addf355449cede37.png 1024w" loading=lazy alt=image-20251029111917970 class=gallery-image data-flex-grow=122 data-flex-basis=294px></p><h2 id=113-顶点动画>11.3 顶点动画</h2><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029112745556.png width=803 height=285 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029112745556_hu_655cc02408549af7.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029112745556_hu_4a98cf8adfd26e41.png 1024w" loading=lazy alt=image-20251029112745556 class=gallery-image data-flex-grow=281 data-flex-basis=676px></p><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029123223679.png width=843 height=159 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029123223679_hu_886b7ac703a4673f.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029123223679_hu_5ddaea88980f7117.png 1024w" loading=lazy alt=image-20251029123223679 class=gallery-image data-flex-grow=530 data-flex-basis=1272px></p><p>1）声明</p><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029113931126.png width=885 height=186 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029113931126_hu_cac97d7acf2ceb07.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029113931126_hu_2818fa1559b5baaa.png 1024w" loading=lazy alt=image-20251029113931126 class=gallery-image data-flex-grow=475 data-flex-basis=1141px></p><p>其中， MainTex是河流纹理，Color用于控制整体颜色，Magnitude 用于控制水流波动的幅度，Frequency用于控制波动频率，InvWaveLength用于控制波长的倒数(InvWaveLength 越大波长越小)，Speed用于控制河流纹理的移动速度。</p><ol start=2><li>我们需要为透明效果设置合适的subshader标签：</li></ol><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029114008836.png width=1080 height=90 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029114008836_hu_daa10e40efcdb09c.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029114008836_hu_6df265f1780e0a21.png 1024w" loading=lazy alt=image-20251029114008836 class=gallery-image data-flex-grow=1200 data-flex-basis=2880px></p><p>在上面的设置中，我们除了为透明效果设置Queue、IgnoreProjector 和RenderType 外，还设置了一个新的标签&ndash;DisableBatching。我们在 3.3.3节中介绍过该标签的含义:一些 Subshader 在使用 Unity 的批处理功能时会出现问题，这时可以通过该标签来直接指明是否对该 SubShader 使用批处理。而这些需要特殊处理的 Shader通常就是指包含了模型空间的顶点动画的 Shader。这是因为，批处理会合并所有相关的模型，而这些模型各自的模型空间就会丢失。而在本例中，我们需要在物体的模型空间下对顶点位置进行偏移。因此，在这里需要取消对该Shader 的批处理操作。</p><p>3）设置pass的状态</p><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029114115484.png width=576 height=129 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029114115484_hu_edeb9a694a67e61b.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029114115484_hu_f681ed5cc8774e83.png 1024w" loading=lazy alt=image-20251029114115484 class=gallery-image data-flex-grow=446 data-flex-basis=1071px></p><p>这里关闭了深度写入，开启并设置了混合模式，并关闭了剔除功能。这是为了让水流的每个
+面都能显示。</p><p>4）然后，我们在顶点着色器中进行了相关的顶点动画:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>v2f vert(a2v v) {
+</span></span><span class=line><span class=cl>	v2f o;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	float4 offset;
+</span></span><span class=line><span class=cl>	offset.yzw = float3(0.0, 0.0, 0.0);
+</span></span><span class=line><span class=cl>	offset.x = sin(_Frequency * _Time.y + v.vertex.x * _InvWaveLength + v.vertex.y * _InvWaveLength + v.vertex.z * _InvWaveLength) * _Magnitude;
+</span></span><span class=line><span class=cl>	o.pos = UnityObjectToClipPos(v.vertex + offset);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
+</span></span><span class=line><span class=cl>	o.uv +=  float2(0.0, _Time.y * _Speed);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>我们首先计算顶点位移量。我们只希望对顶点的x方向进行位移，因此yzw的位移量被设置为0。然后，我们利用Frequency属性和内置的Time.y变量来控制正弦函数的频率。为了让不同位置具有不同的位移，我们对上述结果加上了模型空间下的位置分量，并乘以nvWaveLength来控制波长。最后，我们对结果值乘以 Magnitude属性来控制波动幅度，得到最终的位移。剩下的工作，我们只需要把位移量添加到顶点位置上，再进行正常的顶点变换即可。
+在上面的代码中，我们还进行了纹理动画，即使用Time.y和 Speed 来控制在水平方向上的纹理动画。</p><ol start=5><li>片元着色</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>fixed4 frag(v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>	fixed4 c = tex2D(_MainTex, i.uv);
+</span></span><span class=line><span class=cl>	c.rgb *= _Color.rgb;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	return c;
+</span></span><span class=line><span class=cl>} 
+</span></span></code></pre></td></tr></table></div></div><p>6）最后，我们把 Fallback设置为内置的Transparent/VertexLit(也可以选择关闭Fallback):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Fallback &#34;Transparent/VertexLit&#34;
+</span></span></code></pre></td></tr></table></div></div><p>保存后返回场景，把 Assets/Textures/Chapter11/Water.psd 拖曳到材质的 Main Tex属性上，并调整相关参数。为了让河流更加美观，我们可以复制多个材质并使用不同的参数，再赋给不同的Water模型，就可以得到类似图11.4中的效果。</p><h3 id=顶点动画阴影>顶点动画阴影</h3><p>如果我们想要对包含了顶点动画的物体添加阴影，那么如果仍然像9.4节中那样使用内置的 Difuse 等包含的阴影 Pass 来渲染，就得不到正确的阴影效果(这里指的是无法向其他物体正确地投射阴影)。</p><p>这是因为，我们讲过Unity的阴影绘制需要调用一个 ShadowCaster Pass，而如果直接使用这些内置的 ShadowCaster Pass,这个 Pass 中并没有进行相关的顶点动画,因此 Unity会仍然按照原来的顶点位置来计算阴影，这并不是我们希望看到的。</p><p>这时，我们就需要提供一个自定义的 ShadowCaster Pass，在这个Pass中，我们将进行同样的顶点变换过程。需要注意的是，在前面的实现中，如果涉及半透明物体我们都把Fallback设置成了Transparent/VertexLit，而[ransparent/VertexLit 没有定义 ShadowCaster Pass，因此也就不会产生阴影(详见9.4.5节)。</p><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029124105292.png width=711 height=405 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029124105292_hu_8bdae6af131d1ee2.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029124105292_hu_efbadc98f2b4dfaf.png 1024w" loading=lazy alt=image-20251029124105292 class=gallery-image data-flex-grow=175 data-flex-basis=421px></p><p>此时没有正确的阴影效果。</p><p>为了正确绘制变形对象的阴影，我们就需要提供自定义的ShadowCasterPass。读者可以在本书资源的Chapter11-VertexAnimationWithShadow中找到对应的Unity Shader。</p><p><strong>核心的shadow caster Pass部分：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Pass {
+</span></span><span class=line><span class=cl>	Tags { &#34;LightMode&#34; = &#34;ShadowCaster&#34; }
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	CGPROGRAM
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	#pragma vertex vert
+</span></span><span class=line><span class=cl>	#pragma fragment frag
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	#pragma multi_compile_shadowcaster
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	#include &#34;UnityCG.cginc&#34;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	float _Magnitude;
+</span></span><span class=line><span class=cl>	float _Frequency;
+</span></span><span class=line><span class=cl>	float _InvWaveLength;
+</span></span><span class=line><span class=cl>	float _Speed;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	struct v2f { 
+</span></span><span class=line><span class=cl>	    V2F_SHADOW_CASTER;
+</span></span><span class=line><span class=cl>	};
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	v2f vert(appdata_base v) {
+</span></span><span class=line><span class=cl>		v2f o;
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		float4 offset;
+</span></span><span class=line><span class=cl>		offset.yzw = float3(0.0, 0.0, 0.0);
+</span></span><span class=line><span class=cl>		offset.x = sin(_Frequency * _Time.y + v.vertex.x * _InvWaveLength + v.vertex.y * _InvWaveLength + v.vertex.z * _InvWaveLength) * _Magnitude;
+</span></span><span class=line><span class=cl>		v.vertex = v.vertex + offset;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		TRANSFER_SHADOW_CASTER_NORMALOFFSET(o)
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		return o;
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	fixed4 frag(v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>	    SHADOW_CASTER_FRAGMENT(i)
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>	ENDCG
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>阴影投射的重点在于我们需要按正常Pass的处理来剔除片元或进行顶点动画，以便阴影可以和物体正常渲染的结果相匹配。</p><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029125801351.png width=726 height=399 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029125801351_hu_374532a6513c6211.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029125801351_hu_5c280f909ff9c758.png 1024w" loading=lazy alt=image-20251029125801351 class=gallery-image data-flex-grow=181 data-flex-basis=436px></p><p>在自定义的阴影投射的Pass 中，我们通常会使用 Unity 提供的内置宏V2F SHADOW CASTER、TRANSFER SHADOW CASTER NORMALOFFSET(旧版本中会使用TRANSFERSHADOWCASTER)和SHADOWCASTERFRAGMENT来计算阴影投射时需要的各种变量，而我们可以只关注自定义计算的部分。在上面的代码中，我们首先在v2f结构体中利用V2F SHADOW CASTER来定义阴影投射需要定义的变量。随后，在顶点着色器中我们首先按之前对顶点的处理方法计算顶点的偏移量，不同的是，我们直接把偏移值加到顶点位置变量中，再使用TRANSFERSHADOWCASTERNORMALOFFSET来让Unity为我们完成剩下的事情。在片元着色器中，我们直接使用SHADOWCASTERFRAGMENT来让Unity自动完成阴影投射的部分，把结果输出到深度图和阴影映射纹理中。</p><h2 id=114-广告牌>11.4 广告牌</h2><p>常见的顶点动画就是广告牌技术(Biboarding)。</p><p><strong>什么是广告牌（BillBoarding）？</strong></p><p>广告牌技术会根据<strong>视角方向</strong>来旋转一个被纹理着色的多边形(通常就是简单的四边形，这个多边形就是广告牌)，使得<strong>多边形看起来好像总是面对着摄像机</strong>。</p><p><strong>应用：</strong></p><p>广告牌技术被用于很多应用，比如<strong>渲染烟雾、云朵、闪光效果</strong>等。</p><p><strong>计算：</strong></p><p>广告牌技术的难点在于，如何根据需求来构建3个相互正交的基向量。</p><p>计算过程通常是，我们首先会通过初始计算得到目标的<strong>表面法线</strong>(例如就是视角方向)和<strong>指向上</strong>的方向，而两者往往是不垂直的。但是，两者其中之一是固定的。</p><blockquote><p>例如当模拟草丛时，我们希望广告牌的指向上的方向永远是(0,1,0)，而法线方向应该随视角变化;而当模拟粒子效果时，我们希望广告牌的法线方向是固定的，即总是指向视角方向，指向上的方向则可以发生变化。</p></blockquote><p>我们假设法线方向是固定的，首先，我们根据初始的表面法线和指向上的方向来计算出目标方向的指向右的方向 (通过叉积操作):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>right = up × normal
+</span></span></code></pre></td></tr></table></div></div><p>对其归一化后，再由法线方向和指向右的方向计算出正交的指向上的方向L:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>up&#39; = normal × right
+</span></span></code></pre></td></tr></table></div></div><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029115340871.png width=834 height=282 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029115340871_hu_e84de69ccff34c5e.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029115340871_hu_7a57a8ab2e214d76.png 1024w" loading=lazy alt=image-20251029115340871 class=gallery-image data-flex-grow=295 data-flex-basis=709px></p><p><strong>效果：</strong></p><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029121020472.png width=1350 height=474 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029121020472_hu_4c2a187a32ca85e7.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029121020472_hu_7a6fd4143c047257.png 1024w" loading=lazy alt=image-20251029121020472 class=gallery-image data-flex-grow=284 data-flex-basis=683px></p><p><img src=/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029120958568.png width=1494 height=497 srcset="/p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029120958568_hu_eea95ff5fcf6ebc1.png 480w, /p/11-%E5%8A%A8%E6%80%81%E7%BA%B9%E7%90%86/image-20251029120958568_hu_47bfed99265b95e1.png 1024w" loading=lazy alt=image-20251029120958568 class=gallery-image data-flex-grow=300 data-flex-basis=721px></p><p>正常准备material和shader即可。</p><p>1）声明</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties {
+</span></span><span class=line><span class=cl>	_MainTex (&#34;Main Tex&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>	_Color (&#34;Color Tint&#34;, Color) = (1, 1, 1, 1)
+</span></span><span class=line><span class=cl>	_VerticalBillboarding (&#34;Vertical Restraints&#34;, Range(0, 1)) = 1 
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>其中，MainTex是广告牌显示的透明纹理，Color用于控制显示整体颜色
+VerticalBilboarding 则用于调整是固定法线还是固定指向上的方向，即约束垂直方向的程度。</p><p>2）在本例中，我们需要为透明效果设置合适的Subshader标签</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>SubShader
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>	Tags {&#34;Queue&#34;=&#34;Transparent&#34;,&#34;DisableBatching&#34;=&#34;True&#34;,
+</span></span><span class=line><span class=cl>	&#34;IqnoreProjector&#34;=&#34;True&#34;,&#34;RenderType&#34;=&#34;Transparent&#34;}
+</span></span></code></pre></td></tr></table></div></div><p>在上面的设置中，我们除了为透明效果设置Queue、IgnoreProjector和RenderType 外，还设置了一个新的标签——<strong>DisableBatching</strong>。我们在3.3.3节中介绍过该标签的含义。</p><p><strong>为什么不用批处理？</strong></p><p>我们在3.3.3节中介绍过该标签的含义：</p><p>一些SubShader在使用 Unity的<strong>批处理</strong>功能时会出现问题，这时可以通过该标签来直接指明是否对该SubShader使用批处理。而这些需要特殊处理的 Shader通常就是指包含了模型空间的顶点动画的Shader。这是因为，批处理会合并所有相关的模型，而这些模型各自的模型空间就会被丢失。而在广告牌技术中，我们需要使用物体的模型空间下的位置来作为锚点进行计算。因此。在这里需要取消对该Shader的批处理操作。</p><p>(3)接着，我们设置了Pass 的渲染状态:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Pass { 
+</span></span><span class=line><span class=cl>	Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	ZWrite Off
+</span></span><span class=line><span class=cl>	Blend SrcAlpha OneMinusSrcAlpha
+</span></span><span class=line><span class=cl>	Cull Off
+</span></span></code></pre></td></tr></table></div></div><p>关闭了深度写入，开启混合模式，关闭了剔除功能。目的：让广告牌的每个面都能显示。</p><p>4）顶点着色器（核心）。**所有的计算都是在模型空间下进行的。**首先选择模型空间的原点作为广告牌的锚点，并利用内置变量获取模型空间下的视角位置。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>v2f vert (a2v v) {
+</span></span><span class=line><span class=cl>	v2f o;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	// Suppose the center in object space is fixed
+</span></span><span class=line><span class=cl>	float3 center = float3(0, 0, 0);
+</span></span><span class=line><span class=cl>	float3 viewer = mul(unity_WorldToObject,float4(_WorldSpaceCameraPos, 1));
+</span></span></code></pre></td></tr></table></div></div><p>然后，我们开始计算3个正交矢量。首先，我们根据观察位置和锚点计算目标法线方向，并根据 VerticalBillboarding属性来控制垂直方向上的约束度。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>float3 normalDir = viewer - center;
+</span></span><span class=line><span class=cl>	// If _VerticalBillboarding equals 1, we use the desired view dir as the normal dir
+</span></span><span class=line><span class=cl>	// Which means the normal dir is fixed
+</span></span><span class=line><span class=cl>	// Or if _VerticalBillboarding equals 0, the y of normal is 0
+</span></span><span class=line><span class=cl>	// Which means the up dir is fixed
+</span></span><span class=line><span class=cl>	normalDir.y =normalDir.y * _VerticalBillboarding;
+</span></span><span class=line><span class=cl>	normalDir = normalize(normalDir);
+</span></span></code></pre></td></tr></table></div></div><p>当 VerticalBillboarding为1时，意味着法线方向固定为视角方向;当VerticalBillboarding 为0时，意味着向上方向固定为(0,1,0)。最后，我们需要对计算得到的法线方向进行归一化操作来得到单位矢量。
+接着，我们得到了粗略的向上方向。为了防止法线方向和向上方向平行(如果平行，那么叉积得到的结果将是错误的)，我们对法线方向的y分量进行判断，以得到合适的向上方向。然后，根据法线方向和粗略的向上方向得到向右方向，并对结果进行归一化。但由于此时向上的方向还是不准确的，我们又根据准确的法线方向和向右方向得到最后的向上方向:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Get the approximate up dir
+</span></span><span class=line><span class=cl>	// If normal dir is already towards up, then the up dir is towards front
+</span></span><span class=line><span class=cl>	float3 upDir = abs(normalDir.y) &gt; 0.999 ? float3(0, 0, 1) : float3(0, 1, 0);
+</span></span><span class=line><span class=cl>	float3 rightDir = normalize(cross(upDir, normalDir));
+</span></span><span class=line><span class=cl>	upDir = normalize(cross(normalDir, rightDir));
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	// Use the three vectors to rotate the quad
+</span></span><span class=line><span class=cl>	float3 centerOffs = v.vertex.xyz - center;
+</span></span><span class=line><span class=cl>	float3 localPos = center + rightDir * centerOffs.x + upDir * centerOffs.y + normalDir * centerOffs.z;
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>	o.pos = UnityObjectToClipPos(float4(localPos, 1));
+</span></span><span class=line><span class=cl>	o.uv = TRANSFORM_TEX(v.texcoord,_MainTex);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>5）片元着色器</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>fixed4 frag (v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>	fixed4 c = tex2D (_MainTex, i.uv);
+</span></span><span class=line><span class=cl>	c.rgb *= _Color.rgb;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	return c;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>6）最后，我们把 Fallback设置为内置的Transparent/VertexLit(也可以选择关闭Fallback):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Fallback &#34;Transparent/VertexLit&#34;
+</span></span></code></pre></td></tr></table></div></div><p>需要说明的是，在上面的例子中，我们<strong>使用的是Unity自带的四边形(Quad)来作为广告牌,而不能使用自带的平面(Plane)。</strong></p><p>这是因为，我们的代码是建立在一个竖直摆放的多边形的基础上的，也就是说，这个多边形的顶点结构需要满足在模型空间下是竖直排列的。只有这样，我们才能使用 v.vertex 来计算得到正确的相对于中心的位置偏移量。保存后返回场景，把本书资源中的 Assets/Textures/Chapter11/star.png拖曳到材质的 Main Tex中，即可得到类似图 11.6中的效果。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/unity-shader/>Unity Shader</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/18-%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93/><div class=article-image><img src=/p/18-%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 18 基于物理的渲染" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>18 基于物理的渲染</h2></div></a></article><article class=has-image><a href=/p/17-%E8%A1%A8%E9%9D%A2%E7%9D%80%E8%89%B2%E5%99%A8/><div class=article-image><img src=/p/17-%E8%A1%A8%E9%9D%A2%E7%9D%80%E8%89%B2%E5%99%A8/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 17 表面着色器" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>17 表面着色器</h2></div></a></article><article class=has-image><a href=/p/16-unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/><div class=article-image><img src=/p/16-unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 16 Unity中的渲染优化技术" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>16 Unity中的渲染优化技术</h2></div></a></article><article class=has-image><a href=/p/15-%E5%99%AA%E5%A3%B0%E8%BF%90%E7%94%A8/><div class=article-image><img src=/p/15-%E5%99%AA%E5%A3%B0%E8%BF%90%E7%94%A8/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 15 噪声运用" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>15 噪声运用</h2></div></a></article><article class=has-image><a href=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/><div class=article-image><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 14 非真实感渲染" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>14 非真实感渲染</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2024 -
+2026 Selaphina</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.34.2>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
