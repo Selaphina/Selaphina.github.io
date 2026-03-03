@@ -299,6 +299,14 @@ ssh-add ~/.ssh/id_ed25519_wang
 ssh -T git@github-selaphina
 ```
 
+or
+
+```
+ssh -T git@github-wang
+```
+
+
+
 3.接下来就可以正常操作了
 
 ```
@@ -419,4 +427,25 @@ Hi WangSiya010! You've successfully authenticated...
 ```
 
 
+
+## git如何删除分支
+
+两条命令，分别删除本地和远程的分支：
+
+```
+# 删除本地分支
+git branch -d beta/wsy
+
+# 删除远程分支
+git push origin --delete beta/wsy
+```
+
+## git如何合并本地分支到远端main分支
+
+```
+git checkout main
+git pull origin main
+git merge beta/wsy
+git push origin main
+```
 
