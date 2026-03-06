@@ -1,5 +1,5 @@
 ---
-title: Obsidian多端同步
+title: Blender烘焙
 description:
 date: 2026-02-19 10:20:12+0000
 image: cover1.png
