@@ -1,5 +1,5 @@
 ---
-title: Unity插片树
+title: Unity ASE实现插片树以及冰雪效果
 description: 
 date: 2025-12-15 10:12:30+0000
 image: CUC兑换点2.png
@@ -8,9 +8,9 @@ categories:
 weight: 2025       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
-
-
-复现一些有趣的场景shader效果。
+近期安装了新插件ASE，复现一些有趣的场景效果。包括：
+* 插片树
+* 冰雪顶点
 
 # 1.插片树
 

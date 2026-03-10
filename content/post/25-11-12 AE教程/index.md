@@ -5,7 +5,7 @@ date: 2025-11-14 10:12:30+0000
 image: cover.png
 categories:
     - 教程
-weight: 10       # You can add weight to some posts to override the default sorting (date descending)
+weight: 1995       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
 ## Ae是什么？

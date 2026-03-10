@@ -1,5 +1,5 @@
 ---
-title: fBM噪波实现墨色
+title: Unity fBM噪波实现可控程序化墨色纹理
 description:
 date: 2026-02-19 10:20:12+0000
 image: cover1.png
@@ -103,7 +103,7 @@ float edgeFactor = saturate(edgeGradient / max(_EdgeSharpness, 0.001));
 rampInput -= edgeFactor * _EdgeDarken;
 ```
 
-![GIF 2026-3-10 20-53-22](GIF 2026-3-10 20-53-22.gif)这种方案的开销低（GPU 硬件原生支持)，但效果立竿见影：它在程序化生成的噪波边界上绘制出一圈深色的水墨沉淀，还原了写意画中墨晕边界的质感。
+![边缘深色](GIF 2026-3-10 20-53-22.gif)这种方案的开销低（GPU 硬件原生支持)，但效果立竿见影：它在程序化生成的噪波边界上绘制出一圈深色的水墨沉淀，还原了写意画中墨晕边界的质感。
 
 ---
 
@@ -111,7 +111,9 @@ rampInput -= edgeFactor * _EdgeDarken;
 
 最终实现的 Shader 效果展示：
 
-![GIF 2026-3-10 21-50-40](GIF 2026-3-10 21-50-40.gif)
+![效果展示](GIF 2026-3-10 21-50-40.gif)
+
+
 
 - **Blender 级参数**：支持 Detail（细节层数）、Roughness（糙度）、Lacunarity（间隙度）等精细化调节。
 - **Hue 通道映射**：内部通过三路 3D 噪波合成色彩后提取 **Hue（色相）** 通道，使最终生成的黑白分布比单通道噪波更具随机感和层次感。

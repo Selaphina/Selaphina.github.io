@@ -1,6 +1,6 @@
 ---
 title: 毕业设计 | 水墨风格化场景渲染（其五）
-description: 毕业设计的开发日志，实现TTS模块。
+description: 毕业设计的开发日志，实现STT以及插片摇曳植物等。
 date: 2026-01-15 10:12:30+0000
 image: cover1.png
 categories:
