@@ -1,11 +1,11 @@
 ---
-title: 仿原神渲染
+title: Unity URP仿原神渲染
 description: 记录
 date: 2025-12-11 20:32:30+0000
 image: CUC兑换点2.png
 categories:
     - 技术笔记
-weight: 2019       # You can add weight to some posts to override the default sorting (date descending)
+weight: 1995       # You can add weight to some posts to override the default sorting (date descending)
 
 ---
 

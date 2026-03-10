@@ -7,7 +7,7 @@ categories:
     - 技术笔记
 tags:
     - Unity
-weight: 1990       # You can add weight to some posts to override the default sorting (date descending)
+weight: 1997       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
 ## 1. Blender导出带贴图模型
