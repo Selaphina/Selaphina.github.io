@@ -7,7 +7,7 @@ categories:
     - 工具指南
 tags:
     - Obsidian
-weight: 1999       # You can add weight to some posts to override the default sorting (date descending)
+weight: 2005       # You can add weight to some posts to override the default sorting (date descending)
 
 ---
 
