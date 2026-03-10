@@ -5,7 +5,7 @@ date: 2025-11-14 10:12:30+0000
 image: cover.png
 categories:
     - 教程
-weight: 2       # You can add weight to some posts to override the default sorting (date descending)
+weight: 10       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
 ## Ae是什么？
@@ -351,9 +351,9 @@ ffmpeg -i input.avi -vf "fps=15,scale=640:-1:flags=lanczos" -loop 0 output.gif
 
 ## 前后缀的规范：
 
-![45th前缀-21数媒网络叶谨娴](640.gif)
+![45th前缀](640.gif)
 
-![46-47th前缀-22数媒技王思雅](min前缀.gif)
+![46-47th前缀](min前缀.gif)
 
 1. **前缀尺寸：**1079 x 607
 2. **元素要求：**有学校的元素/CUC STU/48 th (届数)，颜色不宜过多（2-3种），其他可以相对自由发挥！
@@ -364,9 +364,9 @@ ffmpeg -i input.avi -vf "fps=15,scale=640:-1:flags=lanczos" -loop 0 output.gif
 
 ![45th后缀往期回顾-21数媒网络叶谨娴](image-20251115173025202.png)
 
-![46-47th后缀图-22数媒技王思雅](image-20251115172924831.png)
+![46-47th后缀图](image-20251115172924831.png)
 
-![46-47th后缀往期回顾-22广告亓妙薇](image-20251115173109281.png)
+![46-47th后缀往期回顾](image-20251115173109281.png)
 
 
 

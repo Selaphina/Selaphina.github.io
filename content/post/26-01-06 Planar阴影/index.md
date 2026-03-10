@@ -9,7 +9,17 @@ weight: 1998       # You can add weight to some posts to override the default so
 
 ---
 
+一种适用于移动平台的高性能实时阴影解决方案——平面阴影（Planar Shadow）。
+
+> 由于常见引擎如Babylon/Unity等内置的实时阴影实现方式是屏幕空间阴影贴图（Screen Space Shadow Map）非常消耗性能，所以移动端的阴影一般需要使用更加性能友好的替代方案。
+>
+> 平面阴影又称作顶点投射阴影，手游《王者荣耀》中就用了类似的技术。
+>
+> 这种平面阴影的优点是性能消耗小，阴影品质较高，简单好实现，非常适合MOBA类、俯视视角类型的游戏（角色和相机有一定距离）。
+
 ##   实现原理（PlanarShadowSystem）
+
+![图源：知乎[喵喵Mya](https://www.zhihu.com/people/mou-feng-91)](image-20260310194709244.png)
 
   - 基本思路：将 caster 的顶点沿光照方向投影到一个平面（plane normal + plane height）上，生成“扁平化”的投影几何来模拟阴
     影。
@@ -40,10 +50,7 @@ weight: 1998       # You can add weight to some posts to override the default so
       - 自动检测：enableAutoDetection() 按 name pattern 自动加入
       - Receiver：applyPlanarShadowReceivers() 从 shadowMeshes.json 匹配网格名
   6. 渲染阶段
-      - 影子网格是原网格 clone 的几何体（或骨骼 mesh 的特制材质）
       - 渲染组/深度/模板设置确保阴影在 receiver 上、被主体遮挡
-
-  ———
 
 ## 开放控制点
 
@@ -59,13 +66,8 @@ weight: 1998       # You can add weight to some posts to override the default so
 
 ```
 平面阴影的渲染层级（RenderingGroupId）改回了默认值（0）。
-
-之前的设置（1）可能导致阴影强制绘制在所有物体（层级0）之上，造成“漂浮在桌子上”的错觉（实际上是因为深度遮挡失效，阴影盖过了桌子）。
-
-现在阴影应当能正确被桌子、收银台等物体遮挡（在它们下方）。请刷新查看效果。
+如果设置为（1）可能导致阴影强制绘制在所有物体（层级0）之上，造成“漂浮在桌子上”的错觉（实际上是因为深度遮挡失效，阴影盖过了桌子）。
 ```
-
-
 
 ## stencil 遮罩有什么作用？
 
@@ -77,21 +79,6 @@ stencil 遮罩的作用是“限制阴影只画在指定接收面上，并避免
     shadow 表现）。
 
   如果不启用 stencil，阴影会渲染到所有通过深度测试的位置，看起来更容易“漂浮/穿帮”。
-
-## 投下的阴影属于网格体？
-
-每个 caster 会 clone 一份 shadow mesh（_planarShadow 后缀），挂在一个 shadow root 下，使用专用的 planar shadow shader；真正绘制的是这份投影网格，而不是原始网格本身。
-
-## shadow mesh会和原始的网格重叠/导致游戏运行实时面数增加吗
-
-
-  - 顶点/三角形数增加：每个 caster 多一份几何，等于多画一次（含骨骼的话更贵）。
-  - draw call 增加：影子网格是独立材质/渲染组，会多一次绘制。
-  - CPU 也有成本：每帧更新 uniform、跟随变换、管理 caster/receiver。
-
-  - 减少 caster 数量、排除小物体（excludePatterns/minVolume）。
-  - 只给关键角色投影。
-  - 关闭 stencil（略省但可能穿帮）。
 
 ## 对比传统 shadow mapping（深度贴图）
 
@@ -108,4 +95,4 @@ stencil 遮罩的作用是“限制阴影只画在指定接收面上，并避免
   - 阴影形状简单：本质是投影几何体的“扁平投影”，没有软硬边真实变化。
   - 精度与物理真实性较弱：只适合“地面贴影子”的视觉提示用途。
 
-  一句话：planar shadow 是“便宜稳定的视觉提示”，shadow mapping 是“真实但更重、更复杂”的通用方案。
+planar shadow 是“便宜稳定的视觉提示”，shadow mapping 是“真实但更重、更复杂”的通用方案。
