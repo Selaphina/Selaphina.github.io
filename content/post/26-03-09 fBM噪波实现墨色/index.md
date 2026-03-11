@@ -46,6 +46,58 @@ weight: 1994       # You can add weight to some posts to override the default so
 
 不同于简易哈希，Blender 使用了经典的 **Bob Jenkins 整数位运算哈希**。这保证了在 3D 空间中点位采样后的结果具有极高的分布均匀性，是消除“噪波感模糊”的第一步。同时采用 12 方向梯度向量而非随机旋向，使得噪波的形状更加硬朗、可控。
 
+```
+// ---- Integer Hash (Bob Jenkins one-at-a-time) ----
+			// 1D hash: 用于时间序列，音频波形等
+			uint blender_hash(uint kx)
+			{
+				uint c = 0xdeadbeefu + (1u << 2u) + 13u;
+				uint a = c, b = c;
+				a += kx;
+				c ^= b; c -= (b << 14u) | (b >> 18u);
+				a ^= c; a -= (c << 11u) | (c >> 21u);
+				b ^= a; b -= (a << 25u) | (a >> 7u);
+				c ^= b; c -= (b << 16u) | (b >> 16u);
+				a ^= c; a -= (c << 4u)  | (c >> 28u);
+				b ^= a; b -= (a << 14u) | (a >> 18u);
+				c ^= b; c -= (b << 24u) | (b >> 8u);
+				return c;
+			}
+			// 2D hash: 用于纹理（uv坐标），地形等
+			uint blender_hash2(uint kx, uint ky)
+			{
+				uint c = 0xdeadbeefu + (2u << 2u) + 13u;
+				uint a = c, b = c;
+				b += ky; a += kx;
+				c ^= b; c -= (b << 14u) | (b >> 18u);
+				a ^= c; a -= (c << 11u) | (c >> 21u);
+				b ^= a; b -= (a << 25u) | (a >> 7u);
+				c ^= b; c -= (b << 16u) | (b >> 16u);
+				a ^= c; a -= (c << 4u)  | (c >> 28u);
+				b ^= a; b -= (a << 14u) | (a >> 18u);
+				c ^= b; c -= (b << 24u) | (b >> 8u);
+				return c;
+			}
+			// 3D hash：3D体素、3D噪声、世界空间位置
+			uint blender_hash3(uint kx, uint ky, uint kz)
+			{
+				uint c = 0xdeadbeefu + (3u << 2u) + 13u;
+				uint a = c, b = c;
+				c += kz; b += ky; a += kx;
+				c ^= b; c -= (b << 14u) | (b >> 18u);
+				a ^= c; a -= (c << 11u) | (c >> 21u);
+				b ^= a; b -= (a << 25u) | (a >> 7u);
+				c ^= b; c -= (b << 16u) | (b >> 16u);
+				a ^= c; a -= (c << 4u)  | (c >> 28u);
+				b ^= a; b -= (a << 14u) | (a >> 18u);
+				c ^= b; c -= (b << 24u) | (b >> 8u);
+				return c;
+			}
+
+```
+
+
+
 #### 2. 3D Object Space 与域扭曲（Domain Warping）
 
 引入了**畸变（Distortion）参数**，通过对坐标进行二次噪波偏移，让水墨的扩散呈现出有机的、云雾般的波动感。采用 **3D Object Space** 进行采样，确保水墨材质在模型移动或变形时保持稳定。
@@ -105,7 +157,7 @@ rampInput -= edgeFactor * _EdgeDarken;
 
 ![GIFshow](GIFshow.gif)
 
-这种方案的开销低（GPU 硬件原生支持)，但效果立竿见影：它在程序化生成的噪波边界上绘制出一圈深色的水墨沉淀，还原了写意画中墨晕边界的质感。
+这种方案的开销低（GPU 硬件原生支持)，在程序化生成的噪波边界上绘制出一圈深色的水墨沉淀，还原了写意画中墨晕边界的质感。
 
 ---
 
@@ -127,11 +179,38 @@ https://github.com/Selaphina/Ink-Tex-fBM-Shader.git
 
 
 
+## 附录
 
+###  `noise_grad3(uint hash, float x, float y, float z)`为什么是12个方向？
 
+```
+// ---- 3D gradient from hash (12 directions, matching Blender) ----
+			// 将哈希值映射到12个三维梯度方向之一
+			float noise_grad3(uint hash, float x, float y, float z)
+			{
+				uint h = hash & 15u;
+				float u = (h < 8u) ? x : y;
+				float vt = ((h == 12u) || (h == 14u)) ? x : z;
+				float v = (h < 4u) ? y : vt;
+				return negate_if(u, h & 1u) + negate_if(v, h & 2u);
+			}
+```
 
+这是Ken Perlin原始论文的优化：用12个三维向量近似单位球面上的均匀分布，避免开方计算（归一化），同时保持较好的各向同性。
 
+### perlin噪声为什么平滑？
 
+五次缓动函数：
+
+```
+return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+```
+
+**作用**：对插值权重`t`（范围0~1）进行平滑过渡，保证函数在0和1处的一阶、二阶导数均为0（C2连续）。
+
+这是柏林噪声**平滑**的关键。原始柏林噪声用`3t²-2t³`（C1连续），而此处的`6t⁵-15t⁴+10t³`（**Quintic Fade**）更平滑，可消除Mach带等视觉瑕疵。
+
+它让插值结果在网格边界（`t=0`或`t=1`）时变化率为0，实现无缝拼接。
 
 
 
