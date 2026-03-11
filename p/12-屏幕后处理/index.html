@@ -1,0 +1,1164 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Unity Shader 入门精要 第十二章"><title>12 屏幕后处理</title><link rel=canonical href=https://Selaphina.github.io/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/><link rel=stylesheet href=/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css><meta property='og:title' content="12 屏幕后处理"><meta property='og:description' content="Unity Shader 入门精要 第十二章"><meta property='og:url' content='https://Selaphina.github.io/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/'><meta property='og:site_name' content='Selaphina'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Unity Shader'><meta property='article:published_time' content='2024-05-21T22:10:30+00:00'><meta property='article:modified_time' content='2024-05-21T22:10:30+00:00'><meta property='og:image' content='https://Selaphina.github.io/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/cover1.png'><meta name=twitter:title content="12 屏幕后处理"><meta name=twitter:description content="Unity Shader 入门精要 第十二章"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://Selaphina.github.io/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/cover1.png'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_19bb7832d48d68bd.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>Selaphina</a></h1><h2 class=site-description>住在一个奇妙而荒诞的星球。</h2></div></header><ol class=menu-social><li><a href=https://github.com/Selaphina target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#121-基础unity屏幕后处理脚本系统>12.1 基础unity屏幕后处理脚本系统</a></li><li><a href=#122-调整屏幕的亮度饱和度和对比度>12.2 调整屏幕的亮度/饱和度和对比度</a><ol><li><a href=#brightnesssaturationandcontrastcs脚本>BrightnessSaturationAndContrast.cs脚本</a></li><li><a href=#brightnesssaturationandcontrastshader>BrightnessSaturationAndContrast.shader</a></li></ol></li><li><a href=#123-边缘检测>12.3 边缘检测</a><ol><li><a href=#edgedetectioncs-脚本>EdgeDetection.cs 脚本</a></li><li><a href=#chapter12-edgedetection>Chapter12-EdgeDetection</a></li></ol></li><li><a href=#124-高斯模糊>12.4 高斯模糊</a><ol><li><a href=#gaussianblurcs脚本>GaussianBlur.cs脚本</a></li><li><a href=#chapter12--gaussianblurshader>Chapter12- GaussianBlur.shader</a></li></ol></li><li><a href=#125-bloom效果>12.5 Bloom效果</a></li><li><a href=#126-运动模糊>12.6 运动模糊</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/><img src=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/cover1_hu_e2943e4ee1c34a24.png srcset="/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/cover1_hu_e2943e4ee1c34a24.png 800w, /p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/cover1_hu_c98519924185e750.png 1600w" width=800 height=359 loading=lazy alt="Featured image of post 12 屏幕后处理"></a></div><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/ style=background-color:#beefe1;color:#0f3d30>技术笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/>12 屏幕后处理</a></h2><h3 class=article-subtitle>Unity Shader 入门精要 第十二章</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2024-05-21T22:10:30Z>May 21, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>12 minute read</time></div></footer></div></header><section class=article-content><h1 id=12-屏幕后处理>12 屏幕后处理</h1><p>屏幕后处理，顾名思义，通常是指在渲染完整个场景得到屏幕图像后，再对这个图像进行一系列操作，实现各种屏幕特效。例如：景深（Depth of Field），运动模糊（Motion Blur）等。</p><p>因此，想要实现屏幕后处理的基础在于得到渲染后的屏幕图像，即抓取屏幕，而Unity为我们提供了这样一个方便的接口&ndash;0nRenderImage函数。它的函数声明如下:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>MonoBehaviour</span><span class=p>.</span><span class=n>OnRenderImage</span><span class=p>(</span><span class=n>RenderTexture</span> <span class=n>src</span><span class=p>,</span> <span class=n>RenderTexture</span> <span class=n>dest</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 OnRenderlmage 函数中，我们通常是利用Graphics.Blit函数来完成对渲染纹理的:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public static void Blit(Texture src,RenderTexture dest);
+</span></span><span class=line><span class=cl>public static void Blit(Texture src,RenderTexture dest,Material mat,int pass = -1);
+</span></span><span class=line><span class=cl>public static void Blit( Texture src,Material mat,int pass=-1);
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>参数src：</p><p>源纹理，在屏幕后处理技术中，unity通常会将当前屏幕渲染纹理（或者上一步处理后的渲染纹理）存储在src源纹理中。</p></li><li><p>参数dest：</p><p>目标渲染纹理，如果它的值为null，会直接将结果显示在屏幕上。不为null则通过函数的一系列操作后，unity再将dest渲染到屏幕上。</p></li><li><p>参数mat</p><p>我们使用的材质，这个材质使用的unity shader会进行各种屏幕后处理操作。而src纹理将会被传递给shader中名为MainTex的代码.</p></li><li><p>参数pass</p><p>默认值为-1，表示将会依次调用shader内的所有pass，否则只会调用索引值的pass。</p></li></ul><blockquote><p>在默认情况下，OnRenderImage函数会在所有的不透明和透明的Pass执行完毕后被调用，以便对场景中所有游戏对象都产生影响。但有时，我们希望在不透明的Pass(即渲染队列小于等于2500的Pass，内置的 Background、Geometry和 AlphaTest 渲染队列均在此范围内)执行完毕后立即调用 OnRenderlmage 函数,从而不对透明物体产生任何影响。此时,我们可以在 OnRenderlmage函数前添加ImageEfectOpaque 属性来实现这样的目的。13.4节展示了这样一个例子，在13.4节</p></blockquote><h2 id=121-基础unity屏幕后处理脚本系统>12.1 基础unity屏幕后处理脚本系统</h2><p>因此，要在 Unity 中实现屏幕后处理效果，过程通常如下:</p><p>1）首先需要在<strong>摄像机</strong>中添加一个用于屏幕后处理的脚本。在这个脚本中，我们会实现OnRenderlmage函数来获取当前屏幕的渲染纹理。</p><p>2）然后，调用 Graphics.Blit 函数使用特定的 Unity Shader 来对当前图像进行处理，再把返回的渲染纹理显示到屏幕上。</p><p>3）对于一些复杂的屏幕特效，我们可能需要多次调用Graphics.Blit 函数来对上一步的输出结果进行下一步处理。</p><blockquote><p>但是，在进行屏幕后处理之前，我们需要检查一系列条件是否满足，例如当前平台是否支持渲染纹理和屏幕特效，是否支持当前使用的UnityShader 等。为此，我们创建了一个用于屏幕后处理效果的基类，在实现各种屏幕特效时，我们只需要继承自该基类，再实现派生类中不同的操作即可。读者可在本书资源的 <u>Assets/Scripts/Chapter12/PostEffectsBase.cs</u> 中找到该脚本。</p></blockquote><p><code>PostEffecrsBase.cs</code></p><p>(1)首先，所有屏幕后处理效果都需要绑定在某个摄像机上，并且我们希望在编辑器状态下也可以执行该脚本来查看效果:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[ExecuteInEditMode]
+</span></span><span class=line><span class=cl>[RequireComponent (typeof(Camera))]
+</span></span><span class=line><span class=cl>public class PostEffectsBase : MonoBehaviour {
+</span></span></code></pre></td></tr></table></div></div><p>(2)为了提前检查各种资源和条件是否满足，我们在Start函数中调用CheckResources 函数:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	// Called when start
+</span></span><span class=line><span class=cl>	protected void CheckResources() {
+</span></span><span class=line><span class=cl>		bool isSupported = CheckSupport();
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		if (isSupported == false) {
+</span></span><span class=line><span class=cl>			NotSupported();
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	// Called in CheckResources to check support on this platform
+</span></span><span class=line><span class=cl>	protected bool CheckSupport() {
+</span></span><span class=line><span class=cl>		if (SystemInfo.supportsImageEffects == false || SystemInfo.supportsRenderTextures == false) {
+</span></span><span class=line><span class=cl>			Debug.LogWarning(&#34;This platform does not support image effects or render textures.&#34;);
+</span></span><span class=line><span class=cl>			return false;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		return true;
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	// Called when the platform doesn&#39;t support this effect
+</span></span><span class=line><span class=cl>	protected void NotSupported() {
+</span></span><span class=line><span class=cl>		enabled = false;
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	protected void Start() {
+</span></span><span class=line><span class=cl>		CheckResources();
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>(3)由于每个屏幕后处理效果通常都需要指定一个shader 来创建一个用于处理渲染纹理的材质，因此基类中也提供了这样的方法:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>protected Material CheckShaderAndCreateMaterial(Shader shader, Material material) {
+</span></span><span class=line><span class=cl>		if (shader == null) {
+</span></span><span class=line><span class=cl>			return null;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		if (shader.isSupported &amp;&amp; material &amp;&amp; material.shader == shader)
+</span></span><span class=line><span class=cl>			return material;
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		if (!shader.isSupported) {
+</span></span><span class=line><span class=cl>			return null;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		else {
+</span></span><span class=line><span class=cl>			material = new Material(shader);
+</span></span><span class=line><span class=cl>			material.hideFlags = HideFlags.DontSave;
+</span></span><span class=line><span class=cl>			if (material)
+</span></span><span class=line><span class=cl>				return material;
+</span></span><span class=line><span class=cl>			else 
+</span></span><span class=line><span class=cl>				return null;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p><strong>CheckShaderAndCreateMaterial</strong>函数接受两个参数，第一个参数指定了该特效需要使用的Shader，第二个参数则是用于后期处理的材质。该函数首先检査Shader 的可用性，检查通过后就返回一个使用了该 Shader的材质，否则返回null。</p><h2 id=122-调整屏幕的亮度饱和度和对比度>12.2 调整屏幕的亮度/饱和度和对比度</h2><p>1）新建场景，包括相机，平行光。去掉天空盒子。</p><p>2）把本书资源中的 Assets/Textures/Chapter12/Sakura0,jpg拖曳到场景中，并调整其的位置使它可以填充整个场景。
+3）新建一个脚本。在本书资源中，该脚本名为BrightnessSaturationAndContrast.cs。把该脚本拖曳到摄像机上。
+4）新建一个Unity Shader。在本书资源中,该 Shader 名为Chapter12-BrightnessSaturationAndContrast.shader。</p><h3 id=brightnesssaturationandcontrastcs脚本>BrightnessSaturationAndContrast.cs脚本</h3><p>首先来编写 BrightnessSaturationAndContrast.cs脚本。打开该脚本，并进行如下修改：</p><ol><li>首先继承12.1的基类</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public class BrightnessSaturationAndContrast : PostEffectsBase {
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>声明该效果需要的shader，并依据此创建相应的材质：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kd>public</span> <span class=n>Shader</span> <span class=n>briSatConShader</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>private</span> <span class=n>Material</span> <span class=n>briSatConMaterial</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>public</span> <span class=n>Material</span> <span class=n>material</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>		<span class=k>get</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=n>briSatConMaterial</span> <span class=p>=</span> <span class=n>CheckShaderAndCreateMaterial</span><span class=p>(</span><span class=n>briSatConShader</span><span class=p>,</span> <span class=n>briSatConMaterial</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=n>briSatConMaterial</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>  
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在上述代码中，briSatConShader是我们指定的Shader，对应了后面将会实现的Chapter12-BrightnessSaturationAndContrast。briSatConMaterial是创建的材质，我们提供了名为 material 的材质来访问它，material的get函数调用了基类的CheckShaderAndCreateMaterial 函数来得到对应的材质。</p><ol start=3><li>我们还在脚本中提供了调整亮度、饱和度和对比度的参数:</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	[Range(0.0f, 3.0f)]
+</span></span><span class=line><span class=cl>	public float brightness = 1.0f;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	[Range(0.0f, 3.0f)]
+</span></span><span class=line><span class=cl>	public float saturation = 1.0f;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	[Range(0.0f, 3.0f)]
+</span></span><span class=line><span class=cl>	public float contrast = 1.0f;
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>最后定义OnRenderImage来真正的后处理：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>void OnRenderImage(RenderTexture src, RenderTexture dest) {
+</span></span><span class=line><span class=cl>		if (material != null) {
+</span></span><span class=line><span class=cl>			material.SetFloat(&#34;_Brightness&#34;, brightness);
+</span></span><span class=line><span class=cl>			material.SetFloat(&#34;_Saturation&#34;, saturation);
+</span></span><span class=line><span class=cl>			material.SetFloat(&#34;_Contrast&#34;, contrast);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest, material);
+</span></span><span class=line><span class=cl>		} else {
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>每当 OnRenderlmage函数被调用时，它会检查材质是否可用。如果可用，就把参数传递给材质，再调用 Graphics.Blit进行处理；否则，直接把原图像显示到屏幕上，不做任何处理。</p><h3 id=brightnesssaturationandcontrastshader>BrightnessSaturationAndContrast.shader</h3><p>下面，我们来实现 Shader 的部分。打开Chapter12-BrightnessSaturationAndContrast，进行如下修改。</p><p>1)声明</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties {
+</span></span><span class=line><span class=cl>	_MainTex (&#34;Base (RGB)&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>	_Brightness (&#34;Brightness&#34;, Float) = 1
+</span></span><span class=line><span class=cl>	_Saturation(&#34;Saturation&#34;, Float) = 1
+</span></span><span class=line><span class=cl>	_Contrast(&#34;Contrast&#34;, Float) = 1
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>在 12.1节中，我们提到 Graphics.Blit(src,dest,material)将把第一个参数传递给 Shader 中名为MainTex的属性。因此，我们必须声明一个名为MainTex的纹理属性。除此之外，我们还声明了用于调整亮度、饱和度和对比度的属性。这些值将会由脚本传递而得。事实上，我们可以省略Properties中的属性声明，Properties中声明的属性仅仅是为了显示在材质面板中，但对于屏幕特效来说，它们使用的材质都是临时创建的，我们也不需要在材质面板上调整参数，而是直接从脚本传递给 Unity Shader。</p><p>2）定义用于屏幕后处理的pass</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>SubShader {
+</span></span><span class=line><span class=cl>	Pass {  
+</span></span><span class=line><span class=cl>		ZTest Always Cull Off ZWrite Off
+</span></span></code></pre></td></tr></table></div></div><p>3）为了在代码中访问各个属性，我们需要在CG代码块中声明对应的变量:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sampler2D _MainTex;  
+</span></span><span class=line><span class=cl>half _Brightness;
+</span></span><span class=line><span class=cl>half _Saturation;
+</span></span><span class=line><span class=cl>half _Contrast;
+</span></span></code></pre></td></tr></table></div></div><p>4）定义顶点着色器：屏幕特效使用的顶点着色器代码通常都比较简单，我们只需要进行必需的顶点变换，更重要的是，我们需要把正确的纹理坐标传递给片元着色器，以便对屏幕图像进行正确的采样:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>struct v2f {
+</span></span><span class=line><span class=cl>	float4 pos : SV_POSITION;
+</span></span><span class=line><span class=cl>	half2 uv: TEXCOORD0;
+</span></span><span class=line><span class=cl>};
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>v2f vert(appdata_img v) {
+</span></span><span class=line><span class=cl>	v2f o;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.uv = v.texcoord;
+</span></span><span class=line><span class=cl>			 
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>**appdata_img结构体：**使用了Unity内置的appdata_img结构体作为顶点着色器的输入,读者可以在 UnityCGcginc 中找到该结构体的声明,它只包含了图像处理时必需的顶点坐标和纹理
+坐标等变量</p><p>5）接着，我们实现了用于调整亮度、饱和度和对比度的片元着色器:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>fixed4 frag(v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>	fixed4 renderTex = tex2D(_MainTex, i.uv);  
+</span></span><span class=line><span class=cl>	  
+</span></span><span class=line><span class=cl>	// Apply brightness
+</span></span><span class=line><span class=cl>	fixed3 finalColor = renderTex.rgb * _Brightness;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	// Apply saturation
+</span></span><span class=line><span class=cl>	fixed luminance = 0.2125 * renderTex.r + 0.7154 * renderTex.g + 0.0721 * renderTex.b;
+</span></span><span class=line><span class=cl>	fixed3 luminanceColor = fixed3(luminance, luminance, luminance);
+</span></span><span class=line><span class=cl>	finalColor = lerp(luminanceColor, finalColor, _Saturation);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	// Apply contrast
+</span></span><span class=line><span class=cl>	fixed3 avgColor = fixed3(0.5, 0.5, 0.5);
+</span></span><span class=line><span class=cl>	finalColor = lerp(avgColor, finalColor, _Contrast);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	return fixed4(finalColor, renderTex.a);  
+</span></span><span class=line><span class=cl>}  
+</span></span></code></pre></td></tr></table></div></div><p>我们得到对原屏幕图像**(存储在MainTex中)**的采样结果renderTex。然后，利用_Brightness属性来调整亮度。</p><p>亮度的调整非常简单,我们只需要把原颜色乘以亮度系数 Brightness即可。</p><p>然后，我们计算该像素对应的亮度值(luminance)，这是通过对每个颜色分量乘以一个特定的系数再相加得到的。</p><p>我们使用该亮度值创建了一个饱和度为0的颜色值，并使用Saturation属性在其和上一步得到的颜色之间进行插值，从而得到希望的饱和度颜色。对比度的处理类似，我们首先创建一个对比度为0的颜色值(各分量均为0.5)，再使用Contrast属性在其和上一步得到的颜色之间进行插值，从而得到最终的处理结果</p><p>6)回调</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Fallback Off
+</span></span></code></pre></td></tr></table></div></div><h2 id=123-边缘检测>12.3 边缘检测</h2><p>边缘检测的原理是利用一些边缘检测算子对图像进行卷积(convolution)操作。</p><p><img src=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102172424999.png width=785 height=759 srcset="/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102172424999_hu_9c5458fed728d32.png 480w, /p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102172424999_hu_f176f85183f00bd8.png 1024w" loading=lazy alt=image-20251102172424999 class=gallery-image data-flex-grow=103 data-flex-basis=248px></p><p><strong>什么是卷积？</strong></p><p>在图像处理中，卷积操作指的就是使用一个卷积核(kernel)对一张图像中的每个像素进行一系列操作。卷积核通常是一个四方形网格结构(例如2x2、3x3的方形区域)，该区域内每个方格都有一个权重值。当对图像中的某个像素进行卷积时,我们会把卷积核的中心放置于该像素上，如图12.4所示，翻转核之后再依次计算核中每个元素和其覆盖的图像像素值的乘积并求和，得到的结果就是该位置的新像素值。</p><p><img src=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164347694.png width=642 height=192 srcset="/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164347694_hu_67c05d8c28925482.png 480w, /p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164347694_hu_631f3fa3ce486f6f.png 1024w" loading=lazy alt=image-20251102164347694 class=gallery-image data-flex-grow=334 data-flex-basis=802px></p><p>这样的计算过程虽然简单，但可以实现很多常见的图像处理效果，例如图像模糊、边缘检测等。</p><p><strong>几种不同的边缘检测算子</strong></p><p><img src=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164652028.png width=618 height=192 srcset="/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164652028_hu_def6ad746cb49f2e.png 480w, /p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164652028_hu_a9230c12e9cc965d.png 1024w" loading=lazy alt=image-20251102164652028 class=gallery-image data-flex-grow=321 data-flex-basis=772px></p><p>3种常见的边缘检测算子如图12.5所示，它们都包含了两个方向的卷积核，分别用于检测水平方向和竖直方向上的边缘信息。在进行边缘检测时，我们需要对每个像素分别进行一次卷积计算，得到两个方向上的梯度值G和G，而整体的梯度可按下面的公式计算而得:<img src=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164711757.png width=176 height=50 srcset="/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164711757_hu_6158c6d83c587754.png 480w, /p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164711757_hu_d2e8a9d4033084ce.png 1024w" loading=lazy alt=image-20251102164711757 class=gallery-image data-flex-grow=352 data-flex-basis=844px></p><p>由于上述计算包含了开根号操作，出于性能的考虑，我们有时会使用绝对值操作来代替开根号操作:</p><p><img src=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164732492.png width=162 height=51 srcset="/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164732492_hu_5af3a9de13d19018.png 480w, /p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102164732492_hu_89f28ea4f7e6ac88.png 1024w" loading=lazy alt=image-20251102164732492 class=gallery-image data-flex-grow=317 data-flex-basis=762px></p><p><strong>实现过程</strong></p><h3 id=edgedetectioncs-脚本>EdgeDetection.cs 脚本</h3><p>1）新建场景，包括相机，平行光。去掉天空盒子。</p><p>2）把本书资源中的 Assets/Textures/Chapter12/Sakura0,jpg拖曳到场景中，并调整其的位置使它可以填充整个场景。
+3）新建一个脚本。在本书资源中，该脚本名为EdgeDetection.cs。把该脚本拖曳到摄像机上。
+4）新建一个Unity Shader。在本书资源中,该 Shader 名为Chapter12-EdgeDetection.shader。</p><p>首先来编写 EdgeDetection.cs 脚本。打开该脚本，并进行如下修改：</p><ol><li>首先继承12.1的基类</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public class BrightnessSaturationAndContrast : PostEffectsBase {
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>声明该效果需要的shader，并据此创建相应的材质</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public Shader edgeDetectShader;
+</span></span><span class=line><span class=cl>	private Material edgeDetectMaterial = null;
+</span></span><span class=line><span class=cl>	public Material material {  
+</span></span><span class=line><span class=cl>		get {
+</span></span><span class=line><span class=cl>			edgeDetectMaterial = CheckShaderAndCreateMaterial(edgeDetectShader, edgeDetectMaterial);
+</span></span><span class=line><span class=cl>			return edgeDetectMaterial;
+</span></span><span class=line><span class=cl>		}  
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>在上述代码中，edgeDetectShader是我们指定的Shader，对应了后面将会实现的Chapter12-EdgeDetection。</p><ol start=3><li>在脚本中提供用于调整边缘线强度、描边颜色以及背景颜色的参数:</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[Range(0.0f, 1.0f)]
+</span></span><span class=line><span class=cl>public float edgesOnly = 0.0f;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>public Color edgeColor = Color.black;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>public Color backgroundColor = Color.white;
+</span></span></code></pre></td></tr></table></div></div><p>当edgesOnly值为0时，边缘将会叠加在原渲染图像上;当edgesOnly值为1时，则会只显示边缘，不显示原渲染图像。其中，背景颜色由backgroundColor指定，边缘颜色由edgeColor 指定。</p><ol start=4><li>最后，我们定义OnRenderlmage函数来进行真正的特效处理:</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>void OnRenderImage (RenderTexture src, RenderTexture dest) {
+</span></span><span class=line><span class=cl>		if (material != null) {
+</span></span><span class=line><span class=cl>			material.SetFloat(&#34;_EdgeOnly&#34;, edgesOnly);
+</span></span><span class=line><span class=cl>			material.SetColor(&#34;_EdgeColor&#34;, edgeColor);
+</span></span><span class=line><span class=cl>			material.SetColor(&#34;_BackgroundColor&#34;, backgroundColor);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest, material);
+</span></span><span class=line><span class=cl>		} else {
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>每当 OnRenderlmage 函数被调用时，它会检查材质是否可用。如果可用，就把参数传递给材质，再调用 Graphics.Blit进行处理;否则，直接把原图像显示到屏幕上，不做任何处理。</p><h3 id=chapter12-edgedetection>Chapter12-EdgeDetection</h3><p>下面，我们来实现Shader 的部分。打开Chapter12-EdgeDetection，进行如下修改。</p><ol><li>定义</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Properties {
+</span></span><span class=line><span class=cl>	_MainTex (&#34;Base (RGB)&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>	_EdgeOnly (&#34;Edge Only&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>	_EdgeColor (&#34;Edge Color&#34;, Color) = (0, 0, 0, 1)
+</span></span><span class=line><span class=cl>	_BackgroundColor (&#34;Background Color&#34;, Color) = (1, 1, 1, 1)
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>2） 设置屏幕后处理的 Pass</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>SubShader {
+</span></span><span class=line><span class=cl>	Pass {  
+</span></span><span class=line><span class=cl>		ZTest Always Cull Off ZWrite Off
+</span></span></code></pre></td></tr></table></div></div><p>3）为了代码中访问各个属性，需要在CG代码块中声明变量：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sampler2D _MainTex;  
+</span></span><span class=line><span class=cl>uniform half4 _MainTex_TexelSize;
+</span></span><span class=line><span class=cl>fixed _EdgeOnly;
+</span></span><span class=line><span class=cl>fixed4 _EdgeColor;
+</span></span><span class=line><span class=cl>fixed4 _BackgroundColor;
+</span></span></code></pre></td></tr></table></div></div><p>在上面的代码中，我们还声明了一个新的变量MainTexTexelSize。xxxTexelSize是 Unity为我们提供的访问 xxx 纹理对应的每个纹素的大小。例如，一张 512x512大小的纹理，该值大约为0.001953(即112)。由于卷积需要对相邻区域内的纹理进行采样，因此我们需要利用MainTex TexelSize 来计算各个相邻区域的纹理坐标。</p><p>4）在顶点着色器的代码中，我们计算了边缘检测时需要的纹理坐标:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>struct v2f {
+</span></span><span class=line><span class=cl>	float4 pos : SV_POSITION;
+</span></span><span class=line><span class=cl>	half2 uv[9] : TEXCOORD0;
+</span></span><span class=line><span class=cl>};
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>v2f vert(appdata_img v) {
+</span></span><span class=line><span class=cl>	v2f o;
+</span></span><span class=line><span class=cl>	o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	half2 uv = v.texcoord;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	o.uv[0] = uv + _MainTex_TexelSize.xy * half2(-1, -1);
+</span></span><span class=line><span class=cl>	o.uv[1] = uv + _MainTex_TexelSize.xy * half2(0, -1);
+</span></span><span class=line><span class=cl>	o.uv[2] = uv + _MainTex_TexelSize.xy * half2(1, -1);
+</span></span><span class=line><span class=cl>	o.uv[3] = uv + _MainTex_TexelSize.xy * half2(-1, 0);
+</span></span><span class=line><span class=cl>	o.uv[4] = uv + _MainTex_TexelSize.xy * half2(0, 0);
+</span></span><span class=line><span class=cl>	o.uv[5] = uv + _MainTex_TexelSize.xy * half2(1, 0);
+</span></span><span class=line><span class=cl>	o.uv[6] = uv + _MainTex_TexelSize.xy * half2(-1, 1);
+</span></span><span class=line><span class=cl>	o.uv[7] = uv + _MainTex_TexelSize.xy * half2(0, 1);
+</span></span><span class=line><span class=cl>	o.uv[8] = uv + _MainTex_TexelSize.xy * half2(1, 1);
+</span></span><span class=line><span class=cl>			 
+</span></span><span class=line><span class=cl>	return o;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>我们在v2f结构体中定义了一个维数为9的纹理数组，对应了使用Sobel算子采样时需要的9个邻域纹理坐标。通过把计算采样纹理坐标的代码从片元着色器中转移到顶点着色器中，可以减少运算，提高性能。由于从顶点着色器到片元着色器的插值是线性的，因此这样的转移并不会影响纹理坐标的计算结果。</p><p>5）片元着色器是我们的重点</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>fixed4 fragSobel(v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>	half edge = Sobel(i);
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	fixed4 withEdgeColor = lerp(_EdgeColor, tex2D(_MainTex, i.uv[4]), edge);
+</span></span><span class=line><span class=cl>	fixed4 onlyEdgeColor = lerp(_EdgeColor, _BackgroundColor, edge);
+</span></span><span class=line><span class=cl>	return lerp(withEdgeColor, onlyEdgeColor, _EdgeOnly);
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>我们首先调用Sobel函数计算当前像素的梯度值edge，并利用该值分别计算了**背景为原图和纯色下的颜色值,**然后利用 EdgeOnly 在两者之间插值得到最终的像素值。Sobel 函数将利用 Sobel算子对原图进行边缘检测，它的定义如下:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>fixed</span> <span class=n>luminance</span><span class=p>(</span><span class=n>fixed4</span> <span class=n>color</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span>  <span class=mf>0.2125</span> <span class=o>*</span> <span class=n>color</span><span class=o>.</span><span class=n>r</span> <span class=o>+</span> <span class=mf>0.7154</span> <span class=o>*</span> <span class=n>color</span><span class=o>.</span><span class=n>g</span> <span class=o>+</span> <span class=mf>0.0721</span> <span class=o>*</span> <span class=n>color</span><span class=o>.</span><span class=n>b</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>half</span> <span class=n>Sobel</span><span class=p>(</span><span class=n>v2f</span> <span class=n>i</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>const</span> <span class=n>half</span> <span class=n>Gx</span><span class=p>[</span><span class=mi>9</span><span class=p>]</span> <span class=o>=</span> <span class=p>{</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>  <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>							<span class=o>-</span><span class=mi>2</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>  <span class=mi>2</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>							<span class=o>-</span><span class=mi>1</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>  <span class=mi>1</span><span class=p>};</span>
+</span></span><span class=line><span class=cl>	<span class=k>const</span> <span class=n>half</span> <span class=n>Gy</span><span class=p>[</span><span class=mi>9</span><span class=p>]</span> <span class=o>=</span> <span class=p>{</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=o>-</span><span class=mi>2</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>							<span class=mi>0</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>							<span class=mi>1</span><span class=p>,</span>  <span class=mi>2</span><span class=p>,</span>  <span class=mi>1</span><span class=p>};</span>		
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	<span class=n>half</span> <span class=n>texColor</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>half</span> <span class=n>edgeX</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>half</span> <span class=n>edgeY</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=p>(</span><span class=ne>int</span> <span class=n>it</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>it</span> <span class=o>&lt;</span> <span class=mi>9</span><span class=p>;</span> <span class=n>it</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=n>texColor</span> <span class=o>=</span> <span class=n>luminance</span><span class=p>(</span><span class=n>tex2D</span><span class=p>(</span><span class=n>_MainTex</span><span class=p>,</span> <span class=n>i</span><span class=o>.</span><span class=n>uv</span><span class=p>[</span><span class=n>it</span><span class=p>]));</span>
+</span></span><span class=line><span class=cl>		<span class=n>edgeX</span> <span class=o>+=</span> <span class=n>texColor</span> <span class=o>*</span> <span class=n>Gx</span><span class=p>[</span><span class=n>it</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>		<span class=n>edgeY</span> <span class=o>+=</span> <span class=n>texColor</span> <span class=o>*</span> <span class=n>Gy</span><span class=p>[</span><span class=n>it</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	<span class=n>half</span> <span class=n>edge</span> <span class=o>=</span> <span class=mi>1</span> <span class=o>-</span> <span class=nb>abs</span><span class=p>(</span><span class=n>edgeX</span><span class=p>)</span> <span class=o>-</span> <span class=nb>abs</span><span class=p>(</span><span class=n>edgeY</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=n>edge</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们首先定义了水平方向和竖直方向使用的卷积核G和G。接着，我们依次对9个像素行采样，计算它们的亮度值，再与卷积核G和G,中对应的权重相乘后，叠加到各自的梯度值上最后，我们从1中减去水平方向和竖直方向的梯度值的绝对值，得到edge。edge值越小，表明位置越可能是一个边缘点。至此，边缘检测过程结束。
+(6)当然，我们也关闭了该Shader的Fallback:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Fallback Off
+</span></span></code></pre></td></tr></table></div></div><h2 id=124-高斯模糊>12.4 高斯模糊</h2><p>高斯模糊同样利用了卷积计算，它使用的卷积核名为高斯核。高斯核是一个正方形大小的滤波核，其中每个元素的计算都是基于下面的高斯方程:</p><p><img src=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102172445426.png width=306 height=80 srcset="/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102172445426_hu_4cfc8baaf0732efd.png 480w, /p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102172445426_hu_849cd2bc43d7e872.png 1024w" loading=lazy alt=image-20251102172445426 class=gallery-image data-flex-grow=382 data-flex-basis=918px></p><p>高斯方程很好地模拟了邻域每个像素对当前处理像素的影响程度&ndash;距离越近，影响越大。</p><blockquote><p>高斯核的维数越高,模糊程度越大。使用一个NxN 的高斯核对图像进行卷积滤波,就需要NxNxWxH(W 和H分别是图像的宽和高)次纹理采样。当N的大小不断增加时，采样次数会变得非常巨大。幸运的是，我们可以把这个二维高斯函数拆分成两个一维函数。也就是说，我们可以使用两个一维的高斯核(图12.8中的右图)先后对图像进行滤波，它们得到的结果和直接使用二维高斯核是一样的，但采样次数只需要 2xNxWxH。我们可以进一步观察到，两个一维高斯核中包含了很多重复的权重。对于一个大小为5的一维高斯核，我们实际只需要记录3个权重值即可。</p><p><img src=/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102172731413.png width=756 height=369 srcset="/p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102172731413_hu_88ef027ae1fc172f.png 480w, /p/12-%E5%B1%8F%E5%B9%95%E5%90%8E%E5%A4%84%E7%90%86/image-20251102172731413_hu_8846f67c41dfef2f.png 1024w" loading=lazy alt=image-20251102172731413 class=gallery-image data-flex-grow=204 data-flex-basis=491px></p></blockquote><p><strong>实验过程</strong></p><p>1）新建场景，包括相机，平行光。去掉天空盒子。</p><p>2）把本书资源中的 Assets/Textures/Chapter12/Sakura0,jpg拖曳到场景中，并调整其的位置使它可以填充整个场景。
+3）新建一个脚本。在本书资源中，该脚本名为GaussianBlur.cs。把该脚本拖曳到摄像机上。
+4）新建一个Unity Shader。在本书资源中,该 Shader 名为Chapter12-GaussianBlur.shader。</p><h3 id=gaussianblurcs脚本>GaussianBlur.cs脚本</h3><p>首先来编写 BrightnessSaturationAndContrast.cs脚本。打开该脚本，并进行如下修改：</p><ol><li>首先继承12.1的基类</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public class BrightnessSaturationAndContrast : PostEffectsBase {
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>声明需要用到的shader并创建相应材质</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>public Shader gaussianBlurShader;
+</span></span><span class=line><span class=cl>	private Material gaussianBlurMaterial = null;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	public Material material {  
+</span></span><span class=line><span class=cl>		get {
+</span></span><span class=line><span class=cl>			gaussianBlurMaterial = CheckShaderAndCreateMaterial(gaussianBlurShader, gaussianBlurMaterial);
+</span></span><span class=line><span class=cl>			return gaussianBlurMaterial;
+</span></span><span class=line><span class=cl>		}  
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>在脚本中，我们还提供了调整高斯模糊的迭代次数 ，模糊范围和缩放系数的参数：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Blur iterations - larger number means more blur.
+</span></span><span class=line><span class=cl>	[Range(0, 4)]
+</span></span><span class=line><span class=cl>	public int iterations = 3;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	// Blur spread for each iteration - larger value means more blur
+</span></span><span class=line><span class=cl>	[Range(0.2f, 3.0f)]
+</span></span><span class=line><span class=cl>	public float blurSpread = 0.6f;
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	[Range(1, 8)]
+</span></span><span class=line><span class=cl>	public int downSample = 2;
+</span></span><span class=line><span class=cl>	
+</span></span></code></pre></td></tr></table></div></div><p>blurSpread 和 downSample 都是出于性能的考虑。在高斯核维数不变的情况下，BlurSize 越大，模糊程度越高，但采样数却不会受到影响。但过大的BlurSize值会造成虚影，这可能并不是我们希望的。而 downSample 越大，需要处理的像素数越少，同时也能进一步提高模糊程度，但过大的 downSample 可能会使图像像素化。</p><ol start=4><li>最后，我们需要定义关键的 OnRenderlmage函数。我们首先来看第一个版本，也就是最简单的 OnRenderImage 的实现:</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>void OnRenderImage (RenderTexture src, RenderTexture dest) {
+</span></span><span class=line><span class=cl>		if (material != null) {
+</span></span><span class=line><span class=cl>			int rtW = src.width/downSample;
+</span></span><span class=line><span class=cl>			int rtH = src.height/downSample;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			RenderTexture buffer0 = RenderTexture.GetTemporary(rtW, rtH, 0);
+</span></span><span class=line><span class=cl>			buffer0.filterMode = FilterMode.Bilinear;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, buffer0);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			for (int i = 0; i &lt; iterations; i++) {
+</span></span><span class=line><span class=cl>				material.SetFloat(&#34;_BlurSize&#34;, 1.0f + i * blurSpread);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				RenderTexture buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				// Render the vertical pass
+</span></span><span class=line><span class=cl>				Graphics.Blit(buffer0, buffer1, material, 0);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				RenderTexture.ReleaseTemporary(buffer0);
+</span></span><span class=line><span class=cl>				buffer0 = buffer1;
+</span></span><span class=line><span class=cl>				buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				// Render the horizontal pass
+</span></span><span class=line><span class=cl>				Graphics.Blit(buffer0, buffer1, material, 1);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				RenderTexture.ReleaseTemporary(buffer0);
+</span></span><span class=line><span class=cl>				buffer0 = buffer1;
+</span></span><span class=line><span class=cl>			}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			Graphics.Blit(buffer0, dest);
+</span></span><span class=line><span class=cl>			RenderTexture.ReleaseTemporary(buffer0);
+</span></span><span class=line><span class=cl>		} else {
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>与上两节的实现不同,我们这里利用 RenderTexture.GetTemporary 函数分配了一块与屏幕图像大小相同的缓冲区。这是因为，高斯模糊需要调用两个Pass，我们需要使用一块中间缓存来存储第一个 Pass 执行完毕后得到的模糊结果。如代码所示，我们首先调用 Graphics.Blit(src,buffer,material,0)，使用 Shader 中的第一个Pass(即使用竖直方向的一维高斯核进行滤波)对 src 进行处理，并将结果存储在了buffer中。然后,再调用 Graphics.Blit(bufer,dest,material,1),使用 Shader中的第二个 Pass(即使用水平方向的一维高斯核进行滤波)对 buffer 进行处理，返回最终的屏幕图像。最后，我们还需要调用RenderTexture.ReleaseTemporary 来释放之前分配的缓存。</p><ol start=5><li>在理解了上述代码后，我们可以实现第二个版本的 OnRenderlmage 函数。在这个版本中，我们将利用缩放对图像进行降采样，从而减少需要处理的像素个数，提高性能。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	void OnRenderImage (RenderTexture src, RenderTexture dest) {
+</span></span><span class=line><span class=cl>		if (material != null) {
+</span></span><span class=line><span class=cl>			int rtW = src.width/downSample;
+</span></span><span class=line><span class=cl>			int rtH = src.height/downSample;
+</span></span><span class=line><span class=cl>			RenderTexture buffer = RenderTexture.GetTemporary(rtW, rtH, 0);
+</span></span><span class=line><span class=cl>			buffer.filterMode = FilterMode.Bilinear;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			// Render the vertical pass
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, buffer, material, 0);
+</span></span><span class=line><span class=cl>			// Render the horizontal pass
+</span></span><span class=line><span class=cl>			Graphics.Blit(buffer, dest, material, 1);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			RenderTexture.ReleaseTemporary(buffer);
+</span></span><span class=line><span class=cl>		} else {
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span></code></pre></td></tr></table></div></div><p>与第一个版本代码不同的是，我们在声明缓冲区的大小时，使用了小于原屏幕分辨率的尺寸,并将该临时渲染纹理的滤波模式设置为双线性。这样，在调用第一个Pass时，我们需要处理的像素个数就是原来的几分之一。对图像进行降采样不仅可以减少需要处理的像素个数，提高性能,而且适当的降采样往往还可以得到更好的模糊效果。尽管 downSample 值越大，性能越好，但过大的 downSample 可能会造成图像像素化。</p><ol start=6><li>最后一个版本的代码还考虑了高斯模糊的迭代次数:</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>	// / 1st edition: just apply blur
+</span></span><span class=line><span class=cl>	void OnRenderImage(RenderTexture src, RenderTexture dest) {
+</span></span><span class=line><span class=cl>		if (material != null) {
+</span></span><span class=line><span class=cl>			int rtW = src.width;
+</span></span><span class=line><span class=cl>			int rtH = src.height;
+</span></span><span class=line><span class=cl>			RenderTexture buffer = RenderTexture.GetTemporary(rtW, rtH, 0);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			// Render the vertical pass
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, buffer, material, 0);
+</span></span><span class=line><span class=cl>			// Render the horizontal pass
+</span></span><span class=line><span class=cl>			Graphics.Blit(buffer, dest, material, 1);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			RenderTexture.ReleaseTemporary(buffer);
+</span></span><span class=line><span class=cl>		} else {
+</span></span><span class=line><span class=cl>			Graphics.Blit(src, dest);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	} 
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>上面的代码显示了如何利用两个临时缓存在迭代之间进行交替的过程。在迭代开始前，我们首先定义了第一个缓存 bufer0，并把src 中的图像缩放后存储到 bufer0中。在迭代过程中，我们又定义了第二个缓存 bufer1。在执行第一个Pass时，输入是 buffer0，输出是buffer1，完毕后首先把 bufer0 释放，再把结果值 bufer1存储到 buffer0中，重新分配 bufer1，然后再调用第二个Pass，重复上述过程。迭代完成后，bufer0将存储最终的图像，我们再利用Graphics.Blit(bufer0.dest)把结果显示到屏幕上，并释放缓存。</p></blockquote><h3 id=chapter12--gaussianblurshader>Chapter12- GaussianBlur.shader</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span><span class=lnt>91
+</span><span class=lnt>92
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Upgrade NOTE: replaced &#39;mul(UNITY_MATRIX_MVP,*)&#39; with &#39;UnityObjectToClipPos(*)&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Shader &#34;Unity Shaders Book/Chapter 12/Gaussian Blur&#34; {
+</span></span><span class=line><span class=cl>	Properties {
+</span></span><span class=line><span class=cl>		_MainTex (&#34;Base (RGB)&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_BlurSize (&#34;Blur Size&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>	SubShader {
+</span></span><span class=line><span class=cl>		CGINCLUDE
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		#include &#34;UnityCG.cginc&#34;
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		sampler2D _MainTex;  
+</span></span><span class=line><span class=cl>		half4 _MainTex_TexelSize;
+</span></span><span class=line><span class=cl>		float _BlurSize;
+</span></span><span class=line><span class=cl>		  
+</span></span><span class=line><span class=cl>		struct v2f {
+</span></span><span class=line><span class=cl>			float4 pos : SV_POSITION;
+</span></span><span class=line><span class=cl>			half2 uv[5]: TEXCOORD0;
+</span></span><span class=line><span class=cl>		};
+</span></span><span class=line><span class=cl>		  
+</span></span><span class=line><span class=cl>		v2f vertBlurVertical(appdata_img v) {
+</span></span><span class=line><span class=cl>			v2f o;
+</span></span><span class=line><span class=cl>			o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			half2 uv = v.texcoord;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			o.uv[0] = uv;
+</span></span><span class=line><span class=cl>			o.uv[1] = uv + float2(0.0, _MainTex_TexelSize.y * 1.0) * _BlurSize;
+</span></span><span class=line><span class=cl>			o.uv[2] = uv - float2(0.0, _MainTex_TexelSize.y * 1.0) * _BlurSize;
+</span></span><span class=line><span class=cl>			o.uv[3] = uv + float2(0.0, _MainTex_TexelSize.y * 2.0) * _BlurSize;
+</span></span><span class=line><span class=cl>			o.uv[4] = uv - float2(0.0, _MainTex_TexelSize.y * 2.0) * _BlurSize;
+</span></span><span class=line><span class=cl>					 
+</span></span><span class=line><span class=cl>			return o;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		v2f vertBlurHorizontal(appdata_img v) {
+</span></span><span class=line><span class=cl>			v2f o;
+</span></span><span class=line><span class=cl>			o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			half2 uv = v.texcoord;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			o.uv[0] = uv;
+</span></span><span class=line><span class=cl>			o.uv[1] = uv + float2(_MainTex_TexelSize.x * 1.0, 0.0) * _BlurSize;
+</span></span><span class=line><span class=cl>			o.uv[2] = uv - float2(_MainTex_TexelSize.x * 1.0, 0.0) * _BlurSize;
+</span></span><span class=line><span class=cl>			o.uv[3] = uv + float2(_MainTex_TexelSize.x * 2.0, 0.0) * _BlurSize;
+</span></span><span class=line><span class=cl>			o.uv[4] = uv - float2(_MainTex_TexelSize.x * 2.0, 0.0) * _BlurSize;
+</span></span><span class=line><span class=cl>					 
+</span></span><span class=line><span class=cl>			return o;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		fixed4 fragBlur(v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>			float weight[3] = {0.4026, 0.2442, 0.0545};
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			fixed3 sum = tex2D(_MainTex, i.uv[0]).rgb * weight[0];
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			for (int it = 1; it &lt; 3; it++) {
+</span></span><span class=line><span class=cl>				sum += tex2D(_MainTex, i.uv[it*2-1]).rgb * weight[it];
+</span></span><span class=line><span class=cl>				sum += tex2D(_MainTex, i.uv[it*2]).rgb * weight[it];
+</span></span><span class=line><span class=cl>			}
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			return fixed4(sum, 1.0);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		    
+</span></span><span class=line><span class=cl>		ENDCG
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		ZTest Always Cull Off ZWrite Off
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		Pass {
+</span></span><span class=line><span class=cl>			NAME &#34;GAUSSIAN_BLUR_VERTICAL&#34;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			CGPROGRAM
+</span></span><span class=line><span class=cl>			  
+</span></span><span class=line><span class=cl>			#pragma vertex vertBlurVertical  
+</span></span><span class=line><span class=cl>			#pragma fragment fragBlur
+</span></span><span class=line><span class=cl>			  
+</span></span><span class=line><span class=cl>			ENDCG  
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		Pass {  
+</span></span><span class=line><span class=cl>			NAME &#34;GAUSSIAN_BLUR_HORIZONTAL&#34;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			CGPROGRAM  
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			#pragma vertex vertBlurHorizontal  
+</span></span><span class=line><span class=cl>			#pragma fragment fragBlur
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			ENDCG
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	} 
+</span></span><span class=line><span class=cl>	FallBack &#34;Diffuse&#34;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=125-bloom效果>12.5 Bloom效果</h2><p>Bloom 特效是游戏中常见的一种屏幕效果。这种特效可以模拟真实摄像机的一种图像效果,它让画面中较亮的区域“扩散”到周围的区域中，造成一种朦胧的效果。</p><p>Bloom 的实现原理非常简单:我们首先根据一个值提取出图像中的较亮区域，把它们存储在一张渲染纹理中，再利用高斯模糊对这张渲染纹理进行模糊处理，模拟光线扩散的效果，最后再将其和原图像进行混合，得到最终的效果。</p><p><a class=link href=F:%5cUNITY%5c%ef%bc%88%e5%86%af%e4%b9%90%e4%b9%90%ef%bc%89Unity_Shaders_Book%5cAssets%5cShaders%5cChapter12%5cChapter12-Bloom.shader>Chapter12-Bloom.shader</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span><span class=lnt>91
+</span><span class=lnt>92
+</span><span class=lnt>93
+</span><span class=lnt>94
+</span><span class=lnt>95
+</span><span class=lnt>96
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Upgrade NOTE: replaced &#39;mul(UNITY_MATRIX_MVP,*)&#39; with &#39;UnityObjectToClipPos(*)&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Shader &#34;Unity Shaders Book/Chapter 12/Bloom&#34; {
+</span></span><span class=line><span class=cl>	Properties {
+</span></span><span class=line><span class=cl>		_MainTex (&#34;Base (RGB)&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_Bloom (&#34;Bloom (RGB)&#34;, 2D) = &#34;black&#34; {}
+</span></span><span class=line><span class=cl>		_LuminanceThreshold (&#34;Luminance Threshold&#34;, Float) = 0.5
+</span></span><span class=line><span class=cl>		_BlurSize (&#34;Blur Size&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>	SubShader {
+</span></span><span class=line><span class=cl>		CGINCLUDE
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		#include &#34;UnityCG.cginc&#34;
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		sampler2D _MainTex;
+</span></span><span class=line><span class=cl>		half4 _MainTex_TexelSize;
+</span></span><span class=line><span class=cl>		sampler2D _Bloom;
+</span></span><span class=line><span class=cl>		float _LuminanceThreshold;
+</span></span><span class=line><span class=cl>		float _BlurSize;
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		struct v2f {
+</span></span><span class=line><span class=cl>			float4 pos : SV_POSITION; 
+</span></span><span class=line><span class=cl>			half2 uv : TEXCOORD0;
+</span></span><span class=line><span class=cl>		};	
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		v2f vertExtractBright(appdata_img v) {
+</span></span><span class=line><span class=cl>			v2f o;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			o.uv = v.texcoord;
+</span></span><span class=line><span class=cl>					 
+</span></span><span class=line><span class=cl>			return o;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		fixed luminance(fixed4 color) {
+</span></span><span class=line><span class=cl>			return  0.2125 * color.r + 0.7154 * color.g + 0.0721 * color.b; 
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		fixed4 fragExtractBright(v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>			fixed4 c = tex2D(_MainTex, i.uv);
+</span></span><span class=line><span class=cl>			fixed val = clamp(luminance(c) - _LuminanceThreshold, 0.0, 1.0);
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			return c * val;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		struct v2fBloom {
+</span></span><span class=line><span class=cl>			float4 pos : SV_POSITION; 
+</span></span><span class=line><span class=cl>			half4 uv : TEXCOORD0;
+</span></span><span class=line><span class=cl>		};
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		v2fBloom vertBloom(appdata_img v) {
+</span></span><span class=line><span class=cl>			v2fBloom o;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			o.pos = UnityObjectToClipPos (v.vertex);
+</span></span><span class=line><span class=cl>			o.uv.xy = v.texcoord;		
+</span></span><span class=line><span class=cl>			o.uv.zw = v.texcoord;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			#if UNITY_UV_STARTS_AT_TOP			
+</span></span><span class=line><span class=cl>			if (_MainTex_TexelSize.y &lt; 0.0)
+</span></span><span class=line><span class=cl>				o.uv.w = 1.0 - o.uv.w;
+</span></span><span class=line><span class=cl>			#endif
+</span></span><span class=line><span class=cl>				        	
+</span></span><span class=line><span class=cl>			return o; 
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		fixed4 fragBloom(v2fBloom i) : SV_Target {
+</span></span><span class=line><span class=cl>			return tex2D(_MainTex, i.uv.xy) + tex2D(_Bloom, i.uv.zw);
+</span></span><span class=line><span class=cl>		} 
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		ENDCG
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		ZTest Always Cull Off ZWrite Off
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		Pass {  
+</span></span><span class=line><span class=cl>			CGPROGRAM  
+</span></span><span class=line><span class=cl>			#pragma vertex vertExtractBright  
+</span></span><span class=line><span class=cl>			#pragma fragment fragExtractBright  
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			ENDCG  
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		UsePass &#34;Unity Shaders Book/Chapter 12/Gaussian Blur/GAUSSIAN_BLUR_VERTICAL&#34;
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		UsePass &#34;Unity Shaders Book/Chapter 12/Gaussian Blur/GAUSSIAN_BLUR_HORIZONTAL&#34;
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		Pass {  
+</span></span><span class=line><span class=cl>			CGPROGRAM  
+</span></span><span class=line><span class=cl>			#pragma vertex vertBloom  
+</span></span><span class=line><span class=cl>			#pragma fragment fragBloom  
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			ENDCG  
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>	FallBack Off
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=F:%5cUNITY%5c%ef%bc%88%e5%86%af%e4%b9%90%e4%b9%90%ef%bc%89Unity_Shaders_Book%5cAssets%5cScripts%5cChapter12%5cBloom.cs>Bloom.cs</a></p><h2 id=126-运动模糊>12.6 运动模糊</h2><p>运动模糊是真实世界中的摄像机的一种效果。如果在摄像机曝光时，拍摄场景发生了变化，就会产生模糊的画面。</p><p>运动模糊的实现有多种方法。一种实现方法是利用一块累积缓存(accumulationbuffer) 来混合多张连续的图像。当物体快速移动产生多张图像后,我们取它们之间的平均值作为最后的运动模糊图像。然而，这种暴力的方法对性能的消耗很大，因为想要获取多张帧图像往往意味着我们需要在同一帧里渲染多次场景。另一种应用广泛的方法是创建和使用速度缓存(velocitybufer)，这个缓存中存储了各个像素当前的运动速度，然后利用该值来决定模糊的方向和大小。</p><p>在本节中，我们将使用类似上述第一种方法的实现来模拟运动模糊的效果。我们不需要在一帧中把场景渲染多次，但需要保存之前的渲染结果，不断把当前的渲染图像叠加到之前的渲染图像中，从而产生一种运动轨迹的视觉效果。这种方法与原始的利用累计缓存的方法相比性能更好但模糊效果可能会略有影响。</p><p>为此，我们需要进行如下准备工作。</p><p>(1)新建一个场景。在本书资源中，该场景名为Scene126。在Unity5.2中，默认情况下场景将包含一个摄像机和一个平行光，并且使用了内置的天空盒子。在Window→Lighting→Skybox中去掉场景中的天空盒子。</p><p>(2)我们需要搭建一个测试运动模糊的场景。在本书资源的实现中，我们构建了一个包含3面墙的房间，并放置了4个立方体，它们均使用了我们在9.5节中创建的标准材质。同时，我们把本书资源中的 Translating.cs脚本拖曳给摄像机，让其在场景中不断运动。</p><p>(3)新建一个脚本。在本书资源中，该脚本名为MotionBlur.cs。把该脚本拖曳到摄像机上。</p><p>(4)新建一个 Unity Shader。在本书资源中，该 Shader名为 Chapter12-MotionBlur。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Upgrade NOTE: replaced &#39;mul(UNITY_MATRIX_MVP,*)&#39; with &#39;UnityObjectToClipPos(*)&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Shader &#34;Unity Shaders Book/Chapter 12/Motion Blur&#34; {
+</span></span><span class=line><span class=cl>	Properties {
+</span></span><span class=line><span class=cl>		_MainTex (&#34;Base (RGB)&#34;, 2D) = &#34;white&#34; {}
+</span></span><span class=line><span class=cl>		_BlurAmount (&#34;Blur Amount&#34;, Float) = 1.0
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl>	SubShader {
+</span></span><span class=line><span class=cl>		CGINCLUDE
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		#include &#34;UnityCG.cginc&#34;
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		sampler2D _MainTex;
+</span></span><span class=line><span class=cl>		fixed _BlurAmount;
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		struct v2f {
+</span></span><span class=line><span class=cl>			float4 pos : SV_POSITION;
+</span></span><span class=line><span class=cl>			half2 uv : TEXCOORD0;
+</span></span><span class=line><span class=cl>		};
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		v2f vert(appdata_img v) {
+</span></span><span class=line><span class=cl>			v2f o;
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			o.pos = UnityObjectToClipPos(v.vertex);
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			o.uv = v.texcoord;
+</span></span><span class=line><span class=cl>					 
+</span></span><span class=line><span class=cl>			return o;
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		fixed4 fragRGB (v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>			return fixed4(tex2D(_MainTex, i.uv).rgb, _BlurAmount);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		half4 fragA (v2f i) : SV_Target {
+</span></span><span class=line><span class=cl>			return tex2D(_MainTex, i.uv);
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		ENDCG
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		ZTest Always Cull Off ZWrite Off
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		Pass {
+</span></span><span class=line><span class=cl>			Blend SrcAlpha OneMinusSrcAlpha
+</span></span><span class=line><span class=cl>			ColorMask RGB
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			CGPROGRAM
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			#pragma vertex vert  
+</span></span><span class=line><span class=cl>			#pragma fragment fragRGB  
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			ENDCG
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		Pass {   
+</span></span><span class=line><span class=cl>			Blend One Zero
+</span></span><span class=line><span class=cl>			ColorMask A
+</span></span><span class=line><span class=cl>			   	
+</span></span><span class=line><span class=cl>			CGPROGRAM  
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>			#pragma vertex vert  
+</span></span><span class=line><span class=cl>			#pragma fragment fragA
+</span></span><span class=line><span class=cl>			  
+</span></span><span class=line><span class=cl>			ENDCG
+</span></span><span class=line><span class=cl>		}
+</span></span><span class=line><span class=cl>	}
+</span></span><span class=line><span class=cl> 	FallBack Off
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=F:%5cUNITY%5c%ef%bc%88%e5%86%af%e4%b9%90%e4%b9%90%ef%bc%89Unity_Shaders_Book%5cAssets%5cScripts%5cChapter12%5cMotionBlur.cs>MotionBlur.cs</a></p><p>注意：Translating.cs脚本拖曳给摄像机，让其在场景中不断运动。</p><p><a class=link href=F:%5cUNITY%5c%ef%bc%88%e5%86%af%e4%b9%90%e4%b9%90%ef%bc%89Unity_Shaders_Book%5cAssets%5cScripts%5cHelpers%5cTranslating.cs>Translating.cs</a></p></section><footer class=article-footer><section class=article-tags><a href=/tags/unity-shader/>Unity Shader</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/18-%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93/><div class=article-image><img src=/p/18-%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 18 基于物理的渲染" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>18 基于物理的渲染</h2></div></a></article><article class=has-image><a href=/p/17-%E8%A1%A8%E9%9D%A2%E7%9D%80%E8%89%B2%E5%99%A8/><div class=article-image><img src=/p/17-%E8%A1%A8%E9%9D%A2%E7%9D%80%E8%89%B2%E5%99%A8/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 17 表面着色器" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>17 表面着色器</h2></div></a></article><article class=has-image><a href=/p/16-unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/><div class=article-image><img src=/p/16-unity%E4%B8%AD%E7%9A%84%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 16 Unity中的渲染优化技术" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>16 Unity中的渲染优化技术</h2></div></a></article><article class=has-image><a href=/p/15-%E5%99%AA%E5%A3%B0%E8%BF%90%E7%94%A8/><div class=article-image><img src=/p/15-%E5%99%AA%E5%A3%B0%E8%BF%90%E7%94%A8/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 15 噪声运用" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>15 噪声运用</h2></div></a></article><article class=has-image><a href=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/><div class=article-image><img src=/p/14-%E9%9D%9E%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B8%B2%E6%9F%93/cover1.f0ee1d8d7de22d60daf4501adfe94826_hu_84c42c197d6af0f3.png width=250 height=150 loading=lazy alt="Featured image of post 14 非真实感渲染" data-hash="md5-8O4djX3iLWDa9FAa3+lIJg=="></div><div class=article-details><h2 class=article-title>14 非真实感渲染</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2024 -
+2026 Selaphina</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.34.2>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
