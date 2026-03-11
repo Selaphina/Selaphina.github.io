@@ -10,7 +10,7 @@ tags:
 weight: 1998       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
-## 1. Blender导出带贴图模型
+## Unity .Anim冗余空帧删除插件
 
 **资源预处理插件**，目标是对 `AnimationClip` 做 **关键帧冗余消除（Keyframe Reduction）**。在资源大小压缩的角度来看，非常有必要写一个自动化插件来减轻对动画资源的压缩的工作：
 
@@ -28,7 +28,7 @@ weight: 1998       # You can add weight to some posts to override the default so
 
 ## 删帧算法思路
 
-**核心思路：**删除整条无变化曲线（认为这是冗余关键帧）
+删除整条无变化曲线（认为这是冗余关键帧）
 
 ```
 给 key[i-1], key[i], key[i+1]
@@ -42,7 +42,7 @@ weight: 1998       # You can add weight to some posts to override the default so
 则删除 key[i]
 ```
 
-## 关键风险点
+## 主要注意点
 
 ### 1. Quaternion 曲线
 
@@ -123,8 +123,3 @@ curve.SmoothTangents()
 ![image-20260205214723147](image-20260205214723147.png)
 
 每个带动画模型都能减少100k左右的话，所有模型加起来减少的大小就很可观，所谓不积跬步无以至千里……
-
-
-
-
-
