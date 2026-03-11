@@ -1,7 +1,7 @@
 ---
 title: Unity URP仿原神渲染
 description: 记录
-date: 2025-12-11 20:32:30+0000
+date: 2125-12-11 20:32:30+0000
 image: CUC兑换点2.png
 categories:
     - 技术笔记
@@ -9,11 +9,7 @@ weight: 1995       # You can add weight to some posts to override the default so
 
 ---
 
-![最终效果展示](final.gif)
-
-关于原神的卡渲效果实现，各路大佬们贡献了非常丰富的方案，文末会指路参考的技术分享帖。作为萌新，非常有幸能站在巨人们的肩膀上，这里尝试用新角色杜林来试着复现原神的渲染方法。
-
-## 前期准备工作
+## 1 前期准备工作
 
 1.新建URP 3D项目
 
@@ -35,13 +31,62 @@ mask改为everything。
 
 ![image-20251211220842140](image-20251211220842140.png)
 
-## 代码结构
+> TODO: 有仙人曾言： // 我自己试下来，在角色身上 LowQuality 比 Medium 和 High 好
+>  // Medium 和 High 采样数多，过渡的区间大，在角色身上更容易出现 Perspective aliasing
+>
+> 等到时候自己验证一下在说 。
+
+FaceLightmap
+
+![FaceLightmap](image-20251211221505443.png)
+
+Body_Diffuse
+
+![image-20251211221635125](image-20251211221635125.png)
+
+Body_lightmap
+
+![image-20251211221733472](image-20251211221733472.png)
+
+法线图
+
+![image-20251211222108578](image-20251211222108578.png)
+
+shadow ramp
+
+![image-20251211222233237](image-20251211222233237.png)
+
+Face_Diffuse
+
+![image-20251211222320885](image-20251211222320885.png)
+
+Hair_Diffuse
+
+![头发漫反射](image-20251211222358382.png)
+
+hair_lightmap
+
+![image-20251211222446504](image-20251211222446504.png)
+
+MetalMap
+
+![image-20251211222623823](image-20251211222623823.png)
+
+贴图设置完毕。
+
+值得注意的是 杜林的翅膀贴图是和头发放在一起，观察一下贴图纹理的对应。
+
+![image-20251221163249828](image-20251221163249828.png)
+
+
+
+## 2 代码结构
 
 ### 1.整体结构
 
 ![整体的结构](image-20251220215926595.png)
 
-注意：HLSL的代码结构，和CG有一定的区别
+一开始不太习惯HLSL的代码结构，和CG有一定的区别，注意。
 
 ```
 Shader "EXAM1/EXAM_Shader"
@@ -65,6 +110,8 @@ Shader "EXAM1/EXAM_Shader"
 
 ### 2.Subshader结构
 
+![](image-20251220220214291.png)
+
 ```
  SubShader
  {
@@ -82,6 +129,8 @@ Shader "EXAM1/EXAM_Shader"
      {……}
  }
 ```
+
+### Subshader结构
 
 **1.HLSLINCLUDE & ENDHLSL**
 
@@ -114,7 +163,7 @@ Shader "EXAM1/EXAM_Shader"
 
 在Unity URP Shader中，每个Pass通常需要将顶点和片元着色器代码包裹在`HLSLPROGRAM`和`ENDHLSL`块中。
 
-### 3.Pass结构
+### Pass结构
 
 Pass块中，需要在`Tags`之后添加`HLSLPROGRAM`：
 
@@ -177,7 +226,7 @@ half4 frag(v2f i) : SV_TARGET
 
 ```
 
-## 正式开始
+## 3 正式开始
 
 正式开始前先把计算需要用到的变量和向量等数据准备好，先来准备面板参数，面板参数如下：
 
@@ -310,6 +359,8 @@ v2f vert(a2v v)
      return o;  //返回顶点Shader
  }
 ```
+
+![](image-20251228153854738.png)
 
 #### 4）【重点】frag 片元着色器
 
