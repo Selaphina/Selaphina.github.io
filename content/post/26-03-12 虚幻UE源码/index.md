@@ -8,8 +8,6 @@ categories:
 weight: 1997       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
-
-
 # 虚幻引擎
 
 本文用作记录编译UE5源码的基本流程，以及需要注意的事项。
@@ -49,17 +47,37 @@ git clone --depth=1 https://github.com/EpicGames/UnrealEngine.git
 
 > --depth=1：浅克隆（shallow clone），只下载最近一次 commit
 
-然后进入，运行安装脚本进一步下载
+克隆结束后有两步:
+
+* 执行 Setup.bat。可以在命令行加个 `--threads=20` 参数，多线程下载。
+* 执行 GenerateProjectFiles.bat。
+
+1: 运行安装脚本进一步下载
 
 ```
 cd UnrealEngine
+
 ./Setup.bat
 ```
 
-然后生成VS工程
+（或者）提速：
+
+```
+./Setup.bat --threads=16
+```
+
+（或）**只下载 Windows 平台依赖（节省约20GB）**。
+
+```
+./Setup.bat --threads=20 -exclude=Mac -exclude=Linux -exclude=Android -exclude=IOS
+```
+
+2: 生成VS工程
 
 ```
 ./GenerateProjectFiles.bat
 ```
 
 这样才能在 Microsoft Visual Studio 里编译引擎。
+
+## 双击 UE4.sln，进入 VS。

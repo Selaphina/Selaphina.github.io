@@ -305,8 +305,6 @@ or
 ssh -T git@github-wang
 ```
 
-
-
 3.接下来就可以正常操作了
 
 ```
