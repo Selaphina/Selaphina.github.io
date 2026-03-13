@@ -80,6 +80,16 @@ cd UnrealEngine
 
 这样才能在 Microsoft Visual Studio 里编译引擎。
 
-## 3.双击 UE4.sln，进入 VS。
+## 3.参考官方的VS编译文档
 
-未完待续……
+[从源代码构建虚幻引擎 | 虚幻引擎 5.4 文档 | Epic Developer Community](https://dev.epicgames.com/documentation/zh-cn/unreal-engine/building-unreal-engine-from-source?application_version=5.4)
+
+切换到Development Editor
+
+目标平台是Win64
+
+![](image-20260313144435236.png)
+
+推荐使用Rider IDE
+
+[(5 条消息) 【UE-Dev】UE5.5源码版 编译指引 - 知乎](https://zhuanlan.zhihu.com/p/1899504548462166111)
