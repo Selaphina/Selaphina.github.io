@@ -19,6 +19,12 @@ IDE：Visual Studio 2022
 SSD：400+GB
 ```
 
+## 1.确保VS正常使用
+
+Visual Studio 2022
+
+![](image-20260314182750678.png)
+
 ## 1.关联Epic与github账号
 
 [GitHub上的虚幻引擎 - Unreal Engine](https://www.unrealengine.com/zh-CN/ue-on-github)
@@ -69,13 +75,15 @@ cd UnrealEngine
 （或）**只下载 Windows 平台依赖（节省约20GB）**。
 
 ```
-./Setup.bat --threads=20 -exclude=Mac -exclude=Linux -exclude=Android -exclude=IOS
+./Setup.bat --threads=16 -exclude=Mac -exclude=Linux -exclude=Android -exclude=IOS
 ```
+
+这一步依赖下载后，整个UE源码占用80G的空间。
 
 2: 生成VS工程
 
 ```
-./GenerateProjectFiles.bat
+./GenerateProjectFiles.bat --threads=16
 ```
 
 这样才能在 Microsoft Visual Studio 里编译引擎。
@@ -90,6 +98,14 @@ cd UnrealEngine
 
 ![](image-20260313144435236.png)
 
-推荐使用Rider IDE
+推荐使用Rider IDE。注意，即使使用的是rider，也仍然需要在VS中安装好负载，Rider才可以顺畅地使用。
 
 [(5 条消息) 【UE-Dev】UE5.5源码版 编译指引 - 知乎](https://zhuanlan.zhihu.com/p/1899504548462166111)
+
+**1：**用Rider打开UE5.sln
+
+2：配置解决方案和编译目标以及平台（项目默认是配置好的）
+
+![配置解决方案](image-20260314213702833.png)
+
+**3：**构建项目（快速等待：首次构建大概需要 几个小时 的时长）
