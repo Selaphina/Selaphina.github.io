@@ -1,7 +1,7 @@
 ---
 title: Blender常用需求
 description: 需求：模型减面+fbx动画导出+实体化描边。
-date: 2025-11-22 10:20:12+0000
+date: 2125-11-22 10:20:12+0000
 image: cover1.png
 categories:
     - 技术笔记
