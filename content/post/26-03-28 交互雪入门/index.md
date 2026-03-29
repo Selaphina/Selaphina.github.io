@@ -202,6 +202,9 @@ dpi：分辨率，即RT的尺寸（如1024 x 1024）
 
 * 新建BP_Brush
 * 新建S_BrushInfo（Blueprint——Structure）
+* BP_画板
+  * 新增变量S_Brush_Infos Array（数组类型）
+* 新建M_Draw
 * 
 
 ### BP_Brush
@@ -212,7 +215,17 @@ dpi：分辨率，即RT的尺寸（如1024 x 1024）
 
 ![](image-20260328220618873.png)
 
-#### S_BrushInfo
+参数：
+
+| 变量名 | 变量类型 |
+| ------ | -------- |
+| 画板   | BP_画板  |
+| Size   | 脚印大小 |
+| Height | 雪地高度 |
+
+
+
+### S_BrushInfo
 
 ![](image-20260328215459290.png)
 
@@ -222,5 +235,12 @@ SIze：2D向量
 
 
 
+
+
+### BP_画板
+
 ![折叠函数](image-20260328213724846.png)
+
+为了保证Tick中运行顺序在BP_Brush之后，在class default中
+![将BP_画板的tick顺序改为：Post Physics（物理后）](image-20260329105357616.png)
 
