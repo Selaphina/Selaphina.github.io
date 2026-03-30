@@ -1,0 +1,1605 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具指南 on Selaphina</title><link>https://Selaphina.github.io/categories/%E5%B7%A5%E5%85%B7%E6%8C%87%E5%8D%97/</link><description>Recent content in 工具指南 on Selaphina</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 19 Feb 2026 10:20:12 +0000</lastBuildDate><atom:link href="https://Selaphina.github.io/categories/%E5%B7%A5%E5%85%B7%E6%8C%87%E5%8D%97/index.xml" rel="self" type="application/rss+xml"/><item><title>Unity fBM噪波实现可控程序化墨色纹理</title><link>https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/</link><pubDate>Thu, 19 Feb 2026 10:20:12 +0000</pubDate><guid>https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/</guid><description>&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/cover1.png" alt="Featured image of post Unity fBM噪波实现可控程序化墨色纹理" /&gt;&lt;h1 id="技术分享--从-blender-到-unity如何实现高保真水墨风格-fbm-噪波与水渍边缘"&gt;技术分享 | 从 Blender 到 Unity：如何实现高保真水墨风格 fBM 噪波与水渍边缘
+&lt;/h1&gt;&lt;p&gt;在非写实渲染（NPR）领域，水墨风格一直是一个极具挑战性的方向。&lt;/p&gt;
+&lt;p&gt;本文将分享如何通过将 Blender 的 3D fBM 算法移植到 Unity，并结合屏幕空间导数边缘检测，实现程序化水墨材质。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关于blender内水墨纹理的实现参考了五天晴老师的方案。&lt;/li&gt;
+&lt;li&gt;代码地址：&lt;a class="link" href="https://github.com/Selaphina/Ink-Tex-fBM-Shader" target="_blank" rel="noopener"
+&gt;Selaphina/Ink-Tex-fBM-Shader: 仿 &lt;strong&gt;Blender 3D fBM 噪波&lt;/strong&gt;，在Unity中实现程序化水墨纹理。&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="一-奠定基石-blender-的-3d-fbm-噪波"&gt;一、 奠定基石： Blender 的 3D fBM 噪波
+&lt;/h3&gt;&lt;p&gt;很多传统的 Shader 噪波实现依赖于 &lt;code&gt;sin(dot(p, v))&lt;/code&gt; 这种简单的伪随机哈希，其边缘和分布往往不够均匀，层叠后极易产生模糊。&lt;/p&gt;
+&lt;p&gt;为了更加手工可控的质感，我选择了&lt;strong&gt;参考 Blender 的fBM噪波算法&lt;/strong&gt;（参考其 &lt;code&gt;gpu_shader_material_noise.glsl&lt;/code&gt; 源码）到Unity中实现。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310203304080.png"
+width="689"
+height="952"
+srcset="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310203304080_hu_449775ba60dd9d7c.png 480w, https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310203304080_hu_44de30ee01c667fa.png 1024w"
+loading="lazy"
+alt="五天晴老师分享的blender墨色纹理着色器开放的变量如下"
+class="gallery-image"
+data-flex-grow="72"
+data-flex-basis="173px"
+&gt;&lt;/p&gt;
+&lt;p&gt;开放了这几个重要的变量：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;黑噪波大小&lt;/li&gt;
+&lt;li&gt;白噪波大小&lt;/li&gt;
+&lt;li&gt;颜色混合&lt;/li&gt;
+&lt;li&gt;渐变混合&lt;/li&gt;
+&lt;li&gt;笔触强度&lt;/li&gt;
+&lt;li&gt;笔触大小&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我希望在unity工程内实现水墨风格的渲染建筑，blender的材质当然不能连根拔起地带过去，于是，在unity内实现一个类似的噪波纹理，来近似这个效果。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310203654019.png"
+width="279"
+height="459"
+srcset="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310203654019_hu_1f03cfcc73c59a6e.png 480w, https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310203654019_hu_65be5581a0a31965.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="60"
+data-flex-basis="145px"
+&gt;&lt;/p&gt;
+&lt;h4 id="1-整数哈希与梯度向量"&gt;1. 整数哈希与梯度向量
+&lt;/h4&gt;&lt;p&gt;不同于简易哈希，Blender 使用了经典的 &lt;strong&gt;Bob Jenkins 整数位运算哈希&lt;/strong&gt;。这保证了在 3D 空间中点位采样后的结果具有极高的分布均匀性，是消除“噪波感模糊”的第一步。同时采用 12 方向梯度向量而非随机旋向，使得噪波的形状更加硬朗、可控。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;span class="lnt"&gt;44
+&lt;/span&gt;&lt;span class="lnt"&gt;45
+&lt;/span&gt;&lt;span class="lnt"&gt;46
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;// ---- Integer Hash (Bob Jenkins one-at-a-time) ----
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // 1D hash: 用于时间序列，音频波形等
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint blender_hash(uint kx)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint c = 0xdeadbeefu + (1u &amp;lt;&amp;lt; 2u) + 13u;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint a = c, b = c;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; a += kx;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c ^= b; c -= (b &amp;lt;&amp;lt; 14u) | (b &amp;gt;&amp;gt; 18u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; a ^= c; a -= (c &amp;lt;&amp;lt; 11u) | (c &amp;gt;&amp;gt; 21u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; b ^= a; b -= (a &amp;lt;&amp;lt; 25u) | (a &amp;gt;&amp;gt; 7u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c ^= b; c -= (b &amp;lt;&amp;lt; 16u) | (b &amp;gt;&amp;gt; 16u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; a ^= c; a -= (c &amp;lt;&amp;lt; 4u) | (c &amp;gt;&amp;gt; 28u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; b ^= a; b -= (a &amp;lt;&amp;lt; 14u) | (a &amp;gt;&amp;gt; 18u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c ^= b; c -= (b &amp;lt;&amp;lt; 24u) | (b &amp;gt;&amp;gt; 8u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; return c;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // 2D hash: 用于纹理（uv坐标），地形等
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint blender_hash2(uint kx, uint ky)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint c = 0xdeadbeefu + (2u &amp;lt;&amp;lt; 2u) + 13u;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint a = c, b = c;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; b += ky; a += kx;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c ^= b; c -= (b &amp;lt;&amp;lt; 14u) | (b &amp;gt;&amp;gt; 18u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; a ^= c; a -= (c &amp;lt;&amp;lt; 11u) | (c &amp;gt;&amp;gt; 21u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; b ^= a; b -= (a &amp;lt;&amp;lt; 25u) | (a &amp;gt;&amp;gt; 7u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c ^= b; c -= (b &amp;lt;&amp;lt; 16u) | (b &amp;gt;&amp;gt; 16u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; a ^= c; a -= (c &amp;lt;&amp;lt; 4u) | (c &amp;gt;&amp;gt; 28u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; b ^= a; b -= (a &amp;lt;&amp;lt; 14u) | (a &amp;gt;&amp;gt; 18u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c ^= b; c -= (b &amp;lt;&amp;lt; 24u) | (b &amp;gt;&amp;gt; 8u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; return c;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // 3D hash：3D体素、3D噪声、世界空间位置
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint blender_hash3(uint kx, uint ky, uint kz)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint c = 0xdeadbeefu + (3u &amp;lt;&amp;lt; 2u) + 13u;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint a = c, b = c;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c += kz; b += ky; a += kx;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c ^= b; c -= (b &amp;lt;&amp;lt; 14u) | (b &amp;gt;&amp;gt; 18u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; a ^= c; a -= (c &amp;lt;&amp;lt; 11u) | (c &amp;gt;&amp;gt; 21u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; b ^= a; b -= (a &amp;lt;&amp;lt; 25u) | (a &amp;gt;&amp;gt; 7u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c ^= b; c -= (b &amp;lt;&amp;lt; 16u) | (b &amp;gt;&amp;gt; 16u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; a ^= c; a -= (c &amp;lt;&amp;lt; 4u) | (c &amp;gt;&amp;gt; 28u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; b ^= a; b -= (a &amp;lt;&amp;lt; 14u) | (a &amp;gt;&amp;gt; 18u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c ^= b; c -= (b &amp;lt;&amp;lt; 24u) | (b &amp;gt;&amp;gt; 8u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; return c;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="2-3d-object-space-与域扭曲domain-warping"&gt;2. 3D Object Space 与域扭曲（Domain Warping）
+&lt;/h4&gt;&lt;p&gt;引入了&lt;strong&gt;畸变（Distortion）参数&lt;/strong&gt;，通过对坐标进行二次噪波偏移，让水墨的扩散呈现出有机的、云雾般的波动感。采用 &lt;strong&gt;3D Object Space&lt;/strong&gt; 进行采样，确保水墨材质在模型移动或变形时保持稳定。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这里借助nano banana的学术制图功能制作了示意图：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310205733166.png"
+width="2411"
+height="1095"
+srcset="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310205733166_hu_4144f4e58d8d0938.png 480w, https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310205733166_hu_dd8f3e9d722d63c4.png 1024w"
+loading="lazy"
+alt="image-20260310205733166"
+class="gallery-image"
+data-flex-grow="220"
+data-flex-basis="528px"
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="二-去除模糊"&gt;二、 去除模糊
+&lt;/h3&gt;&lt;p&gt;Perlin 噪波天然具有连续平滑的特性，直接映射到颜色上非常模糊。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310204830935.png"
+width="818"
+height="662"
+srcset="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310204830935_hu_d7ba5f560eacd378.png 480w, https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310204830935_hu_511664106e170cbd.png 1024w"
+loading="lazy"
+alt="基础的perlin噪声很平滑，不锐利"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="296px"
+&gt;&lt;/p&gt;
+&lt;p&gt;水墨画的核心特征在于**“墨分五色”**——浓、淡、干、湿、焦。这里分了四个色阶来手动把握颜色：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310205539297.png"
+width="307"
+height="155"
+srcset="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310205539297_hu_d8bc88d5de55d1c6.png 480w, https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310205539297_hu_999de21a408a1b54.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="198"
+data-flex-basis="475px"
+&gt;&lt;/p&gt;
+&lt;h4 id="smoothstep-阈值量化"&gt;&lt;code&gt;smoothstep&lt;/code&gt; 阈值量化
+&lt;/h4&gt;&lt;p&gt;在 Shader 中，我们不使用简单的 &lt;code&gt;lerp&lt;/code&gt;，而是通过多个极窄的 &lt;code&gt;smoothstep&lt;/code&gt; 区间来切割噪波值。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-hlsl" data-lang="hlsl"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 将 [0,1] 的连续噪波切割为锐利的色阶&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;_EdgeSharpness&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 极窄的过渡宽度&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;band1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;smoothstep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.25&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.25&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rampInput&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;band2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;smoothstep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.50&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.50&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rampInput&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;float3&lt;/span&gt; &lt;span class="n"&gt;rampColor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;lerp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;deepInk&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;lerp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mediumInk&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;paperWhite&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;band2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;band1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过控制 &lt;code&gt;_EdgeSharpness&lt;/code&gt;，我们可以自由控制墨色分层的硬度，从而在保证随机形状的同时，获得极高的视觉对比度。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310210432591.png"
+width="1371"
+height="644"
+srcset="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310210432591_hu_84085f5409eed1ed.png 480w, https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310210432591_hu_c0edf72e5842677e.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="212"
+data-flex-basis="510px"
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="三-模拟水渍边缘water-stain-edge"&gt;三、 模拟水渍边缘（Water Stain Edge）
+&lt;/h3&gt;&lt;p&gt;传统水墨在宣纸上扩散时，水分蒸发会导致颜料停留在边界，形成**“外深内浅”**的锐利轮廓。这是水墨质感最关键的“水渍感”。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310205006350.png"
+width="555"
+height="417"
+srcset="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310205006350_hu_aa074b91d3e1a371.png 480w, https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/image-20260310205006350_hu_d1d8166190870053.png 1024w"
+loading="lazy"
+alt="blender的实现效果"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+&gt;&lt;/p&gt;
+&lt;h4 id="进阶技巧屏幕空间偏导数ddxddy"&gt;进阶技巧：屏幕空间偏导数（ddx/ddy）
+&lt;/h4&gt;&lt;p&gt;通过硬件指令 &lt;code&gt;ddx&lt;/code&gt; 和 &lt;code&gt;ddy&lt;/code&gt;，我们可以实时获取当前像素噪波值的变化梯度（Gradient）。梯度越大的地方，恰恰就是噪波纹理的&lt;strong&gt;边缘&lt;/strong&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-hlsl" data-lang="hlsl"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 计算噪波输入的屏幕空间梯度&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;edgeGradient&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;length&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;float2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;ddx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rampInput&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="nb"&gt;ddy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rampInput&lt;/span&gt;&lt;span class="p"&gt;)));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;edgeFactor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;saturate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;edgeGradient&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_EdgeSharpness&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.001&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 在边缘处加深墨色 -&amp;gt; 模拟颜料堆积&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;rampInput&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="n"&gt;edgeFactor&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;_EdgeDarken&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/GIFshow.gif"
+width="1154"
+height="584"
+srcset="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/GIFshow_hu_b00bae481a95c7b.gif 480w, https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/GIFshow_hu_a0585a7859627c4d.gif 1024w"
+loading="lazy"
+alt="GIFshow"
+class="gallery-image"
+data-flex-grow="197"
+data-flex-basis="474px"
+&gt;&lt;/p&gt;
+&lt;p&gt;这种方案的开销低（GPU 硬件原生支持)，在程序化生成的噪波边界上绘制出一圈深色的水墨沉淀，还原了写意画中墨晕边界的质感。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="四-综合效果展示"&gt;四、 综合效果展示
+&lt;/h3&gt;&lt;p&gt;最终实现的 Shader 效果展示：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/GIFend.gif"
+width="620"
+height="618"
+srcset="https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/GIFend_hu_47bccc7838c7bcb5.gif 480w, https://Selaphina.github.io/p/unity-fbm%E5%99%AA%E6%B3%A2%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8E%A7%E7%A8%8B%E5%BA%8F%E5%8C%96%E5%A2%A8%E8%89%B2%E7%BA%B9%E7%90%86/GIFend_hu_8d114696eda4ed42.gif 1024w"
+loading="lazy"
+alt="GIFend"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Blender 级参数&lt;/strong&gt;：支持 Detail（细节层数）、Roughness（糙度）、Lacunarity（间隙度）等精细化调节。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hue 通道映射&lt;/strong&gt;：内部通过三路 3D 噪波合成色彩后提取 &lt;strong&gt;Hue（色相）&lt;/strong&gt; 通道，使最终生成的黑白分布比单通道噪波更具随机感和层次感。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自定义墨色 Ramp&lt;/strong&gt;：支持从浓墨到纸白的四级调色板自定义，配合程序化生成的锐利边缘。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;Shader 源码放在：&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/Selaphina/Ink-Tex-fBM-Shader.git" target="_blank" rel="noopener"
+&gt;https://github.com/Selaphina/Ink-Tex-fBM-Shader.git&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="附录"&gt;附录
+&lt;/h2&gt;&lt;h3 id="noise_grad3uint-hash-float-x-float-y-float-z为什么是12个方向"&gt;&lt;code&gt;noise_grad3(uint hash, float x, float y, float z)&lt;/code&gt;为什么是12个方向？
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;// ---- 3D gradient from hash (12 directions, matching Blender) ----
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // 将哈希值映射到12个三维梯度方向之一
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float noise_grad3(uint hash, float x, float y, float z)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; uint h = hash &amp;amp; 15u;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float u = (h &amp;lt; 8u) ? x : y;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float vt = ((h == 12u) || (h == 14u)) ? x : z;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; float v = (h &amp;lt; 4u) ? y : vt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; return negate_if(u, h &amp;amp; 1u) + negate_if(v, h &amp;amp; 2u);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这是Ken Perlin原始论文的优化：用12个三维向量近似单位球面上的均匀分布，避免开方计算（归一化），同时保持较好的各向同性。&lt;/p&gt;
+&lt;h3 id="perlin噪声为什么平滑"&gt;perlin噪声为什么平滑？
+&lt;/h3&gt;&lt;p&gt;五次缓动函数：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：对插值权重&lt;code&gt;t&lt;/code&gt;（范围0~1）进行平滑过渡，保证函数在0和1处的一阶、二阶导数均为0（C2连续）。&lt;/p&gt;
+&lt;p&gt;这是柏林噪声&lt;strong&gt;平滑&lt;/strong&gt;的关键。原始柏林噪声用&lt;code&gt;3t²-2t³&lt;/code&gt;（C1连续），而此处的&lt;code&gt;6t⁵-15t⁴+10t³&lt;/code&gt;（&lt;strong&gt;Quintic Fade&lt;/strong&gt;）更平滑，可消除Mach带等视觉瑕疵。&lt;/p&gt;
+&lt;p&gt;它让插值结果在网格边界（&lt;code&gt;t=0&lt;/code&gt;或&lt;code&gt;t=1&lt;/code&gt;）时变化率为0，实现无缝拼接。&lt;/p&gt;</description></item><item><title>Git新手使用规范</title><link>https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/</link><pubDate>Wed, 12 Nov 2025 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/</guid><description>&lt;img src="https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/cover.png" alt="Featured image of post Git新手使用规范" /&gt;&lt;p&gt;因为Git是分布式的，你的本地仓库和远程仓库（如GitHub, GitLab）可能不同步。直接&lt;code&gt;git push&lt;/code&gt;可能会因为远程有比你本地更新的提交而被拒绝，或者更糟的是，造成复杂的冲突。&lt;/p&gt;
+&lt;h2 id="简化流程项目允许直接推送到主分支"&gt;简化流程（项目允许直接推送到主分支）
+&lt;/h2&gt;&lt;p&gt;对于非常小的团队或个人项目，有时会直接在主分支上工作。即便如此，**“先拉取，再推送”**的原则依然不变。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 1. 拉取远程最新代码，自动合并
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin master
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 2. （解决可能的冲突，如果有）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 3. 进行你的开发工作，添加、提交
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;你的提交信息&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 4. 再次拉取，确保在推送前是最新的（期间可能有人提交了代码）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin master
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 5. 解决可能出现的冲突（第二次拉取时）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 6. 推送
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="规范的日常协作流程分支工作流"&gt;规范的日常协作流程（分支工作流）
+&lt;/h2&gt;&lt;p&gt;这个流程结合了分支策略，是最安全、最高效的方法。&lt;/p&gt;
+&lt;h3 id="第零步准备工作一次性"&gt;第零步：准备工作（一次性）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;克隆仓库&lt;/strong&gt;：如果是第一次参与项目，先将远程仓库克隆到本地。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone &amp;lt;远程仓库地址&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cd &amp;lt;项目文件夹名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;设置上游分支（可选）&lt;/strong&gt;：克隆后，你的本地&lt;code&gt;main&lt;/code&gt;（或&lt;code&gt;master&lt;/code&gt;）分支通常已经自动跟踪了远程的&lt;code&gt;origin/main&lt;/code&gt;分支。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第一步开始新功能或修复前基于最新代码创建分支"&gt;第一步：开始新功能或修复前——基于最新代码创建分支
+&lt;/h3&gt;&lt;p&gt;这是关键的最佳实践！不要在本地的主分支上直接修改。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;切换到主分支&lt;/strong&gt;：确保你从一个干净的起点开始。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;拉取远程最新变更&lt;/strong&gt;：这保证了你的主分支是最新的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin master
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 或者简单写 git pull （如果当前分支已跟踪远程分支）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;（初次）创建并切换到一个新分支&lt;/strong&gt;：分支名要有描述性，例如&lt;code&gt;feat/user-login&lt;/code&gt;或&lt;code&gt;fix/header-alignment&lt;/code&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout -b feature/wsy-shadow-branch
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;-b&lt;/code&gt;: 就是切换分支“branch”的意思。&lt;/p&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;&lt;strong&gt;(非初次)切换到自己的分支&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout feature/wsy-new-branch
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="4"&gt;
+&lt;li&gt;
+&lt;p&gt;可选：改完代码后查看修改了那些文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git status
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第二步日常开发工作"&gt;第二步：日常开发工作
+&lt;/h3&gt;&lt;p&gt;在你的特性分支上进行开发。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;进行修改&lt;/strong&gt;：添加、删除、修改代码文件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;暂存更改&lt;/strong&gt;：将需要提交的文件加入暂存区。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add &amp;lt;文件名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 或添加所有更改
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;提交更改&lt;/strong&gt;：在本地提交，写清晰的提交信息。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;feat: 新增用户登录接口&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;重复&lt;/strong&gt;：不断重复&lt;code&gt;add&lt;/code&gt;和&lt;code&gt;commit&lt;/code&gt;，直到功能完成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第三步可选准备推送-合并merge最新代码"&gt;第三步：（可选）准备推送-合并（merge）最新代码
+&lt;/h3&gt;&lt;p&gt;在将你的分支推送到远程之前，很可能主分支已经有了新的提交。你需要将这些新变化整合到你的特性分支中，以确保你的代码是基于最新代码的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;切换到主分支并PULL（拉下来）最新代码&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout master
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;切回你特性（feat）分支&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout feat/wsy-new-branch
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;将主分支的更新合并到你的分支&lt;/strong&gt;（有两种主流方式）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;方式A：合并（Merge）&lt;/strong&gt;（更简单，推荐新手）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git merge master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这会在你的特性分支上创建一个“合并提交”，记录整合点。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;方式B：变基（Rebase）&lt;/strong&gt;（历史更整洁，但需谨慎）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git rebase master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这会将你的所有提交“重新播放”在最新的主分支之上，使历史呈线性。&lt;strong&gt;注意：不要在公共分支上使用rebase&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;解决冲突（如果有）&lt;/strong&gt;：如果合并或变基过程中发生代码冲突，Git会提示你。你需要手动打开冲突文件，解决冲突（选择保留谁的代码，或进行修改）。解决后，使用&lt;code&gt;git add&lt;/code&gt;标记冲突已解决。如果使用&lt;code&gt;merge&lt;/code&gt;，然后执行&lt;code&gt;git commit&lt;/code&gt;（合并提交）。如果使用&lt;code&gt;rebase&lt;/code&gt;，执行&lt;code&gt;git rebase --continue&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第四步推送到远程并发起合并请求"&gt;第四步：推送到远程并发起合并请求
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;推送特性分支到远程&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin feat/your-feature-name
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# -u 参数设置上游分支，之后可以直接用 git push
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在GitHub/GitLab等平台上创建Pull Request（PR）&lt;/strong&gt;：前往你的仓库页面，通常会有提示让你创建PR。选择你的特性分支作为源分支，选择&lt;code&gt;main&lt;/code&gt;作为目标分支。在PR描述中清晰说明你的修改内容。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.左侧栏-branches&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/image-20251229165656531.png"
+width="2019"
+height="722"
+srcset="https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/image-20251229165656531_hu_d5328513c017dade.png 480w, https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/image-20251229165656531_hu_6dca942dbcb53525.png 1024w"
+loading="lazy"
+alt="image-20251229165656531"
+class="gallery-image"
+data-flex-grow="279"
+data-flex-basis="671px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2.New—自动跳转New Merge Request&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/image-20251229165844735.png"
+width="1326"
+height="509"
+srcset="https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/image-20251229165844735_hu_90ef77f1a07eb25.png 480w, https://Selaphina.github.io/p/git%E6%96%B0%E6%89%8B%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/image-20251229165844735_hu_32436e6b56bd5cdc.png 1024w"
+loading="lazy"
+alt="image-20251229165844735"
+class="gallery-image"
+data-flex-grow="260"
+data-flex-basis="625px"
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;代码审查&lt;/strong&gt;：团队成员在PR中进行讨论和代码审查。你可能需要根据反馈继续在本地分支上提交修改，然后再次&lt;code&gt;push&lt;/code&gt;，PR会自动更新。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;合并PR&lt;/strong&gt;：审查通过后，由有权限的人（可能就是你）将PR合并到主分支。通常平台会提供“Squash and Merge”（压缩合并）等选项，保持历史整洁。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="第五步清理"&gt;第五步：清理
+&lt;/h3&gt;&lt;p&gt;合并成功后，你可以删除本地和远程的特性分支，保持整洁。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;删除远程分支&lt;/strong&gt;（在PR页面或通过命令）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin --delete feat/your-feature-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;切换回主分支&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;拉取最新的合并结果&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;删除本地分支&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -d feat/your-feature-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="git-在新设备上配置新的ssh密钥"&gt;git 在新设备上配置新的SSH密钥
+&lt;/h2&gt;&lt;h3 id="1-检查现有的-ssh-密钥"&gt;1. &lt;strong&gt;检查现有的 SSH 密钥&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;打开 Git Bash 并运行以下命令，查看是否已存在 SSH 密钥：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ls -al ~/.ssh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果看到 &lt;code&gt;id_ed25519&lt;/code&gt;和 &lt;code&gt;id_ed25519.pub&lt;/code&gt;（或 &lt;code&gt;id_rsa&lt;/code&gt;和 &lt;code&gt;id_rsa.pub&lt;/code&gt;）等文件，说明你已有密钥。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="2-生成新的-ssh-密钥如果没有"&gt;2. &lt;strong&gt;生成新的 SSH 密钥（如果没有）&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;运行以下命令（替换为你的 GitHub 注册邮箱）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-keygen -t ed25519 -C &amp;#34;1806527871@qq.com&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;按 Enter 接受默认保存路径，并设置一个安全的密码（可选）。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="3-将-ssh-密钥添加到-ssh-agent"&gt;3. &lt;strong&gt;将 SSH 密钥添加到 ssh-agent&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;启动 ssh-agent 并添加密钥：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;eval &amp;#34;$(ssh-agent -s)&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-add ~/.ssh/id_ed25519
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id="4-将公钥复制到-github"&gt;4. &lt;strong&gt;将公钥复制到 GitHub&lt;/strong&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;显示公钥内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cat ~/.ssh/id_ed25519.pub
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复制输出的全部内容（以 &lt;code&gt;ssh-ed25519&lt;/code&gt;开头）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;登录 GitHub → Settings → SSH and GPG keys → New SSH key → 粘贴并保存。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="C:%5cUsers%5cAdministrator%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20251114103822658.png"
+loading="lazy"
+alt="image-20251114103822658"
+&gt;&lt;/p&gt;
+&lt;h2 id="git怎么同时管理多个账号"&gt;git怎么同时管理多个账号
+&lt;/h2&gt;&lt;p&gt;当本机上有大于等于2个github账号时，登录信息可能会错乱，特别时访问组织/企业的私有仓库拉取项目时，很容易报错。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;fatal: repository &amp;#39;https://github.com/xxx-xxxx-xxxx/xxx_xxxx_xxxxx.git/&amp;#39; not found
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;又或者，想切回自己的个人仓库提交东西，却发现：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ERROR: Permission to Selaphina/Selaphina.github.io.git denied to WangSiya010. fatal: Could not read from remote repository.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;仓库所有者&lt;/strong&gt;：&lt;code&gt;Selaphina&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;你当前使用的 GitHub 账号&lt;/strong&gt;：&lt;code&gt;WangSiya010&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在 &lt;strong&gt;Windows + Git&lt;/strong&gt; 下，身份可能来自 &lt;strong&gt;3 个地方之一&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;HTTPS Token（Windows Credential Manager）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SSH key（~/.ssh/id_rsa 对应的 GitHub 账号）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Desktop / gh CLI 登录状态&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;你现在这台机器 &lt;strong&gt;已经在用 &lt;code&gt;WangSiya010&lt;/code&gt; 的凭据&lt;/strong&gt;，所以 GitHub 拒绝你。&lt;/p&gt;
+&lt;h3 id="标准解决方法"&gt;标准解决方法
+&lt;/h3&gt;&lt;h4 id="如果不是初次"&gt;如果不是初次：
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;把 SSH Key 加入 ssh-agent（非常重要）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;eval &amp;#34;$(ssh-agent -s)&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-add ~/.ssh/id_ed25519_selaphina
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-add ~/.ssh/id_ed25519_wang
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;2.切换到selaphina账号&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh -T git@github-selaphina
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh -T git@github-wang
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;3.接下来就可以正常操作了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="一为每个-github-账号生成独立-ssh-key"&gt;一、为每个 GitHub 账号生成独立 SSH Key
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;⚠️ 不要复用 key，这是串号根源&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.给 Selaphina 生成 key&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-keygen -t ed25519 -C &amp;#34;selaphina@github&amp;#34; -f ~/.ssh/id_ed25519_selaphina
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;2.给 WangSiya010 生成 key&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-keygen -t ed25519 -C &amp;#34;wangsiya010@github&amp;#34; -f ~/.ssh/id_ed25519_wang
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="二把-ssh-key-加入-ssh-agent非常重要"&gt;二、把 SSH Key 加入 ssh-agent（非常重要）
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;eval &amp;#34;$(ssh-agent -s)&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-add ~/.ssh/id_ed25519_selaphina
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-add ~/.ssh/id_ed25519_wang
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;验证：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-add -l
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;应该能看到 &lt;strong&gt;两个 key&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;admin@BJNBC-0010887 MINGW64 ~
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ ssh-add -l
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;256 SHA256:6hL998UnHpS0zeeu1kNoWsUWiF8Dj+sRaeKsdTnjOeg selaphina@github (ED25519)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;256 SHA256:JhnksLYhb7OUNW1D1oOvKV/c5V5gTK8zeMNLDcl+Mew wangsiya010@github (ED25519)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="三配置-sshconfig核心"&gt;三、配置 &lt;code&gt;~/.ssh/config&lt;/code&gt;（核心）
+&lt;/h4&gt;&lt;p&gt;创建 / 编辑：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nano ~/.ssh/config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;填入 &lt;strong&gt;完整内容&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Selaphina 主账号
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host github-selaphina
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; HostName github.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; User git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; IdentityFile ~/.ssh/id_ed25519_selaphina
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; IdentitiesOnly yes
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# WangSiya010 副账号
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host github-wang
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; HostName github.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; User git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; IdentityFile ~/.ssh/id_ed25519_wang
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; IdentitiesOnly yes
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;Ctrl + O&lt;/code&gt;保存，&lt;strong&gt;直接回车即可&lt;/strong&gt;退出。&lt;/p&gt;
+&lt;h4 id="四把-ssh-公钥分别加到-github"&gt;四、把 SSH 公钥分别加到 GitHub
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Selaphina&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cat ~/.ssh/id_ed25519_selaphina.pub
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;复制 →
+GitHub → Settings → SSH and GPG keys → &lt;strong&gt;New SSH key&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;WangSiya010&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cat ~/.ssh/id_ed25519_wang.pub
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;同样添加到 &lt;strong&gt;WangSiya010&lt;/strong&gt; 账号&lt;/p&gt;
+&lt;h4 id="五测试非常关键"&gt;五、测试（非常关键）
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh -T git@github-selaphina
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;应看到：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Hi Selaphina! You&amp;#39;ve successfully authenticated...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh -T git@github-wang
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;应看到：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Hi WangSiya010! You&amp;#39;ve successfully authenticated...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="git如何删除分支"&gt;git如何删除分支
+&lt;/h2&gt;&lt;p&gt;两条命令，分别删除本地和远程的分支：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 删除本地分支
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -d beta/wsy
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 删除远程分支
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin --delete beta/wsy
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="git如何合并本地分支到远端main分支"&gt;git如何合并本地分支到远端main分支
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull origin main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git merge beta/wsy
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>Obsidian多端同步</title><link>https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/</link><pubDate>Thu, 19 Feb 2026 10:20:12 +0000</pubDate><guid>https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/</guid><description>&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/cover1.png" alt="Featured image of post Obsidian多端同步" /&gt;&lt;p&gt;c&lt;/p&gt;
+&lt;p&gt;春节假期间，更替了一下笔记软件。主要用于教程指路：
+&lt;a class="link" href="https://zhuanlan.zhihu.com/p/586431408" target="_blank" rel="noopener"
+&gt;https://zhuanlan.zhihu.com/p/586431408&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="电脑端"&gt;电脑端：
+&lt;/h2&gt;&lt;p&gt;整体需要：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;u&gt;坚果云&lt;/u&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Obsidian安装Remotely Save插件&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="1安装-remotely-save"&gt;1.安装 Remotely Save
+&lt;/h3&gt;&lt;p&gt;在社区插件市场搜索“Remotely Save”，安装并启用该插件。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223218298.png"
+width="1133"
+height="1051"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223218298_hu_58ba046bc2b355a7.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223218298_hu_8ec6b4d48a7e2997.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="107"
+data-flex-basis="258px"
+&gt;&lt;/p&gt;
+&lt;h3 id="2坚果云"&gt;2.坚果云
+&lt;/h3&gt;&lt;p&gt;打开&lt;a class="link" href="https://link.zhihu.com/?target=https%3A//www.jianguoyun.com/" target="_blank" rel="noopener"
+&gt;坚果云&lt;/a&gt;，登录/注册账号。 创建一个个人同步文件夹，注意&lt;strong&gt;文件夹名称要和被同步的 Obsidian 库的库名一致&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;比如，我的Obsidian 库名为：MyCalendar，那么新建的同步文件夹也要命名为：MyCalendar。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225335753.png"
+width="688"
+height="367"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225335753_hu_14f31084464b182.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225335753_hu_63af8acf1b3d3f2f.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="187"
+data-flex-basis="449px"
+&gt;&lt;/p&gt;
+&lt;p&gt;设置—— 第三方应用管理——添加应用密码&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223001298.png"
+width="749"
+height="945"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223001298_hu_9a5bfdf2fd70d61a.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223001298_hu_9c540db62c8b9ac9.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="190px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223026973.png"
+width="751"
+height="949"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223026973_hu_fae959dfe2bec27b.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219223026973_hu_faecc3dcab53be68.png 1024w"
+loading="lazy"
+alt="image-20260219223026973"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="189px"
+&gt;&lt;/p&gt;
+&lt;p&gt;复制生成的密码。（也可以在刚刚建立的应用处点击“显示密码”来查看密码）&lt;/p&gt;
+&lt;h3 id="3-设置-remotely-save"&gt;3 设置 Remotely Save
+&lt;/h3&gt;&lt;p&gt;进入 Remotely Save 的设置界面，选择远程服务为 Webdav。&lt;/p&gt;
+&lt;p&gt;Webdav 设置中的“服务器地址”、“用户名”、“密码”分别对应输入刚刚“用户信息-安全选项-第三方应用管理”界面中的“服务器地址”、“账号”、“应用密码”（刚刚复制的密码）。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225601456.png"
+width="1137"
+height="564"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225601456_hu_72424662b840fdb0.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225601456_hu_b916647fc3a73d01.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="201"
+data-flex-basis="483px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225712476.png"
+width="1138"
+height="1110"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225712476_hu_25a8054e95751158.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225712476_hu_de7d76d1021d7fe7.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+&gt;&lt;/p&gt;
+&lt;p&gt;设置好后点击“检查”，测试服务器连接状况。&lt;/p&gt;
+&lt;p&gt;参考设置：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225824691.png"
+width="1121"
+height="670"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225824691_hu_b3f511cc0347485d.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219225824691_hu_c0578951c3e05164.png 1024w"
+loading="lazy"
+alt="image-20260219225824691"
+class="gallery-image"
+data-flex-grow="167"
+data-flex-basis="401px"
+&gt;&lt;/p&gt;
+&lt;h2 id="ipad端"&gt;ipad端
+&lt;/h2&gt;&lt;p&gt;Obsidian 库就是一个文件夹，直接把它打包（必须zip）发送到移动端，然后解压——到移动端的obsidian打开即可。&lt;/p&gt;
+&lt;p&gt;打开移动端 Obsidian，选择“Open folder as vault”，选择刚刚解压的文件夹作为 Obsidian 库，然后 Obsidian 会自动进入主界面。&lt;/p&gt;
+&lt;p&gt;点击“同步”，测试服务器连接成功！&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219231252346.png"
+width="960"
+height="512"
+srcset="https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219231252346_hu_c5e603d630e37153.png 480w, https://Selaphina.github.io/p/obsidian%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5/image-20260219231252346_hu_c8100f55dde77185.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="187"
+data-flex-basis="450px"
+&gt;&lt;/p&gt;</description></item><item><title>Hugo：个人博客建站指南</title><link>https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/</link><pubDate>Sun, 09 Nov 2025 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/</guid><description>&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/hugo.png" alt="Featured image of post Hugo：个人博客建站指南" /&gt;&lt;p&gt;作为Hugo建站新手，使用作者提供的 &lt;strong&gt;Stack starter template&lt;/strong&gt;，并用 &lt;strong&gt;GitHub Actions&lt;/strong&gt; 自动构建并部署到 GitHub Pages，最为方便。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;建站之初参考了很多博主的指南博客，都是手工方式在本地安装Hugo，把stack主题拉取到本地再部署到github上。然而实际操作过程中总有和博主相悖的情况发生，遂找G老师从头复盘一遍。最后一遍过。&lt;/p&gt;
+&lt;p&gt;Todo：补充自备案域名的建站方式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="一先决条件"&gt;一、先决条件
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;一个 GitHub 账号（有仓库权限）。&lt;/li&gt;
+&lt;li&gt;安装 Git（本地开发时需要）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;小提示：如果只是用 starter 模板并通过 GitHub Actions 构建部署，&lt;strong&gt;本地安装 Hugo 可以暂时跳过&lt;/strong&gt; — 但建议安装以便本地预览与调试。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;3.从Hugo资源页&lt;a class="link" href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener"
+&gt;Releases · gohugoio/hugo&lt;/a&gt;下载amd版本（查看自己的电脑为**&lt;code&gt;基于 x64 的处理器&lt;/code&gt;** -&amp;gt; &lt;strong&gt;下载 &lt;code&gt;amd64&lt;/code&gt;版本。&lt;/strong&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154753124.png"
+width="1338"
+height="231"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154753124_hu_d8236d5e78984e71.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154753124_hu_12a417f4844c1e53.png 1024w"
+loading="lazy"
+alt="image-20251107154753124"
+class="gallery-image"
+data-flex-grow="579"
+data-flex-basis="1390px"
+&gt;&lt;/p&gt;
+&lt;p&gt;由于部分主题需要 Hugo 的 Extended 版本才可以正常使用，因此建议&lt;strong&gt;一步到位直接安装 Extended 版本&lt;/strong&gt;的 Hugo，在将压缩包解压后一定不要忘记的是将 &lt;code&gt;hugo.exe&lt;/code&gt; 所在的文件夹添加至用户的**&lt;a class="link" href="https://zhida.zhihu.com/search?content_id=165841755&amp;amp;content_type=Article&amp;amp;match_order=1&amp;amp;q=%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f&amp;amp;zhida_source=entity" target="_blank" rel="noopener"
+&gt;环境变量&lt;/a&gt;**。&lt;/p&gt;
+&lt;p&gt;若是以上步骤都正常完成，那么可以在输入 &lt;code&gt;hugo version&lt;/code&gt; 命令后得到正常的版本号显示。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154836195.png"
+width="1434"
+height="255"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154836195_hu_7ed2a0842f8e6f8f.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107154836195_hu_bf136d0eb157f90e.png 1024w"
+loading="lazy"
+alt="image-20251107154836195"
+class="gallery-image"
+data-flex-grow="562"
+data-flex-basis="1349px"
+&gt;&lt;/p&gt;
+&lt;p&gt;4.初始化&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo new site XXX
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;5.快速预览&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;浏览 http://localhost:1313 查看效果。注意：-D的意思是同时预览草稿。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo server -D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在浏览器中访问http://localhost:1313/ ，如果正常就会显示出页面。&lt;/p&gt;
+&lt;p&gt;*如果出现报错多半是没有下载go。https://go.dev/dl/下载&lt;code&gt;go1.22.x.windows-amd64.msi&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id="二用-hugo-theme-stack-starter适合新手"&gt;二、用 Hugo-Theme-Stack Starter（适合新手）
+&lt;/h2&gt;&lt;p&gt;Stack 作者维护了一个 starter 模板并自带 GitHub Actions 来部署，直接用模板能省很多配置工作。示例仓库与 workflow 可参考作者的 starter。&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter" target="_blank" rel="noopener"
+&gt;Hugo-Theme-Stack&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="步骤"&gt;&lt;strong&gt;步骤：&lt;/strong&gt;
+&lt;/h3&gt;&lt;h4 id="1在-github-上用模板创建仓库"&gt;1.&lt;strong&gt;在 GitHub 上用模板创建仓库&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;打开 &lt;code&gt;CaiJimmy/hugo-theme-stack-starter&lt;/code&gt; 仓库（或访问主题主页找到 starter 链接），点击 &lt;strong&gt;Use this template → Create a new repository from template&lt;/strong&gt;。选择仓库名：
+&lt;ul&gt;
+&lt;li&gt;如果你想把博客作为个人主页（username.github.io），仓库名应为 &lt;code&gt;your-github-username.github.io&lt;/code&gt;（这样 GitHub Pages 会直接在根域名托管）。&lt;/li&gt;
+&lt;li&gt;如果想作为项目页（例如 &lt;code&gt;your-username/myblog&lt;/code&gt;），可以用任意仓库名（但发布 URL 会是 &lt;code&gt;https://username.github.io/repo&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;（参考：starter 仓库自带 Actions 和样例配置。）&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter?utm_source=chatgpt.com" target="_blank" rel="noopener"
+&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="2-把仓库-clone-到本地可选但推荐"&gt;2. &lt;strong&gt;把仓库 clone 到本地（可选但推荐）&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/your-username/your-repo.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cd your-repo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="3-修改站点配置最重要的两项"&gt;3. &lt;strong&gt;修改站点配置（最重要的两项）&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;打开仓库中的 &lt;code&gt;config.toml&lt;/code&gt;（或 &lt;code&gt;config/_default/config.toml&lt;/code&gt;，starter 可能把配置拆分），修改：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;baseURL&lt;/code&gt;：部署到 GitHub Pages 时必须设置为你站点的真实 URL，例如：
+&lt;ul&gt;
+&lt;li&gt;个人主页（username.github.io）: &lt;code&gt;https://your-username.github.io/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;比如我：&lt;a class="link" href="https://selaphina.github.io/" target="_blank" rel="noopener"
+&gt;Selaphina&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;项目页：&lt;code&gt;https://your-username.github.io/repo-name/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;title&lt;/code&gt;、&lt;code&gt;author&lt;/code&gt; 等按需修改。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Starter 通常已经把 theme 配好为 Hugo module（不用把主题源码放到 &lt;code&gt;themes/&lt;/code&gt;），直接修改 baseURL 即可。参考 Stack 文档或 starter README。&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack?utm_source=chatgpt.com" target="_blank" rel="noopener"
+&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="4启动本地预览"&gt;4.&lt;strong&gt;启动本地预览&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo server -D
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 浏览 http://localhost:1313 查看效果
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="5确认-github-actions-workflow自动部署"&gt;5.&lt;strong&gt;确认 GitHub Actions workflow（自动部署）&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;starter 仓库中自带 &lt;code&gt;.github/workflows/deploy.yml&lt;/code&gt;（或类似文件），该 workflow 会在你 push 到主分支后构建 Hugo 并把 &lt;code&gt;public/&lt;/code&gt; 内容发布到 GitHub Pages（通常是 &lt;code&gt;gh-pages&lt;/code&gt; 分支或通过 &lt;code&gt;pages&lt;/code&gt; 路径）。你可以打开该文件预览构建步骤并根据需要修改 Hugo 版本或 build 参数。示例和历史记录见作者 repo。&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter/actions/workflows/deploy.yml?utm_source=chatgpt.com" target="_blank" rel="noopener"
+&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107220605272.png"
+width="1151"
+height="894"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107220605272_hu_a6f9ea395bafca7a.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251107220605272_hu_2aaa0e14c727fee4.png 1024w"
+loading="lazy"
+alt="image-20251107220605272"
+class="gallery-image"
+data-flex-grow="128"
+data-flex-basis="308px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181141764.png"
+width="1172"
+height="504"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181141764_hu_2f89172ccd7afc02.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181141764_hu_64dde4c6414fdeb7.png 1024w"
+loading="lazy"
+alt="image-20251109181141764"
+class="gallery-image"
+data-flex-grow="232"
+data-flex-basis="558px"
+&gt;&lt;/p&gt;
+&lt;h4 id="6推送修改并等待自动部署"&gt;6.&lt;strong&gt;推送修改并等待自动部署&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;Customize site config&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;推送后，GitHub Actions 会触发构建并将结果发布到 GitHub Pages。你可以在仓库的 &lt;strong&gt;Actions&lt;/strong&gt; 标签页查看构建日志与历史。成功后，访问你设置的 &lt;code&gt;baseURL&lt;/code&gt; 即可看到站点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;比如：https://selaphina.github.io/&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;7.新建博客帖子：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;根目录\content\post&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181312523.png"
+width="564"
+height="531"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181312523_hu_1ad8827c9805aa4b.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20251109181312523_hu_d517a82b1cd7880d.png 1024w"
+loading="lazy"
+alt="image-20251109181312523"
+class="gallery-image"
+data-flex-grow="106"
+data-flex-basis="254px"
+&gt;&lt;/p&gt;
+&lt;h2 id="附录"&gt;附录
+&lt;/h2&gt;&lt;h3 id="create-a-new-repository-on-the-command-line"&gt;create a new repository on the command line
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git remote add origin git@github.com:Selaphina/Selaphina.github.io.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &amp;#34;first commit&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="push-an-existing-repository-from-the-command-line"&gt;push an existing repository from the command line
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git remote add origin git@github.com:huoshaoweiba/Sera.github.io-.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -M main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="怎么删除帖子"&gt;怎么删除帖子？
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;本想设置草稿帖子，即在网络上访问时不显示的帖子。但是无论设置draft: true还是private：true都失败了，草稿照常显示，非常不美观。对构建config.yml等进行修改也无效果。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;删除不需要的帖子。单纯从content中删除之后，本地hugo server正常删除，而公网上的帖子仍然存在。经检查，应在&lt;code&gt;\..\【站点根目录】\public\p&lt;/code&gt;目录下的对应帖子也删除才可以。&lt;/p&gt;
+&lt;p&gt;不知是否是构建工作流没有顾及到位。总之目前只能用此方法删除。&lt;/p&gt;
+&lt;h3 id="怎么设置草稿"&gt;怎么设置草稿？
+&lt;/h3&gt;&lt;p&gt;上述所示，没有常规标记draft : true的草稿方式。&lt;/p&gt;
+&lt;p&gt;但是！由于工作流中规定的【不允许上传未来日期/过时的帖子】。因此，如果想要上传一个公网上不可见（相当于私密的）帖子，可以把日期改为未来的日期。比如&lt;code&gt;2100年6月6日&lt;/code&gt;，这样的话起码75年内都不会有人能在公网上访问你的私密帖子了。&lt;/p&gt;
+&lt;h3 id="构建失败超时"&gt;构建失败：超时
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;un hugo --minify --gc --buildDrafts=false
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --buildFuture=false --buildExpired=false
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Start building sites
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; hugo v0.154.5-a6f99cca223a29cad1d4cdaa6a1a90508ac1da71+extended linux/amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; BuildDate=2026-01-11T20:53:23Z VendorInfo=gohugoio
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; hugo: collected modules in 674 msERROR error building site: &amp;#34;/home/runner/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; work/Selaphina.github.io/Selaphina.github.io/content/post/25-12-11 仿原神渲染
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; /index.md:1:1&amp;#34;: timed out rendering the page content. Extend the
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; limit in your Hugo config file: timeout after 1m0s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Total in 219536 ms
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Error: Process completed with exit code 1.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这个原因在于：&lt;/p&gt;
+&lt;p&gt;Hugo 在渲染某一篇 Markdown 页面时，单页渲染耗时超过 60 秒，直接被强制中断。&lt;/p&gt;
+&lt;p&gt;这篇帖子写的太长，Markdown 中包含 &lt;strong&gt;极大体量的代码块 / 数学公式 / 嵌套短代码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;典型高风险内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;超长 &lt;code&gt;代码块&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;大量highlight&lt;/li&gt;
+&lt;li&gt;大量 LaTeX 数学公式（KaTeX / MathJax）&lt;/li&gt;
+&lt;li&gt;复杂 shortcode 嵌套（shortcode 里又调用 shortcode）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="解决方案"&gt;解决方案
+&lt;/h4&gt;&lt;p&gt;✅官解： 直接延长 Hugo timeout（必须做）&lt;/p&gt;
+&lt;p&gt;在你的 &lt;code&gt;config.toml / config.yaml&lt;/code&gt; 中加入：&lt;/p&gt;
+&lt;p&gt;*我这里是toml&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20260119163930332.png"
+width="638"
+height="213"
+srcset="https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20260119163930332_hu_3ef5ffee268997a6.png 480w, https://Selaphina.github.io/p/hugo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97/image-20260119163930332_hu_4e90d78b5dc9029b.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="299"
+data-flex-basis="718px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;toml&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;timeout = &amp;#34;5m&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;YAML&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;timeout: 5m
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;GitHub Actions 机器慢，&lt;strong&gt;1 分钟对中等偏长技术博客是完全不够的&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="update-theme失败"&gt;Update theme失败
+&lt;/h2&gt;&lt;p&gt;![年底比较忙，给我整这出,每天定时更新失败一次，邮箱堆满了](D:\WSY\Selaphina\content\post\25-11-10 hugo\image-20260204012338653.png)&lt;/p&gt;
+&lt;p&gt;在Action查看失败原因：&lt;/p&gt;
+&lt;p&gt;![](D:\WSY\Selaphina\content\post\25-11-10 hugo\image-20260204012502151.png)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Run hugo mod tidy
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Error: &amp;#34;/tmp/hugo_cache_runner/modules/filecache/modules/pkg/mod/github.com/!cai!jimmy/hugo-theme-stack/v3@v3.34.0/layouts/partials/helper/color-from-str.html:4:1&amp;#34;: parse failed: template: partials/helper/color-from-str.html:4: function &amp;#34;hash&amp;#34; not defined
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Error: Process completed with exit code 1.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;GitHub Actions 使用的 Hugo 版本过旧，而 &lt;code&gt;hugo-theme-stack v3.34.0&lt;/code&gt; 使用了新版 Hugo 才支持的 &lt;code&gt;hash&lt;/code&gt; 模板函数。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因此在 GitHub 上构建失败，但你本地可能是正常的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;function &amp;#34;hash&amp;#34; not defined
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;hash 是 Hugo 新增的 template function&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当前 GitHub Actions 里的 Hugo 还没这个函数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;但 hugo-theme-stack v3.34.0 已经开始用了&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;出问题的文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;layouts/partials/helper/color-from-str.html
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;这是 Stack 主题 v3.34.0 新增的实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="解决方案升级-github-actions-里的-hugo"&gt;解决方案：升级 GitHub Actions 里的 Hugo
+&lt;/h3&gt;&lt;p&gt;如果你用的是官方 Hugo Action，打开你的 workflow，例如：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Selaphina.github.io/.github/workflows /update-theme.yml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;目前workflow 做了两件&lt;strong&gt;危险组合&lt;/strong&gt;的事：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# ① 固定 Hugo 版本&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;hugo-version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0.123.8&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# ② 每天自动把 Stack 主题升级到“最新”&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="l"&gt;hugo mod get -u github.com/CaiJimmy/hugo-theme-stack/v3&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这在工程上是一个不稳定系统&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;下游（主题）每天变，上游（Hugo）不变&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;于是某一天：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Stack &lt;code&gt;v3.34.0&lt;/code&gt; → 开始使用 &lt;code&gt;hash&lt;/code&gt; 模板函数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hash&lt;/code&gt; 需要 &lt;strong&gt;Hugo ≥ 0.124&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;你的 CI 仍然是 &lt;strong&gt;0.123.8&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;💥 定时任务自动升级主题 → 构建直接炸 → GitHub 给你疯狂发邮件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="修改点"&gt;修改点：
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; hugo-version: &amp;#39;latest&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;既然&lt;strong&gt;已经选择&lt;/strong&gt;让主题每天自动升级&lt;/li&gt;
+&lt;li&gt;那 Hugo 就 &lt;strong&gt;必须&lt;/strong&gt; 跟着升级&lt;/li&gt;
+&lt;li&gt;Stack 是 Hugo 官方生态里维护最规范的主题之一&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;“最新 Hugo + 最新 Stack” 是被作者默认支持的组合&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;📌 &lt;strong&gt;这是 Stack 作者自己在用的组合&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>压缩包密码破解 Ziperello</title><link>https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/</link><pubDate>Fri, 14 Nov 2025 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/</guid><description>&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/CUC%E5%85%91%E6%8D%A2%E7%82%B92.png" alt="Featured image of post 压缩包密码破解 Ziperello" /&gt;&lt;p&gt;使用 Ziperello &lt;a class="link" href="https://qweree.cn/index.php/416/" target="_blank" rel="noopener"
+&gt;https://qweree.cn/index.php/416/&lt;/a&gt; 对加了密码的压缩包进行密码破解，教程如下：&lt;/p&gt;
+&lt;p&gt;第一步，双击运行 Ziperello双击我打开程序.exe，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115145845360.png"
+width="327"
+height="243"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115145845360_hu_81fe80aafea7a3d1.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115145845360_hu_45257a6d8d9e935b.png 1024w"
+loading="lazy"
+alt="image-20251115145845360"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="322px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第二步，打开一个加了密的 ZIP 压缩包，再选择一个里面的文件，再点击下一步，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150020123.png"
+width="1173"
+height="587"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150020123_hu_35452c3a6615650b.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150020123_hu_353ed8e1fb31a1f1.png 1024w"
+loading="lazy"
+alt="image-20251115150020123"
+class="gallery-image"
+data-flex-grow="199"
+data-flex-basis="479px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第三步，这里可以选择「暴力破解」方式，继续下一步，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150032549.png"
+width="1173"
+height="591"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150032549_hu_5c4ad86e15cfccfa.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150032549_hu_f92a332b66a27562.png 1024w"
+loading="lazy"
+alt="image-20251115150032549"
+class="gallery-image"
+data-flex-grow="198"
+data-flex-basis="476px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第四步，如果对压缩包来源没有一点头绪，建议可以选数字、小写字母、大写字母这三种方式组合，毕竟这三种是大家常用的组合，继续下一步，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150116337.png"
+width="1173"
+height="597"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150116337_hu_46e3417a28e0822b.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150116337_hu_9ebaca0f044855e0.png 1024w"
+loading="lazy"
+alt="image-20251115150116337"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="471px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第五步，如下图界面我们直接点击开始，程序会自动组合各种密码进行暴力尝试，当然，密码越长、越复杂破解时间也会更长！&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150135862.png"
+width="1170"
+height="606"
+srcset="https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150135862_hu_ae2f6fe289793563.png 480w, https://Selaphina.github.io/p/%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-ziperello/image-20251115150135862_hu_7d2d6aa96de74cf6.png 1024w"
+loading="lazy"
+alt="image-20251115150135862"
+class="gallery-image"
+data-flex-grow="193"
+data-flex-basis="463px"
+&gt;&lt;/p&gt;
+&lt;p&gt;第六步，只需静静等待，直到弹框提示正确密码，大功告成，如图：&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;原文链接：https://blog.csdn.net/qq_29856169/article/details/139879447&lt;/p&gt;</description></item><item><title>python虚拟环境</title><link>https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</link><pubDate>Sat, 14 Dec 2024 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</guid><description>&lt;img src="https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/CUC%E5%85%91%E6%8D%A2%E7%82%B92.png" alt="Featured image of post python虚拟环境" /&gt;&lt;h2 id="方法1使用conda推荐"&gt;方法1：使用conda（推荐）
+&lt;/h2&gt;&lt;h3 id="1-创建一个新环境并安装python-31016"&gt;1) 创建一个新环境并安装Python 3.10.16
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;conda create -n py310 python=3.10.16
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="2激活新环境"&gt;2）激活新环境
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;conda activate py310
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="3验证版本"&gt;3）验证版本
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;python --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install ipywidgets pyyaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="voxai"&gt;VoxAI
+&lt;/h3&gt;&lt;p&gt;纯web的线上应用，没有本地软件，也没有找到可调用的API库。应该是闭源的商业化服务。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.voxelai.ai/" target="_blank" rel="noopener"
+&gt;https://blog.voxelai.ai/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204143349360.png"
+width="1520"
+height="590"
+srcset="https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204143349360_hu_8892c388329d4b17.png 480w, https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204143349360_hu_76921059033e4b5f.png 1024w"
+loading="lazy"
+alt="image-20251204143349360"
+class="gallery-image"
+data-flex-grow="257"
+data-flex-basis="618px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204130912488.png"
+width="1998"
+height="980"
+srcset="https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204130912488_hu_1c7a3765a4dd866c.png 480w, https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204130912488_hu_cc3b79831c55a11b.png 1024w"
+loading="lazy"
+alt="image-20251204130912488"
+class="gallery-image"
+data-flex-grow="203"
+data-flex-basis="489px"
+&gt;&lt;/p&gt;
+&lt;p&gt;生成的red lawn mower（红色割草机）质量很好，而且是vox和minecraft风格的。免费额度有限，生成大量模型需要付费订阅。只能导出vox和minecraft的格式。需要二次转格式。&lt;/p&gt;
+&lt;p&gt;闭源且无api库，不能本地部署/集成。&lt;/p&gt;
+&lt;h3 id="shap-e"&gt;&lt;strong&gt;Shap-e&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;openai的开源项目，可以本地部署，但是质量差，达不到商业水准&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/openai/shap-e?tab=readme-ov-file#usage" target="_blank" rel="noopener"
+&gt;GitHub - openai/shap-e: Generate 3D objects conditioned on text or images&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204142809660.png"
+width="837"
+height="751"
+srcset="https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204142809660_hu_b04d6916faf93f3e.png 480w, https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204142809660_hu_25944829e268728d.png 1024w"
+loading="lazy"
+alt="image-20251204142809660"
+class="gallery-image"
+data-flex-grow="111"
+data-flex-basis="267px"
+&gt;&lt;/p&gt;
+&lt;p&gt;输出主流格式：obj/ply&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204143032408.png"
+width="731"
+height="507"
+srcset="https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204143032408_hu_a7bb7a51c6c465bd.png 480w, https://Selaphina.github.io/p/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/image-20251204143032408_hu_f6ee35f1645701b4.png 1024w"
+loading="lazy"
+alt="image-20251204143032408"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="346px"
+&gt;&lt;/p&gt;
+&lt;p&gt;文本prompt生成的效果蛮差，图片to 3D必须是白底的图片才行，比较弱。&lt;/p&gt;
+&lt;p&gt;本地部署生成的是无贴图无材质的obj网格。&lt;/p&gt;
+&lt;p&gt;Make‑A‑Shape&lt;/p&gt;</description></item></channel></rss>
