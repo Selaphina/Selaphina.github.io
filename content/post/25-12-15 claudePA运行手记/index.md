@@ -1,5 +1,5 @@
 ---
-title: Codex手记
+title: Codex & Claude CLI手记
 description: 如何安装并使用Codex进行vibe coding
 date: 2025-12-16 10:32:30+0000
 image: CUC兑换点2.png
@@ -74,3 +74,21 @@ https://github.com/farion1231/cc-switch/releases/tag/v3.8.2
 下一步
 
 ![image-20251218163400100](image-20251218163400100.png)
+
+## Claude
+
+[Token Plan - MiniMax API 平台](https://platform.minimaxi.com/subscribe/token-plan)
+
+这里买这个。
+
+![](image-20260326211937047.png)
+
+[Claude Code - MiniMax 开放平台文档中心](https://platform.minimaxi.com/docs/token-plan/claude-code#windows)
+
+![充值之后跳到这里](image-20260326212404378.png)
+
+复制API key
+
+![image-20260326212440760](image-20260326212440760.png)
+
+![image-20260326212343012](image-20260326212343012.png)
