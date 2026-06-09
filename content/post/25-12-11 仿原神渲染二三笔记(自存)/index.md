@@ -99,7 +99,14 @@ Shader "EXAM1/EXAM_Shader"
     Subshader
     {
         Pass
-        {……}
+        {
+        	// 顶点着色器：几何变换与数据准备
+			v2f vert (appdata v)
+            {……}
+            // 片元着色器：颜色计算与输出
+            fixed4 frag (v2f i) : SV_Target
+            {……}
+        }
 
         Pass
         {……}

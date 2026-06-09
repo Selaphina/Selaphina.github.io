@@ -5,7 +5,7 @@ date: 2126-02-19 10:20:12+0000
 image: CUC兑换点2.png
 categories:
     - 工具指南
-weight: 1997       # You can add weight to some posts to override the default sorting (date descending)
+weight: 2029       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
 # 虚幻引擎
@@ -205,7 +205,10 @@ dpi：分辨率，即RT的尺寸（如1024 x 1024）
 * BP_画板
   * 新增变量S_Brush_Infos Array（数组类型）
 * 新建M_Draw
-* 
+* RT_Snow/RT_Snowcopy: 将类型又RBGA改为R16f
+* 对应上条的rbga改为r后：M_Snow加上1-x
+  * 原本只是rbga的画板绘制上无数个【1】（黑底白笔）
+  * 现在是单通道a的画板上绘制无数个【0】（取反，白底黑笔）
 
 ### BP_Brush
 
@@ -235,12 +238,81 @@ SIze：2D向量
 
 
 
-
-
 ### BP_画板
 
 ![折叠函数](image-20260328213724846.png)
 
 为了保证Tick中运行顺序在BP_Brush之后，在class default中
 ![将BP_画板的tick顺序改为：Post Physics（物理后）](image-20260329105357616.png)
+
+### M_Snow
+
+RT全部改为R 16f
+
+![节约了gba3个通道](image-20260403005959594.png)
+
+在lerp之后加上1-x。
+
+> * 原本只是rbga的画板绘制上无数个【1】（黑底白笔）
+> * 现在是单通道a的画板上绘制无数个【0】（取反，白底黑笔）
+
+![](image-20260403005629619.png)
+
+## 5 让雪堆积起来
+
+需要：
+
+- 新增材质：M_堆积
+
+  - 作为场景中的交互主体；继承自Actor，包含Scene Component作为根组件
+
+- 更改材质光照模式：M_Snow；使之像真正的雪地
+
+  - Unlit——>Subsurface（次表面）
+
+    设置次表面颜色（蓝色）；法线（RT_snowcopy）；basecolor（1.0白色）；
+
+* 更改BP_画板：
+
+  * 把M_堆积绘制到RT_snowcopy上
+* 新建M_Land
+  * 虚拟高度场
+* 新建RVT_Height
+  * 实时虚拟纹理（Runtime Virtual Texture）
+
+### M_堆积
+
+![](image-20260403190539854.png)
+
+注意：图中的1-x节点被我拿掉了，因为感觉不取反看上去更像对的。
+
+### M_Snow
+
+![](image-20260403190650863.png)
+
+### BP_画板
+
+![](image-20260403190741747.png)
+
+把M_堆积绘制到RT_snowcopy上
+
+### M_Land
+
+
+
+
+
+### RVT_Height
+
+
+
+设置为worldheight
+
+### RVT_Normal
+
+
+
+设置为Basecolor, Normal, Roughness
+
+
 
