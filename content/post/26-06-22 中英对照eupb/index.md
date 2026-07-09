@@ -1,5 +1,5 @@
 ---
-title: 中英对照EPUB电子书导出
+title: 中英对照EPUB/PDF翻译及导出
 description: 
 date: 2026-06-21 10:12:30+0000
 image: CUC兑换点2.png
@@ -12,19 +12,26 @@ weight: 2120       # You can add weight to some posts to override the default so
 
 ​	https://github.com/oomol-lab/epub-translator
 
+​    https://github.com/PDFMathTranslate
+
 本文主要包括：
 
 **1.前提：**
 
-有一本无法网购到中文译本且图书馆藏也搜索不到的英文原著电子版EPUB。获得渠道是海鲜市场（。）
+* 有一本无法网购到中文译本且图书馆藏也搜索不到的英文原著电子版EPUB。获得渠道是海鲜市场（。）
+* wps会员过期+沉浸式翻译的网页免费版有很多乱码和错位的问题。
 
 **2.github**搜到5.8k⭐的EPUB-translator。
 
-**3.通过pip install**一键安装epub-translator 成品库并简单跑通翻译代码（详情按照README文档来写就足够，不要过度依赖GPT，它会乱加东西）。
+**3.通过pip install**一键安装epub-translator 成品库并简单跑通翻译代码
 
-## 首次使用
+4.大部分情况按照README文档来做就足够了，不要过度依赖GPT老师，它会乱加东西。
 
-### 1.虚拟环境 (windows)
+## EPUB
+
+### 首次使用
+
+#### 1.虚拟环境 (windows)
 
 ```
 python -m venv venv
@@ -41,7 +48,7 @@ pip install epub-translator
 > source venv/bin/activate
 > ```
 
-### 2.准备一个干净的目录
+#### 2.准备一个干净的目录
 
 ```
 epub-proj
@@ -55,7 +62,7 @@ epub-proj
 |--cache/
 ```
 
-### 3.（可选）直接解压 EPUB
+#### 3.（可选）直接解压 EPUB
 
 😌：把 `.epub` 改成 `.zip`，就可以直接解压epub来看文件结构是否有问题。
 
@@ -111,7 +118,7 @@ def zip_epub(folder_path, output_epub):
 zip_epub("已解压文件夹名（例如：你当如鸟飞向你的山）", "rezip-book-name-you-like.epub")
 ```
 
-### 4.直接跑run.py（参考README中的示例即可）
+#### 4.直接跑run.py（参考README中的示例即可）
 
 填好：
 
@@ -158,7 +165,7 @@ with tqdm(total=100, desc="翻译中", unit="%") as pbar:
 python run.py
 ```
 
-## 后续使用
+### 后续使用
 
 1.将英文原著放入input文件夹下
 
@@ -172,4 +179,44 @@ python run.py
 
 等待进度条跑完即可。800k的epub大约需要6-7毛钱的额度就可以翻译。
 
-![image-20260622163512293](image-20260622163512293.png)
+![image-20260709155406599](image-20260709155406599.png)
+
+## PDF
+
+### 首次使用
+
+原地址：[PDFMathTranslate/PDFMathTranslate: [EMNLP 2025 Demo\] PDF scientific paper translation with preserved formats - 基于 AI 完整保留排版的 PDF 文档全文双语翻译，支持 Google/DeepL/Ollama/OpenAI 等服务，提供 CLI/GUI/MCP/Docker/Zotero](https://github.com/PDFMathTranslate/PDFMathTranslate)
+
+#### 1.虚拟环境 (windows)
+
+```
+python -m venv venv
+
+venv\Scripts\activate
+
+pip install pdf2zh
+```
+
+### 运行
+
+```
+pdf2zh -i
+```
+
+### 后续使用
+
+进入根文件目录 
+
+```
+venv\Scripts\activate
+```
+
+运行
+
+```
+pdf2zh -i
+```
+
+访问http://localhost:7860/ 即可使用，选择服务：Deepseek——填入api key。
+
+![image-20260709155604531](image-20260709155604531.png)
