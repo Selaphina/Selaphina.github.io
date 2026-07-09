@@ -447,3 +447,235 @@ git merge beta/wsy
 git push origin main
 ```
 
+## 非个人主机：HTTPS + PAT
+
+在多人共用的  Linux 账号上使用 HTTPS + Personal Access Token (PAT)，这样不需要在服务器保存 SSH 私钥，更适合实验室环境。
+
+#### 一、PAT 是什么？
+
+以前 GitHub 支持：
+
+```
+git push
+Username: xxx
+Password: xxx
+```
+
+直接输入 GitHub 密码。
+
+但从 2021 年开始，GitHub 已经禁用了密码认证。
+
+现在需要使用：
+
+```
+GitHub Username + Personal Access Token (PAT)
+```
+
+其中 PAT 类似于：
+
+```
+github_pat_11AXXXXXXXXXXXXXXXXXXXXX
+```
+
+它相当于一个可撤销的专用密码。
+
+------
+
+#### 二、创建 PAT
+
+登录 GitHub：
+
+[GitHub Settings Tokens 页面](https://github.com/settings/tokens?utm_source=chatgpt.com)
+
+点击：
+
+```
+Generate new token
+```
+
+你会看到两个选项：
+
+```
+Fine-grained tokens（推荐）
+Classic tokens
+```
+
+点击：
+
+```
+Generate new token (Fine-grained)
+```
+
+填写 Token name：
+
+例如：
+
+```
+LabServer
+```
+
+------
+
+Expiration
+
+建议：
+
+```
+90 days
+```
+
+或者
+
+```
+180 days
+```
+
+科研服务器不建议永久有效。
+
+------
+
+Repository access
+
+如果只用于这个项目：
+
+```
+Only select repositories
+```
+
+选择：
+
+```
+VideoColorGrading_LUT
+```
+
+------
+
+Permissions
+
+Repository permissions：
+
+```
+Contents
+```
+
+改成：
+
+```
+Read and write
+```
+
+即可满足：
+
+```
+git pull
+git push
+```
+
+------
+
+然后：
+
+```
+Generate token
+```
+
+GitHub 会显示：
+
+```
+github_pat_xxxxxxxxxxxxx
+```
+
+⚠️ **立刻复制保存。**
+
+关闭页面后再也看不到。
+
+例如保存到本地密码管理器：
+
+```
+GitHub PAT
+github_pat_xxxxxxxxxxxxx
+```
+
+------
+
+#### 三、把远程仓库改成 HTTPS
+
+查看当前：
+
+```
+git remote -v
+```
+
+如果是：
+
+```
+git@github.com:Selaphina/VideoColorGrading_LUT.git
+```
+
+改成 HTTPS：
+
+```
+git remote set-url origin https://github.com/Selaphina/VideoColorGrading_LUT.git
+```
+
+验证：
+
+```
+git remote -v
+```
+
+应该看到：
+
+```
+origin  https://github.com/Selaphina/VideoColorGrading_LUT.git
+```
+
+------
+
+# 四、第一次 Push
+
+执行：
+
+```
+git push -u origin main
+```
+
+Git 会提示：
+
+```
+Username for 'https://github.com':
+```
+
+输入：
+
+```
+Selaphina
+```
+
+（你的 GitHub 用户名）
+
+------
+
+接着：
+
+```
+Password for 'https://github.com':
+```
+
+这里：
+
+❌ 不是 GitHub 登录密码
+
+而是：
+
+✅ 刚才生成的 PAT
+
+例如：
+
+```
+github_pat_xxxxxxxxxxxxx
+```
+
+输入时终端不会显示字符，这是正常的。
+
+回车。

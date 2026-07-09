@@ -220,3 +220,6 @@ pdf2zh -i
 访问http://localhost:7860/ 即可使用，选择服务：Deepseek——填入api key。
 
 ![image-20260709155604531](image-20260709155604531.png)
+
+3.3rmb大约可以跑1000页。
+
