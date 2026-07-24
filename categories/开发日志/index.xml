@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>开发日志 on Selaphina</title><link>https://Selaphina.github.io/categories/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link><description>Recent content in 开发日志 on Selaphina</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 08 Jul 2026 10:12:30 +0000</lastBuildDate><atom:link href="https://Selaphina.github.io/categories/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml"/><item><title>Blender 日志 | 制作自己的3D qq人</title><link>https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/</link><pubDate>Wed, 08 Jul 2026 10:12:30 +0000</pubDate><guid>https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/</guid><description>&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/CUC%E5%85%91%E6%8D%A2%E7%82%B92.png" alt="Featured image of post Blender 日志 | 制作自己的3D qq人" /&gt;&lt;p&gt;参考教程：&lt;/p&gt;
+&lt;h2 id="0前置插件配置"&gt;0.前置插件/配置
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;node wrangler&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;VRM format (用于动捕)&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709162736697.png"
+width="993"
+height="741"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709162736697_hu_5506f0b728e0ac00.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709162736697_hu_1900704a457d0754.png 1024w"
+loading="lazy"
+alt="image-20260709162736697"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="321px"
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;looptool&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163428059.png"
+width="990"
+height="741"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163428059_hu_3480ac6865bbea2f.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163428059_hu_7013f6e36508999b.png 1024w"
+loading="lazy"
+alt="image-20260709163428059"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;文件路径——图像编辑器&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709162945632.png"
+width="1155"
+height="741"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709162945632_hu_5396f2b5b4022670.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709162945632_hu_87f15bafb603dc60.png 1024w"
+loading="lazy"
+alt="image-20260709162945632"
+class="gallery-image"
+data-flex-grow="155"
+data-flex-basis="374px"
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;界面——拾色器类型——方形（SV+H）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163051031.png"
+width="990"
+height="741"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163051031_hu_47a1010894ffc4bd.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163051031_hu_5420102664023616.png 1024w"
+loading="lazy"
+alt="image-20260709163051031"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;视图切换&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163159856.png"
+width="990"
+height="741"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163159856_hu_38df65bfe2545e6b.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163159856_hu_5f65aa8a48e30c8e.png 1024w"
+loading="lazy"
+alt="image-20260709163159856"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;坐标轴（面向-Y）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163608033.png"
+width="177"
+height="150"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163608033_hu_a8dbec94392c1a2f.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709163608033_hu_d242e7e059c6d345.png 1024w"
+loading="lazy"
+alt="image-20260709163608033"
+class="gallery-image"
+data-flex-grow="118"
+data-flex-basis="283px"
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Z表示上下俯仰。Y表示前后，X表示左右。这样导出的模型朝向是正确的。&lt;/p&gt;
+&lt;h2 id="1面部"&gt;1.面部
+&lt;/h2&gt;&lt;p&gt;1.1 扣出眼睛洞洞：&lt;/p&gt;
+&lt;p&gt;正方体——修改器【表面细分】——视图3——应用&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709164828898.png"
+width="399"
+height="357"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709164828898_hu_968aa8712aba663d.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709164828898_hu_aa71e356eb68bf85.png 1024w"
+loading="lazy"
+alt="image-20260709164828898"
+class="gallery-image"
+data-flex-grow="111"
+data-flex-basis="268px"
+&gt;&lt;/p&gt;
+&lt;p&gt;编辑模式——选中左右六个面扣眼睛。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709164742862.png"
+width="846"
+height="846"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709164742862_hu_ca13ee37072237ff.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709164742862_hu_2fe4d523cb5abdf3.png 1024w"
+loading="lazy"
+alt="image-20260709164742862"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+&gt;&lt;/p&gt;
+&lt;p&gt;选中并隐藏后脑（H）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;alt+H，显示被隐藏的后脑勺&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709164957494.png"
+width="1467"
+height="972"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709164957494_hu_e1bcea871c2c677d.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709164957494_hu_ee49326467191268.png 1024w"
+loading="lazy"
+alt="image-20260709164957494"
+class="gallery-image"
+data-flex-grow="150"
+data-flex-basis="362px"
+&gt;&lt;/p&gt;
+&lt;p&gt;选中嘴巴——I内插——S缩小——X删除面&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709165140077.png"
+width="1080"
+height="891"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709165140077_hu_41c156c071494431.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709165140077_hu_9c5e54cf186f3de1.png 1024w"
+loading="lazy"
+alt="image-20260709165140077"
+class="gallery-image"
+data-flex-grow="121"
+data-flex-basis="290px"
+&gt;&lt;/p&gt;
+&lt;p&gt;选中鼻子——I内插——S缩小——G微调&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709165611447.png"
+width="873"
+height="822"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709165611447_hu_aa929d0c39419f7f.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709165611447_hu_f1f413ce1b223542.png 1024w"
+loading="lazy"
+alt="image-20260709165611447"
+class="gallery-image"
+data-flex-grow="106"
+data-flex-basis="254px"
+&gt;&lt;/p&gt;
+&lt;p&gt;选中左半张脸——x——删除点&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709170121740.png"
+width="1158"
+height="939"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709170121740_hu_a62d03e81ad776a4.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260709170121740_hu_c56604fc4fde17d6.png 1024w"
+loading="lazy"
+alt="image-20260709170121740"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="295px"
+&gt;&lt;/p&gt;
+&lt;p&gt;2.后脑勺&lt;/p&gt;
+&lt;p&gt;新建一个经纬球sphere（与脸部cube是不同的两个网格体），把它拖到适当的位置作为后脑。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260721232513186.png"
+width="1353"
+height="843"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260721232513186_hu_77135e5e24e9897e.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260721232513186_hu_54e60f75de81ead8.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="385px"
+&gt;&lt;/p&gt;
+&lt;p&gt;注意记得应用变换+设置原点-&amp;gt;几何中心。&lt;/p&gt;
+&lt;p&gt;进入雕刻模式——右上角可以选择镜像x对称&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260721232819103.png"
+width="2112"
+height="972"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260721232819103_hu_25024e5159a4d289.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260721232819103_hu_809b4137fbb12219.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="217"
+data-flex-basis="521px"
+&gt;&lt;/p&gt;
+&lt;p&gt;制作一个形状不错的头壳。&lt;/p&gt;
+&lt;p&gt;按住alt循环选边，右键——标记缝合边。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722004308795.png"
+width="816"
+height="717"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722004308795_hu_5473d095cc24cb8.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722004308795_hu_af31d4e4d54bbbc0.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="113"
+data-flex-basis="273px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722005703957.png"
+width="942"
+height="747"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722005703957_hu_bed31b8592d57a77.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722005703957_hu_e5fdbdb26a74e4b7.png 1024w"
+loading="lazy"
+alt="脸/耳朵内/耳朵外/嘴/后脑勺中线都标记缝合边"
+class="gallery-image"
+data-flex-grow="126"
+data-flex-basis="302px"
+&gt;&lt;/p&gt;
+&lt;p&gt;注意：如果左右脸不对称（异瞳/泪痣/犄角等等），需要在脑袋本体后脑勺上，选择后半部分中线标记为缝合边。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;后续展开UV时候就可以画不对称的脸了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722005221290.png"
+width="966"
+height="897"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722005221290_hu_d595b980096e60c6.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722005221290_hu_66fec072405e0e90.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="107"
+data-flex-basis="258px"
+&gt;&lt;/p&gt;
+&lt;p&gt;注意：所有缝合边标记好后，物体模式——修改器——从上到下依次应用（镜像——细分）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这一步可以先备份一下未合并的版本。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722005530127.png"
+width="528"
+height="783"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722005530127_hu_c00ebb55e89d9003.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722005530127_hu_fdf6c9879d76d07f.png 1024w"
+loading="lazy"
+alt="image-20260722005530127"
+class="gallery-image"
+data-flex-grow="67"
+data-flex-basis="161px"
+&gt;&lt;/p&gt;
+&lt;h2 id="2uv展开"&gt;2.UV展开
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722010717934.png"
+width="1809"
+height="852"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722010717934_hu_cbebf6901575fbf1.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722010717934_hu_d7162ba35e21a2e7.png 1024w"
+loading="lazy"
+alt="全选——UV-展开"
+class="gallery-image"
+data-flex-grow="212"
+data-flex-basis="509px"
+&gt;&lt;/p&gt;
+&lt;p&gt;展开后正常在UV Editing中是这样的：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722010834717.png"
+width="1764"
+height="981"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722010834717_hu_14993848d2a7ba8b.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722010834717_hu_e105de227f3edd54.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="179"
+data-flex-basis="431px"
+&gt;&lt;/p&gt;
+&lt;p&gt;眼睛+眼白+高光+睫毛+眉毛：按L选择，UV——按视角展开&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722013210894.png"
+width="1047"
+height="975"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722013210894_hu_1fa36da1b92eb063.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722013210894_hu_e277d8d9c74336bc.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="107"
+data-flex-basis="257px"
+&gt;&lt;/p&gt;
+&lt;p&gt;记得同样使用L，将各个部分的UV分开：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722013614076.png"
+width="791"
+height="636"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722013614076_hu_db1c928cf4d5eb67.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722013614076_hu_2b86f01039ab20cc.png 1024w"
+loading="lazy"
+alt="image-20260722013614076"
+class="gallery-image"
+data-flex-grow="124"
+data-flex-basis="298px"
+&gt;&lt;/p&gt;
+&lt;p&gt;制作牙齿和舌头：新建平面网格体，命名zuiba。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;所有的网格体命名都不能是骨骼名重名，如mouth/head/hand/thumb等等。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最后合并时：先子后父，ctrl+J，鼠标悬停在模型上！注意是物体模式。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722022408168.png"
+width="2013"
+height="933"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722022408168_hu_cebb3d114bec52c4.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722022408168_hu_25e96e1e2dc66a46.png 1024w"
+loading="lazy"
+alt="image-20260722022408168"
+class="gallery-image"
+data-flex-grow="215"
+data-flex-basis="517px"
+&gt;&lt;/p&gt;
+&lt;p&gt;口腔的uv展开：顶视图（z），从视角投影&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722230130011.png"
+width="588"
+height="501"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722230130011_hu_f454ea9c134e89e4.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722230130011_hu_16e8b277e7a71d30.png 1024w"
+loading="lazy"
+alt="布置好的UV"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="281px"
+&gt;&lt;/p&gt;
+&lt;p&gt;UV布置好之后，新建——命名——保存图片（。png）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722230046772.png"
+width="1017"
+height="723"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722230046772_hu_8add419395f79fd0.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722230046772_hu_84194349bbce9fb5.png 1024w"
+loading="lazy"
+alt="image-20260722230046772"
+class="gallery-image"
+data-flex-grow="140"
+data-flex-basis="337px"
+&gt;&lt;/p&gt;
+&lt;p&gt;打开着色面板（shading）&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722230155623.png"
+width="1794"
+height="1376"
+srcset="https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722230155623_hu_cb49edce2fe42d59.png 480w, https://Selaphina.github.io/p/blender-%E6%97%A5%E5%BF%97-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%843d-qq%E4%BA%BA/image-20260722230155623_hu_c528acc8fb4ecffe.png 1024w"
+loading="lazy"
+alt="拖动png贴图到着色器中"
+class="gallery-image"
+data-flex-grow="130"
+data-flex-basis="312px"
+&gt;&lt;/p&gt;
+&lt;p&gt;选中图像纹理后+Ctrl+T，即可自动连接完整的节点。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ctrl+T需要在node wranggle插件开启的前提下才能正常用。&lt;/p&gt;
+&lt;/blockquote&gt;</description></item></channel></rss>
