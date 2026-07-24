@@ -679,3 +679,21 @@ github_pat_xxxxxxxxxxxxx
 输入时终端不会显示字符，这是正常的。
 
 回车。
+
+```
+python video_demo.py --ref_path examples/reference4.jpg --input_path examples/金秋嫦娥.mp4 --save_path output/example3.mp4
+```
+
+
+
+```
+python shot_video_demo.py \
+  --ref_path examples/reference4.jpg \
+  --input_path examples/金秋嫦娥.mp4 \
+  --save_path output/shot_example1.mp4 \
+  --report_path output/shot_example1_report.json \
+  --size 512 \
+  --steps 25 \
+  --skip_threshold 0.08
+```
+
